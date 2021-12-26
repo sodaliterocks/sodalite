@@ -1,0 +1,4 @@
+[submodule "lib/elementary.default-settings"]
+	path = lib/elementary.default-settings
+	url = https://github.com/elementary/default-settings
+	branch = master

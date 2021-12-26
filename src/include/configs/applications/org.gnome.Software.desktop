@@ -1,0 +1,16 @@
+# This file is provided by Sodalite's OSTree and overwrites the stock one provided
+# by GNOME Software. It's the easiest, but possibly most hackiest, way of changing
+# the icon to match that of elementaryOS's AppCenter. We also use Software
+# instead of AppCenter as it does not support OSTree correctly.
+
+[Desktop Entry]
+Name=Software
+Comment=Browse and manage apps
+Icon=/usr/share/icons/appcenter-48.svg
+Exec=gnome-software %U
+Terminal=false
+Type=Application
+Categories=GNOME;GTK;System;PackageManager;
+StartupNotify=true
+MimeType=x-scheme-handler/appstream;
+X-GNOME-UsesNotifications=true

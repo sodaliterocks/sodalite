@@ -1,0 +1,87 @@
+ref: fedora/rawhide/${basearch}/ostree-base
+selinux: true
+boot-location: modules
+etc-group-members:
+  - wheel
+mutate-os-release: "35"
+documentation: true
+packages:
+  - git-core
+  - lvm2
+  - rpm-ostree
+  # Container management
+  - buildah
+  - podman
+  - skopeo
+  - toolbox
+  # Flatpak support
+  - flatpak
+  - xdg-desktop-portal
+  # HFS filesystem tools for Apple hardware
+  # See https://github.com/projectatomic/rpm-ostree/issues/1380
+  - hfsplus-tools
+  # Bundle the minimal -devel packages needed to build a kernel.
+  # This is needed because we can't rely on layering to install these
+  # due to version conflicts with the base image.
+  - glibc-devel
+  - kernel-devel
+  - elfutils-libelf-devel
+  # Contains default ostree remote config to be used on client's
+  # system for fetching ostree update
+  - fedora-repos-ostree
+  # the archive repo for more reliable package layering
+  # https://github.com/coreos/fedora-coreos-tracker/issues/400
+  - fedora-repos-archive
+#packages-aarch64:
+#  - grub2-efi
+#  - ostree-grub2
+#  - efibootmgr
+#  - shim
+#packages-armhfp:
+#  - extlinux-bootloader
+#  - xorg-x11-drv-armada
+#packages-ppc64:
+#  - grub2
+#  - ostree-grub2
+#packages-ppc64le:
+#  - grub2
+#  - ostree-grub2
+packages-x86_64:
+  - grub2-efi-ia32
+  - grub2-efi-x64
+  - grub2-pc
+  - ostree-grub2
+  - efibootmgr
+  - shim-ia32
+  - shim-x64
+  - microcode_ctl
+  - mcelog
+  - thermald
+  - hyperv-daemons
+  - open-vm-tools-desktop
+  - virtualbox-guest-additions
+  - xorg-x11-drv-intel
+  - xorg-x11-drv-openchrome
+  - xorg-x11-drv-vesa
+  - xorg-x11-drv-vmware
+exclude-packages:
+  - PackageKit
+  # We can not include openh264. See https://fedoraproject.org/wiki/OpenH264
+  - gstreamer1-plugin-openh264
+  - mozilla-openh264
+  - openh264
+default_target: graphical.target
+check-passwd:
+  type: file
+  filename: passwd
+check-groups:
+  type: file
+  filename: group
+ignore-removed-users:
+  - root
+ignore-removed-groups:
+  - root
+automatic-version-prefix: "35.0"
+automatic-version-suffix: "-"
+include: fedora-common-ostree-pkgs.yaml
+tmp-is-dir: true

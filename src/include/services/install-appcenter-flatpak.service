@@ -1,0 +1,14 @@
+[Unit]
+Description=Install AppCenter Flatpak repository
+Wants=network-online.target
+After=syslog.target network.target network-online.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/sodalite-install-appcenter-flatpak
+Restart=on-failure
+RestartSec=10
+KillMode=process
+
+[Install]
+WantedBy=multi-user.target
