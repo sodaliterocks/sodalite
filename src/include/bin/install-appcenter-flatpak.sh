@@ -14,7 +14,7 @@ function install_app() {
         REPO=$3
     fi
 
-    flatpak info $NAME $BRANCH || flatpak install --system --noninteractive $REPO $NAME $BRANCH
+    flatpak info $NAME $BRANCH || flatpak install --system $REPO $NAME $BRANCH -y
 }
 
 echo "Installing AppCenter Flatpak repository..."
