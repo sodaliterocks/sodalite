@@ -6,6 +6,8 @@ if ! [ $(id -u) = 0 ]; then
 fi
 
 # TODO: Check ostree and rpm-ostree are installed
+# TODO: Check git-lfs is installed and has pulled correctly, otherwise all the
+#       wallpapers are blank! 
 # TODO: Make sure submodules we need for build are pulled in
 
 BASE_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )/.."
