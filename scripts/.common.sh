@@ -6,6 +6,7 @@ if ! [ $(id -u) = 0 ]; then
 fi
 
 # TODO: Check ostree and rpm-ostree are installed
+# TODO: Make sure submodules we need for build are pulled in
 
 BASE_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 BUILD_DIR="$BASE_DIR/../build"

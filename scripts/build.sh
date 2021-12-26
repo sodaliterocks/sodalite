@@ -17,6 +17,6 @@ rpm-ostree compose tree \
     --unified-core \
     --cachedir="$OSTREE_CACHE_DIR" \
     --repo="$OSTREE_REPO_DIR" \
-    src/${VARIANT}.yaml
+    $BASE_DIR/src/${VARIANT}.yaml
 
 # TODO: Correct permissions to those of the BASE_DIR

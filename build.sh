@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
 SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )/scripts"
-$SCRIPT_DIR/build.sh
+$SCRIPT_DIR/build.sh $@
