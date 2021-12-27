@@ -38,7 +38,6 @@ packages:
   - rpm-ostree
 exclude-packages:
   - PackageKit
-  #- fedora-workstation-backgrounds # These backgrounds look hideous in Pantheon
   - gnome-tour # GNOME is impossible to reach, so we don't need this
   - gstreamer1-plugin-openh264
   - mozilla-openh264
