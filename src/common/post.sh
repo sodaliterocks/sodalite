@@ -30,7 +30,7 @@ sed -i "s/^\(VERSION=\)\"\(.*\)\"$/\1\"35.1 (Sodalite)\"/g" /etc/os-release
 echo "VARIANT=\"Sodalite\"" >> /etc/os-release
 echo "VARIANT_ID=sodalite" >> /etc/os-release
 
-ln -s /usr/share/backgrounds/sodalite/karsten-wurth-7BjhtdogU3A-unsplash.jpg /usr/share/backgrounds/elementaryos-default
+ln -s /usr/share/backgrounds/default/karsten-wurth-7BjhtdogU3A-unsplash.jpg /usr/share/backgrounds/elementaryos-default
 
 glib-compile-schemas /usr/share/glib-2.0/schemas
 systemctl enable sodalite-generate-oem
