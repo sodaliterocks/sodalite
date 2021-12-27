@@ -23,12 +23,12 @@ for x in /usr/sbin/glibc_post_upgrade.*; do
     fi
 done
 
-sed -i "s/^\(NAME=\)\"\(.*\)\"$/\1\"Fedora Sodalite\"/g" /etc/os-release
-sed -i "s/^\(PRETTY_NAME=\)\"\(.*\)\"$/\1\"Fedora Sodalite 35.0\"/g" /etc/os-release
-sed -i "s/^\(VERSION=\)\"\(.*\)\"$/\1\"35.0 Japurá\"/g" /etc/os-release
+# TODO: Work out the correct way to do this, since this isn't!
+sed -i "s/^\(NAME=\)\"\(.*\)\"$/\1\"Fedora Linux\"/g" /etc/os-release
+sed -i "s/^\(PRETTY_NAME=\)\"\(.*\)\"$/\1\"Fedora Linux 35.1 (Sodalite)\"/g" /etc/os-release
+sed -i "s/^\(VERSION=\)\"\(.*\)\"$/\1\"35.1 (Sodalite)\"/g" /etc/os-release
 echo "VARIANT=\"Sodalite\"" >> /etc/os-release
 echo "VARIANT_ID=sodalite" >> /etc/os-release
-echo "VERSION_CODENAME=japura" >> /etc/os-release
 
 ln -s /usr/share/backgrounds/sodalite/karsten-wurth-7BjhtdogU3A-unsplash.jpg /usr/share/backgrounds/elementaryos-default
 
