@@ -1,5 +1,6 @@
 ref: fedora/35/${basearch}/sodalite-msfttools
 repos:
+  - copr-jose_exposito-touchegg
   - fedora-35
   - fedora-35-updates
   - microsoft
@@ -15,8 +16,11 @@ packages:
   # BUG: PowerShell won't install: attempts to install stuff into /usr/local/
   # SEE: https://github.com/projectatomic/rpm-ostree/issues/233
   #- powershell
-exclude-packages:
-  - mozilla-firefox
+#exclude-packages:
+#  - firefox # This doesn't work. Why?
+remove-from-packages: [
+  ["firefox", "/usr/*" ]
+]
 include:
   - fedora-sodalite.yaml
 
