@@ -1,5 +1,5 @@
 # DO NOT EDIT! This content is generated from comps-sync.py
-include: fedora-common-ostree.yaml
+include: fedora-common-ostree-pkgs.yaml
 packages:
   - NetworkManager-config-connectivity-fedora
   - bluedevil
