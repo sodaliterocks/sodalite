@@ -110,4 +110,4 @@ For more automated housekeeping, these scripts are ran as services (going by the
 
 ## License
 
-See **[LICENSE.md](LICENSE.md)**. It's MIT, alright, like every awesome pile of code.
+See **[LICENSE](LICENSE)**. It's MIT, alright, like every awesome pile of code.
