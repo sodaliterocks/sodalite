@@ -1,6 +1,0 @@
-[microsoft]
-name=Microsoft
-baseurl=https://packages.microsoft.com/rhel/7/prod/
-enabled=1
-gpgcheck=1
-gpgkey=https://packages.microsoft.com/keys/microsoft.asc
