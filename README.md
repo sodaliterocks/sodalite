@@ -106,6 +106,7 @@ For more automated housekeeping, these scripts are ran as services (going by the
 	* [Smaran Alva](https://unsplash.com/@smal)
 	* [Willian Daigneault](https://unsplash.com/@williamdaigneault)
 	* [Zara Walker](https://unsplash.com/@mojoblogs)
+* The [Sodalite mineral](https://en.wikipedia.org/wiki/Sodalite), for the name. It's pronounced _soh-da-lyte_, not _sou-da-lite_, you fool.
 * The Omicron variant of COVID-19, for giving me the initial free time to make this thing. True story.
 
 ## License
