@@ -25,8 +25,8 @@ done
 
 # TODO: Work out the correct way to do this, since this isn't!
 sed -i "s/^\(NAME=\)\"\(.*\)\"$/\1\"Fedora Linux\"/g" /etc/os-release
-sed -i "s/^\(PRETTY_NAME=\)\"\(.*\)\"$/\1\"Fedora Linux 35.1 (Sodalite)\"/g" /etc/os-release
-sed -i "s/^\(VERSION=\)\"\(.*\)\"$/\1\"35.1 (Sodalite)\"/g" /etc/os-release
+sed -i "s/^\(PRETTY_NAME=\)\"\(.*\)\"$/\1\"Fedora Linux 35 (Sodalite)\"/g" /etc/os-release
+sed -i "s/^\(VERSION=\)\"\(.*\)\"$/\1\"35 (Sodalite)\"/g" /etc/os-release
 echo "VARIANT=\"Sodalite\"" >> /etc/os-release
 echo "VARIANT_ID=sodalite" >> /etc/os-release
 

@@ -57,8 +57,7 @@ ignore-removed-users:
   - root
 ignore-removed-groups:
   - root
-automatic-version-prefix: "35.1"
-automatic-version-suffix: "-"
+automatic-version-prefix: "35-<date:%Y%m%d>"
 postprocess-script: post.sh
 include: [
   "comps/pantheon-desktop-pkgs.yaml"
