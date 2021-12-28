@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # 1) Install Fedora Silverblue, or any other Fedora OSTree variant
-# 2) Run 'curl -s https://git.zio.sh/sodalite/sodalite-ostree/raw/branch/master/install.sh | bash'
+# 2) Run 'curl -s https://raw.githubusercontent.com/electricduck/sodalite/main/install.sh | bash'
 # 3) Reboot
 # 4) ???
 # 5) PROFIT!
