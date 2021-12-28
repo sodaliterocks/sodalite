@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # 1) Install Fedora Silverblue, or any other Fedora OSTree variant
-# 2) Run 'curl -s https://raw.githubusercontent.com/electricduck/sodalite/main/install.sh | bash'
+# 2) Run 'wget https://raw.githubusercontent.com/electricduck/sodalite/main/install.sh; chmod +x install.sh; sudo ./install.sh'
 # 3) Reboot
 # 4) ???
 # 5) PROFIT!
@@ -57,9 +57,9 @@ echo_logo_line "|____/ \___/ \__,_|\__,_|_|_|\__\___|"
 echo ""
 
 #          --------------------------------------------------------------------------------
-echo -e "This script will install, or \"rebase\" Sodalite onto your current Fedora OSTree"
+echo -e "This script will install, or \"rebase\", Sodalite onto your current Fedora OSTree"
 echo -e "installation. As with any rebase this can easily be reversed by calling"
-echo -e "'rpm-ostree rollback'. This script is intended to make it quick to install Fedora"
+echo -e "'rpm-ostree rollback'. This script is intended to make it quick to install"
 echo -e "Sodalite but a basic knowledge of OSTree and/or Fedora Silverblue is recommended"
 echo -e "should issues arise. Docs for Fedora Silverblue can be found at"
 echo -e "https://docs.fedoraproject.org/en-US/fedora-silverblue/.\n"
