@@ -19,7 +19,7 @@ Like every OS though, things begin to break down after years of abuse to its fou
 
 So hello world, this is Sodalite: Fedora Silverblue and Pantheon.
 
-As a sidenote, a similar configuration exists in the [workstation-ostree-config repository on Pagure](https://pagure.io/workstation-ostree-config) (specifically in `./fedora-pantheon.yaml`) but this is a barebones vanilla install. Sodalite was actually partially inspired by this and builds upon it, providing a more finished product with the trademark elementary flourish.
+As a sidenote, a similar configuration exists in the [workstation-ostree-config repository on Pagure](https://pagure.io/workstation-ostree-config) (specifically in `./fedora-pantheon.yaml`) but that is a barebones vanilla install. Sodalite was actually partially inspired by this and builds upon it, providing a more finished product with the trademark elementary flourish.
 
 ## Status
 
