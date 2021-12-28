@@ -85,7 +85,6 @@ add-files: [
   ["../include/configs/gschemas/io.elementary.desktop.gschema.override", "/usr/share/glib-2.0/schemas/io.elementary.desktop.gschema.override"],
   ["../include/configs/plank/firefox.dockitem", "/etc/skel/.config/plank/dock1/launchers/firefox.dockitem"],
   ["../include/configs/plank/io.elementary.files.dockitem", "/etc/skel/.config/plank/dock1/launchers/io.elementary.files.dockitem"],
-  ["../include/configs/plank/microsoft-edge.dockitem", "/etc/skel/.config/plank/dock1/launchers/microsoft-edge.dockitem"],
   ["../include/configs/plank/org.gnome.Software.dockitem", "/etc/skel/.config/plank/dock1/launchers/org.gnome.Software.dockitem"],
   ["../include/configs/upstream-release", "/etc/upstream-release/lsb-release"],
   ["../include/icons/appcenter-48.svg", "/usr/share/icons/appcenter-48.svg"],
