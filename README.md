@@ -1,5 +1,7 @@
 # Sodalite
 
+![](./.assets/screenshot.png)
+
 ## Quickstart
 
 You better know what you're doing, sparky. To get going:
