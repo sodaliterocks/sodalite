@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+if ! [ $(id -u) = 0 ]; then
+   echo "Must be ran as root!"
+   exit 1
+fi
+
 # TODO: Work out if user has uninstalled an app manually
 function install_app() {
     NAME=$1
@@ -14,7 +19,7 @@ function install_app() {
         REPO=$3
     fi
 
-    flatpak info $NAME $BRANCH || flatpak install --system $REPO $NAME $BRANCH -y
+    flatpak info --system $NAME $BRANCH || flatpak install --noninteractive --or-update --system $REPO $NAME $BRANCH
 }
 
 echo "Installing AppCenter Flatpak repository..."
@@ -27,6 +32,8 @@ echo "Installing AppCenter Flatpak repository..."
 #   until the next boot
 
 flatpak remote-add \
+    --if-not-exists \
+    --system \
     --comment="The open source, pay-what-you-want app store from elementary" \
     --description="Reviewed and curated by elementary to ensure a native, privacy-respecting, and secure experience" \
     --gpg-import=/usr/share/gnupg/appcenter.gpg \
