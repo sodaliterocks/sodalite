@@ -98,7 +98,7 @@ For more automated housekeeping, these scripts are ran as services (going by the
 * [Timothée Ravier](https://tim.siosm.fr), for his extensive guidance to the community concerning Fedora Silverblue.
 * The [elementary team](https://elementary.io/team), for building their lovely stuff and getting it working everywhere.
 * The contributors to [Ublue](https://github.com/castrojo/ublue), for showing me there's plenty niche-of-niches.
-* The amazing photographers/artists of our included curated wallpapers:
+* The amazing photographers/artists of the included wallpapers:
 	* [Adrien Olichon](https://unsplash.com/@adrienolichon)
 	* [Austin Neill](https://unsplash.com/@arstyy)
 	* [Cody Fitzgerald](https://unsplash.com/@cfitz)
