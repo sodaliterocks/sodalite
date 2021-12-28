@@ -1,5 +1,5 @@
 [net.launchpad.plank.dock.settings:Pantheon]
-dock-items=['gala-multitaskingview.dockitem', 'firefox.dockitem', 'microsoft-edge.dockitem', 'io.elementary.calendar.dockitem', 'io.elementary.music.dockitem', 'io.elementary.photos.dockitem', 'io.elementary.files.dockitem', 'org.gnome.Software.dockitem']
+dock-items=['gala-multitaskingview.dockitem', 'org.gnome.Epiphany.dockitem', 'firefox.dockitem', 'io.elementary.calendar.dockitem', 'io.elementary.music.dockitem', 'io.elementary.photos.dockitem', 'io.elementary.files.dockitem', 'org.gnome.Software.dockitem']
 hide-delay=250
 hide-mode='window-dodge'
 show-dock-item=false

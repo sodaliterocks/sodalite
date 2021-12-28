@@ -39,10 +39,10 @@ flatpak remote-add \
 install_app org.gnome.Evince
 install_app org.gnome.FileRoller
 
-#install_app org.gnome.Epiphany
-#install_app org.freedesktop.Platform.GL.default 21.08 freedesktop
-# IMPORTANT: Web will not be installed due to the following reasons:
+# Web will not be installed automatically due to the following reasons:
 # - Firefox is Fedora's default browser: we should respect that decision
 # - It's a large package the user possibly doesn't want
 # - With Firefox being the default, it would be odd for many users for
-#   it to dissapear
+#   it to disappear
+#
+# Instead, the user can run 'sodalite-install-epiphany'

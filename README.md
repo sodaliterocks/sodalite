@@ -31,7 +31,7 @@ However, there's plenty of stuff that _does_ work rendering Sodalite entirely us
 
 * **AppCenter**<br />Although this builds on Fedora, it refuses to work properly in Silverblue due to the nature of everything. Without proper support for OSTree, and a lack of PackageKit in the host, errors are thrown and nothing really loads in. _GNOME Software_ instead serves as a replacement, along with the AppCenter Flatpak repository being setup for you.
 * **Mail**<br />This app is not yet in the upstream for Fedora.
-* **Web**<br />As Fedora uses Firefox as the default browser, Web (or Epiphany) is not installed by default. You can rectify this yourself by installing it from Flatpak.
+* **Web**<br />As Fedora uses Firefox as the default browser, Web (Epiphany) is not installed by default. You can rectify this yourself by running `sodalite-install-epiphany`.
 
 ### Other Issues
 
@@ -71,6 +71,7 @@ An OSTree repository has already been setup for Sodalite, so you don't even need
 
 For bits of housekeeping, Sodalite also includes a few scripts:
 
+* `sodalite-install-epiphany`<br />Installs Web (Epiphany); elementary's default browser.
 * `sodalite-reset-plank-items`<br />Resets the Dock to the original layout. This layout is taken from GNOME's default layout, dissimilar to elementaryOS: _Multitasking View_, _Firefox_, _Calendar_, _Music_, _Photos_, _Files_, _Software_. If any of these apps are missing warnings will be thrown and they won't appear.
 * `sodalite-uninstall-gnome-apps`<br />Removes GNOME apps installed via Flatpak. You'll be presented with a list of apps and given a choice whether you want to remove them all. Although they play nicely in Pantheon, they look extremely out-of-place.
 
