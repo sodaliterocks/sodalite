@@ -26,6 +26,6 @@ include:
 
 rojig:
   name: fedora-sodalite-msfttools
-  summary: "Fedora Sodalite (Pantheon)"
+  summary: "Sodalite"
   license: MIT
-  description: "Fedora Sodalite with various Microsoft tools (.NET SDK, Edge, PowerShell, VSCode)"
+  description: "Sodalite with various Microsoft tools (.NET SDK, Edge, PowerShell, VSCode)"

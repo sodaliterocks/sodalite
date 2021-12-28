@@ -8,5 +8,5 @@ include:
 
 rojig:
   name: fedora-sodalite
-  summary: "Fedora Sodalite (Pantheon)"
+  summary: "Sodalite"
   license: MIT

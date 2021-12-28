@@ -57,8 +57,8 @@ echo_logo_line "|____/ \___/ \__,_|\__,_|_|_|\__\___|"
 echo ""
 
 #          --------------------------------------------------------------------------------
-echo -e "This script will install, or \"rebase\" Fedora Sodalite onto your current Fedora"
-echo -e "OSTree instllation. As with any rebase this can easily be reversed by calling"
+echo -e "This script will install, or \"rebase\" Sodalite onto your current Fedora OSTree"
+echo -e "installation. As with any rebase this can easily be reversed by calling"
 echo -e "'rpm-ostree rollback'. This script is intended to make it quick to install Fedora"
 echo -e "Sodalite but a basic knowledge of OSTree and/or Fedora Silverblue is recommended"
 echo -e "should issues arise. Docs for Fedora Silverblue can be found at"
@@ -77,8 +77,8 @@ fi
 if [[ -d "$PWD/build" ]]; then
     #           --------------------------------------------------------------------------------
     echo_error "This script does not use your local build, but the hosted production version"
-    echo_error "of Fedora Sodalite. Please refer to OSTree documentation if you wish to use"
-    echo_error "a local OSTree repository.\n"
+    echo_error "of Sodalite. Please refer to OSTree documentation if you wish to use a local"
+    echo_error "OSTree repository.\n"
 fi
 
 prompt_yn "Do you wish to continue?" \
