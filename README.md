@@ -1,21 +1,21 @@
 # Sodalite
 
-![](./.assets/screenshot.png)
+![Screenshot of Sodalite 35](./.assets/screenshot.png)
 
 ## Quickstart
 
 You better know what you're doing, sparky. To get going:
 
-1) Install an OSTree version of Fedora, such as Fedora Silverblue.
+1) Install an OSTree version of Fedora, such as [Fedora Silverblue](https://silverblue.fedoraproject.org/).
 2) Run `wget https://raw.githubusercontent.com/electricduck/sodalite/main/install.sh; chmod +x install.sh; sudo ./install.sh`.
 3) Beg for forgiveness for blindly running a script while you wait for the process to complete.
-4) Reboot.
+4) Reboot when prompted.
 
 ## Background
 
 Like most of us, I've been distro hopping since I was eating crayons, but as with anything in life there comes a point you need to settle down. I eventually found love for the fantastic [elementaryOS](https://elementary.io/): a beautifully crafted distro, packed with a few lovely apps and mated to the in-house Pantheon desktop. With very little customization, its not the experience for the most die-hard Linux fan, but I grew to love the workflow and UX patterns I found myself forced into.
 
-Like every OS though, things begin to break down after years of abuse to its foundation. A tweak to something in /usr here, and a hack in /etc there: it piles up and I forget what I've done, leading to a grubby OS I'm going to need to eventually reinstall. _Hooray_. Fedora Silverblue and OSTree seems like an answer, and having used Fedora off-and-on for almost a year after becoming increasingly irritated by elementaryOS's Ubuntu LTS base, I decided to mate an old friend and a new idea. A weekend goes by of [searching through documentation](https://rpm-ostree.readthedocs.io/en/stable/manual/treefile/) and [peering at repositories](https://pagure.io/workstation-ostree-config), and soon stable platform with a charming desktop is born, a niche on-top of a niche it sure it, but I can't be the only one that likes this sort of thing.
+Like every OS though, things begin to break down after years of abuse to its foundation. A tweak to something in /usr here, and a hack in /etc there: it piles up and I forget what I've done, leading to a grubby OS I'm going to need to eventually reinstall. _G r e a t_. Fedora had been something I'd been using on-and-off for the past year &mdash; installing Pantheon in place of GNOME, of course &mdash; leading me to eventually stumble across [Fedora Silverblue](https://silverblue.fedoraproject.org/) and [OSTree](https://ostreedev.github.io/ostree/). _Hm, a usable immutable OS, you say? Sounds glorious!_  And with that I give up a weekend to attempt to mate an old friend and a new idea, spending hours [searching through documentation](https://rpm-ostree.readthedocs.io/en/stable/manual/treefile/) and [peering at repositories](https://pagure.io/workstation-ostree-config), and soon stable platform with a charming desktop is born. Seems only right to share with the world.
 
 So hello world, this is Sodalite: Fedora Silverblue and Pantheon.
 
@@ -54,14 +54,14 @@ An OSTree repository has already been setup for Sodalite, so you don't even need
 
 1) If you haven't already, install an OSTree version of Fedora, such as [Fedora Silverblue](https://silverblue.fedoraproject.org/download).
 	* If you've never used OSTree or Fedora Silverblue before, **[read the docs](https://docs.fedoraproject.org/en-US/fedora-silverblue/)**. Get to know the OS, (try to) break it, reinstall it, repeat.
-	* Custom partitioning is unsupported but does work from experience. The installer is flaky however, and will often stumble on basic problems and giving you very little guidance on what went wrong. For example, `fedora` still being present in the EFI if leftover from a previous install &mdash; just delete the directory!
+	* Custom partitioning is unsupported but does work from experience. The installer is flaky however, and will often stumble on basic problems and giving you very little guidance on what went wrong. For example, `fedora` still being present in the EFI partition if leftover from a previous install &mdash; just delete the directory!
 	* If you're feeling adventurous, install [Fedora IoT](https://getfedora.org/iot/) instead &mdash; it's OSTree too, plus the ISO is over half the size.
 2) Grab a coffee or carbonated beverage. Or beer. That works too.
 3) Run the `install.sh` script (as root), making sure you inspect it first: there might be spiders!
 	* If you haven't cloned the repository, you can also run `wget https://raw.githubusercontent.com/electricduck/sodalite/main/install.sh; chmod +x install.sh; sudo ./install.sh`, as mentioned in the Quickstart above.
 	* This script uses a remote repository and will not use the local build (that's coming soon™).
 	* Seriously though, take a look at what the script does: it's easy and you'll learn something. In a nutshell, it uses the repository located at `https://ostree.zio.sh/repo` (no GPG) and pulls `zio:fedora/<version>/<arch>/sodalite`.
-4) Reboot, and make sure you choose the correct OSTree deployment at the boot menu. Unless you've done anything weird it'll already be selected as the default option.
+4) Reboot when prompted. On reboot, make sure you choose the correct OSTree deployment at the boot menu (which should be the default option anyway).
 
 ### Post-install
 
