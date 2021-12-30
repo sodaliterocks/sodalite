@@ -26,6 +26,7 @@ packages:
   - vala
   # Device enhancements
   - hfsplus-tools # HFS filesystem tools for Apple hardware
+  - smartmontools # tlp recommends installing
   - tlp # Enhancements for laptop batteries
   - touchegg # Enhancements for touch inputs
   # Fonts
