@@ -86,6 +86,7 @@ add-files: [
   ["../include/configs/plank/firefox.dockitem", "/etc/skel/.config/plank/dock1/launchers/firefox.dockitem"],
   ["../include/configs/plank/io.elementary.files.dockitem", "/etc/skel/.config/plank/dock1/launchers/io.elementary.files.dockitem"],
   ["../include/configs/plank/org.gnome.Software.dockitem", "/etc/skel/.config/plank/dock1/launchers/org.gnome.Software.dockitem"],
+  ["../include/configs/tlp/50-vm-writeback.conf", "/etc/tlp.d/50-vm-writeback.conf"],
   ["../include/configs/upstream-release", "/etc/upstream-release/lsb-release"],
   ["../include/icons/appcenter-48.svg", "/usr/share/icons/appcenter-48.svg"],
   ["../include/services/generate-oem.service", "/etc/systemd/system/sodalite-generate-oem.service"],
