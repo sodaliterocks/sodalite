@@ -91,6 +91,8 @@ add-files: [
   ["../include/icons/appcenter-48.svg", "/usr/share/icons/appcenter-48.svg"],
   ["../include/services/generate-oem.service", "/etc/systemd/system/sodalite-generate-oem.service"],
   ["../include/services/install-appcenter-flatpak.service", "/etc/systemd/system/sodalite-install-appcenter-flatpak.service"],
+  ["../include/tools/common.sh", "/usr/libexec/sodalite-common"],
+  ["../include/tools/update.sh", "/usr/bin/sodalite-update"],
   ["../include/wallpapers/adrien-olichon-gXqgs6Smvw-unsplash.jpg", "/usr/share/backgrounds/default/adrien-olichon-gXqgs6Smvw-unsplash.jpg"],
   ["../include/wallpapers/austin-neill-AGPGx6Yr9NI-unsplash.jpg", "/usr/share/backgrounds/default/austin-neill-AGPGx6Yr9NI-unsplash.jpg"],
   ["../include/wallpapers/cody-fitzgerald-iUBG6hQe4N0-unsplash.jpg", "/usr/share/backgrounds/default/cody-fitzgerald-iUBG6hQe4N0-unsplash.jpg"],
