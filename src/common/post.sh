@@ -12,6 +12,17 @@ function set_osrelease_property() {
     sed -i "s/^\($PROPERTY=\)\"\(.*\)\"$/\1\"35 ($VALUE)\"/g" /etc/os-release
 }
 
+function set_osrelease_property() {
+    PROPERTY=$1
+    VALUE=$2
+
+    if [[ $VALUE =~ [[:space:]]+) ]]; then
+        VALUE="\"$VALUE\""
+    fi
+
+    sed -i "s/^\($PROPERTY=\)\(.*\)$/\1$VALUE/g" /etc/os-release
+}
+
 # BUG: https://github.com/projectatomic/rpm-ostree/issues/1542#issuecomment-419684977
 for x in /etc/yum.repos.d/*modular.repo; do
     sed -i -e 's,enabled=[01],enabled=0,' ${x}
@@ -34,7 +45,7 @@ for x in /usr/sbin/glibc_post_upgrade.*; do
 done
 
 # TODO: Work out the correct way to do this, since this isn't!
-set_osrelease_id "ID" $VARIANT_ID
+set_osrelease_property "ID" $VARIANT_ID
 set_osrelease_property "NAME" $VARIANT_NAME
 set_osrelease_property "PRETTY_NAME" "$VARIANT_NAME 35"
 set_osrelease_property "VERSION" "35"
