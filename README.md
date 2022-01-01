@@ -67,13 +67,15 @@ An OSTree repository has already been setup for Sodalite, so you don't even need
 
 (todo)
 
-#### Included scripts
+#### Included tools
 
-For bits of housekeeping, Sodalite also includes a few scripts:
+For bits of housekeeping, Sodalite also includes a few tools:
 
 * `sodalite-install-epiphany`<br />Installs Web (Epiphany); elementary's default browser.
 * `sodalite-reset-plank-items`<br />Resets the Dock to the original layout. This layout is taken from GNOME's default layout, dissimilar to elementaryOS: _Multitasking View_, _Firefox_, _Calendar_, _Music_, _Photos_, _Files_, _Software_. If any of these apps are missing warnings will be thrown and they won't appear.
+* `sodalite-set-hostname [hostname] [description]`<br />Sets the system hostname.
 * `sodalite-uninstall-gnome-apps`<br />Removes GNOME apps installed via Flatpak. You'll be presented with a list of apps and given a choice whether you want to remove them all. Although they play nicely in Pantheon, they look extremely out-of-place.
+* `sodalite-update`<br />Updates the system!
 
 For more automated housekeeping, these scripts are ran as services (going by the same name of their respective script), but can be called manually if need be:
 
