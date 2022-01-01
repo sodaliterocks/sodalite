@@ -43,6 +43,7 @@ set_osrelease_property "NAME" $VARIANT_NAME
 set_osrelease_property "PRETTY_NAME" "$VARIANT_NAME 35"
 set_osrelease_property "VERSION" "35"
 
+# TODO: Get default wallpaper from gschema
 ln -s /usr/share/backgrounds/default/karsten-wurth-7BjhtdogU3A-unsplash.jpg /usr/share/backgrounds/elementaryos-default
 
 glib-compile-schemas /usr/share/glib-2.0/schemas
