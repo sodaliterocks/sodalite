@@ -2,7 +2,15 @@
 
 set -xeuo pipefail
 
-IFS=';' read -ra VARIANT <<< $(cat /etc/sodalite-variant)
+VARIANT_ID=$(sodalite-get-variant id)
+VARIANT_NAME=$(sodalite-get-variant name)
+
+function set_osrelease_property() {
+    PROPERTY=$1
+    VALUE=$2
+
+    sed -i "s/^\($PROPERTY=\)\"\(.*\)\"$/\1\"35 ($VALUE)\"/g" /etc/os-release
+}
 
 # BUG: https://github.com/projectatomic/rpm-ostree/issues/1542#issuecomment-419684977
 for x in /etc/yum.repos.d/*modular.repo; do
@@ -26,11 +34,10 @@ for x in /usr/sbin/glibc_post_upgrade.*; do
 done
 
 # TODO: Work out the correct way to do this, since this isn't!
-sed -i "s/^\(NAME=\)\"\(.*\)\"$/\1\"Fedora Linux\"/g" /etc/os-release
-sed -i "s/^\(PRETTY_NAME=\)\"\(.*\)\"$/\1\"Fedora Linux 35 (${VARIANT[1]})\"/g" /etc/os-release
-sed -i "s/^\(VERSION=\)\"\(.*\)\"$/\1\"35 (${VARIANT[1]})\"/g" /etc/os-release
-echo "VARIANT=\"Sodalite\"" >> /etc/os-release
-echo "VARIANT_ID=sodalite" >> /etc/os-release
+set_osrelease_id "ID" $VARIANT_ID
+set_osrelease_property "NAME" $VARIANT_NAME
+set_osrelease_property "PRETTY_NAME" "$VARIANT_NAME 35"
+set_osrelease_property "VERSION" "35"
 
 ln -s /usr/share/backgrounds/default/karsten-wurth-7BjhtdogU3A-unsplash.jpg /usr/share/backgrounds/elementaryos-default
 
