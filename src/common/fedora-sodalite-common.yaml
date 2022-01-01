@@ -37,6 +37,7 @@ packages:
   - gnome-software # Replacement for AppCenter
   - lvm2
   - rpm-ostree
+  - xprop
 exclude-packages:
   - PackageKit
   - gnome-tour # GNOME is impossible to reach, so we don't need this
