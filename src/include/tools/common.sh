@@ -36,6 +36,23 @@ function echoc() {
     fi
 }
 
+function get_answer() {
+    QUESTION=$@
+
+    if [[ ! -n $QUESTION ]]; then
+        QUESTION="Continue?"
+    fi
+
+    while true; do
+        read -p "$QUESTION [Y/n]: " ANSWER
+        case $ANSWER in
+            [Yy]* ) echo true; return ;;
+            [Nn]* ) echo false; return ;;
+            * ) ;;
+        esac
+    done
+}
+
 function set_export() {
     if [[ ! -n $(eval "echo \$$1") ]]; then
         eval "$1"='$2'

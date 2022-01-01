@@ -93,6 +93,7 @@ add-files: [
   ["../include/services/generate-oem.service", "/etc/systemd/system/sodalite-generate-oem.service"],
   ["../include/services/install-appcenter-flatpak.service", "/etc/systemd/system/sodalite-install-appcenter-flatpak.service"],
   ["../include/tools/common.sh", "/usr/libexec/sodalite-common"],
+  ["../include/tools/cleanup.sh", "/usr/libexec/sodalite-cleanup"],
   ["../include/tools/get-variant.sh", "/usr/bin/sodalite-get-variant"],
   ["../include/tools/set-hostname.sh", "/usr/bin/sodalite-set-hostname"],
   ["../include/tools/update.sh", "/usr/bin/sodalite-update"],
