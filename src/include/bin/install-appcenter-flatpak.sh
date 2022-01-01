@@ -24,12 +24,10 @@ function install_app() {
 
 echo "Installing AppCenter Flatpak repository..."
 
-# TODO:
-# - Get GPG key from remote location?
-# - Check if GPG key actually exists on system
-# - Check if repository is already enabled
-# - Check we can reach the remote, otherwise abandon this attempt after a while
-#   until the next boot
+# TODO:  Get GPG key from remote location?
+# TODO: Check if GPG key actually exists on system
+# TODO: Check if repository is already enabled
+# TODO: Check we can reach the remote, otherwise abandon this attempt after a while until the next boot
 
 flatpak remote-add \
     --if-not-exists \
