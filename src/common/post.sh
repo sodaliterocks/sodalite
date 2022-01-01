@@ -2,6 +2,8 @@
 
 set -xeuo pipefail
 
+IFS=';' read -ra VARIANT <<< $(cat /etc/sodalite-variant)
+
 # BUG: https://github.com/projectatomic/rpm-ostree/issues/1542#issuecomment-419684977
 for x in /etc/yum.repos.d/*modular.repo; do
     sed -i -e 's,enabled=[01],enabled=0,' ${x}
@@ -25,8 +27,8 @@ done
 
 # TODO: Work out the correct way to do this, since this isn't!
 sed -i "s/^\(NAME=\)\"\(.*\)\"$/\1\"Fedora Linux\"/g" /etc/os-release
-sed -i "s/^\(PRETTY_NAME=\)\"\(.*\)\"$/\1\"Fedora Linux 35 (Sodalite)\"/g" /etc/os-release
-sed -i "s/^\(VERSION=\)\"\(.*\)\"$/\1\"35 (Sodalite)\"/g" /etc/os-release
+sed -i "s/^\(PRETTY_NAME=\)\"\(.*\)\"$/\1\"Fedora Linux 35 (${VARIANT[1]})\"/g" /etc/os-release
+sed -i "s/^\(VERSION=\)\"\(.*\)\"$/\1\"35 (${VARIANT[1]})\"/g" /etc/os-release
 echo "VARIANT=\"Sodalite\"" >> /etc/os-release
 echo "VARIANT_ID=sodalite" >> /etc/os-release
 

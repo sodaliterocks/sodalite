@@ -5,6 +5,9 @@ repos:
   - fedora-35-updates
 include:
   - common/fedora-sodalite-common.yaml
+add-files: [
+  ["../include/variant-templates/sodalite-variant_sodalite", "/etc/sodalite-variant"]
+]
 
 rojig:
   name: fedora-sodalite
