@@ -51,4 +51,4 @@ function test_root() {
     fi
 }
 
-set_export SODALITE_TOOLS_DEBUG true
+set_export SODALITE_TOOLS_DEBUG false
