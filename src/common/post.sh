@@ -9,13 +9,6 @@ function set_osrelease_property() {
     PROPERTY=$1
     VALUE=$2
 
-    sed -i "s/^\($PROPERTY=\)\"\(.*\)\"$/\1\"35 ($VALUE)\"/g" /etc/os-release
-}
-
-function set_osrelease_property() {
-    PROPERTY=$1
-    VALUE=$2
-
     if [[ $VALUE =~ [[:space:]]+) ]]; then
         VALUE="\"$VALUE\""
     fi
