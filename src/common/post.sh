@@ -47,5 +47,7 @@ set_osrelease_property "VERSION" "35"
 ln -s /usr/share/backgrounds/default/karsten-wurth-7BjhtdogU3A-unsplash.jpg /usr/share/backgrounds/elementaryos-default
 
 glib-compile-schemas /usr/share/glib-2.0/schemas
+
 systemctl enable sodalite-generate-oem
 systemctl enable sodalite-install-appcenter-flatpak
+systemctl enable touchegg
