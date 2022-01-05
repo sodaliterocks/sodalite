@@ -21,10 +21,8 @@ packages:
   - git-core
   - git-lfs
   - glibc-devel
-  - granite-devel # For basic Pantheon development
   - kernel-devel
   - meson
-  - vala
   # Device enhancements
   - hfsplus-tools # HFS filesystem tools for Apple hardware
   - smartmontools # tlp recommends installing
