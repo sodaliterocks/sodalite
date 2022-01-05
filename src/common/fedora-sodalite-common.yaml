@@ -35,18 +35,35 @@ packages:
   - opendyslexic-fonts # Open Dyslexic
   - rsms-inter-fonts # Inter
   # Package management
+  - flatpak
   - gnome-software # Replacement for AppCenter
   - python-pip
   - rpm-ostree
   # Misc
   - lvm2
+  - xdg-desktop-portal
   - xprop
+packages-x86_64:
+  - efibootmgr
+  - grub2-efi-ia32
+  - grub2-efi-x64
+  - grub2-pc
+  - hyperv-daemons
+  - mcelog
+  - microcode_ctl
+  - open-vm-tools-desktop
+  - ostree-grub2
+  - shim-ia32
+  - shim-x64
+  - thermald
+  - virtualbox-guest-additions
+  - xorg-x11-drv-intel
+  - xorg-x11-drv-openchrome
+  - xorg-x11-drv-vesa
+  - xorg-x11-drv-vmware
 exclude-packages:
   - PackageKit
   - gnome-tour # GNOME is impossible to reach, so we don't need this
-  - gstreamer1-plugin-openh264
-  - mozilla-openh264
-  - openh264
 default_target: graphical.target
 remove-from-packages: [
   ["gnome-session-wayland-session", "/usr/share/wayland-sessions/*"],
