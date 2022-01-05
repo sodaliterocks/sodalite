@@ -35,14 +35,13 @@ However, there's plenty of stuff that _does_ work rendering Sodalite entirely us
 
 ### Other Issues
 
-* Although included, _Greeter_ is not setup as the default LightDM greeter (i.e. the login screen). You'll instead see the standard Fedora greeter. Greeter currently fails to startup properly and the reason for it is currently unknown.
 * Various _Switchboard_ (System Settings) items are not included as they are not available on Fedora currently. Relevant issues can be found in the [elementary organisation on GitHub](https://github.com/elementary?q=switchboard-plug-&type=all&language=&sort=). Most importantly, _User Accounts_, and _Date & Time_, are missing.
 * _Universal Access_ in _Switchboard_ does not work.
 * On first start, the dock will appear screwed up as the defaults aren't copied in: you can rectify this by running `sodalite-reset-plank-items`. You'll also be missing a few other defaults you may wish to copy from `/etc/skel/`.
 	* If you're installing Fedora Silverblue fresh, an easy-ish way to fix this is to make a temporary user, then after setting up Sodalite create your actual user and delete the temporary user.
 * Various theming issues, due to be fixed in the upstream:
 	* Some apps appear odd, such as Firefox which entirely lacks rounded corners.
-	* Flatpak apps will not be themed and fallback to the Adwaita theme.
+	* Many Flatpak apps will not be themed and fallback to the Adwaita theme.
 * Many Flatpak apps will be duplicated in the Dock: see [issue #64 on elementary/dock](https://github.com/elementary/dock/issues/64). Although this is one of many issues across elementary, I felt like I needed to bring this one up. Nothing broke on your end!
 * ~~Not enough people are using this masterpiece.~~
 
