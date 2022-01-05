@@ -19,6 +19,7 @@ packages:
   # Dev
   - elfutils-libelf-devel
   - git-core
+  - git-lfs
   - glibc-devel
   - granite-devel # For basic Pantheon development
   - kernel-devel
@@ -33,10 +34,12 @@ packages:
   - google-roboto-mono-fonts # Roboto Mono
   - opendyslexic-fonts # Open Dyslexic
   - rsms-inter-fonts # Inter
-  # Misc
+  # Package management
   - gnome-software # Replacement for AppCenter
-  - lvm2
+  - python-pip
   - rpm-ostree
+  # Misc
+  - lvm2
   - xprop
 exclude-packages:
   - PackageKit
