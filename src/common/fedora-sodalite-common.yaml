@@ -32,6 +32,15 @@ packages:
   - google-roboto-mono-fonts # Roboto Mono
   - opendyslexic-fonts # Open Dyslexic
   - rsms-inter-fonts # Inter
+  # GVfs
+  - gvfs
+  - gvfs-afc
+  - gvfs-afp
+  - gvfs-fuse
+  - gvfs-gphoto2
+  - gvfs-mtp
+  - gvfs-nfs
+  - gvfs-smb
   # Package management
   - flatpak
   - gnome-software # Replacement for AppCenter
