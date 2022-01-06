@@ -1,0 +1,24 @@
+# SEE: https://decathorpe.com/fedora-elementary-stable-status.html
+packages:
+  #- appcenter                          # AppCenter does not work with rpm-ostree!
+  - elementary-mail
+  - elementary-settings-daemon
+  - elementary-tasks
+  - indicator-application
+  - switchboard-plug-about
+  - switchboard-plug-datetime           # Buggy on Fedora
+  - switchboard-plug-locale             # Buggy on Fedora (relies on apt)
+  - switchboard-plug-onlineaccounts
+  - switchboard-plug-parental-controls  # Untested
+  - switchboard-plug-power              # Limited functionality
+  - switchboard-plug-security-privacy   # Buggy on Fedora (relies on ufw)
+  - switchboard-plug-useraccounts       # Untested (potentially dangerous?)
+  - touchegg
+  - wingpanel-indicator-a11y
+  - wingpanel-indicator-ayatana
+  - xdg-desktop-portal-pantheon
+remove-from-packages: [
+  ["switchboard-plug-datetime", "/*"],
+  ["switchboard-plug-locale", "/*"],
+  ["switchboard-plug-security-privacy", "/*"]
+]
