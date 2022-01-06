@@ -89,7 +89,8 @@ ignore-removed-groups:
 automatic-version-prefix: "35-<date:%Y%m%d>"
 postprocess-script: post.sh
 include: [
-  "comps/pantheon-desktop-pkgs.yaml"
+  #"packages/fedora-ostree-pkgs.yaml",
+  "packages/elementary-pkgs.yaml"
 ]
 add-files: [
   ["../../lib/elementary.default-settings/appcenter/appcenter.hiddenapps", "/etc/appcenter/appcenter.hiddenapps"],
