@@ -122,6 +122,7 @@ add-files: [
   ["../include/oem-logos/amd.png", "/usr/share/oem-logos/amd.png"],
   ["../include/oem-logos/apple.png", "/usr/share/oem-logos/apple.png"],
   ["../include/oem-logos/asus.png", "/usr/share/oem-logos/asus.png"],
+  ["../include/oem-logos/chromebook.png", "/usr/share/oem-logos/chromebook.png"],
   ["../include/oem-logos/hp.png", "/usr/share/oem-logos/hp.png"],
   ["../include/oem-logos/huawei.png", "/usr/share/oem-logos/huawei.png"],
   ["../include/oem-logos/ibm.png", "/usr/share/oem-logos/ibm.png"],
