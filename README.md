@@ -25,13 +25,13 @@ As a sidenote, a similar configuration exists in the [workstation-ostree-config 
 
 This project is still very much early days and there is plenty of things that are broken, mostly due to missing upstream elementary/Pantheon packages on Fedora &mdash; Pantheon is _mostly_ distro-agnostic but still some way from being complete &mdash; but also because ~~I'm a simpleton~~ I lack understanding of various components in OSTree and Fedora Silverblue. But we'll get there... eventually!
 
-However, there's plenty of stuff that _does_ work rendering Sodalite entirely usable for day-to-day activites: I even used it to type up this README and build releases. Unless in this _Missing Apps_ list, every app included in elementaryOS comes with Sodalite and works 100% (probably)! That includes, **Music**, **Photos**, **Videos**, **Calendar**, **Files**, **Terminal**, **Code**, **Camera**, along with several other in-box utilities. AppCenter's Flatpak repository is also setup, giving you access to the ever-grown "curated" apps for elementaryOS.
+However, there's plenty of stuff that _does_ work rendering Sodalite entirely usable for day-to-day activites: I even used it to type up this README and build releases. Unless in this _Missing Apps_ list, every app included in elementaryOS comes with Sodalite and works 100% (probably)! That includes, **Music**, **Photos**, **Videos**, **Calendar**, **Files**, **Terminal**, **Code**, **Camera**, along with several other in-box utilities. AppCenter's Flatpak repository is also pre-installed giving you access to the ever-grown "curated" apps for elementaryOS.
 
 ### Missing Apps
 
-* **AppCenter**<br />Although this builds on Fedora, it refuses to work properly in Silverblue due to the nature of everything. Without proper support for OSTree, and a lack of PackageKit in the host, errors are thrown and nothing really loads in. _GNOME Software_ instead serves as a replacement, along with the AppCenter Flatpak repository being setup for you.
+* **AppCenter**<br />Although this builds on Fedora it refuses to work properly in Silverblue due to the nature of everything. Without proper support for OSTree, and a lack of PackageKit in the host, errors are thrown and nothing really loads in. _GNOME Software_ instead serves as a replacement, along with the AppCenter Flatpak repository being pre-installed.
 * **Mail**<br />This app is not yet in the upstream for Fedora.
-* **Web**<br />As Fedora uses Firefox as the default browser, Web (Epiphany) is not installed by default. You can rectify this yourself by running `sodalite-install-epiphany`.
+* **Web**<br />As Fedora uses Firefox as the default browser, Web (Epiphany) is not installed by default. You can rectify this by running `sodalite-install-epiphany`.
 
 ### Other Issues
 
