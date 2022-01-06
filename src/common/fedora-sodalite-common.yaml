@@ -27,7 +27,6 @@ packages:
   - hfsplus-tools # HFS filesystem tools for Apple hardware
   - smartmontools # tlp recommends installing
   - tlp # Enhancements for laptop batteries
-  - touchegg # Enhancements for touch inputs
   # Fonts
   - google-roboto-mono-fonts # Roboto Mono
   - opendyslexic-fonts # Open Dyslexic
@@ -90,7 +89,8 @@ automatic-version-prefix: "35-<date:%Y%m%d>"
 postprocess-script: post.sh
 include: [
   #"packages/fedora-ostree-pkgs.yaml",
-  "packages/elementary-pkgs.yaml"
+  "packages/elementary-pkgs.yaml",
+  "packages/elementary-staging-pkgs.yaml"
 ]
 add-files: [
   ["../../lib/elementary.default-settings/appcenter/appcenter.hiddenapps", "/etc/appcenter/appcenter.hiddenapps"],
