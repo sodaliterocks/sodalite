@@ -94,6 +94,7 @@ add-files: [
   ["../../lib/elementary.default-settings/skel/plank/dock1/launchers/org.gnome.Epiphany.dockitem", "/etc/skel/.config/plank/dock1/launchers/org.gnome.Epiphany.dockitem"],
   ["../../lib/elementary.default-settings/skel/.inputrc", "/etc/skel/.inputrc"],
   ["../../lib/elementary.default-settings/sudoers.d/pwfeedback", "/etc/sudoers.d/pwfeedback"],
+  ["../include/bin/detach.sh", "/usr/bin/detach"],
   ["../include/bin/generate-oem.sh", "/usr/bin/sodalite-generate-oem"],
   ["../include/bin/install-appcenter-flatpak.sh", "/usr/bin/sodalite-install-appcenter-flatpak"],
   ["../include/bin/install-epiphany.sh", "/usr/bin/sodalite-install-epiphany"],
