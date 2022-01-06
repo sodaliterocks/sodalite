@@ -82,6 +82,16 @@ esac
 
 if [[ $SODALITE_GENERATE_OEM_NO_HACKS == false ]]; then
     case ${hw_manufacturer,,} in
+        "google") # Chromebook's (are annoying)
+            if [[ $hw_manufacturer == "GOOGLE" ]]; then
+                hw_product_original=$hw_product
+
+                hw_manufacturer="Google"
+                hw_product="Chromebook"
+                hw_version=$hw_product_original
+                hw_logo=$(get_oem_logo_path chromebook)
+            fi
+            ;;
         "hp")
             if [[ $hw_version == "Type1ProductConfigId" ]]; then
                 hw_version=""
