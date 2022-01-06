@@ -53,6 +53,22 @@ function get_answer() {
     done
 }
 
+function get_cpu_vendor() {
+    cpu_vendor=$(cat /proc/cpuinfo | grep vendor_id | uniq)
+    cpu_vendor=${cpu_vendor#*\:}
+
+    echo $cpu_vendor
+}
+
+function get_hwinfo() {
+    key=$1
+    type=$2
+
+    [[ -z $type ]] && type="1"
+
+    sudo dmidecode -t$type | grep "$key:" | sed 's/\t'"${key}"': //g'
+}
+
 function set_export() {
     if [[ ! -n $(eval "echo \$$1") ]]; then
         eval "$1"='$2'
