@@ -34,6 +34,7 @@ if [[ $revert_to_default == true ]]; then
         [[ ! -d $plank_launchers_dir ]] && mkdir -p $plank_launchers_dir
         rsync -av --delete-after /etc/skel/.config/plank/dock1/launchers/ $plank_launchers_dir
         dconf write /net/launchpad/plank/docks/dock1/dock-items $default_plank_items
-        plank
     fi
 fi
+
+plank
