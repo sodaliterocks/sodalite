@@ -140,7 +140,7 @@ add-files: [
   ["../include/tools/common.sh", "/usr/libexec/sodalite-common"],
   ["../include/tools/generate-oem.sh", "/usr/bin/sodalite-generate-oem"],
   ["../include/tools/get-variant.sh", "/usr/bin/sodalite-get-variant"],
-  ["../include/tools/repair-plank.sh", "/usr/bin/sodalite-repair-plank"],
+  ["../include/tools/plank.sh", "/usr/bin/sodalite-plank"],
   ["../include/tools/set-hostname.sh", "/usr/bin/sodalite-set-hostname"],
   ["../include/tools/update.sh", "/usr/bin/sodalite-update"],
   ["../include/wallpapers/adrien-olichon-gXqgs6Smvw-unsplash.jpg", "/usr/share/backgrounds/default/adrien-olichon-gXqgs6Smvw-unsplash.jpg"],
