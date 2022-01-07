@@ -77,10 +77,6 @@ _The below scripts are ran as services._
 * `sodalite-generate-oem`<br />Generates the OEM file (`/etc/oem.conf`) to populate the _Hardware_ tab under _System_ in _System Settings_. This information comes from `dmidecode`, so if it looks messed up blame the manufacturer.
 * `sodalite-install-appcenter-flatpak`<br />Installs the AppCenter Flatpak repository, giving you access to the ever-grown "curated" apps for elementaryOS. Also installs a few apps from the repository included in elementaryOS.
 
-_The below scripts are ran as autostart._
-
-* `sodalite-repair-plank`<br />Handles updating defaults on Plank.
-
 ### Removal
 
 (todo &mdash; OSTree has several ways and its dependant on your install!)
