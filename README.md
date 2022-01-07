@@ -1,6 +1,6 @@
 # Sodalite
 
-![Screenshot of Sodalite 35](./.assets/screenshot.png)
+![Screenshot of Sodalite 35](./lib/sodalite-lfs/screenshots/screenshot.png)
 
 ## Quickstart
 
