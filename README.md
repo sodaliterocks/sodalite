@@ -34,7 +34,7 @@ However, there's plenty of stuff that _does_ work rendering Sodalite entirely us
 
 ### Other Issues
 
-* Various _Switchboard_ (System Settings) items are not included or do not work right.
+* Various System Settings (Switchboard) items are not included or do not work right.
 * Various theming issues, due to be fixed in the upstream:
 	* Some apps appear odd, such as Firefox which entirely lacks rounded corners.
 	* Many Flatpak apps will not be themed and fallback to the Adwaita theme.
