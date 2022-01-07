@@ -72,10 +72,14 @@ For bits of housekeeping, Sodalite also includes a few tools:
 * `sodalite-uninstall-gnome-apps`<br />Removes GNOME apps installed via Flatpak. You'll be presented with a list of apps and given a choice whether you want to remove them all. Although they play nicely in Pantheon, they look extremely out-of-place.
 * `sodalite-update`<br />Updates the system!
 
-_The below scripts are ran as services._
+_The below scripts are ran as services: you should never need to run them manually unless you disable the service (which has the same name)._
 
 * `sodalite-generate-oem`<br />Generates the OEM file (`/etc/oem.conf`) to populate the _Hardware_ tab under _System_ in _System Settings_. This information comes from `dmidecode`, so if it looks messed up blame the manufacturer.
 * `sodalite-install-appcenter-flatpak`<br />Installs the AppCenter Flatpak repository, giving you access to the ever-grown "curated" apps for elementaryOS. Also installs a few apps from the repository included in elementaryOS.
+
+_The below scripts are run as autostart for the user: you should need need to run them manually unless you disable the autostart (which has the same name)._
+
+* `sodalite-plank-wrapper`<br />Launches Plank with a wrapper to correct default settings (and update them if the user never changes items).
 
 ### Removal
 

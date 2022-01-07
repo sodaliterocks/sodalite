@@ -1,5 +1,5 @@
 [Desktop Entry]
-Name=Plank (Sodalite variant)
+Name=Plank (Sodalite wrapper)
 Comment=Stupidly simple (and awesome).
 Exec=sodalite-plank
 Icon=plank
