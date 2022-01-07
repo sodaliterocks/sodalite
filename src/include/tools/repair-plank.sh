@@ -14,6 +14,7 @@ plank_launchers_dir="$HOME/.config/plank/dock1/launchers"
 revert_to_default=false
 
 declare -a default_plank_items_regex=(
+    "(\['firefox\.dockitem','io\.elementary\.calendar\.dockitem','io\.elementary\.music\.dockitem','io\.elementary\.videos\.dockitem','io\.elementary\.photos-viewer\.dockitem','io\.elementary\.mail\.dockitem'\])"
     "(\['gala-multitaskingview\.dockitem','firefox\.dockitem','io\.elementary\.calendar\.dockitem','io\.elementary\.music\.dockitem','io\.elementary\.photos\.dockitem','io\.elementary\.files\.dockitem','org\.gnome\.Software\.dockitem'\])"
 )
 
