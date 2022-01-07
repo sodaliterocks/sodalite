@@ -34,8 +34,7 @@ However, there's plenty of stuff that _does_ work rendering Sodalite entirely us
 
 ### Other Issues
 
-* Various _Switchboard_ (System Settings) items are not included as they are not available on Fedora currently. Relevant issues can be found in the [elementary organisation on GitHub](https://github.com/elementary?q=switchboard-plug-&type=all&language=&sort=). Most importantly, _User Accounts_, and _Date & Time_, are missing.
-* _Universal Access_ in _Switchboard_ does not work.
+* Various _Switchboard_ (System Settings) items are not included or do not work right.
 * Various theming issues, due to be fixed in the upstream:
 	* Some apps appear odd, such as Firefox which entirely lacks rounded corners.
 	* Many Flatpak apps will not be themed and fallback to the Adwaita theme.
