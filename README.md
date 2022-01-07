@@ -30,15 +30,12 @@ However, there's plenty of stuff that _does_ work rendering Sodalite entirely us
 ### Missing Apps
 
 * **AppCenter**<br />Although this builds on Fedora it refuses to work properly in Silverblue due to the nature of everything. Without proper support for OSTree, and a lack of PackageKit in the host, errors are thrown and nothing really loads in. _GNOME Software_ instead serves as a replacement, along with the AppCenter Flatpak repository being pre-installed.
-* **Mail**<br />This app is not yet in the upstream for Fedora.
 * **Web**<br />As Fedora uses Firefox as the default browser, Web (Epiphany) is not installed by default. You can rectify this by running `sodalite-install-epiphany`.
 
 ### Other Issues
 
 * Various _Switchboard_ (System Settings) items are not included as they are not available on Fedora currently. Relevant issues can be found in the [elementary organisation on GitHub](https://github.com/elementary?q=switchboard-plug-&type=all&language=&sort=). Most importantly, _User Accounts_, and _Date & Time_, are missing.
 * _Universal Access_ in _Switchboard_ does not work.
-* On first start, the dock will appear screwed up as the defaults aren't copied in: you can rectify this by running `sodalite-reset-plank-items`. You'll also be missing a few other defaults you may wish to copy from `/etc/skel/`.
-	* If you're installing Fedora Silverblue fresh, an easy-ish way to fix this is to make a temporary user, then after setting up Sodalite create your actual user and delete the temporary user.
 * Various theming issues, due to be fixed in the upstream:
 	* Some apps appear odd, such as Firefox which entirely lacks rounded corners.
 	* Many Flatpak apps will not be themed and fallback to the Adwaita theme.
@@ -71,15 +68,18 @@ An OSTree repository has already been setup for Sodalite, so you don't even need
 For bits of housekeeping, Sodalite also includes a few tools:
 
 * `sodalite-install-epiphany`<br />Installs Web (Epiphany); elementary's default browser.
-* `sodalite-reset-plank-items`<br />Resets the Dock to the original layout. This layout is taken from GNOME's default layout, dissimilar to elementaryOS: _Multitasking View_, _Firefox_, _Calendar_, _Music_, _Photos_, _Files_, _Software_. If any of these apps are missing warnings will be thrown and they won't appear.
 * `sodalite-set-hostname [hostname] [description]`<br />Sets the system hostname.
 * `sodalite-uninstall-gnome-apps`<br />Removes GNOME apps installed via Flatpak. You'll be presented with a list of apps and given a choice whether you want to remove them all. Although they play nicely in Pantheon, they look extremely out-of-place.
 * `sodalite-update`<br />Updates the system!
 
-For more automated housekeeping, these scripts are ran as services (going by the same name of their respective script), but can be called manually if need be:
+_The below scripts are ran as services._
 
 * `sodalite-generate-oem`<br />Generates the OEM file (`/etc/oem.conf`) to populate the _Hardware_ tab under _System_ in _System Settings_. This information comes from `dmidecode`, so if it looks messed up blame the manufacturer.
 * `sodalite-install-appcenter-flatpak`<br />Installs the AppCenter Flatpak repository, giving you access to the ever-grown "curated" apps for elementaryOS. Also installs a few apps from the repository included in elementaryOS.
+
+_The below scripts are ran as autostart._
+
+* `sodalite-repair-plank`<br />Handles updating defaults on Plank.
 
 ### Removal
 

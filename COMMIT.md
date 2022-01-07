@@ -27,8 +27,9 @@
 | 🧹 (`:broom:`) | Other non-user-facing chores, such as renaming files |
 | 🔀 (`:twisted_rightwards_arrows:`) | Merging branches |
 | 🤔 (`:thinking:`) | Testing or empty commits |
+| 📦 (`:package:`) | Various/unspecified changes |
 | 🎉 (`:tada:`) | Initializing a repository |
-| 🔥 (`:fire:`) | Archiving a repository
+| 🔥 (`:fire:`) | Archiving a repository |
 
 ### Messages
 
