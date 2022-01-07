@@ -1,9 +1,0 @@
-[Desktop Entry]
-Name=Repair Plank
-Exec=sodalite-repair-plank
-Terminal=false
-Type=Application
-OnlyShowIn=Pantheon;
-NoDisplay=true
-X-GNOME-AutoRestart=true
-X-GNOME-Autostart-Phase=Applications

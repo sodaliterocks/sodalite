@@ -73,7 +73,8 @@ exclude-packages:
 default_target: graphical.target
 remove-from-packages: [
   ["gnome-session-wayland-session", "/usr/share/wayland-sessions/*"],
-  ["gnome-session-xsession", "/usr/share/xsessions/*"]
+  ["gnome-session-xsession", "/usr/share/xsessions/*"],
+  ["plank", "/etc/xdg/autostart/plank.desktop"]
 ]
 check-passwd:
   type: file
@@ -109,7 +110,7 @@ add-files: [
   ["../include/bin/uninstall-gnome-apps.sh", "/usr/bin/sodalite-uninstall-gnome-apps"],
   ["../include/configs/bashrc", "/etc/skel/.bashrc"],
   ["../include/configs/applications/org.gnome.Software.desktop", "/usr/share/applications/org.gnome.Software.desktop"],
-  ["../include/configs/autostart/repair-plank.desktop", "/etc/xdg/autostart/sodalite-repair-plank.desktop"],
+  ["../include/configs/autostart/plank.desktop", "/etc/xdg/autostart/plank.desktop"],
   ["../include/configs/gschemas/io.elementary.desktop.gschema.override", "/usr/share/glib-2.0/schemas/io.elementary.desktop.gschema.override"],
   ["../include/configs/plank/firefox.dockitem", "/etc/skel/.config/plank/dock1/launchers/firefox.dockitem"],
   ["../include/configs/plank/io.elementary.files.dockitem", "/etc/skel/.config/plank/dock1/launchers/io.elementary.files.dockitem"],
