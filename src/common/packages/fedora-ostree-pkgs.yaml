@@ -1,1 +1,1 @@
-include: ../comps/fedora-common-ostree-pkgs.yaml
+include: ../../../lib/workstation-ostree-config/fedora-common-ostree-pkgs.yaml

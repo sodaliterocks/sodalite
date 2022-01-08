@@ -2,9 +2,9 @@
 	path = lib/elementary.default-settings
 	url = https://github.com/elementary/default-settings
 	branch = master
-[submodule "lib/fedora-comps"]
-	path = lib/fedora-comps
-	url = https://pagure.io/fedora-comps.git
 [submodule "lfs"]
 	path = lfs
 	url = https://git.zio.sh/ducky/sodalite-lfs
+[submodule "lib/workstation-ostree-config"]
+	path = lib/workstation-ostree-config
+	url = https://pagure.io/workstation-ostree-config
