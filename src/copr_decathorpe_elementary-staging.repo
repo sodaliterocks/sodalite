@@ -1,5 +1,5 @@
 [copr_decathorpe_elementary-staging]
-name=Fedora Copr: decathorpe/elementary-staging
+name=Copr: decathorpe/elementary-staging
 baseurl=https://download.copr.fedorainfracloud.org/results/decathorpe/elementary-staging/fedora-35-$basearch/
 type=rpm-md
 skip_if_unavailable=True

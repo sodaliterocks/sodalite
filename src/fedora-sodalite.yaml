@@ -1,6 +1,7 @@
 ref: fedora/35/${basearch}/sodalite
 repos:
   - copr_decathorpe_elementary-staging
+  - copr_stsdc_monitor
   - fedora-35
   - fedora-35-updates
 include:
