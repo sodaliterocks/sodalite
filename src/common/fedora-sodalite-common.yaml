@@ -83,6 +83,7 @@ remove-files: [
     "/usr/share/icewm/themes/clearlooks-2px/taskbar/linux.xpm",
 ]
 remove-from-packages: [
+  ["evolution-data-server", "/etc/xdg/autostart/org.gnome.Evolution-alarm-notify.desktop"],
   ["fedora-workstation-backgrounds", "/usr/share/backgrounds/*"],
   ["gnome-session-wayland-session", "/usr/share/wayland-sessions/*"],
   ["gnome-session-xsession", "/usr/share/xsessions/*"],
