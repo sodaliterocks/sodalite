@@ -69,13 +69,13 @@ fi
 
 if [[ $prompt_major_update == true ]]; then
     if [[ $(get_answer "Release update available ($latest_major_release). Update?") == true ]]; then
-        echo "rpm-ostree rebase $latest_major_remote:$latest_major_ref"
+        rpm-ostree rebase $latest_major_remote:$latest_major_ref
         prompt_minor_update=false
     fi
 fi
 
 if [[ $prompt_minor_update == true ]]; then
     if [[ $(get_answer "Incremental update available ($latest_minor_commit). Update?") == true ]]; then
-        echo "rpm-ostree upgrade"
+        rpm-ostree upgrade
     fi
 fi
