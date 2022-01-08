@@ -76,7 +76,13 @@ function get_hwinfo() {
 
     [[ -z $type ]] && type="1"
 
-    sudo dmidecode -t$type | grep "$key:" | sed 's/\t'"${key}"': //g'
+    value=$(dmidecode -t$type | grep "$key:" | sed 's/\t'"${key}"': //g')
+
+    if [[ -z value ]]; then
+        echo "Unknown $key"
+    else
+        echo $value
+    fi
 }
 
 function get_latest_major_ref() {
