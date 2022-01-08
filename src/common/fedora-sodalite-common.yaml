@@ -96,6 +96,7 @@ include: [
   "packages/elementary-staging-pkgs.yaml"
 ]
 add-files: [
+  ["../../lfs/logo/logo.png", "/usr/share/icons/hicolor/256x256/apps/fedora-logo-icon.png"],
   ["../../lfs/oem-logos/acer.png", "/usr/share/oem-logos/acer.png"],
   ["../../lfs/oem-logos/amd.png", "/usr/share/oem-logos/amd.png"],
   ["../../lfs/oem-logos/apple.png", "/usr/share/oem-logos/apple.png"],
