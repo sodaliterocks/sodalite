@@ -46,6 +46,7 @@ packages:
   - python-pip
   - rpm-ostree
   # Misc
+  - com.github.stsdc.monitor
   - lvm2
   - xdg-desktop-portal
   - xprop
