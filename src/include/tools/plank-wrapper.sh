@@ -9,7 +9,6 @@ fi
 shopt -s extglob
 
 current_plank_items=$(dconf read /net/launchpad/plank/docks/dock1/dock-items | sed 's/ //g')
-# TODO: Get this from [net.launchpad.plank.dock.settings:Pantheon] in ../configs/gschemas/io.elementary.desktop.gschema.override
 default_plank_items="['gala-multitaskingview.dockitem','firefox.dockitem','io.elementary.calendar.dockitem','io.elementary.music.dockitem','io.elementary.photos.dockitem','io.elementary.files.dockitem','org.gnome.Software.dockitem']"
 plank_launchers_dir="$HOME/.config/plank/dock1/launchers"
 revert_to_default=false
@@ -20,6 +19,8 @@ declare -a default_plank_items_regex=(
 )
 
 if [[ -z $current_plank_items ]]; then
+    revert_to_default=true
+elif [[ $current_plank_items == "@as[]" ]]; then
     revert_to_default=true
 else
     for val in ${default_plank_items_regex[@]}; do
