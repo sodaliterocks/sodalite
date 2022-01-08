@@ -114,8 +114,8 @@ if [[ $SODALITE_GENERATE_OEM_NO_HACKS == false ]]; then
             ;;
         "msi"|"micro-star international"*)
             if [[ $hw_product =~ ((.+) \(([A-Za-z0-9\-]{1,})\)) ]]; then
-                $hw_product="${BASH_REMATCH[2]}"
-                $hw_version="${BASH_REMATCH[3]}"
+                hw_product="${BASH_REMATCH[2]}"
+                hw_version="${BASH_REMATCH[3]}"
             fi
             ;;
     esac
