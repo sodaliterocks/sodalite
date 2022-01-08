@@ -4,6 +4,7 @@ set -xeuo pipefail
 
 variant_id=$(sodalite-get-variant id)
 variant_name=$(sodalite-get-variant name)
+variant_name_alt=$(sodalite-get-variant name | sed "s/Sodalite //")
 
 function set_osrelease_property() {
     property=$1
@@ -38,10 +39,20 @@ for x in /usr/sbin/glibc_post_upgrade.*; do
 done
 
 # TODO: Work out the correct way to do this, since this isn't!
+osrelease_version_id="35"
+osrelease_pretty_name="$variant_name $osrelease_version_id"
+osrelease_version="$osrelease_version_id"
+
+if [[ !-z $variant_name_alt ]]; then
+    osrelease_pretty_name+=" ($variant_name_alt)"
+    osrelease_version+=" ($variant_name_alt)"
+fi
+
 set_osrelease_property "ID" $variant_id
 set_osrelease_property "NAME" $variant_name
-set_osrelease_property "PRETTY_NAME" "$variant_name 35"
-set_osrelease_property "VERSION" "35"
+set_osrelease_property "PRETTY_NAME" $osrelease_pretty_name
+set_osrelease_property "VERSION" $osrelease_version
+set_osrelease_property "VERSION_ID" $osrelease_version_id
 
 # TODO: Get default wallpaper from gschema
 ln -s /usr/share/backgrounds/default/karsten-wurth-7BjhtdogU3A-unsplash.jpg /usr/share/backgrounds/elementaryos-default
