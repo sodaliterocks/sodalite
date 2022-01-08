@@ -69,6 +69,7 @@ packages-x86_64:
   - xorg-x11-drv-vmware
 exclude-packages:
   - PackageKit
+  - fedora-workstation-backgrounds # These wallpapers are hideous
   - gnome-tour # GNOME is impossible to reach, so we don't need this
 default_target: graphical.target
 remove-from-packages: [
