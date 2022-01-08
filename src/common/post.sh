@@ -43,7 +43,7 @@ osrelease_version_id="35"
 osrelease_pretty_name="$variant_name $osrelease_version_id"
 osrelease_version="$osrelease_version_id"
 
-if [[ !-z $variant_name_alt ]]; then
+if [[ ! -z $variant_name_alt ]]; then
     osrelease_pretty_name+=" ($variant_name_alt)"
     osrelease_version+=" ($variant_name_alt)"
 fi
