@@ -5,7 +5,7 @@ if [[ $(realpath -s "$0") == "/usr/bin/sodalite-"* ]]; then
     oem_logo_root="/usr/share/oem-logos"
 else
     . "$(dirname "$(realpath -s "$0")")/common.sh"
-    oem_logo_root="$(dirname "$(realpath -s "$0")")/../oem-logos"
+    oem_logo_root="$(dirname "$(realpath -s "$0")")/../../../lfs/oem-logos"
 fi
 
 function get_oem_logo_path() {
@@ -33,11 +33,25 @@ echo "Generating OEM information..."
 oem_file="/etc/oem.conf"
 oem_logo_file="/etc/oem-logo.png"
 
-hw_manufacturer=$(get_hwinfo 'Manufacturer')
-hw_product=$(get_hwinfo 'Product Name')
-hw_version=$(get_hwinfo 'Version')
+dmidecode_type=1
+
+if [[ $(get_hwinfo 'Serial Number') == "To be filled by O.E.M." ]]; then
+    # This is a custom build here so we'll use the motherboard info instead
+    dmidecode_type=2
+fi
+
+hw_manufacturer=$(get_hwinfo 'Manufacturer' $dmidecode_type)
+hw_product=$(get_hwinfo 'Product Name' $dmidecode_type)
+hw_version=$(get_hwinfo 'Version' $dmidecode_type)
 hw_logo=""
 hw_url=""
+
+if { 
+    [[ $hw_version == "1.0" ]] ||
+    [[ $hw_version == "Type1ProductConfigId" ]];
+}; then
+    hw_version=""
+fi
 
 case ${hw_manufacturer,,} in
     "acer")
@@ -84,37 +98,24 @@ if [[ $SODALITE_GENERATE_OEM_NO_HACKS == false ]]; then
     case ${hw_manufacturer,,} in
         "google") # Chromebook's (are annoying)
             if [[ $hw_manufacturer == "GOOGLE" ]]; then
-                hw_product_original=$hw_product
-
+                hw_logo=$(get_oem_logo_path chromebook)
+                hw_version=$hw_product
                 hw_manufacturer="Google"
                 hw_product="Chromebook"
-                hw_version=$hw_product_original
-                hw_logo=$(get_oem_logo_path chromebook)
             fi
             ;;
         "hp")
-            if [[ $hw_version == "Type1ProductConfigId" ]]; then
-                hw_version=""
-            fi
-
             if [[ $hw_product == HP* ]]; then
-                hw_product_original=${hw_product/HP /}
-                hw_product=${hw_product_original%-*}
-                hw_version=${hw_product_original#*-}
-
-                [[ -z $hw_product ]] && hw_product=$hw_product_original
+                if [[ $hw_product =~ ((HP.+) ([A-Za-z0-9]{1,})-([A-Za-z0-9]{1,})) ]];then
+                    hw_product="${BASH_REMATCH[2]} ${BASH_REMATCH[3]}"
+                    hw_version="${BASH_REMATCH[4]}"
+                fi
             fi
             ;;
         "msi"|"micro-star international"*)
-            alt_hw_product=$(get_hwinfo 'Product Name' 2)
-            [[ ! -z $alt_hw_product ]] && hw_product=$alt_hw_product
-
-            if { [[ $hw_product == *"("* ]] && [[ $hw_product == *")"* ]]; }; then
-                hw_product_original=$hw_product
-                hw_product=${hw_product_original%(*}
-
-                hw_version=${hw_product_original#*\(}
-                hw_version=${hw_version%)*}
+            if [[ $hw_product =~ ((.+) \(([A-Za-z0-9\-]{1,})\)) ]]; then
+                $hw_product="${BASH_REMATCH[2]}"
+                $hw_version="${BASH_REMATCH[3]}"
             fi
             ;;
     esac
