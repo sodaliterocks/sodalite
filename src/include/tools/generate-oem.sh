@@ -63,6 +63,12 @@ case ${hw_manufacturer,,} in
     "asus")
         hw_url="https://www.asus.com/support"
         ;;
+    "dell")
+        hw_url="https://www.dell.com/support"
+        ;;
+    "gigabyte")
+        hw_url="https://www.gigabyte.com/Support"
+        ;;
     "hp")
         hw_url="https://support.hp.com"
         ;;
@@ -74,6 +80,9 @@ case ${hw_manufacturer,,} in
         ;;
     "lg")
         hw_url="https://www.lg.com/support"
+        ;;
+    "medion")
+        hw_url="https://www.medion.com" # No canon URL to support site
         ;;
     "microsoft")
         hw_url="https://support.microsoft.com"
