@@ -72,6 +72,16 @@ exclude-packages:
   - gnome-tour # GNOME is impossible to reach, so we don't need this
   - xdg-desktop-portal-gnome
 default_target: graphical.target
+remove-files: [
+    "/usr/share/icewm/themes/clearlooks/taskbar/icewm_taskbar_logos_fedora.tar.gz",
+    "/usr/share/icewm/themes/clearlooks/taskbar/linux_fedora_logo.xpm",
+    "/usr/share/icewm/themes/clearlooks/taskbar/linux_fedora.xpm",
+    "/usr/share/icewm/themes/clearlooks/taskbar/linux.xpm",
+    "/usr/share/icewm/themes/clearlooks-2px/taskbar/icewm_taskbar_logos_fedora.tar.gz",
+    "/usr/share/icewm/themes/clearlooks-2px/taskbar/linux_fedora_logo.xpm",
+    "/usr/share/icewm/themes/clearlooks-2px/taskbar/linux_fedora.xpm",
+    "/usr/share/icewm/themes/clearlooks-2px/taskbar/linux.xpm",
+]
 remove-from-packages: [
   ["fedora-workstation-backgrounds", "/usr/share/backgrounds/*"],
   ["gnome-session-wayland-session", "/usr/share/wayland-sessions/*"],
