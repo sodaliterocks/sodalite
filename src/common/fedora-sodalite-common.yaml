@@ -70,6 +70,7 @@ packages-x86_64:
 exclude-packages:
   - PackageKit
   - gnome-tour # GNOME is impossible to reach, so we don't need this
+  - xdg-desktop-portal-gnome
 default_target: graphical.target
 remove-from-packages: [
   ["fedora-workstation-backgrounds", "/usr/share/backgrounds/*"],
