@@ -1,4 +1,4 @@
-# This is for compatibility (prior to commit #).
+# This is for compatibility (prior to commit #1cf0a1fae31c49c797146c90854bc136fa105994).
 # Rebase to sodalite/stable/x86_64/base ASAP!
 ref: fedora/35/${basearch}/sodalite
 include:

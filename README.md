@@ -19,7 +19,7 @@ Confused? Head down to [Getting](#getting).
 
 ### Wait, what happened to `install.sh`?
 
-Removed in (the commit), because:
+Removed in [1cf0a1f](https://github.com/electricduck/sodalite/commit/1cf0a1fae31c49c797146c90854bc136fa105994), because:
 
 * Fedora Silverblue itself is not for beginners, and you shouldn't really need an easy-peasy installer script to get this going.
 	* The script itself might possibly break with future versions of the tools it invokes.
