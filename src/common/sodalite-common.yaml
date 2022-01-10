@@ -104,7 +104,7 @@ add-files: [
   ["../include/tools/generate-oem.sh", "/usr/bin/sodalite-generate-oem"],
   ["../include/tools/plank-wrapper.sh", "/usr/bin/sodalite-plank-wrapper"],
   ["../include/tools/set-hostname.sh", "/usr/bin/sodalite-set-hostname"],
-  
+
   # /etc
   ["../../lib/elementary.default-settings/appcenter/appcenter.hiddenapps", "/etc/appcenter/appcenter.hiddenapps"],
   ["../../lib/elementary.default-settings/cups/default-testpage.pdf", "/etc/cups/default-testpage.pdf"],
@@ -146,8 +146,12 @@ add-files: [
   ["../../lfs/wallpapers/adrien-olichon-gXqgs6Smvw-unsplash.jpg", "/usr/share/backgrounds/default/adrien-olichon-gXqgs6Smvw-unsplash.jpg"],
   ["../../lfs/wallpapers/austin-neill-AGPGx6Yr9NI-unsplash.jpg", "/usr/share/backgrounds/default/austin-neill-AGPGx6Yr9NI-unsplash.jpg"],
   ["../../lfs/wallpapers/cody-fitzgerald-iUBG6hQe4N0-unsplash.jpg", "/usr/share/backgrounds/default/cody-fitzgerald-iUBG6hQe4N0-unsplash.jpg"],
+  ["../../lfs/wallpapers/dustin-humes-OrO_HSqlZMY-unsplash.jpg", "/usr/share/backgrounds/default/dustin-humes-OrO_HSqlZMY-unsplash.jpg"],
+  ["../../lfs/wallpapers/jack-b-vcNPMwS08UI-unsplash.jpg", "/usr/share/backgrounds/default/jack-b-vcNPMwS08UI-unsplash.jpg"],
   ["../../lfs/wallpapers/karsten-wurth-7BjhtdogU3A-unsplash.jpg", "/usr/share/backgrounds/default/karsten-wurth-7BjhtdogU3A-unsplash.jpg"],
+  ["../../lfs/wallpapers/max-okhrimenko-R-CoXmMrWFk-unsplash.jpg", "/usr/share/backgrounds/default/max-okhrimenko-R-CoXmMrWFk-unsplash.jpg"],
   ["../../lfs/wallpapers/nathan-dumlao-y_qtd7IizFE-unsplash.jpg", "/usr/share/backgrounds/default/nathan-dumlao-y_qtd7IizFE-unsplash.jpg"],
+  ["../../lfs/wallpapers/ryan-stone-U3cctUBucn0-unsplash.jpg", "/usr/share/backgrounds/default/ryan-stone-U3cctUBucn0-unsplash.jpg"],
   ["../../lfs/wallpapers/smaran-alva-hno1wDtV1X4-unsplash.jpg", "/usr/share/backgrounds/default/smaran-alva-hno1wDtV1X4-unsplash.jpg"],
   ["../../lfs/wallpapers/william-daigneault-7c8z4KEvgds-unsplash.jpg", "/usr/share/backgrounds/default/william-daigneault-7c8z4KEvgds-unsplash.jpg"],
   ["../../lfs/wallpapers/zara-walker-_pC5hT6aXfs-unsplash.jpg", "/usr/share/backgrounds/default/zara-walker-_pC5hT6aXfs-unsplash.jpg"],
