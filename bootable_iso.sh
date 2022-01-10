@@ -1,4 +1,7 @@
 git clone -b f35 https://pagure.io/fedora-lorax-templates.git
+mkdir ostree_repo
+ostree init --repo=ostree_repo
+rpm-ostree compose tree --repo=$(pwd)/ostree_repo $(pwd)/src/fedora-sodalite.yaml
 
 exec lorax  --product=Fedora \
                 --version=35 \
@@ -6,11 +9,11 @@ exec lorax  --product=Fedora \
                 --variant=Sodalite \
 		--release=20220110 \
                 --nomacboot \
-                --volid=Fedora-SB-ostree-x86_64-35 \
+                --volid=Fedora-Sodalite-x86_64-35 \
                 --add-template=$(pwd)/fedora-lorax-templates/ostree-based-installer/lorax-configure-repo.tmpl \
                 --add-template=$(pwd)/fedora-lorax-templates/ostree-based-installer/lorax-embed-repo.tmpl \
                 --add-template=$(pwd)/fedora-lorax-templates/ostree-based-installer/lorax-embed-flatpaks.tmpl \
-                --add-template-var=ostree_install_repo=https://ostree.zio.sh/repo \
+                --add-template-var=ostree_install_repo=file://$(pwd)/ostree_repo \
                 --add-template-var=ostree_update_repo=https://ostree.zio.sh/repo \
                 --add-template-var=ostree_osname=fedora \
                 --add-template-var=ostree_oskey=fedora-35-sodalite \
