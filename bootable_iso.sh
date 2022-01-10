@@ -1,7 +1,4 @@
 git clone -b f35 https://pagure.io/fedora-lorax-templates.git
-mkdir ostree_repo
-ostree init --repo=ostree_repo
-rpm-ostree compose tree --repo=$(pwd)/ostree_repo $(pwd)/src/fedora-sodalite.yaml
 
 exec lorax  --product=Fedora \
                 --version=35 \
