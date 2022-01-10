@@ -1,17 +1,5 @@
+# This is for compatibility (prior to commit #).
+# Rebase to sodalite/stable/x86_64/base ASAP!
 ref: fedora/35/${basearch}/sodalite
-repos:
-  - copr_decathorpe_elementary-staging
-  - copr_stsdc_monitor
-  - fedora-35
-  - fedora-35-updates
 include:
-  - common/fedora-sodalite-common.yaml
-add-files: [
-  ["include/configs/sodalite-variant", "/etc/sodalite-variant"]
-]
-
-rojig:
-  name: fedora-sodalite
-  summary: "Sodalite"
-  license: MIT
-  description: "A Pantheon experience for Fedora Silverblue: Sodalite."
+  - ./sodalite-base.yaml

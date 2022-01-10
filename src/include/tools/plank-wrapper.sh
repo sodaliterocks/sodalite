@@ -38,4 +38,4 @@ if [[ $revert_to_default == true ]]; then
     fi
 fi
 
-plank
+plank # INVESTIGATE: Launch with detach?

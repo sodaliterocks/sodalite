@@ -2,11 +2,10 @@
 
 set -xeuo pipefail
 
-variant_id=$(sodalite-get-variant id)
-variant_name=$(sodalite-get-variant name)
-variant_name_alt=$(sodalite-get-variant name | sed "s/Sodalite //")
+. /usr/libexec/sodalite-common
 
 function set_osrelease_property() {
+    # TODO: Handle missing properties
     property=$1
     value=$2
 
@@ -16,6 +15,12 @@ function set_osrelease_property() {
 
     sed -i "s/^\($property=\)\(.*\)$/\1$value/g" /etc/os-release
 }
+
+#########
+# HACKS #
+#########
+
+# TODO: Work out if we even need these. These issues are pretty old.
 
 # BUG: https://github.com/projectatomic/rpm-ostree/issues/1542#issuecomment-419684977
 for x in /etc/yum.repos.d/*modular.repo; do
@@ -38,21 +43,41 @@ for x in /usr/sbin/glibc_post_upgrade.*; do
     fi
 done
 
-# TODO: Work out the correct way to do this, since this isn't!
-osrelease_version_id="35"
-osrelease_pretty_name="$variant_name $osrelease_version_id"
-osrelease_version="$osrelease_version_id"
+###################
+# OSTREE MUTATING #
+###################
 
-if [[ ! -z $variant_name_alt ]]; then
-    osrelease_pretty_name+=" ($variant_name_alt)"
-    osrelease_version+=" ($variant_name_alt)"
+sodalite_version_base="0"
+sodalite_version_build="00000000.0"
+if [[ $(get_config_item /etc/os-release VERSION) =~ (([0-9]{1,3})-([0-9]{8}.[0-9]{1,}).+) ]]; then
+    sodalite_version_base="${BASH_REMATCH[2]}"
+    sodalite_version_build="${BASH_REMATCH[3]}"
 fi
 
-set_osrelease_property "ID" $variant_id
-set_osrelease_property "NAME" $variant_name
-set_osrelease_property "PRETTY_NAME" $osrelease_pretty_name
-set_osrelease_property "VERSION" $osrelease_version
-set_osrelease_property "VERSION_ID" $osrelease_version_id
+osr_id="$(get_config_item /etc/sodalite-release ID)"
+osr_name="$(get_config_item /etc/sodalite-release NAME)"
+osr_variant="$(get_config_item /etc/sodalite-release VARIANT)"
+osr_variant_id="$(get_config_item /etc/sodalite-release VARIANT_ID)"
+osr_version="$sodalite_version_build" # INVESTIGATE: Good idea? Could break things?
+osr_version_id="$sodalite_version_base"
+
+if [[ ! -z $osr_variant ]]; then
+    osr_version="$osr_version ($osr_variant)"
+fi
+
+set_osrelease_property "ID" $osr_id
+set_osrelease_property "NAME" $osr_name
+set_osrelease_property "PRETTY_NAME" "$osr_name $osr_version"
+#set_osrelease_property "VARIANT" $osr_variant
+echo "VARIANT=\"$osr_variant\"" >> /etc/os-release
+#set_osrelease_property "VARIANT_ID" $osr_variant_id
+echo "VARIANT_ID=\"$osr_variant_id\"" >> /etc/os-release
+set_osrelease_property "VERSION" "$osr_version"
+set_osrelease_property "VERSION_ID" $osr_version_id
+
+########
+# MISC #
+########
 
 # TODO: Get default wallpaper from gschema
 ln -s /usr/share/backgrounds/default/karsten-wurth-7BjhtdogU3A-unsplash.jpg /usr/share/backgrounds/elementaryos-default

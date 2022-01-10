@@ -1,0 +1,184 @@
+ref: sodalite/stable/${basearch}/common
+selinux: true
+boot-location: modules
+etc-group-members:
+  - wheel
+mutate-os-release: "35"
+documentation: true
+packages:
+  # Base
+  - fedora-release
+  - fedora-release-ostree-desktop
+  - fedora-repos-archive
+  - fedora-repos-ostree
+  # Container management
+  - buildah
+  - podman
+  - skopeo
+  - toolbox
+  # Dev
+  - elfutils-libelf-devel
+  - git-core
+  - git-lfs
+  - glibc-devel
+  - kernel-devel
+  - meson
+  # Device enhancements
+  - hfsplus-tools # HFS filesystem tools for Apple hardware
+  - smartmontools # tlp recommends installing
+  - tlp # Enhancements for laptop batteries
+  # Fonts
+  - google-roboto-mono-fonts # Roboto Mono
+  - opendyslexic-fonts # Open Dyslexic
+  - rsms-inter-fonts # Inter
+  # GVfs
+  - gvfs
+  - gvfs-afc
+  - gvfs-afp
+  - gvfs-fuse
+  - gvfs-gphoto2
+  - gvfs-mtp
+  - gvfs-nfs
+  - gvfs-smb
+  # Package management
+  - flatpak
+  - gnome-software # Replacement for AppCenter
+  - python-pip
+  - rpm-ostree
+  # Misc
+  - com.github.stsdc.monitor
+  - lvm2
+  - xdg-desktop-portal
+  - xprop
+packages-x86_64:
+  - efibootmgr
+  - grub2-efi-ia32
+  - grub2-efi-x64
+  - grub2-pc
+  - hyperv-daemons
+  - mcelog
+  - microcode_ctl
+  - open-vm-tools-desktop
+  - ostree-grub2
+  - shim-ia32
+  - shim-x64
+  - thermald
+  - virtualbox-guest-additions
+  - xorg-x11-drv-intel
+  - xorg-x11-drv-openchrome
+  - xorg-x11-drv-vesa
+  - xorg-x11-drv-vmware
+exclude-packages:
+  - PackageKit
+  - gnome-tour # GNOME is impossible to reach, so we don't need this
+  - xdg-desktop-portal-gnome
+default_target: graphical.target
+remove-from-packages: [
+  ["evolution-data-server", "/etc/xdg/autostart/org.gnome.Evolution-alarm-notify.desktop"],
+  ["fedora-workstation-backgrounds", "/usr/share/backgrounds/*"],
+  ["gnome-session-wayland-session", "/usr/share/wayland-sessions/*"],
+  ["gnome-session-xsession", "/usr/share/xsessions/*"],
+  ["plank", "/etc/xdg/autostart/plank.desktop"]
+]
+check-passwd:
+  type: file
+  filename: passwd
+check-groups:
+  type: file
+  filename: group
+ignore-removed-users:
+  - root
+ignore-removed-groups:
+  - root
+automatic-version-prefix: "35-<date:%Y%m%d>"
+postprocess-script: post.sh
+include: [
+  #"packages/fedora-ostree-pkgs.yaml",
+  "packages/elementary-pkgs.yaml",
+  "packages/elementary-staging-pkgs.yaml"
+]
+add-files: [
+  # Tools (/usr/bin/sodalite-*)
+  ["../include/tools/cleanup.sh", "/usr/bin/sodalite-cleanup"],
+  ["../include/tools/common.sh", "/usr/libexec/sodalite-common"],
+  ["../include/tools/generate-oem.sh", "/usr/bin/sodalite-generate-oem"],
+  ["../include/tools/plank-wrapper.sh", "/usr/bin/sodalite-plank-wrapper"],
+  ["../include/tools/set-hostname.sh", "/usr/bin/sodalite-set-hostname"],
+  
+  # /etc
+  ["../../lib/elementary.default-settings/appcenter/appcenter.hiddenapps", "/etc/appcenter/appcenter.hiddenapps"],
+  ["../../lib/elementary.default-settings/cups/default-testpage.pdf", "/etc/cups/default-testpage.pdf"],
+  ["../../lib/elementary.default-settings/gtk/settings.ini", "/etc/gtk/settings.ini"],
+  ["../include/sysroot/etc/tlp.d/50-vm-writeback.conf", "/etc/tlp.d/50-vm-writeback.conf"],
+  ["../include/sysroot/etc/upstream-release/lsb-release", "/etc/upstream-release/lsb-release"],
+
+  # /etc/skel
+  ["../../lib/elementary.default-settings/skel/flatpak/repo/appcenter.trustedkeys.gpg", "/usr/share/gnupg/appcenter.gpg"],
+  ["../../lib/elementary.default-settings/skel/plank/dock1/launchers/gala-multitaskingview.dockitem", "/etc/skel/.config/plank/dock1/launchers/gala-multitaskingview.dockitem"],
+  ["../../lib/elementary.default-settings/skel/plank/dock1/launchers/io.elementary.calendar.dockitem", "/etc/skel/.config/plank/dock1/launchers/io.elementary.calendar.dockitem"],
+  ["../../lib/elementary.default-settings/skel/plank/dock1/launchers/io.elementary.music.dockitem", "/etc/skel/.config/plank/dock1/launchers/io.elementary.music.dockitem"],
+  ["../../lib/elementary.default-settings/skel/plank/dock1/launchers/io.elementary.photos.dockitem", "/etc/skel/.config/plank/dock1/launchers/io.elementary.photos.dockitem"],
+  ["../../lib/elementary.default-settings/skel/.inputrc", "/etc/skel/.inputrc"],
+  ["../../lib/elementary.default-settings/sudoers.d/pwfeedback", "/etc/sudoers.d/pwfeedback"],
+  ["../include/sysroot/etc/skel/dot.bashrc", "/etc/skel/.bashrc"],
+  ["../include/sysroot/etc/skel/dot.config/plank/dock1/launchers/firefox.dockitem", "/etc/skel/.config/plank/dock1/launchers/firefox.dockitem"],
+  ["../include/sysroot/etc/skel/dot.config/plank/dock1/launchers/io.elementary.files.dockitem", "/etc/skel/.config/plank/dock1/launchers/io.elementary.files.dockitem"],
+  ["../include/sysroot/etc/skel/dot.config/plank/dock1/launchers/org.gnome.Software.dockitem", "/etc/skel/.config/plank/dock1/launchers/org.gnome.Software.dockitem"],
+
+  # /etc/systemd
+  ["../include/sysroot/etc/systemd/system/sodalite-generate-oem.service", "/etc/systemd/system/sodalite-generate-oem.service"],
+  ["../include/sysroot/etc/systemd/system/sodalite-install-appcenter-flatpak.service", "/etc/systemd/system/sodalite-install-appcenter-flatpak.service"],
+
+  # /etc/xdg
+  ["../include/sysroot/etc/xdg/autostart/gnome-software-service.desktop", "/etc/xdg/autostart/gnome-software-service.desktop"],
+  ["../include/sysroot/etc/xdg/autostart/plank-wrapper.desktop", "/etc/xdg/autostart/sodalite-plank-wrapper.desktop"],
+
+  # /usr/bin
+  ["../include/sysroot/usr/bin/detach.sh", "/usr/bin/detach"],
+  ["../include/sysroot/usr/bin/install-appcenter-flatpak.sh", "/usr/bin/sodalite-install-appcenter-flatpak"],
+  ["../include/sysroot/usr/bin/install-epiphany.sh", "/usr/bin/sodalite-install-epiphany"],
+  ["../include/sysroot/usr/bin/uninstall-gnome-apps.sh", "/usr/bin/sodalite-uninstall-gnome-apps"],
+
+  # /usr/share/applications
+  ["../include/sysroot/usr/share/applications/org.gnome.Software.desktop", "/usr/share/applications/org.gnome.Software.desktop"],
+
+  # /usr/share/backgrounds
+  ["../../lfs/wallpapers/adrien-olichon-gXqgs6Smvw-unsplash.jpg", "/usr/share/backgrounds/default/adrien-olichon-gXqgs6Smvw-unsplash.jpg"],
+  ["../../lfs/wallpapers/austin-neill-AGPGx6Yr9NI-unsplash.jpg", "/usr/share/backgrounds/default/austin-neill-AGPGx6Yr9NI-unsplash.jpg"],
+  ["../../lfs/wallpapers/cody-fitzgerald-iUBG6hQe4N0-unsplash.jpg", "/usr/share/backgrounds/default/cody-fitzgerald-iUBG6hQe4N0-unsplash.jpg"],
+  ["../../lfs/wallpapers/karsten-wurth-7BjhtdogU3A-unsplash.jpg", "/usr/share/backgrounds/default/karsten-wurth-7BjhtdogU3A-unsplash.jpg"],
+  ["../../lfs/wallpapers/nathan-dumlao-y_qtd7IizFE-unsplash.jpg", "/usr/share/backgrounds/default/nathan-dumlao-y_qtd7IizFE-unsplash.jpg"],
+  ["../../lfs/wallpapers/smaran-alva-hno1wDtV1X4-unsplash.jpg", "/usr/share/backgrounds/default/smaran-alva-hno1wDtV1X4-unsplash.jpg"],
+  ["../../lfs/wallpapers/william-daigneault-7c8z4KEvgds-unsplash.jpg", "/usr/share/backgrounds/default/william-daigneault-7c8z4KEvgds-unsplash.jpg"],
+  ["../../lfs/wallpapers/zara-walker-_pC5hT6aXfs-unsplash.jpg", "/usr/share/backgrounds/default/zara-walker-_pC5hT6aXfs-unsplash.jpg"],
+
+  # /usr/share/glib-2.0
+  ["../include/sysroot/usr/share/glib-2.0/schemas/io.elementary.desktop.gschema.override", "/usr/share/glib-2.0/schemas/io.elementary.desktop.gschema.override"],
+
+  # /usr/share/icons
+  ["../../lfs/logo/logo.png", "/usr/share/icons/hicolor/256x256/apps/fedora-logo-icon.png"],
+  ["../include/sysroot/usr/share/icons/appcenter-48.svg", "/usr/share/icons/appcenter-48.svg"],
+
+  # /usr/share/oem-logos
+  ["../../lfs/oem-logos/acer.png", "/usr/share/oem-logos/acer.png"],
+  ["../../lfs/oem-logos/amd.png", "/usr/share/oem-logos/amd.png"],
+  ["../../lfs/oem-logos/apple.png", "/usr/share/oem-logos/apple.png"],
+  ["../../lfs/oem-logos/asus.png", "/usr/share/oem-logos/asus.png"],
+  ["../../lfs/oem-logos/chromebook.png", "/usr/share/oem-logos/chromebook.png"],
+  ["../../lfs/oem-logos/dell.png", "/usr/share/oem-logos/dell.png"],
+  ["../../lfs/oem-logos/gigabyte.png", "/usr/share/oem-logos/gigabyte.png"],
+  ["../../lfs/oem-logos/hp.png", "/usr/share/oem-logos/hp.png"],
+  ["../../lfs/oem-logos/huawei.png", "/usr/share/oem-logos/huawei.png"],
+  ["../../lfs/oem-logos/ibm.png", "/usr/share/oem-logos/ibm.png"],
+  ["../../lfs/oem-logos/intel.png", "/usr/share/oem-logos/intel.png"],
+  ["../../lfs/oem-logos/lenovo.png", "/usr/share/oem-logos/lenovo.png"],
+  ["../../lfs/oem-logos/lg.png", "/usr/share/oem-logos/lg.png"],
+  ["../../lfs/oem-logos/medion.png", "/usr/share/oem-logos/medion.png"],
+  ["../../lfs/oem-logos/microsoft.png", "/usr/share/oem-logos/microsoft.png"],
+  ["../../lfs/oem-logos/msi.png", "/usr/share/oem-logos/msi.png"],
+  ["../../lfs/oem-logos/qemu.png", "/usr/share/oem-logos/qemu.png"],
+  ["../../lfs/oem-logos/samsung.png", "/usr/share/oem-logos/samsung.png"],
+  ["../../lfs/oem-logos/system76.png", "/usr/share/oem-logos/system76.png"],
+  ["../../lfs/oem-logos/toshiba.png", "/usr/share/oem-logos/toshiba.png"],
+]
+tmp-is-dir: true

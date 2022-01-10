@@ -1,0 +1,17 @@
+ref: sodalite/stable/${basearch}/base
+repos:
+  - copr_decathorpe_elementary-staging
+  - copr_stsdc_monitor
+  - fedora-35
+  - fedora-35-updates
+include:
+  - common/sodalite-common.yaml
+add-files: [
+  ["include/sysroot/etc/sodalite-release__base", "/etc/sodalite-release"]
+]
+
+rojig:
+  name: fedora-sodalite
+  summary: "Sodalite"
+  license: MIT
+  description: "A Pantheon experience for Fedora Silverblue: Sodalite."

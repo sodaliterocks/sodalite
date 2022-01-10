@@ -7,9 +7,24 @@
 You better know what you're doing, sparky. To get going:
 
 1) Install an OSTree version of Fedora, such as [Fedora Silverblue](https://silverblue.fedoraproject.org/).
-2) Run `wget https://raw.githubusercontent.com/electricduck/sodalite/main/install.sh; chmod +x install.sh; sudo ./install.sh`.
-3) Beg for forgiveness for blindly running a script while you wait for the process to complete.
-4) Reboot when prompted.
+2) Open a terminal and issue these commands:
+	* `sudo ostree remote add --if-not-exists zio https://ostree.zio.sh/repo --no-gpg-verify`
+	* `sudo ostree pull sodalite/stable/x86_64/default`
+	* `sudo rpm-ostree rebase zio:sodalite/stable/x86_64/default`
+3) Stick the kettle on and make yourself a cuppa. It'll take a while.
+4) Reboot when prompted. Sit back in awe as the desktop loads up.
+	* Updates will occur automatically if you update everything from Software (which runs in the background by default and notifies you). Alternatively, run `sudo rpm-ostree upgrade` from a terminal.
+
+Confused? Head down to [Getting](#getting).
+
+### Wait, what happened to `install.sh`?
+
+Removed in (the commit), because:
+
+* Fedora Silverblue itself is not for beginners, and you shouldn't really need an easy-peasy installer script to get this going.
+	* The script itself might possibly break with future versions of the tools it invokes.
+* You'll learn how things work without blindly running random scripts, and possibly troubleshoot issues since you'll know _where_ something went wrong.
+* It's literally three lines to install. 😜
 
 ## Background
 
@@ -41,7 +56,7 @@ However, there's plenty of stuff that _does_ work rendering Sodalite entirely us
 * Many Flatpak apps will be duplicated in the Dock: see [issue #64 on elementary/dock](https://github.com/elementary/dock/issues/64). Although this is one of many issues across elementary, I felt like I needed to bring this one up. Nothing broke on your end!
 * ~~Not enough people are using this masterpiece.~~
 
-## Getting
+<h2 id="getting">Getting</h2>
 
 Ready? It's easy. Ish. Hold out your hand and I'll guide you.
 
@@ -51,12 +66,24 @@ An OSTree repository has already been setup for Sodalite, so you don't even need
 	* If you've never used OSTree or Fedora Silverblue before, **[read the docs](https://docs.fedoraproject.org/en-US/fedora-silverblue/)**. Get to know the OS, (try to) break it, reinstall it, repeat.
 	* Custom partitioning is unsupported but does work from experience. The installer is flaky however, and will often stumble on basic problems and giving you very little guidance on what went wrong. For example, `fedora` still being present in the EFI partition if leftover from a previous install &mdash; just delete the directory!
 	* If you're feeling adventurous, install [Fedora IoT](https://getfedora.org/iot/) instead &mdash; it's OSTree too, plus the ISO is over half the size.
-2) Grab a coffee or carbonated beverage. Or beer. That works too.
-3) Run the `install.sh` script (as root), making sure you inspect it first: there might be spiders!
-	* If you haven't cloned the repository, you can also run `wget https://raw.githubusercontent.com/electricduck/sodalite/main/install.sh; chmod +x install.sh; sudo ./install.sh`, as mentioned in the Quickstart above.
-	* This script uses a remote repository and will not use the local build (that's coming soon™).
-	* Seriously though, take a look at what the script does: it's easy and you'll learn something. In a nutshell, it uses the repository located at `https://ostree.zio.sh/repo` (no GPG) and pulls `zio:fedora/<version>/<arch>/sodalite`.
-4) Reboot when prompted. On reboot, make sure you choose the correct OSTree deployment at the boot menu (which should be the default option anyway).
+2) Open a terminal and issue the following commands with superuser privileges (as `root`, or with `sudo`):
+	1) `ostree remote add --if-not-exists zio https://ostree.zio.sh/repo --no-gpg-verify`<br />This adds the OSTree repository hosted on [zio.sh](https://zio.sh) (a group of servers partially ran by [@electricduck](https://github.com/electricduck) — it can be trusted). No GPG verification because I'm lazy as sin.
+	2) `ostree pull sodalite/stable/x86_64/base`<br />This pulls the OSTree image for Sodalite, and is split up into four parts (similar to that of Fedora Silverblue). These parts can be substituted for other values:
+		1) `sodalite`: The **name** of the image. That's _SOH-da-lyte_ not _sou-DA-lyte_ — I'm not making a sugar-free beverage here.
+		2) `stable`: The **version** of the image. Possible values:
+            * `stable`: Rolling-release version based on the current stable version of Fedora Linux (as of currently, Fedora Linux 35).
+        1) `x86_64`: The **architecture** of the image. Possible values:
+            * `x86_64`: For 64-bit CPUs (`x86_64`, `amd64`, or — please stop saying this — `x64`).
+            * <s>`x86`: [What year is it!?](https://c.tenor.com/9OcQhlCBNG0AAAAd/what-year-is-it-jumanji.gif)</s>
+        2) `base`: The **variant** of the image. Possible values:
+            * `base`: Everything you'll need to get going (hopefully). Other variants are built on-top of this.
+            * <s>`caral`: Stuff and things.</s> Coming soon™.
+	3) `rpm-ostree rebase zio:sodalite/stable/x86_64/base`<br />This rebases the OS onto Sodalite's image. Remember to substitute any values from before into this one!
+3) Reboot when prompted with `systemctl reboot`.
+4) Once logged in, defaults should apply and everything should be as it should.
+   	* Unless removed them beforehand, you'll have a tonne of GNOME apps still installed from Flatpak. As Flatpak apps are part of the "user" part of the OS they cannot be programatically removed during the rebase. Run to `sodalite-uninstall-gnome-apps` to remove them all.
+   	* Some elementaryOS apps are provided via Flatpak itself. These will be installed on bootup but make take some time to appear in your Applications menu. Invoke it manually with `sodalite-install-appcenter-flatpak`.
+   	* Updates will occur automatically if you update everything from Software (which runs in the background by default and notifies). Alternatively, run `rpm-ostree upgrade`.
 
 ### Post-install
 
@@ -107,7 +134,7 @@ _The below scripts are run as autostart for the user: you should need need to ru
 	* [Smaran Alva](https://unsplash.com/@smal)
 	* [Willian Daigneault](https://unsplash.com/@williamdaigneault)
 	* [Zara Walker](https://unsplash.com/@mojoblogs)
-* The [Sodalite mineral](https://en.wikipedia.org/wiki/Sodalite), for the name. It's pronounced _soh-da-lyte_, not _sou-da-lite_, you fool.
+* The [Sodalite mineral](https://en.wikipedia.org/wiki/Sodalite), for the name. It's pronounced _SOH-da-lyte_ not _sou-DA-lyte_, you fool.
 * The Omicron variant of COVID-19, for giving me the initial free time to make this thing. True story.
 
 ## License
