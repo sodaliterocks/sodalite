@@ -13,7 +13,8 @@ You better know what you're doing, sparky. To get going:
 	* `sudo rpm-ostree rebase zio:sodalite/stable/x86_64/base`
 3) Stick the kettle on and make yourself a cuppa. It'll take a while.
 4) Reboot when prompted. Sit back in awe as the desktop loads up.
-	* Updates will occur automatically if you update everything from Software (which runs in the background by default and notifies you). Alternatively, run `sudo rpm-ostree upgrade` from a terminal.
+	* Updates will occur automatically if you update everything from Software (which runs in the background by default and sends desktops notifications).
+	* As they are installed via Flatpak, various GNOME apps will still be lingering. Remove these with `sudo sodalite-uninstall-gnome-apps`.
 
 Confused? Head down to [Getting](#getting).
 
@@ -81,13 +82,18 @@ An OSTree repository has already been setup for Sodalite, so you don't even need
 	3) `rpm-ostree rebase zio:sodalite/stable/x86_64/base`<br />This rebases the OS onto Sodalite's image. Remember to substitute any values from before into this one!
 3) Reboot when prompted with `systemctl reboot`.
 4) Once logged in, defaults should apply and everything should be as it should.
-   	* Unless removed them beforehand, you'll have a tonne of GNOME apps still installed from Flatpak. As Flatpak apps are part of the "user" part of the OS they cannot be programatically removed during the rebase. Run to `sodalite-uninstall-gnome-apps` to remove them all.
-   	* Some elementaryOS apps are provided via Flatpak itself. These will be installed on bootup but make take some time to appear in your Applications menu. Invoke it manually with `sodalite-install-appcenter-flatpak`.
-   	* Updates will occur automatically if you update everything from Software (which runs in the background by default and notifies). Alternatively, run `rpm-ostree upgrade`.
 
 ### Post-install
 
-(todo)
+#### Updating
+
+Updates will occur automatically if you update everything from Software (which runs in the background by default and sends desktop notifications).
+
+Alternatively, run `rpm-ostree upgrade`.
+
+#### GNOME apps
+
+Unless removed them beforehand, you'll have a tonne of GNOME apps still installed from Flatpak. As Flatpak apps are part of the "user" part of the OS they cannot be programatically removed during the rebase. Run to `sodalite-uninstall-gnome-apps` to remove them all.
 
 #### Included tools
 
@@ -96,7 +102,6 @@ For bits of housekeeping, Sodalite also includes a few tools:
 * `sodalite-install-epiphany`<br />Installs Web (Epiphany); elementary's default browser.
 * `sodalite-set-hostname [hostname] [description]`<br />Sets the system hostname.
 * `sodalite-uninstall-gnome-apps`<br />Removes GNOME apps installed via Flatpak. You'll be presented with a list of apps and given a choice whether you want to remove them all. Although they play nicely in Pantheon, they look extremely out-of-place.
-* `sodalite-update`<br />Updates the system!
 
 _The below scripts are ran as services: you should never need to run them manually unless you disable the service (which has the same name)._
 
@@ -107,7 +112,7 @@ _The below scripts are run as autostart for the user: you should need need to ru
 
 * `sodalite-plank-wrapper`<br />Launches Plank with a wrapper to correct default settings (and update them if the user never changes items).
 
-### Removal
+#### Removal
 
 (todo &mdash; OSTree has several ways and its dependant on your install!)
 
@@ -117,14 +122,15 @@ _The below scripts are run as autostart for the user: you should need need to ru
 
 ## Contributing
 
-(todo)
+See [CONTRIBUTING.md](./CONTRIBUTING.md).
 
 ## Acknowledgements
 
-* The contributors to [workstation-ostree-config](https://pagure.io/workstation-ostree-config), giving me a solid ground to work from.
+* [Jorge O. Castro](https://github.com/castrojo), for including Sodalite in [awesome-immutable](https://github.com/castrojo/awesome-immutable).
 * [Timothée Ravier](https://tim.siosm.fr), for his extensive guidance to the community concerning Fedora Silverblue.
-* The [elementary team](https://elementary.io/team), for building their lovely stuff and getting it working everywhere.
-* The contributors to [Ublue](https://github.com/castrojo/ublue), for showing me there's plenty niche-of-niches.
+* [Fabio Valentini](https://decathorpe.com/), for providing the extra packages for elementary on Fedora via the [elementary-staging Copr repository](https://copr.fedorainfracloud.org/coprs/decathorpe/elementary-staging/).
+* The contributors to [workstation-ostree-config](https://pagure.io/workstation-ostree-config), giving me a solid ground to work from.
+* The [elementary team](https://elementary.io/team), for building lovely stuff.
 * The amazing photographers/artists of the included wallpapers:
 	* [Adrien Olichon](https://unsplash.com/@adrienolichon)
 	* [Austin Neill](https://unsplash.com/@arstyy)
