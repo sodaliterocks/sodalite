@@ -1,6 +1,6 @@
 # If you want to make your own build of Sodalite it's a good idea to use this
 # file. This is also the default file ./build.sh uses (which can be changed
-# with `./build.sh [variant]`; for example, `./build./sh base`).
+# with `./build.sh [variant]`; for example, `./build.sh base`).
 
 ref: sodalite/stable/${basearch}/custom
 repos:
