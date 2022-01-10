@@ -65,15 +65,15 @@ if [[ ! -z $osr_variant ]]; then
     osr_version="$osr_version ($osr_variant)"
 fi
 
-set_osrelease_property "ID" $osr_id
-set_osrelease_property "NAME" $osr_name
-set_osrelease_property "PRETTY_NAME" "$osr_name $osr_version"
+[[ ! -z $osr_id ]] && set_osrelease_property "ID" $osr_id
+[[ ! -z $osr_name ]] && set_osrelease_property "NAME" $osr_name
+[[ ! -z $osr_name ]] && set_osrelease_property "PRETTY_NAME" "$osr_name $osr_version"
 #set_osrelease_property "VARIANT" $osr_variant
-echo "VARIANT=\"$osr_variant\"" >> /etc/os-release
+[[ ! -z $osr_variant ]] && echo "VARIANT=\"$osr_variant\"" >> /etc/os-release
 #set_osrelease_property "VARIANT_ID" $osr_variant_id
-echo "VARIANT_ID=\"$osr_variant_id\"" >> /etc/os-release
-set_osrelease_property "VERSION" "$osr_version"
-set_osrelease_property "VERSION_ID" $osr_version_id
+[[ ! -z $osr_variant_id ]] && echo "VARIANT_ID=\"$osr_variant_id\"" >> /etc/os-release
+[[ ! -z $osr_version ]] && set_osrelease_property "VERSION" "$osr_version"
+[[ ! -z $osr_version_id ]] && set_osrelease_property "VERSION_ID" $osr_version_id
 
 ########
 # MISC #
