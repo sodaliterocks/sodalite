@@ -9,8 +9,8 @@ You better know what you're doing, sparky. To get going:
 1) Install an OSTree version of Fedora, such as [Fedora Silverblue](https://silverblue.fedoraproject.org/).
 2) Open a terminal and issue these commands:
 	* `sudo ostree remote add --if-not-exists zio https://ostree.zio.sh/repo --no-gpg-verify`
-	* `sudo ostree pull sodalite/stable/x86_64/default`
-	* `sudo rpm-ostree rebase zio:sodalite/stable/x86_64/default`
+	* `sudo ostree pull zio:sodalite/stable/x86_64/base`
+	* `sudo rpm-ostree rebase zio:sodalite/stable/x86_64/base`
 3) Stick the kettle on and make yourself a cuppa. It'll take a while.
 4) Reboot when prompted. Sit back in awe as the desktop loads up.
 	* Updates will occur automatically if you update everything from Software (which runs in the background by default and notifies you). Alternatively, run `sudo rpm-ostree upgrade` from a terminal.
