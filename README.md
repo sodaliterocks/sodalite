@@ -22,7 +22,7 @@ Confused? Head down to [Getting](#getting).
 Removed in [1cf0a1f](https://github.com/electricduck/sodalite/commit/1cf0a1fae31c49c797146c90854bc136fa105994), because:
 
 * Fedora Silverblue itself is not for beginners, and you shouldn't really need an easy-peasy installer script to get this going.
-	* The script itself might possibly break with future versions of the tools it invokes.
+* The script itself might possibly break with future versions of the tools it invokes.
 * You'll learn how things work without blindly running random scripts, and possibly troubleshoot issues since you'll know _where_ something went wrong.
 * It's literally three lines to install. 😜
 
