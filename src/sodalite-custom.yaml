@@ -1,6 +1,8 @@
 # If you want to make your own build of Sodalite it's a good idea to use this
 # file. This is also the default file ./build.sh uses (which can be changed
 # with `./build.sh [variant]`; for example, `./build.sh base`).
+#
+# See https://rpm-ostree.readthedocs.io/en/stable/manual/treefile/ for help.
 
 ref: sodalite/stable/${basearch}/custom
 repos:
