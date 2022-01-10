@@ -15,7 +15,7 @@ test_root
 [[ -z $working_dir ]] && working_dir="$base_dir/build"
 
 treefile="$base_dir/src/sodalite-$variant.yaml"
-[[ $variant == "legacy" ]] & treefile="$base_dir/src/fedora-sodalite.yaml"
+[[ $variant == "legacy" ]] && treefile="$base_dir/src/fedora-sodalite.yaml"
 
 if [[ ! -f $treefile ]]; then
     echoc error "sodalite-$variant does not exist"
