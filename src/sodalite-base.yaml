@@ -11,7 +11,7 @@ add-files: [
 ]
 
 rojig:
-  name: fedora-sodalite
+  name: sodalite
   summary: "Sodalite"
   license: MIT
   description: "A Pantheon experience for Fedora Silverblue: Sodalite."
