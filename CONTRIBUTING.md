@@ -2,7 +2,13 @@
 
 Awesome! Help is always appreciated, from bugfixes to potential new features. There's just a few things to know before you get going though, outlined below.
 
-## Licensing
+## Issues
+
+(todo)
+
+## Development
+
+### Licensing
 
 All code submitted into this repository will be [licensed as MIT](https://github.com/electricduck/sodalite/blob/main/LICENSE), which means:
 
@@ -10,7 +16,7 @@ All code submitted into this repository will be [licensed as MIT](https://github
 * Lacks liability or warranty.
 * Original license (MIT) must stay intact.
 
-## Branches
+### Branches
 
 * `main` (default): **Production branch**
 	* Contains the latest production version of `stable` (as in the `stable` in `sodalite/stable/x86_64/base`) for all variants.
@@ -29,7 +35,7 @@ All code submitted into this repository will be [licensed as MIT](https://github
 	* `main` in cherry-picked into here, being careful not to adjust the `ref` properties in treefiles.
 	* This is the working code that is built on [the OSTree server](https://ostree.zio.sh/repo).
 
-## Commit Messages
+### Commit Messages
 
 ```
 <emoji> [[#<issue>]] [<area>:] <message>
@@ -74,7 +80,7 @@ For inspiration, have a look through the history with `git log` (or `git log <fi
 | 🎉 (`:tada:`) | Initializing a repository |
 | 🔥 (`:fire:`) | Archiving a repository |
 
-## Coding Convention
+### Coding Convention
 
 Early days and I'm still working things out myself, but some things to keep in mind:
 
@@ -84,6 +90,6 @@ Early days and I'm still working things out myself, but some things to keep in m
 * Keep to how the file is laid out but also stick to what you know. It can be cleaned up later!
 * [Submit an issue](https://github.com/electricduck/sodalite/issues/new) if you feel something could be done in a better way.
 
-## LFS Folder
+### LFS Folder
 
 At the root of the repo lies the mystical `./lfs` submodule which points to [ducky/sodalite-lfs on Zio Git](https://git.zio.sh/ducky/sodalite-lfs). This was done after Sodalite quickly utilized GitHub's puny LFS limits (just 1GiB bandwidth — in 2022!?). If you wish to change any of the files there please submit a ticket and I'll sort something out.
