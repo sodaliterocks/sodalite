@@ -36,7 +36,6 @@ fi
 
 echoc "$(write_emoji "⚡")Building tree for sodalite-$variant..."
 rpm-ostree compose tree \
-    --unified-core \
     --cachedir="$ostree_cache_dir" \
     --repo="$ostree_repo_dir" \
     $treefile
