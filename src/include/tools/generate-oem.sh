@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# TODO: Make this its own self-contained script. Would be useful for anyone on elementaryOS!
 
 if [[ $(realpath -s "$0") == "/usr/bin/sodalite-"* ]]; then
     . /usr/libexec/sodalite-common
@@ -54,23 +55,30 @@ if {
 fi
 
 case ${hw_manufacturer,,} in
+    "asustek"*) # ASUS (ASUSTek Computer Inc.)
+        hw_logo=$(get_oem_logo_path asus)
+        hw_manufacturer="ASUS"
+        hw_url="https://www.asus.com/support"
+        ;;
+    "hp") # HP (HP Inc.)
+        hw_url="https://support.hp.com"
+        ;;
+    "micro-star international"*) # MSI (Micro-Star International Co., Ltd)
+        hw_logo=$(get_oem_logo_path msi)
+        hw_manufacturer="MSI"
+        hw_url="https://www.msi.com/support"
+        ;;
     "acer")
         hw_url="https://acer.com/support"
         ;;
     "apple")
         hw_url="https://support.apple.com"
         ;;
-    "asus")
-        hw_url="https://www.asus.com/support"
-        ;;
     "dell")
         hw_url="https://www.dell.com/support"
         ;;
     "gigabyte")
         hw_url="https://www.gigabyte.com/Support"
-        ;;
-    "hp")
-        hw_url="https://support.hp.com"
         ;;
     "huawei")
         hw_url="https://consumer.huawei.com" # No canon URL to support site
@@ -87,10 +95,6 @@ case ${hw_manufacturer,,} in
     "microsoft")
         hw_url="https://support.microsoft.com"
         ;;
-    "msi"|"micro-star international"*)
-        hw_logo=$(get_oem_logo_path msi)
-        hw_url="https://www.msi.com/support"
-        ;;
     "qemu")
         hw_url="https://www.qemu.org/docs/master"
         ;;
@@ -104,7 +108,13 @@ case ${hw_manufacturer,,} in
 esac
 
 if [[ $SODALITE_GENERATE_OEM_NO_HACKS == false ]]; then
-    case ${hw_manufacturer,,} in
+    case ${hw_manufacturer,,} in # The hw_manufacturer may have been modified up above
+        "asus")
+            if [[ $hw_product =~ (([A-Za-z]{1,})_ASUSLaptop ([A-Za-z0-9]{1,})[_]{0,}([A-Za-z0-9]{0,})) ]]; then
+                hw_product="${BASH_REMATCH[2]}"
+                hw_version="${BASH_REMATCH[4]}"
+            fi
+            ;;
         "google") # Chromebook's (are annoying)
             if [[ $hw_manufacturer == "GOOGLE" ]]; then
                 hw_logo=$(get_oem_logo_path chromebook)
@@ -121,7 +131,7 @@ if [[ $SODALITE_GENERATE_OEM_NO_HACKS == false ]]; then
                 fi
             fi
             ;;
-        "msi"|"micro-star international"*)
+        "msi")
             if [[ $hw_product =~ ((.+) \(([A-Za-z0-9\-]{1,})\)) ]]; then
                 hw_product="${BASH_REMATCH[2]}"
                 hw_version="${BASH_REMATCH[3]}"
