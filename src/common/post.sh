@@ -58,11 +58,11 @@ osr_id="$(get_config_item /etc/sodalite-release ID)"
 osr_name="$(get_config_item /etc/sodalite-release NAME)"
 osr_variant="$(get_config_item /etc/sodalite-release VARIANT)"
 osr_variant_id="$(get_config_item /etc/sodalite-release VARIANT_ID)"
-osr_version="$sodalite_version_build" # INVESTIGATE: Good idea? Could break things?
+osr_version="$sodalite_version_base-$sodalite_version_build"
 osr_version_id="$sodalite_version_base"
 
 if [[ ! -z $osr_variant ]]; then
-    osr_version="$osr_version ($osr_variant)"
+    osr_version+=" ($osr_variant)"
 fi
 
 [[ ! -z $osr_id ]] && set_osrelease_property "ID" $osr_id
