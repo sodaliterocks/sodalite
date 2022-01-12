@@ -1,7 +1,7 @@
 git clone -b f35 https://pagure.io/fedora-lorax-templates.git
 mkdir ostree_repo
 ostree init --repo=ostree_repo
-rpm-ostree compose tree --repo=$(pwd)/ostree_repo $(pwd)/src/fedora-sodalite.yaml
+rpm-ostree compose tree --repo=$(pwd)/ostree_repo $(pwd)/src/sodalite-base.yaml
 
 exec lorax  --product=Fedora \
                 --version=35 \
@@ -17,11 +17,11 @@ exec lorax  --product=Fedora \
                 --add-template-var=ostree_update_repo=https://ostree.zio.sh/repo \
                 --add-template-var=ostree_osname=fedora \
                 --add-template-var=ostree_oskey=fedora-35-sodalite \
-                --add-template-var=ostree_install_ref=fedora/35/x86_64/sodalite \
-                --add-template-var=ostree_update_ref=fedora/35/x86_64/sodalite \
-                --add-template-var=flatpak_remote_name=fedora \
-                --add-template-var=flatpak_remote_url=oci+https://registry.fedoraproject.org \
-                --add-template-var=flatpak_remote_refs="runtime/org.fedoraproject.Platform/x86_64/f35 app/org.gnome.gedit/x86_64/stable" \
+                --add-template-var=ostree_install_ref=sodalite/stable/x86_64/base \
+                --add-template-var=ostree_update_ref=sodalite/stable/x86_64/base \
+                --add-template-var=flatpak_remote_name=flathub \
+                --add-template-var=flatpak_remote_url=https://flathub.org/repo/flathub.flatpakrepo \
+                --add-template-var=flatpak_remote_refs="runtime/org.gnome.Platform/x86_64/41 app/org.gnome.Epiphany/x86_64/stable" \
                 --logfile=$(pwd)/lorax.log \
                 --tmp=$(pwd)/temp \
                 --rootfs-size=8 \
