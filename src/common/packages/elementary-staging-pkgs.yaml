@@ -17,8 +17,11 @@ packages:
   - wingpanel-indicator-a11y
   - wingpanel-indicator-ayatana
   - xdg-desktop-portal-pantheon
+# BUG: Not getting removed due to lack of --unified-core (see https://github.com/electricduck/sodalite/issues/9#issuecomment-1010384738)
+#      We'll remove these packages the hacky way in ../sodalite-common.yaml
 remove-from-packages: [
   ["switchboard-plug-datetime", "/*"],
   ["switchboard-plug-locale", "/*"],
+  ["switchboard-plug-parental-controls", "/*"],
   ["switchboard-plug-security-privacy", "/*"]
 ]
