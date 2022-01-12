@@ -101,7 +101,7 @@ add-files: [
   # HACK: Removing files by overwritng them (see https://github.com/electricduck/sodalite/issues/9#issuecomment-1010384738)
   ["../include/sysroot/etc/xdg/autostart/org.gnome.Evolution-alarm-notify.desktop", "/etc/xdg/autostart/org.gnome.Evolution-alarm-notify.desktop"],
   ["../include/sysroot/etc/xdg/autostart/plank.desktop", "/etc/xdg/autostart/plank.desktop"],
-  ["../include/sysroot/usr/lib64/switchboard/personal/liblocale-plug.so", "/usr/lib64/switchboard/personal/liblocale-plug.so"]
+  ["../include/sysroot/usr/lib64/switchboard/personal/liblocale-plug.so", "/usr/lib64/switchboard/personal/liblocale-plug.so"],
   ["../include/sysroot/usr/lib64/switchboard/system/libdatetime.so", "/usr/lib64/switchboard/system/libdatetime.so"],
   ["../include/sysroot/usr/lib64/switchboard/system/libparental-controls.so", "/usr/lib64/switchboard/system/libparental-controls.so"],
   ["../include/sysroot/usr/lib64/switchboard/system/libsecurity-privacy.so", "/usr/lib64/switchboard/system/libsecurity-privacy.so"],
