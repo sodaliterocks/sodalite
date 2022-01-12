@@ -7,7 +7,7 @@ exec lorax  --product=Fedora \
                 --version=35 \
                 --source=https://kojipkgs.fedoraproject.org/compose/35/latest-Fedora-35/compose/Everything/x86_64/os/ \
                 --variant=Sodalite \
-		--release=20220110 \
+		--release=$(date '+%Y%m%d') \
                 --nomacboot \
                 --volid=Fedora-Sodalite-x86_64-35 \
                 --add-template=$(pwd)/fedora-lorax-templates/ostree-based-installer/lorax-configure-repo.tmpl \
