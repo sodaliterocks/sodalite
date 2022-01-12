@@ -55,30 +55,39 @@ if {
 fi
 
 case ${hw_manufacturer,,} in
-    "asustek"*) # ASUS (ASUSTek Computer Inc.)
-        hw_logo=$(get_oem_logo_path asus)
+    "asus"|"asustek"*) # ASUS (ASUSTek Computer Inc.)
         hw_manufacturer="ASUS"
         hw_url="https://www.asus.com/support"
         ;;
-    "hp") # HP (HP Inc.)
+    "dell"|"dell inc"*) # Dell (Dell Inc.)
+        hw_manufacturer="Dell"
+        hw_url="https://www.dell.com/support"
+        ;;
+    "gigabyte technology"*|"giga-byte technology"*) # GIGABYTE (Gigabyte Technology Co., Ltd)
+        hw_manufacturer="GIGABYTE"
+        hw_url="https://www.gigabyte.com/Support"
+        ;;
+    "hp"|"hewlett-packard") # HP (HP Inc.)
+        hw_manufacturer="HP"
         hw_url="https://support.hp.com"
         ;;
-    "micro-star international"*) # MSI (Micro-Star International Co., Ltd)
-        hw_logo=$(get_oem_logo_path msi)
+    "msi"|"micro-star international"*) # MSI (Micro-Star International Co., Ltd)
         hw_manufacturer="MSI"
         hw_url="https://www.msi.com/support"
+        ;;
+    "microsoft"|"microsoft corp"*) # Microsoft (Microsoft Corp.)
+        hw_manufacturer="Microsoft"
+        hw_url="https://support.microsoft.com"
+        ;;
+    "vmware"*) # VMware (VMware, Inc.)
+        hw_manufacturer="VMware"
+        hw_url="https://www.vmware.com/support"
         ;;
     "acer")
         hw_url="https://acer.com/support"
         ;;
     "apple")
         hw_url="https://support.apple.com"
-        ;;
-    "dell")
-        hw_url="https://www.dell.com/support"
-        ;;
-    "gigabyte")
-        hw_url="https://www.gigabyte.com/Support"
         ;;
     "huawei")
         hw_url="https://consumer.huawei.com" # No canon URL to support site
@@ -91,9 +100,6 @@ case ${hw_manufacturer,,} in
         ;;
     "medion")
         hw_url="https://www.medion.com" # No canon URL to support site
-        ;;
-    "microsoft")
-        hw_url="https://support.microsoft.com"
         ;;
     "qemu")
         hw_url="https://www.qemu.org/docs/master"
@@ -115,6 +121,11 @@ if [[ $SODALITE_GENERATE_OEM_NO_HACKS == false ]]; then
                 hw_version="${BASH_REMATCH[4]}"
             fi
             ;;
+        "dell")
+            if [[ $hw_product =~ (Dell System ([A-Za-z0-9\-\ ]{1,})) ]]; then
+                hw_product="${BASH_REMATCH[2]}"
+            fi
+            ;;
         "google") # Chromebook's (are annoying)
             if [[ $hw_manufacturer == "GOOGLE" ]]; then
                 hw_logo=$(get_oem_logo_path chromebook)
@@ -125,11 +136,14 @@ if [[ $SODALITE_GENERATE_OEM_NO_HACKS == false ]]; then
             ;;
         "hp")
             if [[ $hw_product == HP* ]]; then
-                if [[ $hw_product =~ ((HP.+) ([A-Za-z0-9]{1,})-([A-Za-z0-9]{1,})) ]];then
-                    hw_product="${BASH_REMATCH[2]} ${BASH_REMATCH[3]}"
-                    hw_version="${BASH_REMATCH[4]}"
+                if [[ $hw_product =~ (HP ([A-Za-z0-9\ ]{1,})-([A-Za-z0-9]{1,})) ]];then
+                    hw_product="${BASH_REMATCH[2]}"
+                    hw_version="${BASH_REMATCH[3]}"
                 fi
             fi
+            ;;
+        "microsoft")
+            [[ $hw_product == "Virtual Machine" ]] && hw_product="Hyper-V VM"
             ;;
         "msi")
             if [[ $hw_product =~ ((.+) \(([A-Za-z0-9\-]{1,})\)) ]]; then
