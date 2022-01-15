@@ -115,7 +115,6 @@ add-files: [
   ["../include/tools/cleanup.sh", "/usr/bin/sodalite-cleanup"],
   ["../include/tools/generate-oem.sh", "/usr/bin/sodalite-generate-oem"],
   ["../include/tools/plank-wrapper.sh", "/usr/bin/sodalite-plank-wrapper"],
-  ["../include/tools/set-hostname.sh", "/usr/bin/sodalite-set-hostname"],
 
   # /etc
   ["../../lib/elementary.default-settings/appcenter/appcenter.hiddenapps", "/etc/appcenter/appcenter.hiddenapps"],
