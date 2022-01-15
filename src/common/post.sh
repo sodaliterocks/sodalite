@@ -2,7 +2,7 @@
 
 set -xeuo pipefail
 
-. /usr/libexec/sodalite-common
+. /usr/libexec/sodalite/bash/common.sh
 
 function set_osrelease_property() {
     # TODO: Handle missing properties

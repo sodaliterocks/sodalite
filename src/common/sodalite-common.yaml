@@ -111,8 +111,8 @@ add-files: [
   ["../include/sysroot/usr/share/xsessions/gnome-xorg.desktop", "/usr/share/xsessions/gnome-xorg.desktop"],
 
   # Tools (/usr/bin/sodalite-*)
+  ["../../lib/sodaliterocks.common/bash/common.sh", "/usr/libexec/sodalite/bash/common.sh"],
   ["../include/tools/cleanup.sh", "/usr/bin/sodalite-cleanup"],
-  ["../include/tools/common.sh", "/usr/libexec/sodalite-common"],
   ["../include/tools/generate-oem.sh", "/usr/bin/sodalite-generate-oem"],
   ["../include/tools/plank-wrapper.sh", "/usr/bin/sodalite-plank-wrapper"],
   ["../include/tools/set-hostname.sh", "/usr/bin/sodalite-set-hostname"],

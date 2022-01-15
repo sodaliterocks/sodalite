@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
 if [[ $(realpath -s "$0") == "/usr/bin/sodalite-"* ]]; then
-    . /usr/libexec/sodalite-common
+    . /usr/libexec/sodalite/bash/common.sh
 else
-    . "$(dirname "$(realpath -s "$0")")/common.sh"
+    . "$(dirname "$(realpath -s "$0")")/../../../lib/sodaliterocks.common/bash/common.sh"
 fi
 
 function invoke_cleanup() {

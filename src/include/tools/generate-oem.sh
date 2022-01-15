@@ -2,10 +2,10 @@
 # TODO: Make this its own self-contained script. Would be useful for anyone on elementaryOS!
 
 if [[ $(realpath -s "$0") == "/usr/bin/sodalite-"* ]]; then
-    . /usr/libexec/sodalite-common
+    . /usr/libexec/sodalite/bash/common.sh
     oem_logo_root="/usr/share/oem-logos"
 else
-    . "$(dirname "$(realpath -s "$0")")/common.sh"
+    . "$(dirname "$(realpath -s "$0")")/../../../lib/sodaliterocks.common/bash/common.sh"
     oem_logo_root="$(dirname "$(realpath -s "$0")")/../../../lfs/oem-logos"
 fi
 

@@ -8,3 +8,6 @@
 [submodule "lib/workstation-ostree-config"]
 	path = lib/workstation-ostree-config
 	url = https://pagure.io/workstation-ostree-config
+[submodule "lib/sodaliterocks.common"]
+	path = lib/sodaliterocks.common
+	url = https://github.com/sodaliterocks/common
