@@ -48,18 +48,24 @@ done
 ###################
 
 sodalite_version_base="0"
-sodalite_version_build="00000000.0"
-if [[ $(get_config_item /etc/os-release VERSION) =~ (([0-9]{1,3})-([0-9]{8}.[0-9]{1,}).+) ]]; then
+sodalite_version_release="00.0"
+sodalite_version_build="0"
+if [[ $(get_config_item /etc/os-release VERSION) =~ (([0-9]{1,3})-([0-9]{2}.[0-9]{1,}).([0-9]{1,})) ]]; then
     sodalite_version_base="${BASH_REMATCH[2]}"
-    sodalite_version_build="${BASH_REMATCH[3]}"
+    sodalite_version_release="${BASH_REMATCH[3]}"
+    sodalite_version_build="${BASH_REMATCH[4]}"
 fi
 
 osr_id="$(get_config_item /etc/sodalite-release ID)"
 osr_name="$(get_config_item /etc/sodalite-release NAME)"
 osr_variant="$(get_config_item /etc/sodalite-release VARIANT)"
 osr_variant_id="$(get_config_item /etc/sodalite-release VARIANT_ID)"
-osr_version="$sodalite_version_base-$sodalite_version_build"
+osr_version="$sodalite_version_base-$sodalite_version_release"
 osr_version_id="$sodalite_version_base"
+
+if [[ $sodalite_version_build > 0 ]]; then
+    osr_version+=".$sodalite_version_build"
+fi
 
 if [[ ! -z $osr_variant ]]; then
     osr_version+=" ($osr_variant)"

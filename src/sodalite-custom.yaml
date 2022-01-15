@@ -13,7 +13,7 @@ repos:
 include:
   - common/sodalite-common.yaml
 add-files: [
-  ["include/sysroot/etc/sodalite-release__custom", "/etc/sodalite-release"]
+  ["sysroot/etc/sodalite-release__custom", "/etc/sodalite-release"]
 ]
 
 rojig:
