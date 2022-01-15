@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-. "$(dirname "$(realpath -s "$0")")/src/include/tools/common.sh"
+. "$(dirname "$(realpath -s "$0")")/lib/sodaliterocks.common/bash/common.sh"
 
 base_dir="$(dirname "$(realpath -s "$0")")"
 variant=$1
