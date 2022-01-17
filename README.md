@@ -1,6 +1,6 @@
 # Sodalite
 
-![Screenshot of Sodalite](https://git.zio.sh/ducky/sodalite-lfs/raw/branch/main/screenshots/screenshot.png?u=2)
+![Screenshot of Sodalite](https://git.zio.sh/ducky/sodalite-lfs/raw/branch/main/screenshots/screenshot.png?u=3)
 
 ## Quickstart
 
