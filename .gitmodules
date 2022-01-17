@@ -4,7 +4,7 @@
 	branch = master
 [submodule "lfs"]
 	path = lfs
-	url = https://git.zio.sh/ducky/sodalite-lfs
+	url = https://git.zio.sh/sodaliterocks/lfs
 [submodule "lib/workstation-ostree-config"]
 	path = lib/workstation-ostree-config
 	url = https://pagure.io/workstation-ostree-config
