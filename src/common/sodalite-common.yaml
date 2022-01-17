@@ -1,4 +1,9 @@
 ref: sodalite/stable/${basearch}/common
+repos:
+  - copr_decathorpe_elementary-staging
+  - copr_stsdc_monitor
+  - fedora-35
+  - fedora-35-updates
 selinux: true
 boot-location: modules
 etc-group-members:
@@ -89,14 +94,13 @@ ignore-removed-users:
   - root
 ignore-removed-groups:
   - root
+automatic-version-prefix: "35-22.0"
 automatic-version-suffix: "."
 postprocess-script: post.sh
 include: [
-  "include/mutate-os-release.yaml",
-
-  #"include/packages/fedora-ostree-pkgs.yaml",
-  "include/packages/elementary-pkgs.yaml",
-  "include/packages/elementary-staging-pkgs.yaml"
+  #"packages/fedora-ostree-pkgs.yaml",
+  "packages/elementary-pkgs.yaml",
+  "packages/elementary-staging-pkgs.yaml"
 ]
 add-files: [
   # HACK: Removing files by overwritng them (see https://github.com/electricduck/sodalite/issues/9#issuecomment-1010384738)

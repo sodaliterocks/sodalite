@@ -5,16 +5,8 @@
 # See https://rpm-ostree.readthedocs.io/en/stable/manual/treefile/ for help.
 
 ref: sodalite/stable/${basearch}/custom
-repos:
-  - copr_decathorpe_elementary-staging
-  - copr_stsdc_monitor
-  - fedora-35
-  - fedora-35-updates
 include:
   - common/sodalite-common.yaml
-add-files: [
-  ["sysroot/etc/sodalite-release__custom", "/etc/sodalite-release"]
-]
 
 rojig:
   name: sodalite-custom

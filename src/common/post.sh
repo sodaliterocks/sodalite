@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-set -xeuo pipefail
-
 . /usr/libexec/sodalite/bash/common.sh
 
 function set_osrelease_property() {
@@ -15,6 +13,19 @@ function set_osrelease_property() {
 
     sed -i "s/^\($property=\)\(.*\)$/\1$value/g" /etc/os-release
 }
+
+function set_upstreamrelease_property() {
+    property=$1
+    value=$2
+
+    if [[ $value =~ [[:space:]]+ ]]; then
+        value="\"$value\""
+    fi
+
+    sed -i "s/^\($property=\)\(.*\)$/\1$value/g" /etc/upstream-release/lsb-release
+}
+
+set -xeuo pipefail
 
 #########
 # HACKS #
@@ -47,39 +58,48 @@ done
 # OSTREE MUTATING #
 ###################
 
-sodalite_version_base="0"
-sodalite_version_release="00.0"
-sodalite_version_build="0"
-if [[ $(get_config_item /etc/os-release VERSION) =~ (([0-9]{1,3})-([0-9]{2}.[0-9]{1,}).([0-9]{1,})) ]]; then
-    sodalite_version_base="${BASH_REMATCH[2]}"
-    sodalite_version_release="${BASH_REMATCH[3]}"
-    sodalite_version_build="${BASH_REMATCH[4]}"
+# TODO: Handle other version styles (useful for forked repos)
+version_base="0"
+version_release="00.0"
+version_build="0"
+if [[ $(get_config_item /etc/os-release VERSION) =~ (([0-9]{1,3})-([0-9]{2}.[0-9]{1,})(.([0-9]{1,}){0,1}).+) ]]; then
+    version_base="${BASH_REMATCH[2]}"
+    version_release="${BASH_REMATCH[3]}"
+    [[ -z ${BASH_REMATCH[5]} ]] && version_build="${BASH_REMATCH[5]}"
 fi
 
-osr_id="$(get_config_item /etc/sodalite-release ID)"
-osr_name="$(get_config_item /etc/sodalite-release NAME)"
-osr_variant="$(get_config_item /etc/sodalite-release VARIANT)"
-osr_variant_id="$(get_config_item /etc/sodalite-release VARIANT_ID)"
-osr_version="$sodalite_version_base-$sodalite_version_release"
-osr_version_id="$sodalite_version_base"
+osr_id="sodalite" # TODO: Programatically set this
+osr_name="Sodalite" # TODO: Programatically set this
+osr_variant="" # TODO: Programatically set this
+osr_variant_id="" # TODO: Programatically set this
+osr_version="$version_base-$version_release"
+osr_version_id="$version_base"
 
-if [[ $sodalite_version_build > 0 ]]; then
-    osr_version+=".$sodalite_version_build"
+if [[ $version_build > 0 ]]; then
+    osr_version+=".$version_build"
 fi
 
 if [[ ! -z $osr_variant ]]; then
     osr_version+=" ($osr_variant)"
 fi
 
+cat /etc/os-release
+
 [[ ! -z $osr_id ]] && set_osrelease_property "ID" $osr_id
 [[ ! -z $osr_name ]] && set_osrelease_property "NAME" $osr_name
 [[ ! -z $osr_name ]] && set_osrelease_property "PRETTY_NAME" "$osr_name $osr_version"
-#set_osrelease_property "VARIANT" $osr_variant
+#[[ ! -z $osr_variant ]] && set_osrelease_property "VARIANT" $osr_variant
 [[ ! -z $osr_variant ]] && echo "VARIANT=\"$osr_variant\"" >> /etc/os-release
-#set_osrelease_property "VARIANT_ID" $osr_variant_id
+#[[ ! -z $osr_variant_id ]] && set_osrelease_property "VARIANT_ID" $osr_variant_id
 [[ ! -z $osr_variant_id ]] && echo "VARIANT_ID=\"$osr_variant_id\"" >> /etc/os-release
 [[ ! -z $osr_version ]] && set_osrelease_property "VERSION" "$osr_version"
 [[ ! -z $osr_version_id ]] && set_osrelease_property "VERSION_ID" $osr_version_id
+
+if [[ ! -z $version_base ]]; then
+    set_upstreamrelease_property "ID" fedora
+    set_upstreamrelease_property "PRETTY_NAME" "Fedora Linux $version_base"
+    set_upstreamrelease_property "VERSION_ID" $version_base
+fi
 
 ########
 # MISC #
