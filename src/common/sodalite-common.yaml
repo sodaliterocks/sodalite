@@ -118,7 +118,6 @@ add-files: [
   # Tools (/usr/bin/sodalite-*)
   ["../../lib/sodaliterocks.common/bash/common.sh", "/usr/libexec/sodalite/bash/common.sh"],
   ["../tools/cleanup.sh", "/usr/bin/sodalite-cleanup"],
-  ["../tools/generate-oem.sh", "/usr/bin/sodalite-generate-oem"],
   ["../tools/plank-wrapper.sh", "/usr/bin/sodalite-plank-wrapper"],
 
   # /etc
@@ -150,6 +149,7 @@ add-files: [
   ["../sysroot/etc/xdg/autostart/plank-wrapper.desktop", "/etc/xdg/autostart/sodalite-plank-wrapper.desktop"],
 
   # /usr/bin
+  ["../../lib/sodaliterocks.generate-oemconf", "/usr/bin/generate-oemconf"],
   ["../sysroot/usr/bin/detach.sh", "/usr/bin/detach"],
   ["../sysroot/usr/bin/install-appcenter-flatpak.sh", "/usr/bin/sodalite-install-appcenter-flatpak"],
   ["../sysroot/usr/bin/install-epiphany.sh", "/usr/bin/sodalite-install-epiphany"],
