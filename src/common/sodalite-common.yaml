@@ -141,7 +141,7 @@ add-files: [
   ["../sysroot/etc/skel/dot.config/plank/dock1/launchers/org.gnome.Software.dockitem", "/etc/skel/.config/plank/dock1/launchers/org.gnome.Software.dockitem"],
 
   # /etc/systemd
-  ["../sysroot/etc/systemd/system/sodalite-generate-oem.service", "/etc/systemd/system/sodalite-generate-oem.service"],
+  ["../sysroot/etc/systemd/system/generate-oemconf.service", "/etc/systemd/system/generate-oemconf.service"],
   ["../sysroot/etc/systemd/system/sodalite-install-appcenter-flatpak.service", "/etc/systemd/system/sodalite-install-appcenter-flatpak.service"],
 
   # /etc/xdg
