@@ -149,7 +149,7 @@ add-files: [
   ["../sysroot/etc/xdg/autostart/plank-wrapper.desktop", "/etc/xdg/autostart/sodalite-plank-wrapper.desktop"],
 
   # /usr/bin
-  ["../../lib/sodaliterocks.generate-oemconf", "/usr/bin/generate-oemconf"],
+  ["../../lib/sodaliterocks.generate-oemconf/generate-oemconf.sh", "/usr/bin/generate-oemconf"],
   ["../sysroot/usr/bin/detach.sh", "/usr/bin/detach"],
   ["../sysroot/usr/bin/install-appcenter-flatpak.sh", "/usr/bin/sodalite-install-appcenter-flatpak"],
   ["../sysroot/usr/bin/install-epiphany.sh", "/usr/bin/sodalite-install-epiphany"],
