@@ -111,7 +111,7 @@ ln -s /usr/share/backgrounds/default/karsten-wurth-7BjhtdogU3A-unsplash.jpg /usr
 glib-compile-schemas /usr/share/glib-2.0/schemas
 
 systemctl disable gdm
+systemctl enable generate-oemconf
 systemctl enable lightdm
-systemctl enable sodalite-generate-oem
 systemctl enable sodalite-install-appcenter-flatpak
 systemctl enable touchegg
