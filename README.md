@@ -8,7 +8,7 @@ You better know what you're doing, sparky. To get going:
 
 1) Install an OSTree version of Fedora, such as [Fedora Silverblue](https://silverblue.fedoraproject.org/).
 2) Open a terminal and issue these commands:
-	* `sudo ostree remote add --if-not-exists zio https://ostree.zio.sh/repo --no-gpg-verify`
+	* `sudo ostree remote add --if-not-exists zio https://ostree.sodalite.rocks --no-gpg-verify`
 	* `sudo ostree pull zio:sodalite/stable/x86_64/base`
 	* `sudo rpm-ostree rebase zio:sodalite/stable/x86_64/base`
 3) Stick the kettle on and make yourself a cuppa. It'll take a while.
@@ -68,7 +68,7 @@ An OSTree repository has already been setup for Sodalite, so you don't even need
 	* Custom partitioning is unsupported but does work from experience. The installer is flaky however, and will often stumble on basic problems and giving you very little guidance on what went wrong. For example, `fedora` still being present in the EFI partition if leftover from a previous install &mdash; just delete the directory!
 	* If you're feeling adventurous, install [Fedora IoT](https://getfedora.org/iot/) instead &mdash; it's OSTree too, plus the ISO is over half the size.
 2) Open a terminal and issue the following commands with superuser privileges (as `root`, or with `sudo`):
-	1) `ostree remote add --if-not-exists zio https://ostree.zio.sh/repo --no-gpg-verify`<br />This adds the OSTree repository hosted on [zio.sh](https://zio.sh) (a group of servers partially ran by [@electricduck](https://github.com/electricduck) — it can be trusted). No GPG verification because I'm lazy as sin.
+	1) `ostree remote add --if-not-exists zio https://ostree.sodalite.rocks --no-gpg-verify`<br />This adds the OSTree repository. No GPG verification because I'm lazy as sin.
 	2) `ostree pull sodalite/stable/x86_64/base`<br />This pulls the OSTree image for Sodalite, and is split up into four parts (similar to that of Fedora Silverblue). These parts can be substituted for other values:
 		1) `sodalite`: The **name** of the image. That's _SOH-da-lyte_ not _sou-DA-lyte_ — I'm not making a sugar-free beverage here.
 		2) `stable`: The **version** of the image. Possible values:
