@@ -75,11 +75,21 @@ osr_variant_id="" # TODO: Programatically set this
 osr_version="$version_base-$version_release"
 osr_version_id="$version_base"
 
+# HACK: This gets set with the build.sh script, so no biggy if we miss it
+if [[ -f /etc/sodalite-variant ]]; then
+    if [[ -s /etc/sodalite-variant ]]; then
+        osr_variant_id="$(cat /etc/sodalite-variant)"
+        osr_variant=$osr_variant_id
+    fi
+
+    rm -f /etc/sodalite-variant
+fi
+
 if [[ $version_build > 0 ]]; then
     osr_version+=".$version_build"
 fi
 
-if [[ ! -z $osr_variant ]]; then
+if [[ ! -z $osr_variant ]] && [[ $osr_variant != "base" ]]; then
     osr_version+=" ($osr_variant)"
 fi
 
