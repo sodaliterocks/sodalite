@@ -8,24 +8,15 @@ You better know what you're doing, sparky. To get going:
 
 1) Install an OSTree version of Fedora, such as [Fedora Silverblue](https://silverblue.fedoraproject.org/).
 2) Open a terminal and issue these commands:
-	* `sudo ostree remote add --if-not-exists zio https://ostree.sodalite.rocks --no-gpg-verify`
-	* `sudo ostree pull zio:sodalite/stable/x86_64/base`
-	* `sudo rpm-ostree rebase zio:sodalite/stable/x86_64/base`
+	* `sudo ostree remote add --if-not-exists sodalite https://ostree.sodalite.rocks --no-gpg-verify`
+	* `sudo ostree pull sodalite:sodalite/stable/x86_64/base`
+	* `sudo rpm-ostree rebase sodalite:sodalite/stable/x86_64/base`
 3) Stick the kettle on and make yourself a cuppa. It'll take a while.
 4) Reboot when prompted. Sit back in awe as the desktop loads up.
 	* Updates will occur automatically if you update everything from Software (which runs in the background by default and sends desktops notifications).
 	* As they are installed via Flatpak, various GNOME apps will still be lingering. Remove these with `sudo sodalite-uninstall-gnome-apps`.
 
 Confused? Head down to [Getting](#getting).
-
-### Wait, what happened to `install.sh`?
-
-Removed in [1cf0a1f](https://github.com/electricduck/sodalite/commit/1cf0a1fae31c49c797146c90854bc136fa105994), because:
-
-* Fedora Silverblue itself is not for beginners, and you shouldn't really need an easy-peasy installer script to get this going.
-* The script itself might possibly break with future versions of the tools it invokes.
-* You'll learn how things work without blindly running random scripts, and possibly troubleshoot issues since you'll know _where_ something went wrong.
-* It's literally three lines to install. 😜
 
 ## Background
 
@@ -68,7 +59,9 @@ An OSTree repository has already been setup for Sodalite, so you don't even need
 	* Custom partitioning is unsupported but does work from experience. The installer is flaky however, and will often stumble on basic problems and giving you very little guidance on what went wrong. For example, `fedora` still being present in the EFI partition if leftover from a previous install &mdash; just delete the directory!
 	* If you're feeling adventurous, install [Fedora IoT](https://getfedora.org/iot/) instead &mdash; it's OSTree too, plus the ISO is over half the size.
 2) Open a terminal and issue the following commands with superuser privileges (as `root`, or with `sudo`):
-	1) `ostree remote add --if-not-exists zio https://ostree.sodalite.rocks --no-gpg-verify`<br />This adds the OSTree repository. No GPG verification because I'm lazy as sin.
+	1) `ostree remote add --if-not-exists sodalite https://ostree.sodalite.rocks --no-gpg-verify`<br />This adds the remote OSTree repository.
+        - `--no-gpg-verify` is important as there is no GPG verification.
+        - Previous versions of this document use the remote `https://ostree.zio.sh/repo` (named `zio`). This endpoint is still up (in fact, `https://ostree.sodalite.rocks` just redirects to it) and can be used instead. If you're still using it there is no need to change it: everything will still work.
 	2) `ostree pull sodalite/stable/x86_64/base`<br />This pulls the OSTree image for Sodalite, and is split up into four parts (similar to that of Fedora Silverblue). These parts can be substituted for other values:
 		1) `sodalite`: The **name** of the image. That's _SOH-da-lyte_ not _sou-DA-lyte_ — I'm not making a sugar-free beverage here.
 		2) `stable`: The **version** of the image. Possible values:
@@ -78,8 +71,7 @@ An OSTree repository has already been setup for Sodalite, so you don't even need
             * <s>`x86`: [What year is it!?](https://c.tenor.com/9OcQhlCBNG0AAAAd/what-year-is-it-jumanji.gif)</s>
         2) `base`: The **variant** of the image. Possible values:
             * `base`: Everything you'll need to get going (hopefully). Other variants are built on-top of this.
-            * <s>`caral`: Stuff and things.</s> Coming soon™.
-	3) `rpm-ostree rebase zio:sodalite/stable/x86_64/base`<br />This rebases the OS onto Sodalite's image. Remember to substitute any values from before into this one!
+	3) `rpm-ostree rebase sodalite:sodalite/stable/x86_64/base`<br />This rebases the OS onto Sodalite's image. Remember to substitute any values from before into this one!
 3) Reboot when prompted with `systemctl reboot`.
 4) Once logged in, defaults should apply and everything should be as it should.
 
@@ -87,22 +79,30 @@ An OSTree repository has already been setup for Sodalite, so you don't even need
 
 #### Updating
 
-Updates will occur automatically if you update everything from Software (which runs in the background by default and sends desktop notifications).
+Performing a system update can be done by either:
 
-Alternatively, run `rpm-ostree upgrade`.
+- Running `rpm-ostree upgrade` at a terminal.
+- Opening **Software**, navigating to **Updates** and pressing **Update All**.
+  - As Software runs in the background and periodically checks for updates, you may also receive a notification of a new update; clicking on this opens the appropriate page.
+  - An update for the OS may take a while to appear in Software (which will appear as "Operating System Updates"), so the above method is preferred.
+
+Reboot after either method has finished. You can verify the version installed by opening **System Settings** and navigating to **System ➔ Operating System**: the version proceeds the word "Sodalite".
+
+If something breaks, you can rollback by calling `rpm-ostree rollback` at a terminal. Remember to also [create a new issue](https://github.com/sodaliterocks/sodalite/issues/new) if appropriate!
 
 #### GNOME apps
 
-Unless removed them beforehand, you'll have a tonne of GNOME apps still installed from Flatpak. As Flatpak apps are part of the "user" part of the OS they cannot be programatically removed during the rebase. Run to `sodalite-uninstall-gnome-apps` to remove them all.
+Unless removed beforehand, you'll have a tonne of GNOME apps still installed from Flatpak. As Flatpak apps are part of the "user" part of the OS they cannot be programatically removed during the rebase. These apps work fine in Pantheon, and will use the default Adwaita theme, but look extremely out-of-place.
 
-#### Included tools
+Run `sodalite-uninstall-gnome-apps` to remove them all.
 
-For bits of housekeeping, Sodalite also includes a few tools:
+#### Web / Epiphany
 
-* `sodalite-install-epiphany`<br />Installs Web (Epiphany); elementary's default browser.
-* `sodalite-uninstall-gnome-apps`<br />Removes GNOME apps installed via Flatpak (as mentioned above). You'll be presented with a list of apps and given a choice whether you want to remove them all. Although they play nicely in Pantheon, they look extremely out-of-place.
+As Firefox is Fedora's default browser, we have chose to respect that decision and leave it be. However, Pantheon's preffered browser of choice is a special patched version of [Epiphany](https://apps.gnome.org/en-GB/app/org.gnome.Epiphany/) distributed via the AppCenter Flatpak repository.
 
-#### Removal
+Run `sodalite-install-epiphany` to install.
+
+### Removal
 
 (todo &mdash; OSTree has several ways and its dependant on your install!)
 
