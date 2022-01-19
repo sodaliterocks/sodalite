@@ -1,4 +1,4 @@
-# If you want to make your own build of Sodalite it's a good idea to use this
+# If you want to make your own build of Sodalite, it's a good idea to use this
 # file. This is also the default file ./build.sh uses (which can be changed
 # with `./build.sh [variant]`; for example, `./build.sh base`).
 #
@@ -12,4 +12,4 @@ rojig:
   name: sodalite-custom
   summary: "Sodalite (Custom)"
   license: MIT
-  description: "My custom build of Sodalite."
+  description: "Immutable. Beautiful. | My custom build of Sodalite."
