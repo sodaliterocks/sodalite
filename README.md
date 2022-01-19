@@ -119,7 +119,7 @@ See [CONTRIBUTING.md](./CONTRIBUTING.md).
 * [Fabio Valentini](https://decathorpe.com/), for providing the extra packages for elementary on Fedora via the [elementary-staging Copr repository](https://copr.fedorainfracloud.org/coprs/decathorpe/elementary-staging/).
 * [Jorge O. Castro](https://github.com/castrojo), for including Sodalite in [awesome-immutable](https://github.com/castrojo/awesome-immutable).
 * [Timothée Ravier](https://tim.siosm.fr), for their extensive guidance to the community concerning Fedora Silverblue.
-* ["Topfi"](https://github.com/ACertainTopfi), for their various contributions (and joining @sodaliterocks!).
+* ["Topfi"](https://github.com/ACertainTopfi), for their various contributions (and joining [@sodaliterocks](https://github.com/sodaliterocks)!).
 * The [elementary team](https://elementary.io/team), for building lovely stuff.
 * The contributors to [workstation-ostree-config](https://pagure.io/workstation-ostree-config), for a solid ground to work from.
 * The amazing photographers/artists of the included wallpapers:
@@ -136,7 +136,7 @@ See [CONTRIBUTING.md](./CONTRIBUTING.md).
 	* [Willian Daigneault](https://unsplash.com/@williamdaigneault)
 	* [Zara Walker](https://unsplash.com/@mojoblogs)
 * The [Sodalite mineral](https://en.wikipedia.org/wiki/Sodalite), for the name. It's pronounced _SOH-da-lyte_ not _sou-DA-lyte_, you fool.
-* The Omicron variant of COVID-19, for giving @electricduck the initial free time to make this thing. That's not even a joke, that's literally what happened.
+* The Omicron variant of COVID-19, for giving [Ducky](https://github.com/electriduck) the initial free time to make this thing. That's not even a joke, that's literally what happened.
 
 ## License
 
