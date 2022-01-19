@@ -14,3 +14,6 @@
 [submodule "lib/sodaliterocks.generate-oemconf"]
 	path = lib/sodaliterocks.generate-oemconf
 	url = https://github.com/sodaliterocks/generate-oemconf
+[submodule "lib/elementary.icons"]
+	path = lib/elementary.icons
+	url = https://github.com/elementary/icons
