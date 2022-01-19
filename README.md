@@ -45,7 +45,7 @@ However, there's plenty of stuff that _does_ work rendering Sodalite entirely us
 * Various theming issues, due to be fixed in the upstream:
 	* Some apps appear odd, such as Firefox which entirely lacks rounded corners.
 	* Many Flatpak apps will not be themed and fallback to the Adwaita theme.
-* Many Flatpak apps will be duplicated in the Dock: see [issue #64 on elementary/dock](https://github.com/elementary/dock/issues/64). Although this is one of many issues across elementary, I felt like I needed to bring this one up. Nothing broke on your end!
+* Many Flatpak apps will be duplicated in the Dock: see [issue #64 on elementary/dock](https://github.com/elementary/dock/issues/64). Although this is one of many issues across elementary, this was worth bringing up. Nothing broke on your end!
 * ~~Not enough people are using this masterpiece.~~
 
 <h2 id="getting">Getting</h2>
@@ -136,7 +136,7 @@ See [CONTRIBUTING.md](./CONTRIBUTING.md).
 	* [Willian Daigneault](https://unsplash.com/@williamdaigneault)
 	* [Zara Walker](https://unsplash.com/@mojoblogs)
 * The [Sodalite mineral](https://en.wikipedia.org/wiki/Sodalite), for the name. It's pronounced _SOH-da-lyte_ not _sou-DA-lyte_, you fool.
-* The Omicron variant of COVID-19, for giving me the initial free time to make this thing. True story.
+* The Omicron variant of COVID-19, for giving @electricduck the initial free time to make this thing. That's not even a joke, that's literally what happened.
 
 ## License
 
