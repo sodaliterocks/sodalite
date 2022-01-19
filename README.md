@@ -116,11 +116,12 @@ See [CONTRIBUTING.md](./CONTRIBUTING.md).
 
 ## Acknowledgements
 
-* [Jorge O. Castro](https://github.com/castrojo), for including Sodalite in [awesome-immutable](https://github.com/castrojo/awesome-immutable).
-* [Timothée Ravier](https://tim.siosm.fr), for his extensive guidance to the community concerning Fedora Silverblue.
 * [Fabio Valentini](https://decathorpe.com/), for providing the extra packages for elementary on Fedora via the [elementary-staging Copr repository](https://copr.fedorainfracloud.org/coprs/decathorpe/elementary-staging/).
-* The contributors to [workstation-ostree-config](https://pagure.io/workstation-ostree-config), giving me a solid ground to work from.
+* [Jorge O. Castro](https://github.com/castrojo), for including Sodalite in [awesome-immutable](https://github.com/castrojo/awesome-immutable).
+* [Timothée Ravier](https://tim.siosm.fr), for their extensive guidance to the community concerning Fedora Silverblue.
+* ["Topfi"](https://github.com/ACertainTopfi), for their various contributions (and joining @sodaliterocks!).
 * The [elementary team](https://elementary.io/team), for building lovely stuff.
+* The contributors to [workstation-ostree-config](https://pagure.io/workstation-ostree-config), for a solid ground to work from.
 * The amazing photographers/artists of the included wallpapers:
 	* [Adrien Olichon](https://unsplash.com/@adrienolichon)
 	* [Austin Neill](https://unsplash.com/@arstyy)
