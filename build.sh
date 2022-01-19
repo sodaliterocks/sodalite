@@ -22,6 +22,8 @@ if [[ ! -f $treefile ]]; then
     exit
 fi
 
+lockfile="$base_dir/src/common/sodalite-common.overrides.yaml"
+
 ostree_cache_dir="$working_dir/cache"
 ostree_repo_dir="$working_dir/repo"
 mkdir -p $ostree_cache_dir
@@ -41,10 +43,11 @@ echoc "$(write_emoji "🪛")Setting variant file..."
 echo "$variant" > "$base_dir/src/sysroot/etc/sodalite-variant"
 
 echoc "$(write_emoji "⚡")Building tree for sodalite-$variant..."
+
 rpm-ostree compose tree \
     --cachedir="$ostree_cache_dir" \
     --repo="$ostree_repo_dir" \
-    $treefile
+    `[[ -s $lockfile ]] && echo "--ex-lockfile="$lockfile""` $treefile
 
 if [[ $? != 0 ]]; then
     echoc error "Failed to build tree"
