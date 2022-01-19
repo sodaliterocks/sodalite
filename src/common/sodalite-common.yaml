@@ -186,7 +186,6 @@ add-files: [
   ["../../lib/elementary.icons/apps/48/system-software-install.svg", "/usr/share/icons/elementary/48/system-software-install.svg"],
   ["../../lib/elementary.icons/apps/64/system-software-install.svg", "/usr/share/icons/elementary/64/system-software-install.svg"],
   ["../../lib/elementary.icons/apps/symbolic/system-software-install-symbolic.svg", "/usr/share/icons/elementary/symbolic/system-software-install-symbolic.svg"],
-  ["../sysroot/usr/share/icons/appcenter-48.svg", "/usr/share/icons/appcenter-48.svg"],
   ["../sysroot/usr/share/icons/default/index.theme", "/usr/share/icons/default/index.theme"]
 ]
 tmp-is-dir: true
