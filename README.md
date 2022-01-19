@@ -98,7 +98,7 @@ Run `sodalite-uninstall-gnome-apps` to remove them all.
 
 #### Web / Epiphany
 
-As Firefox is Fedora's default browser, we have chose to respect that decision and leave it be. However, Pantheon's preffered browser of choice is a special patched version of [Epiphany](https://apps.gnome.org/en-GB/app/org.gnome.Epiphany/) distributed via the AppCenter Flatpak repository.
+As Firefox is Fedora's default browser, we have chose to respect that decision and leave it be. However, Pantheon's preferred browser of choice is a patched version of [Epiphany](https://wiki.gnome.org/Apps/Web) distributed via the AppCenter Flatpak repository.
 
 Run `sodalite-install-epiphany` to install.
 
