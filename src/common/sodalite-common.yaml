@@ -94,7 +94,7 @@ ignore-removed-users:
   - root
 ignore-removed-groups:
   - root
-automatic-version-prefix: "35-22.0"
+automatic-version-prefix: "35-22.1"
 automatic-version-suffix: "."
 postprocess-script: post.sh
 include: [
