@@ -179,5 +179,6 @@ add-files: [
   # /usr/share/icons
   ["../../lfs/logo/logo.png", "/usr/share/icons/hicolor/256x256/apps/fedora-logo-icon.png"],
   ["../sysroot/usr/share/icons/appcenter-48.svg", "/usr/share/icons/appcenter-48.svg"],
+  ["../sysroot/usr/share/icons/default/index.theme", "/usr/share/icons/default/index.theme"]
 ]
 tmp-is-dir: true
