@@ -65,7 +65,7 @@ version_build="0"
 if [[ $(get_config_item /etc/os-release VERSION) =~ (([0-9]{1,3})-([0-9]{2}.[0-9]{1,})(.([0-9]{1,}){0,1}).+) ]]; then
     version_base="${BASH_REMATCH[2]}"
     version_release="${BASH_REMATCH[3]}"
-    [[ -z ${BASH_REMATCH[5]} ]] && version_build="${BASH_REMATCH[5]}"
+    [[ ! -z ${BASH_REMATCH[5]} ]] && version_build="${BASH_REMATCH[5]}"
 fi
 
 osr_id="sodalite" # TODO: Programatically set this
