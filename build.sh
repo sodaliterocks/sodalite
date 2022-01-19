@@ -37,7 +37,7 @@ fi
 # HACK: Letting the OS know what variant it is so it can mutate the os-release
 #       accordingly. Doing it this way until we can find a better way of
 #       knowing the variant during post.
-echoc "$(write_emoji "🪛")Creating variant file..."
+echoc "$(write_emoji "🪛")Setting variant file..."
 echo "$variant" > "$base_dir/src/sysroot/etc/sodalite-variant"
 
 echoc "$(write_emoji "⚡")Building tree for sodalite-$variant..."
