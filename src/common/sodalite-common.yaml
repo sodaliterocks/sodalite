@@ -141,7 +141,7 @@ add-files: [
   ["../sysroot/etc/skel/dot.config/plank/dock1/launchers/org.gnome.Software.dockitem", "/etc/skel/.config/plank/dock1/launchers/org.gnome.Software.dockitem"],
 
   # /etc/systemd
-  ["../sysroot/etc/systemd/system/sodalite-generate-oem.service", "/etc/systemd/system/sodalite-generate-oem.service"],
+  ["../sysroot/etc/systemd/system/generate-oemconf.service", "/etc/systemd/system/generate-oemconf.service"],
   ["../sysroot/etc/systemd/system/sodalite-install-appcenter-flatpak.service", "/etc/systemd/system/sodalite-install-appcenter-flatpak.service"],
 
   # /etc/xdg
@@ -149,7 +149,7 @@ add-files: [
   ["../sysroot/etc/xdg/autostart/plank-wrapper.desktop", "/etc/xdg/autostart/sodalite-plank-wrapper.desktop"],
 
   # /usr/bin
-  ["../../lib/sodaliterocks.generate-oemconf", "/usr/bin/generate-oemconf"],
+  ["../../lib/sodaliterocks.generate-oemconf/generate-oemconf.sh", "/usr/bin/generate-oemconf"],
   ["../sysroot/usr/bin/detach.sh", "/usr/bin/detach"],
   ["../sysroot/usr/bin/install-appcenter-flatpak.sh", "/usr/bin/sodalite-install-appcenter-flatpak"],
   ["../sysroot/usr/bin/install-epiphany.sh", "/usr/bin/sodalite-install-epiphany"],
