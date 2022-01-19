@@ -179,6 +179,13 @@ add-files: [
 
   # /usr/share/icons
   ["../../lfs/logo/logo.png", "/usr/share/icons/hicolor/256x256/apps/fedora-logo-icon.png"],
+  ["../../lib/elementary.icons/apps/128/system-software-install.svg", "/usr/share/icons/elementary/128/system-software-install.svg"],
+  ["../../lib/elementary.icons/apps/16/system-software-install.svg", "/usr/share/icons/elementary/16/system-software-install.svg"],
+  ["../../lib/elementary.icons/apps/24/system-software-install.svg", "/usr/share/icons/elementary/24/system-software-install.svg"],
+  ["../../lib/elementary.icons/apps/32/system-software-install.svg", "/usr/share/icons/elementary/32/system-software-install.svg"],
+  ["../../lib/elementary.icons/apps/48/system-software-install.svg", "/usr/share/icons/elementary/48/system-software-install.svg"],
+  ["../../lib/elementary.icons/apps/64/system-software-install.svg", "/usr/share/icons/elementary/64/system-software-install.svg"],
+  ["../../lib/elementary.icons/apps/symbolic/system-software-install-symbolic.svg", "/usr/share/icons/elementary/symbolic/system-software-install-symbolic.svg"],
   ["../sysroot/usr/share/icons/appcenter-48.svg", "/usr/share/icons/appcenter-48.svg"],
   ["../sysroot/usr/share/icons/default/index.theme", "/usr/share/icons/default/index.theme"]
 ]

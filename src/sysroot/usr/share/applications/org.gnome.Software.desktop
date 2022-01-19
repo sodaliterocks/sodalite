@@ -6,7 +6,7 @@
 [Desktop Entry]
 Name=Software
 Comment=Browse and manage apps
-Icon=/usr/share/icons/appcenter-48.svg
+Icon=system-software-install
 Exec=gnome-software %U
 Terminal=false
 Type=Application
@@ -14,3 +14,11 @@ Categories=GNOME;GTK;System;PackageManager;
 StartupNotify=true
 MimeType=x-scheme-handler/appstream;
 X-GNOME-UsesNotifications=true
+
+[Desktop Action ModeUpdates]
+Name=Check for Updates
+Exec=gnome-software --mode=updates
+
+[Desktop Action Quit]
+Name=Quit Software
+Exec=gnome-software --quit
