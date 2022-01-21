@@ -66,10 +66,10 @@ An OSTree repository has already been setup for Sodalite, so you don't even need
 		1) `sodalite`: The **name** of the image. That's _SOH-da-lyte_ not _sou-DA-lyte_ — I'm not making a sugar-free beverage here.
 		2) `stable`: The **version** of the image. Possible values:
             * `stable`: Rolling-release version based on the current stable version of Fedora Linux (as of currently, Fedora Linux 35).
-        1) `x86_64`: The **architecture** of the image. Possible values:
+        3) `x86_64`: The **architecture** of the image. Possible values:
             * `x86_64`: For 64-bit CPUs (`x86_64`, `amd64`, or — please stop saying this — `x64`).
             * <s>`x86`: [What year is it!?](https://c.tenor.com/9OcQhlCBNG0AAAAd/what-year-is-it-jumanji.gif)</s>
-        2) `base`: The **variant** of the image. Possible values:
+        4) `base`: The **variant** of the image. Possible values:
             * `base`: Everything you'll need to get going (hopefully). Other variants are built on-top of this.
 	3) `rpm-ostree rebase sodalite:sodalite/stable/x86_64/base`<br />This rebases the OS onto Sodalite's image. Remember to substitute any values from before into this one!
 3) Reboot when prompted with `systemctl reboot`.
