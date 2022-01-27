@@ -24,7 +24,7 @@ Like most of us, I've been distro hopping since I was eating crayons, but as wit
 
 Like every OS though, things begin to break down after years of abuse to its foundation. A tweak to something in /usr here, and a hack in /etc there: it piles up and I forget what I've done, leading to a grubby OS I'm going to need to eventually reinstall. _G r e a t_. Fedora had been something I'd been using on-and-off for the past year &mdash; installing Pantheon in place of GNOME, of course &mdash; leading me to eventually stumble across [Fedora Silverblue](https://silverblue.fedoraproject.org/) and [rpm-ostree](https://rpm-ostree.readthedocs.io/en/stable/). _Hm, a usable immutable OS, you say? Sounds glorious!_  And with that I give up a weekend to attempt to mate an old friend and a new idea, spending hours [searching through documentation](https://rpm-ostree.readthedocs.io/en/stable/manual/treefile/) and [peering at repositories](https://pagure.io/workstation-ostree-config), and soon stable platform with a charming desktop is born. Seems only right to share with the world.
 
-So hello world, this is Sodalite: Pantheon and rpm-ostree.
+So hello world, this is Sodalite: Pantheon and OSTree.
 
 As a sidenote, a similar configuration exists in the [workstation-ostree-config repository on Pagure](https://pagure.io/workstation-ostree-config) (specifically in `./fedora-pantheon.yaml`) but that is a barebones vanilla install. Sodalite was actually partially inspired by this and builds upon it, providing a more finished product with the trademark elementary flourish.
 
@@ -36,7 +36,7 @@ However, there's plenty of stuff that _does_ work rendering Sodalite entirely us
 
 ### Missing Apps
 
-* **AppCenter**<br />Although this builds on Fedora it refuses to work properly in rpm-ostree distros due to the nature of everything. Without proper support for OSTree, and a lack of PackageKit in the host, errors are thrown and nothing really loads in. _GNOME Software_ instead serves as a replacement, along with the AppCenter Flatpak repository being pre-installed.
+* **AppCenter**<br />Although this builds on Fedora it refuses to work properly in rpm-ostree-based distros due to the nature of everything. Without proper support for OSTree, and a lack of PackageKit in the host, errors are thrown and nothing really loads in. _GNOME Software_ instead serves as a replacement, along with the AppCenter Flatpak repository being pre-installed.
 * **Web**<br />As Fedora uses Firefox as the default browser, Web (Epiphany) is not installed by default. You can rectify this by running `sodalite-install-epiphany`.
 
 ### Other Issues
