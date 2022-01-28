@@ -1,4 +1,4 @@
-ref: sodalite/stable/${basearch}/elementary-nightly
+ref: sodalite/f35/${basearch}/elementary-nightly
 include:
   - common/sodalite-common.yaml
 
