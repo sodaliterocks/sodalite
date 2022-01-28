@@ -1,6 +1,0 @@
-[fedora-35-updates]
-name=Fedora 35 $basearch Updates
-mirrorlist=https://mirrors.fedoraproject.org/metalink?repo=updates-released-f35&arch=$basearch
-enabled=0
-gpgcheck=1
-metadata_expire=1d

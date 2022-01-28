@@ -1,14 +1,24 @@
+# Meta
 ref: sodalite/stable/${basearch}/common
+include: [
+  #"packages/fedora-ostree-pkgs.yaml",
+  "packages/elementary-pkgs.yaml",
+  "packages/elementary-staging-pkgs.yaml"
+]
+
+# Version
+releasever: "35" # Fedora version
+automatic-version-prefix: "${releasever}-22.1" # <base>-<year>.<release> (SEE: https://github.com/sodaliterocks/sodalite/releases/tag/v/stable/35-22.0)
+automatic-version-suffix: "."
+
+# Repositories
 repos:
   - copr_decathorpe_elementary-staging
   - copr_stsdc_monitor
-  - fedora-35
-  - fedora-35-updates
-selinux: true
-boot-location: modules
-etc-group-members:
-  - wheel
-documentation: true
+  - fedora
+  - fedora-updates
+
+# Packages
 packages:
   # Base
   - fedora-release
@@ -76,34 +86,10 @@ exclude-packages:
   - PackageKit
   - gnome-tour # GNOME is impossible to reach, so we don't need this
   - xdg-desktop-portal-gnome
-default_target: graphical.target
-remove-from-packages: [ # Removing files below in add-files
-  ["evolution-data-server", "/etc/xdg/autostart/org.gnome.Evolution-alarm-notify.desktop"],
-  ["fedora-workstation-backgrounds", "/usr/share/backgrounds/*"],
-  ["gnome-session-wayland-session", "/usr/share/wayland-sessions/*"],
-  ["gnome-session-xsession", "/usr/share/xsessions/*"],
-  ["plank", "/etc/xdg/autostart/plank.desktop"]
-]
-check-passwd:
-  type: file
-  filename: passwd
-check-groups:
-  type: file
-  filename: group
-ignore-removed-users:
-  - root
-ignore-removed-groups:
-  - root
-automatic-version-prefix: "35-22.1"
-automatic-version-suffix: "."
-postprocess-script: post.sh
-include: [
-  #"packages/fedora-ostree-pkgs.yaml",
-  "packages/elementary-pkgs.yaml",
-  "packages/elementary-staging-pkgs.yaml"
-]
+
+# File manipulation
 add-files: [
-  # HACK: Removing files by overwritng them (see https://github.com/electricduck/sodalite/issues/9#issuecomment-1010384738)
+  # HACK: Removing files by overwriting them (see https://github.com/electricduck/sodalite/issues/9#issuecomment-1010384738)
   ["../sysroot/etc/xdg/autostart/org.gnome.Evolution-alarm-notify.desktop", "/etc/xdg/autostart/org.gnome.Evolution-alarm-notify.desktop"],
   ["../sysroot/etc/xdg/autostart/plank.desktop", "/etc/xdg/autostart/plank.desktop"],
   ["../sysroot/usr/lib64/switchboard/personal/liblocale-plug.so", "/usr/lib64/switchboard/personal/liblocale-plug.so"],
@@ -188,4 +174,30 @@ add-files: [
   ["../../lib/elementary.icons/apps/symbolic/system-software-install-symbolic.svg", "/usr/share/icons/elementary/symbolic/system-software-install-symbolic.svg"],
   ["../sysroot/usr/share/icons/default/index.theme", "/usr/share/icons/default/index.theme"]
 ]
+remove-from-packages: [ # "Removing" files above in add-files
+  ["evolution-data-server", "/etc/xdg/autostart/org.gnome.Evolution-alarm-notify.desktop"],
+  ["fedora-workstation-backgrounds", "/usr/share/backgrounds/*"],
+  ["gnome-session-wayland-session", "/usr/share/wayland-sessions/*"],
+  ["gnome-session-xsession", "/usr/share/xsessions/*"],
+  ["plank", "/etc/xdg/autostart/plank.desktop"]
+]
+
+# Options
+boot-location: modules
+check-groups:
+  type: file
+  filename: group
+check-passwd:
+  type: file
+  filename: passwd
+default_target: graphical.target
+documentation: true
+etc-group-members:
+  - wheel
+ignore-removed-users:
+  - root
+ignore-removed-groups:
+  - root
+postprocess-script: post.sh
+selinux: true
 tmp-is-dir: true
