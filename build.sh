@@ -43,7 +43,7 @@ fi
 echoc "$(write_emoji "🪛")Setting variant file..."
 echo "$variant" > "$base_dir/src/sysroot/etc/sodalite-variant"
 
-echoc "$(write_emoji "⚡")Building tree for sodalite-$variant..."
+echoc "$(write_emoji "⚡")Building tree for 'sodalite-$variant'..."
 
 rpm-ostree compose tree \
     --cachedir="$ostree_cache_dir" \
@@ -53,7 +53,7 @@ rpm-ostree compose tree \
 if [[ $? != 0 ]]; then
     echoc error "Failed to build tree"
 else
-    echoc "$(write_emoji "✏️")Generating summary for sodalite-$variant..."
+    echoc "$(write_emoji "✏️")Generating summary for 'sodalite-$variant'..."
     ostree summary --repo="$ostree_repo_dir" --update
 fi
 
@@ -65,6 +65,5 @@ echoc "$(write_emoji "🛡️")Correcting permissions for build directory..."
 real_user=$(get_sudo_user)
 chown -R $real_user:$real_user $working_dir
 
-# BUG: rpm-ostree leaves junk behind (in persistant tmp!) if the build isn't finished
 echoc "$(write_emoji "🗑️")Deleting temporary build artifacts..."
 rm -rf  /var/tmp/rpm-ostree.*
