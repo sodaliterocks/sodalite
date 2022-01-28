@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# Usage: ./build.sh [<variant>] [<working-dir>]
 
 . "$(dirname "$(realpath -s "$0")")/lib/sodaliterocks.common/bash/common.sh"
 
