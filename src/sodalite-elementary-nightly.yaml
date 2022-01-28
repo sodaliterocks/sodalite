@@ -1,0 +1,12 @@
+ref: sodalite/stable/${basearch}/elementary-nightly
+include:
+  - common/sodalite-common.yaml
+
+repos:
+  - copr_decathorpe_elementary-nightly
+
+rojig:
+  name: sodalite-elementary-nightly
+  summary: "Sodalite (elementary Nightly)"
+  license: MIT
+  description: "Beautiful. Immutable. | Sodalite with nightly elementary packages."
