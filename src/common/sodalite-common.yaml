@@ -22,7 +22,6 @@ repos:
 packages:
   - fedora-release
   - fedora-release-ostree-desktop
-  #- fedora-release-silverblue
   - fedora-repos-archive
   - fedora-repos-ostree
 packages-x86_64:
