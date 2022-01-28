@@ -5,7 +5,10 @@ packages:
   - elementary-mail
   - elementary-settings-daemon
   - elementary-tasks
+  - google-roboto-mono-fonts            # Default Monospace font
   - indicator-application
+  - opendyslexic-fonts                  # Default "dysxlexic-friendly" font
+  - rsms-inter-fonts                    # Default UI font
   - switchboard-plug-about
   - switchboard-plug-datetime           # Buggy on Fedora
   - switchboard-plug-locale             # Buggy on Fedora (relies on apt)

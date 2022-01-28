@@ -2,7 +2,8 @@
 ref: sodalite/stable/${basearch}/common
 include: [
   #"packages/fedora-ostree-pkgs.yaml", # BUG: Circular dependency caused in packages/elementary-pkgs.yaml, so we'll need to comment this out for now
-  "packages/elementary-pkgs.yaml"
+  "packages/elementary-pkgs.yaml",
+  "packages/extra-pkgs.yaml"
 ]
 
 # Version
@@ -19,50 +20,11 @@ repos:
 
 # Packages
 packages:
-  # Base
   - fedora-release
   - fedora-release-ostree-desktop
+  #- fedora-release-silverblue
   - fedora-repos-archive
   - fedora-repos-ostree
-  # Container management
-  - buildah
-  - podman
-  - skopeo
-  - toolbox
-  # Dev
-  - elfutils-libelf-devel
-  - git-core
-  - git-lfs
-  - glibc-devel
-  - kernel-devel
-  - meson
-  # Device enhancements
-  - hfsplus-tools # HFS filesystem tools for Apple hardware
-  - smartmontools # tlp recommends installing
-  - tlp # Enhancements for laptop batteries
-  # Fonts
-  - google-roboto-mono-fonts # Roboto Mono
-  - opendyslexic-fonts # Open Dyslexic
-  - rsms-inter-fonts # Inter
-  # GVfs
-  - gvfs
-  - gvfs-afc
-  - gvfs-afp
-  - gvfs-fuse
-  - gvfs-gphoto2
-  - gvfs-mtp
-  - gvfs-nfs
-  - gvfs-smb
-  # Package management
-  - flatpak
-  - gnome-software # Replacement for AppCenter
-  - python-pip
-  - rpm-ostree
-  # Misc
-  - com.github.stsdc.monitor
-  - lvm2
-  - xdg-desktop-portal
-  - xprop
 packages-x86_64:
   - efibootmgr
   - grub2-efi-ia32
