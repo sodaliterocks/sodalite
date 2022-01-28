@@ -1,9 +1,8 @@
 # Meta
 ref: sodalite/stable/${basearch}/common
 include: [
-  #"packages/fedora-ostree-pkgs.yaml",
-  "packages/elementary-pkgs.yaml",
-  "packages/elementary-staging-pkgs.yaml"
+  #"packages/fedora-ostree-pkgs.yaml", # BUG: Circular dependency caused in packages/elementary-pkgs.yaml, so we'll need to comment this out for now
+  "packages/elementary-pkgs.yaml"
 ]
 
 # Version
