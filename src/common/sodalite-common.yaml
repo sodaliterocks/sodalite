@@ -87,6 +87,7 @@ add-files: [
   ["../sysroot/etc/skel/dot.config/plank/dock1/launchers/firefox.dockitem", "/etc/skel/.config/plank/dock1/launchers/firefox.dockitem"],
   ["../sysroot/etc/skel/dot.config/plank/dock1/launchers/io.elementary.files.dockitem", "/etc/skel/.config/plank/dock1/launchers/io.elementary.files.dockitem"],
   ["../sysroot/etc/skel/dot.config/plank/dock1/launchers/org.gnome.Software.dockitem", "/etc/skel/.config/plank/dock1/launchers/org.gnome.Software.dockitem"],
+  ["../sysroot/etc/skel/dot.config/touchegg/touchegg.conf", "/etc/skel/.config/touchegg/touchegg.conf"],
 
   # /etc/systemd
   ["../sysroot/etc/systemd/system/generate-oemconf.service", "/etc/systemd/system/generate-oemconf.service"],
@@ -102,6 +103,9 @@ add-files: [
   ["../sysroot/usr/bin/install-appcenter-flatpak.sh", "/usr/bin/sodalite-install-appcenter-flatpak"],
   ["../sysroot/usr/bin/install-epiphany.sh", "/usr/bin/sodalite-install-epiphany"],
   ["../sysroot/usr/bin/uninstall-gnome-apps.sh", "/usr/bin/sodalite-uninstall-gnome-apps"],
+
+  # /usr/share
+  ["../sysroot/usr/share/touchegg/touchegg.conf", "/usr/share/touchegg/touchegg.conf"],
 
   # /usr/share/applications
   ["../sysroot/usr/share/applications/org.gnome.Software.desktop", "/usr/share/applications/org.gnome.Software.desktop"],
