@@ -91,6 +91,7 @@ toggle-maximized=['<Super>Up']
 unmaximize=['<Alt>F5']
 
 [org.gnome.desktop.wm.preferences:Pantheon]
+action-middle-click-titlebar='minimize'
 button-layout='close:maximize'
 mouse-button-modifier='<Super>'
 resize-with-right-button=true
