@@ -111,6 +111,27 @@ if [[ ! -z $version_base ]]; then
     set_upstreamrelease_property "VERSION_ID" $version_base
 fi
 
+############
+# REMOVALS #
+############
+
+# HACK: Removing files here instead because we're not using --unified-core (see https://github.com/electricduck/sodalite/issues/9#issuecomment-1010384738)
+
+declare -a to_remove=(
+    # Fedora Workstation backgrounds
+    "/usr/share/backgrounds/fedora-workstation"
+    "/usr/share/doc/fedora-workstation-backgrounds"
+    "/usr/share/gnome-background-properties/fedora-workstation-backgrounds.xml"
+    # GNOME autostarts
+    "/etc/xdg/autostart/org.gnome.Evolution-alarm-notify.desktop"
+    # Misc.
+    "/usr/share/icewm"
+)
+
+for file in ${to_remove[@]}; do
+    rm -rf $file
+done
+
 ########
 # MISC #
 ########

@@ -50,7 +50,7 @@ exclude-packages:
 # File manipulation
 add-files: [
   # HACK: Removing files by overwriting them (see https://github.com/electricduck/sodalite/issues/9#issuecomment-1010384738)
-  ["../sysroot/etc/xdg/autostart/org.gnome.Evolution-alarm-notify.desktop", "/etc/xdg/autostart/org.gnome.Evolution-alarm-notify.desktop"],
+  #["../sysroot/etc/xdg/autostart/org.gnome.Evolution-alarm-notify.desktop", "/etc/xdg/autostart/org.gnome.Evolution-alarm-notify.desktop"],
   ["../sysroot/etc/xdg/autostart/plank.desktop", "/etc/xdg/autostart/plank.desktop"],
   ["../sysroot/usr/lib64/switchboard/personal/liblocale-plug.so", "/usr/lib64/switchboard/personal/liblocale-plug.so"],
   ["../sysroot/usr/lib64/switchboard/personal/libsecurity-privacy.so", "/usr/lib64/switchboard/personal/libsecurity-privacy.so"],
