@@ -115,8 +115,7 @@ fi
 # MISC #
 ########
 
-# TODO: Get default wallpaper from gschema
-ln -s /usr/share/backgrounds/default/karsten-wurth-7BjhtdogU3A-unsplash.jpg /usr/share/backgrounds/elementaryos-default
+ln -s $(get_config_item /usr/share/glib-2.0/schemas/io.elementary.desktop.gschema.override picture-uri) /usr/share/backgrounds/elementaryos-default
 
 glib-compile-schemas /usr/share/glib-2.0/schemas
 
