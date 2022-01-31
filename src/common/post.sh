@@ -137,21 +137,26 @@ declare -a to_remove=(
     "/etc/xdg/autostart/light-locker.desktop"
     # plank
     "/etc/xdg/autostart/plank.desktop"
-    # switchboard-plug-datetime
-    "/usr/lib64/switchboard/system/libdatetime.so"
-    "/usr/share/doc/switchboard-plug-datetime/"
-    # switchboard-plug-locale
-    "/usr/lib64/switchboard/personal/liblocale-plug.so"
-    "/usr/share/doc/switchboard-plug-locale/"
-    # switchboard-plug-parental-controls
-    "/usr/lib64/switchboard/system/libparental-controls.so"
-    "/usr/share/doc/switchboard-plug-parental-controls/"
-    # switchboard-plug-security-privacy
-    "/usr/lib64/switchboard/personal/libsecurity-privacy.so"
-    "/usr/share/doc/switchboard-plug-security-privacy/"
     # misc.
     "/usr/share/icewm"
 )
+
+if [[ $variant != "elementary-nightly" ]]; then
+    to_remove+=(
+        # switchboard-plug-datetime
+        "/usr/lib64/switchboard/system/libdatetime.so"
+        "/usr/share/doc/switchboard-plug-datetime/"
+        # switchboard-plug-locale
+        "/usr/lib64/switchboard/personal/liblocale-plug.so"
+        "/usr/share/doc/switchboard-plug-locale/"
+        # switchboard-plug-parental-controls
+        "/usr/lib64/switchboard/system/libparental-controls.so"
+        "/usr/share/doc/switchboard-plug-parental-controls/"
+        # switchboard-plug-security-privacy
+        "/usr/lib64/switchboard/personal/libsecurity-privacy.so"
+        "/usr/share/doc/switchboard-plug-security-privacy/"
+    )
+fi
 
 for file in ${to_remove[@]}; do
     rm -rf $file
