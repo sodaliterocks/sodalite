@@ -49,18 +49,6 @@ exclude-packages:
 
 # File manipulation
 add-files: [
-  # HACK: Removing files by overwriting them (see https://github.com/electricduck/sodalite/issues/9#issuecomment-1010384738)
-  #["../sysroot/etc/xdg/autostart/org.gnome.Evolution-alarm-notify.desktop", "/etc/xdg/autostart/org.gnome.Evolution-alarm-notify.desktop"],
-  ["../sysroot/etc/xdg/autostart/plank.desktop", "/etc/xdg/autostart/plank.desktop"],
-  ["../sysroot/usr/lib64/switchboard/personal/liblocale-plug.so", "/usr/lib64/switchboard/personal/liblocale-plug.so"],
-  ["../sysroot/usr/lib64/switchboard/personal/libsecurity-privacy.so", "/usr/lib64/switchboard/personal/libsecurity-privacy.so"],
-  ["../sysroot/usr/lib64/switchboard/system/libdatetime.so", "/usr/lib64/switchboard/system/libdatetime.so"],
-  ["../sysroot/usr/lib64/switchboard/system/libparental-controls.so", "/usr/lib64/switchboard/system/libparental-controls.so"],
-  ["../sysroot/usr/share/wayland-sessions/gnome.desktop", "/usr/share/wayland-sessions/gnome.desktop"],
-  ["../sysroot/usr/share/wayland-sessions/gnome-wayland.desktop", "/usr/share/wayland-sessions/gnome-wayland.desktop"],
-  ["../sysroot/usr/share/xsessions/gnome.desktop", "/usr/share/xsessions/gnome.desktop"],
-  ["../sysroot/usr/share/xsessions/gnome-xorg.desktop", "/usr/share/xsessions/gnome-xorg.desktop"],
-
   # Tools (/usr/bin/sodalite-*)
   ["../../lib/sodaliterocks.common/bash/common.sh", "/usr/libexec/sodalite/bash/common.sh"],
   ["../tools/cleanup.sh", "/usr/bin/sodalite-cleanup"],

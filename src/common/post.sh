@@ -116,13 +116,35 @@ fi
 # HACK: Removing files here instead because we're not using --unified-core (see https://github.com/electricduck/sodalite/issues/9#issuecomment-1010384738)
 
 declare -a to_remove=(
-    # Fedora Workstation backgrounds
+    # evolution-data-server
+    "/etc/xdg/autostart/org.gnome.Evolution-alarm-notify.desktop"
+    "/usr/libexec/evolution-data-server/evolution-alarm-notify"
+    # fedora-workstation-backgrounds
     "/usr/share/backgrounds/fedora-workstation"
     "/usr/share/doc/fedora-workstation-backgrounds"
     "/usr/share/gnome-background-properties/fedora-workstation-backgrounds.xml"
-    # GNOME autostarts
-    "/etc/xdg/autostart/org.gnome.Evolution-alarm-notify.desktop"
-    # Misc.
+    # gnome-session
+    "/usr/share/wayland-sessions/gnome.desktop"
+    "/usr/share/wayland-sessions/gnome-wayland.desktop"
+    "/usr/share/xsessions/gnome.desktop"
+    "/usr/share/xsessions/gnome-xorg.desktop"
+    # light-locker
+    "/etc/xdg/autostart/light-locker.desktop"
+    # plank
+    "/etc/xdg/autostart/plank.desktop"
+    # switchboard-plug-datetime
+    "/usr/lib64/switchboard/system/libdatetime.so"
+    "/usr/share/doc/switchboard-plug-datetime/"
+    # switchboard-plug-locale
+    "/usr/lib64/switchboard/personal/liblocale-plug.so"
+    "/usr/share/doc/switchboard-plug-locale/"
+    # switchboard-plug-parental-controls
+    "/usr/lib64/switchboard/system/libparental-controls.so"
+    "/usr/share/doc/switchboard-plug-parental-controls/"
+    # switchboard-plug-security-privacy
+    "/usr/lib64/switchboard/personal/libsecurity-privacy.so"
+    "/usr/share/doc/switchboard-plug-security-privacy/"
+    # misc.
     "/usr/share/icewm"
 )
 
