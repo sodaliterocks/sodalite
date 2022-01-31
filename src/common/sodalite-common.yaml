@@ -127,13 +127,9 @@ add-files: [
   ["../sysroot/usr/share/icons/default/index.theme", "/usr/share/icons/default/index.theme"],
   ["../sysroot/usr/share/icons/hicolor/scalable/apps/org.gnome.Boxes.svg", "/usr/share/icons/hicolor/scalable/apps/org.gnome.Boxes.svg"]
 ]
-remove-from-packages: [ # "Removing" files above in add-files
-  ["evolution-data-server", "/etc/xdg/autostart/org.gnome.Evolution-alarm-notify.desktop"],
-  ["fedora-workstation-backgrounds", "/usr/share/backgrounds/*"],
-  ["gnome-session-wayland-session", "/usr/share/wayland-sessions/*"],
-  ["gnome-session-xsession", "/usr/share/xsessions/*"],
-  ["plank", "/etc/xdg/autostart/plank.desktop"]
-]
+#remove-from-packages: [ # Removing files in post
+#
+#]
 
 # Options
 boot-location: modules
