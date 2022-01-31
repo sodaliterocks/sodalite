@@ -6,6 +6,7 @@ packages:
  - toolbox
  # Desktop apps
  - com.github.stsdc.monitor # Process monitor
+ - gnome-boxes # Hypervisor
  - gnome-software # Replacement for AppCenter
  # Device-specific
  - hfsplus-tools # HFS tools for Apple devices
