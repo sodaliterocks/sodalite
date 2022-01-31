@@ -93,8 +93,6 @@ if [[ ! -z $osr_variant ]] && [[ $osr_variant != "base" ]]; then
     osr_version+=" ($osr_variant)"
 fi
 
-cat /etc/os-release
-
 [[ ! -z $osr_id ]] && set_osrelease_property "ID" $osr_id
 [[ ! -z $osr_name ]] && set_osrelease_property "NAME" $osr_name
 [[ ! -z $osr_name ]] && set_osrelease_property "PRETTY_NAME" "$osr_name $osr_version"
