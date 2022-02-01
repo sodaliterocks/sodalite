@@ -2,27 +2,19 @@
 
 . /usr/libexec/sodalite/bash/common.sh
 
-function set_osrelease_property() {
+function set_property() {
     # TODO: Handle missing properties
-    property=$1
-    value=$2
+    file=$1
+    property=$2
+    value=$3
 
-    if [[ $value =~ [[:space:]]+ ]]; then
-        value="\"$value\""
+    if [[ -f $file ]]; then
+        if [[ $value =~ [[:space:]]+ ]]; then
+            value="\"$value\""
+        fi
+
+        sed -i "s/^\($property=\)\(.*\)$/\1$value/g" $file
     fi
-
-    sed -i "s/^\($property=\)\(.*\)$/\1$value/g" /etc/os-release
-}
-
-function set_upstreamrelease_property() {
-    property=$1
-    value=$2
-
-    if [[ $value =~ [[:space:]]+ ]]; then
-        value="\"$value\""
-    fi
-
-    sed -i "s/^\($property=\)\(.*\)$/\1$value/g" /etc/upstream-release/lsb-release
 }
 
 set -xeuo pipefail
@@ -98,20 +90,20 @@ if [[ ! -z $osr_variant ]] && [[ $osr_variant != "base" ]]; then
     osr_version+=" ($osr_variant)"
 fi
 
-[[ ! -z $osr_id ]] && set_osrelease_property "ID" $osr_id
-[[ ! -z $osr_name ]] && set_osrelease_property "NAME" $osr_name
-[[ ! -z $osr_name ]] && set_osrelease_property "PRETTY_NAME" "$osr_name $osr_version"
-#[[ ! -z $osr_variant ]] && set_osrelease_property "VARIANT" $osr_variant
+[[ ! -z $osr_id ]] && set_property /etc/os-release "ID" $osr_id
+[[ ! -z $osr_name ]] && set_property /etc/os-release "NAME" $osr_name
+[[ ! -z $osr_name ]] && set_property /etc/os-release "PRETTY_NAME" "$osr_name $osr_version"
+#[[ ! -z $osr_variant ]] && set_property /etc/os-release "VARIANT" $osr_variant
 [[ ! -z $osr_variant ]] && echo "VARIANT=\"$osr_variant\"" >> /etc/os-release
-#[[ ! -z $osr_variant_id ]] && set_osrelease_property "VARIANT_ID" $osr_variant_id
+#[[ ! -z $osr_variant_id ]] && set_property /etc/os-release "VARIANT_ID" $osr_variant_id
 [[ ! -z $osr_variant_id ]] && echo "VARIANT_ID=\"$osr_variant_id\"" >> /etc/os-release
-[[ ! -z $osr_version ]] && set_osrelease_property "VERSION" "$osr_version"
-[[ ! -z $osr_version_id ]] && set_osrelease_property "VERSION_ID" $osr_version_id
+[[ ! -z $osr_version ]] && set_property /etc/os-release "VERSION" "$osr_version"
+[[ ! -z $osr_version_id ]] && set_property /etc/os-release "VERSION_ID" $osr_version_id
 
 if [[ ! -z $version_base ]]; then
-    set_upstreamrelease_property "ID" fedora
-    set_upstreamrelease_property "PRETTY_NAME" "Fedora Linux $version_base"
-    set_upstreamrelease_property "VERSION_ID" $version_base
+    set_property /etc/upstream-release/lsb-release "ID" fedora
+    set_property /etc/upstream-release/lsb-release "PRETTY_NAME" "Fedora Linux $version_base"
+    set_property /etc/upstream-release/lsb-release "VERSION_ID" $version_base
 fi
 
 ############
@@ -142,6 +134,8 @@ declare -a to_remove=(
 )
 
 if [[ $variant != "elementary-nightly" ]]; then
+    # These elementary packages are considered broken, so we'll only keep them
+    # for this variant
     to_remove+=(
         # switchboard-plug-datetime
         "/usr/lib64/switchboard/system/libdatetime.so"
@@ -166,6 +160,7 @@ done
 # MISC #
 ########
 
+# Sets the background System (in Switchboard) can use behind the logo
 ln -s $(get_config_item /usr/share/glib-2.0/schemas/io.elementary.desktop.gschema.override picture-uri | sed -E 's/file:\/\///' | sed -E "s/'//g") /usr/share/backgrounds/elementaryos-default
 
 glib-compile-schemas /usr/share/glib-2.0/schemas
