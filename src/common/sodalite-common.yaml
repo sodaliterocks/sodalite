@@ -8,7 +8,7 @@ include: [
 
 # Version
 releasever: "35" # Fedora version
-automatic-version-prefix: "${releasever}-22.2" # <base>-<year>.<release> (SEE: https://github.com/sodaliterocks/sodalite/releases/tag/v/stable/35-22.0)
+automatic-version-prefix: "${releasever}-22.3" # <base>-<year>.<release> (SEE: https://github.com/sodaliterocks/sodalite/releases/tag/v/stable/35-22.0)
 automatic-version-suffix: "."
 
 # Repositories
