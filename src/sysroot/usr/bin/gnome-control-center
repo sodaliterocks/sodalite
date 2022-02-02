@@ -1,0 +1,10 @@
+#!/bin/sh
+
+case $1 in
+    network)
+	    xdg-open settings://network
+	    ;;
+    *)
+	    xdg-open settings://
+	    ;;
+esac

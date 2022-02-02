@@ -84,6 +84,7 @@ add-files: [
   ["../../lib/sodaliterocks.generate-oemconf/generate-oemconf.sh", "/usr/bin/generate-oemconf"],
   ["../../lib/sodaliterocks.hacks/src/hacks.sh", "/usr/bin/sodalite-hacks"],
   ["../sysroot/usr/bin/detach.sh", "/usr/bin/detach"],
+  ["../sysroot/usr/bin/gnome-control-center", "/usr/bin/gnome-control-center"],
   ["../sysroot/usr/bin/plank-sodalite-wrapper.sh", "/usr/bin/plank-sodalite-wrapper"],
   
   # /usr/libexec
