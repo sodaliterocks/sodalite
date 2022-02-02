@@ -32,7 +32,7 @@ As a sidenote, a similar configuration exists in the [workstation-ostree-config 
 
 This project is still very much early days and there is plenty of things that are broken, mostly due to missing upstream elementary/Pantheon packages on Fedora &mdash; Pantheon is _mostly_ distro-agnostic but still some way from being complete.
 
-However, there's plenty of stuff that _does_ work rendering Sodalite entirely usable for day-to-day activites: I even used it to type up this README and build releases. Unless in this _Missing Apps_ list, every app included in elementaryOS comes with Sodalite and works 100% (probably)! That includes, **Music**, **Photos**, **Videos**, **Calendar**, **Files**, **Terminal**, **Code**, **Camera**, along with several other in-box utilities. AppCenter's Flatpak repository is also pre-installed giving you access to the ever-grown "curated" apps for elementaryOS.
+However, there's plenty of stuff that _does_ work rendering Sodalite entirely usable for day-to-day activites: it was even used to type up this README and build releases. Unless in this _Missing Apps_ list, every app included in elementaryOS comes with Sodalite and works 100% (probably)! That includes, **Music**, **Photos**, **Videos**, **Calendar**, **Files**, **Terminal**, **Code**, **Camera**, along with several other in-box utilities. AppCenter's Flatpak repository is also pre-installed giving you access to the ever-grown "curated" apps for elementaryOS.
 
 ### Missing Apps
 
