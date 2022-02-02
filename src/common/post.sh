@@ -5,7 +5,7 @@
 function get_property() {
     file=$1
     item=$2
-    echo $(grep -oP '(?<=^'"$item"'=).+' $config_file | tr -d '"')
+    echo $(grep -oP '(?<=^'"$item"'=).+' $file | tr -d '"')
 }
 
 function set_property() {
