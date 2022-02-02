@@ -17,3 +17,6 @@
 [submodule "lib/elementary.icons"]
 	path = lib/elementary.icons
 	url = https://github.com/elementary/icons
+[submodule "lib/sodaliterocks.hacks"]
+	path = lib/sodaliterocks.hacks
+	url = https://github.com/sodaliterocks/hacks

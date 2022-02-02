@@ -1,0 +1,31 @@
+#!/bin/sh
+
+# GNOME Control Center "shim"
+# ---
+# This shim provides compatibility with various apps that attempt to open
+# GNOME Control Center, as it has been removed as of 9aa2081, and will attempt
+# to redirect the request to Switchboard (or whatever handles settings://).
+
+option=$1
+
+function setting() {
+    xdg-open settings://$1
+}
+
+case $option in
+    applications) setting applications/permissions ;;
+    backgrounds) setting desktop/wallpaper ;;
+    color) gcm-viewer ;;
+    default) setting applications ;;
+    display) setting display ;;
+    network|wifi) setting network ;;
+    notifications) setting notifications ;;
+    power) setting power ;;
+    printers) setting printer ;;
+    sound) setting sound ;;
+    universal-access) setting universal-access ;;
+    *)
+        echo "No shim provided for '$option'. Trying settings://$option..."
+	    xdg-open settings://$option
+	    ;;
+esac

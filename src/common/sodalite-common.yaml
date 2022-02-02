@@ -8,7 +8,7 @@ include: [
 
 # Version
 releasever: "35" # Fedora version
-automatic-version-prefix: "${releasever}-22.2" # <base>-<year>.<release> (SEE: https://github.com/sodaliterocks/sodalite/releases/tag/v/stable/35-22.0)
+automatic-version-prefix: "${releasever}-22.3" # <base>-<year>.<release> (SEE: https://github.com/sodaliterocks/sodalite/releases/tag/v/stable/35-22.0)
 automatic-version-suffix: "."
 
 # Repositories
@@ -49,23 +49,6 @@ exclude-packages:
 
 # File manipulation
 add-files: [
-  # HACK: Removing files by overwriting them (see https://github.com/electricduck/sodalite/issues/9#issuecomment-1010384738)
-  ["../sysroot/etc/xdg/autostart/org.gnome.Evolution-alarm-notify.desktop", "/etc/xdg/autostart/org.gnome.Evolution-alarm-notify.desktop"],
-  ["../sysroot/etc/xdg/autostart/plank.desktop", "/etc/xdg/autostart/plank.desktop"],
-  ["../sysroot/usr/lib64/switchboard/personal/liblocale-plug.so", "/usr/lib64/switchboard/personal/liblocale-plug.so"],
-  ["../sysroot/usr/lib64/switchboard/personal/libsecurity-privacy.so", "/usr/lib64/switchboard/personal/libsecurity-privacy.so"],
-  ["../sysroot/usr/lib64/switchboard/system/libdatetime.so", "/usr/lib64/switchboard/system/libdatetime.so"],
-  ["../sysroot/usr/lib64/switchboard/system/libparental-controls.so", "/usr/lib64/switchboard/system/libparental-controls.so"],
-  ["../sysroot/usr/share/wayland-sessions/gnome.desktop", "/usr/share/wayland-sessions/gnome.desktop"],
-  ["../sysroot/usr/share/wayland-sessions/gnome-wayland.desktop", "/usr/share/wayland-sessions/gnome-wayland.desktop"],
-  ["../sysroot/usr/share/xsessions/gnome.desktop", "/usr/share/xsessions/gnome.desktop"],
-  ["../sysroot/usr/share/xsessions/gnome-xorg.desktop", "/usr/share/xsessions/gnome-xorg.desktop"],
-
-  # Tools (/usr/bin/sodalite-*)
-  ["../../lib/sodaliterocks.common/bash/common.sh", "/usr/libexec/sodalite/bash/common.sh"],
-  ["../tools/cleanup.sh", "/usr/bin/sodalite-cleanup"],
-  ["../tools/plank-wrapper.sh", "/usr/bin/sodalite-plank-wrapper"],
-
   # /etc
   ["../../lib/elementary.default-settings/appcenter/appcenter.hiddenapps", "/etc/appcenter/appcenter.hiddenapps"],
   ["../../lib/elementary.default-settings/cups/default-testpage.pdf", "/etc/cups/default-testpage.pdf"],
@@ -87,21 +70,32 @@ add-files: [
   ["../sysroot/etc/skel/dot.config/plank/dock1/launchers/firefox.dockitem", "/etc/skel/.config/plank/dock1/launchers/firefox.dockitem"],
   ["../sysroot/etc/skel/dot.config/plank/dock1/launchers/io.elementary.files.dockitem", "/etc/skel/.config/plank/dock1/launchers/io.elementary.files.dockitem"],
   ["../sysroot/etc/skel/dot.config/plank/dock1/launchers/org.gnome.Software.dockitem", "/etc/skel/.config/plank/dock1/launchers/org.gnome.Software.dockitem"],
+  ["../sysroot/etc/skel/dot.config/touchegg/touchegg.conf", "/etc/skel/.config/touchegg/touchegg.conf"],
 
   # /etc/systemd
   ["../sysroot/etc/systemd/system/generate-oemconf.service", "/etc/systemd/system/generate-oemconf.service"],
-  ["../sysroot/etc/systemd/system/sodalite-install-appcenter-flatpak.service", "/etc/systemd/system/sodalite-install-appcenter-flatpak.service"],
+  ["../sysroot/etc/systemd/system/update-appcenter-flatpak.service", "/etc/systemd/system/update-appcenter-flatpak.service"],
 
   # /etc/xdg
   ["../sysroot/etc/xdg/autostart/gnome-software-service.desktop", "/etc/xdg/autostart/gnome-software-service.desktop"],
-  ["../sysroot/etc/xdg/autostart/plank-wrapper.desktop", "/etc/xdg/autostart/sodalite-plank-wrapper.desktop"],
+  ["../sysroot/etc/xdg/autostart/plank-sodalite-wrapper.desktop", "/etc/xdg/autostart/plank-sodalite-wrapper.desktop"],
 
   # /usr/bin
   ["../../lib/sodaliterocks.generate-oemconf/generate-oemconf.sh", "/usr/bin/generate-oemconf"],
+  ["../../lib/sodaliterocks.hacks/src/hacks.sh", "/usr/bin/sodalite-hacks"],
   ["../sysroot/usr/bin/detach.sh", "/usr/bin/detach"],
-  ["../sysroot/usr/bin/install-appcenter-flatpak.sh", "/usr/bin/sodalite-install-appcenter-flatpak"],
-  ["../sysroot/usr/bin/install-epiphany.sh", "/usr/bin/sodalite-install-epiphany"],
-  ["../sysroot/usr/bin/uninstall-gnome-apps.sh", "/usr/bin/sodalite-uninstall-gnome-apps"],
+  ["../sysroot/usr/bin/gnome-control-center", "/usr/bin/gnome-control-center"],
+  ["../sysroot/usr/bin/plank-sodalite-wrapper.sh", "/usr/bin/plank-sodalite-wrapper"],
+  
+  # /usr/libexec
+  ["../../lib/sodaliterocks.hacks/src/plugins/cleanup.sh", "/usr/libexec/sodalite-hacks/plugins/cleanup.sh"],
+  ["../../lib/sodaliterocks.hacks/src/plugins/flatpak.sh", "/usr/libexec/sodalite-hacks/plugins/flatpak.sh"],
+  ["../../lib/sodaliterocks.hacks/src/plugins/nvidia.sh", "/usr/libexec/sodalite-hacks/plugins/nvidia.sh"],
+  ["../../lib/sodaliterocks.hacks/src/plugins/vscode.sh", "/usr/libexec/sodalite-hacks/plugins/vscode.sh"],
+  ["../../lib/sodaliterocks.hacks/src/utils.sh", "/usr/libexec/sodalite-hacks/utils.sh"],
+
+  # /usr/share
+  ["../sysroot/usr/share/touchegg/touchegg.conf", "/usr/share/touchegg/touchegg.conf"],
 
   # /usr/share/applications
   ["../sysroot/usr/share/applications/org.gnome.Software.desktop", "/usr/share/applications/org.gnome.Software.desktop"],
@@ -125,22 +119,19 @@ add-files: [
 
   # /usr/share/icons
   ["../../lfs/logo/logo.png", "/usr/share/icons/hicolor/256x256/apps/fedora-logo-icon.png"],
-  ["../../lib/elementary.icons/apps/128/system-software-install.svg", "/usr/share/icons/elementary/128/system-software-install.svg"],
-  ["../../lib/elementary.icons/apps/16/system-software-install.svg", "/usr/share/icons/elementary/16/system-software-install.svg"],
-  ["../../lib/elementary.icons/apps/24/system-software-install.svg", "/usr/share/icons/elementary/24/system-software-install.svg"],
-  ["../../lib/elementary.icons/apps/32/system-software-install.svg", "/usr/share/icons/elementary/32/system-software-install.svg"],
-  ["../../lib/elementary.icons/apps/48/system-software-install.svg", "/usr/share/icons/elementary/48/system-software-install.svg"],
-  ["../../lib/elementary.icons/apps/64/system-software-install.svg", "/usr/share/icons/elementary/64/system-software-install.svg"],
-  ["../../lib/elementary.icons/apps/symbolic/system-software-install-symbolic.svg", "/usr/share/icons/elementary/symbolic/system-software-install-symbolic.svg"],
-  ["../sysroot/usr/share/icons/default/index.theme", "/usr/share/icons/default/index.theme"]
+  ["../../lib/elementary.icons/apps/128/system-software-install.svg", "/usr/share/icons/elementary/apps/128/system-software-install.svg"],
+  ["../../lib/elementary.icons/apps/16/system-software-install.svg", "/usr/share/icons/elementary/apps/16/system-software-install.svg"],
+  ["../../lib/elementary.icons/apps/24/system-software-install.svg", "/usr/share/icons/elementary/apps/24/system-software-install.svg"],
+  ["../../lib/elementary.icons/apps/32/system-software-install.svg", "/usr/share/icons/elementary/apps/32/system-software-install.svg"],
+  ["../../lib/elementary.icons/apps/48/system-software-install.svg", "/usr/share/icons/elementary/apps/48/system-software-install.svg"],
+  ["../../lib/elementary.icons/apps/64/system-software-install.svg", "/usr/share/icons/elementary/apps/64/system-software-install.svg"],
+  ["../../lib/elementary.icons/apps/symbolic/system-software-install-symbolic.svg", "/usr/share/icons/elementary/apps/symbolic/system-software-install-symbolic.svg"],
+  ["../sysroot/usr/share/icons/default/index.theme", "/usr/share/icons/default/index.theme"],
+  ["../sysroot/usr/share/icons/hicolor/scalable/apps/org.gnome.Boxes.svg", "/usr/share/icons/hicolor/scalable/apps/org.gnome.Boxes.svg"]
 ]
-remove-from-packages: [ # "Removing" files above in add-files
-  ["evolution-data-server", "/etc/xdg/autostart/org.gnome.Evolution-alarm-notify.desktop"],
-  ["fedora-workstation-backgrounds", "/usr/share/backgrounds/*"],
-  ["gnome-session-wayland-session", "/usr/share/wayland-sessions/*"],
-  ["gnome-session-xsession", "/usr/share/xsessions/*"],
-  ["plank", "/etc/xdg/autostart/plank.desktop"]
-]
+#remove-from-packages: [ # Removing files in post
+#
+#]
 
 # Options
 boot-location: modules

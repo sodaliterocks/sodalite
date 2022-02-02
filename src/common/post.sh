@@ -2,30 +2,39 @@
 
 . /usr/libexec/sodalite/bash/common.sh
 
-function set_osrelease_property() {
-    # TODO: Handle missing properties
-    property=$1
-    value=$2
-
-    if [[ $value =~ [[:space:]]+ ]]; then
-        value="\"$value\""
-    fi
-
-    sed -i "s/^\($property=\)\(.*\)$/\1$value/g" /etc/os-release
+function get_property() {
+    file=$1
+    item=$2
+    echo $(grep -oP '(?<=^'"$item"'=).+' $file | tr -d '"')
 }
 
-function set_upstreamrelease_property() {
-    property=$1
-    value=$2
+function set_property() {
+    # TODO: Handle missing properties
+    file=$1
+    property=$2
+    value=$3
 
-    if [[ $value =~ [[:space:]]+ ]]; then
-        value="\"$value\""
+    if [[ -f $file ]]; then
+        if [[ -z $(get_property $file $property) ]]; then
+            echo "$property=\"$value\"" >> $file
+        else
+            if [[ $value =~ [[:space:]]+ ]]; then
+                value="\"$value\""
+            fi
+
+            sed -i "s/^\($property=\)\(.*\)$/\1$value/g" $file
+        fi
     fi
-
-    sed -i "s/^\($property=\)\(.*\)$/\1$value/g" /etc/upstream-release/lsb-release
 }
 
 set -xeuo pipefail
+
+# HACK: This gets set with the build.sh script, so no biggy if we miss it
+variant="unknown"
+if [[ -s /etc/sodalite-variant ]]; then
+    variant="$(cat /etc/sodalite-variant)"
+    rm -f /etc/sodalite-variant
+fi
 
 #########
 # HACKS #
@@ -62,7 +71,7 @@ done
 version_base="0"
 version_release="00.0"
 version_build="0"
-if [[ $(get_config_item /etc/os-release VERSION) =~ (([0-9]{1,3})-([0-9]{2}.[0-9]{1,})(.([0-9]{1,}){0,1}).+) ]]; then
+if [[ $(get_property /etc/os-release VERSION) =~ (([0-9]{1,3})-([0-9]{2}.[0-9]{1,})(.([0-9]{1,}){0,1}).+) ]]; then
     version_base="${BASH_REMATCH[2]}"
     version_release="${BASH_REMATCH[3]}"
     [[ ! -z ${BASH_REMATCH[5]} ]] && version_build="${BASH_REMATCH[5]}"
@@ -75,14 +84,9 @@ osr_variant_id="" # TODO: Programatically set this
 osr_version="$version_base-$version_release"
 osr_version_id="$version_base"
 
-# HACK: This gets set with the build.sh script, so no biggy if we miss it
-if [[ -f /etc/sodalite-variant ]]; then
-    if [[ -s /etc/sodalite-variant ]]; then
-        osr_variant_id="$(cat /etc/sodalite-variant)"
-        osr_variant=$osr_variant_id
-    fi
-
-    rm -f /etc/sodalite-variant
+if [[ ! -z $variant ]]; then
+    osr_variant_id=$variant
+    osr_variant=$variant
 fi
 
 if [[ $version_build > 0 ]]; then
@@ -93,35 +97,205 @@ if [[ ! -z $osr_variant ]] && [[ $osr_variant != "base" ]]; then
     osr_version+=" ($osr_variant)"
 fi
 
-cat /etc/os-release
-
-[[ ! -z $osr_id ]] && set_osrelease_property "ID" $osr_id
-[[ ! -z $osr_name ]] && set_osrelease_property "NAME" $osr_name
-[[ ! -z $osr_name ]] && set_osrelease_property "PRETTY_NAME" "$osr_name $osr_version"
-#[[ ! -z $osr_variant ]] && set_osrelease_property "VARIANT" $osr_variant
-[[ ! -z $osr_variant ]] && echo "VARIANT=\"$osr_variant\"" >> /etc/os-release
-#[[ ! -z $osr_variant_id ]] && set_osrelease_property "VARIANT_ID" $osr_variant_id
-[[ ! -z $osr_variant_id ]] && echo "VARIANT_ID=\"$osr_variant_id\"" >> /etc/os-release
-[[ ! -z $osr_version ]] && set_osrelease_property "VERSION" "$osr_version"
-[[ ! -z $osr_version_id ]] && set_osrelease_property "VERSION_ID" $osr_version_id
+[[ ! -z $osr_id ]] && set_property /etc/os-release "ID" $osr_id
+[[ ! -z $osr_name ]] && set_property /etc/os-release "NAME" $osr_name
+[[ ! -z $osr_name ]] && set_property /etc/os-release "PRETTY_NAME" "$osr_name $osr_version"
+[[ ! -z $osr_variant ]] && set_property /etc/os-release "VARIANT" $osr_variant
+[[ ! -z $osr_variant_id ]] && set_property /etc/os-release "VARIANT_ID" $osr_variant_id
+[[ ! -z $osr_version ]] && set_property /etc/os-release "VERSION" "$osr_version"
+[[ ! -z $osr_version_id ]] && set_property /etc/os-release "VERSION_ID" $osr_version_id
 
 if [[ ! -z $version_base ]]; then
-    set_upstreamrelease_property "ID" fedora
-    set_upstreamrelease_property "PRETTY_NAME" "Fedora Linux $version_base"
-    set_upstreamrelease_property "VERSION_ID" $version_base
+    set_property /etc/upstream-release/lsb-release "ID" fedora
+    set_property /etc/upstream-release/lsb-release "PRETTY_NAME" "Fedora Linux $version_base"
+    set_property /etc/upstream-release/lsb-release "VERSION_ID" $version_base
 fi
+
+############
+# REMOVALS #
+############
+
+# HACK: Removing files here instead because we're not using --unified-core (see https://github.com/electricduck/sodalite/issues/9#issuecomment-1010384738)
+
+declare -a to_remove=(
+    # evolution-data-server
+    "/etc/xdg/autostart/org.gnome.Evolution-alarm-notify.desktop"
+    "/usr/libexec/evolution-data-server/evolution-alarm-notify"
+    # fedora-workstation-backgrounds
+    "/usr/share/backgrounds/fedora-workstation"
+    "/usr/share/doc/fedora-workstation-backgrounds"
+    "/usr/share/gnome-background-properties/fedora-workstation-backgrounds.xml"
+    # gnome-control-center
+    #"/usr/bin/gnome-control-center"
+    "/usr/libexec/cc-remote-login-helper"
+    "/usr/libexec/gnome-control-center-print-renderer"
+    "/usr/libexec/gnome-control-center-search-provider"
+    "/usr/share/applications/gnome-applications-panel.desktop"
+    "/usr/share/applications/gnome-background-panel.desktop"
+    "/usr/share/applications/gnome-bluetooth-panel.desktop"
+    "/usr/share/applications/gnome-camera-panel.desktop"
+    "/usr/share/applications/gnome-color-panel.desktop"
+    "/usr/share/applications/gnome-control-center.desktop"
+    "/usr/share/applications/gnome-datetime-panel.desktop"
+    "/usr/share/applications/gnome-default-apps-panel.desktop"
+    "/usr/share/applications/gnome-diagnostics-panel.desktop"
+    "/usr/share/applications/gnome-display-panel.desktop"
+    "/usr/share/applications/gnome-info-overview-panel.desktop"
+    "/usr/share/applications/gnome-keyboard-panel.desktop"
+    "/usr/share/applications/gnome-location-panel.desktop"
+    "/usr/share/applications/gnome-lock-panel.desktop"
+    "/usr/share/applications/gnome-microphone-panel.desktop"
+    "/usr/share/applications/gnome-mouse-panel.desktop"
+    "/usr/share/applications/gnome-multitasking-panel.desktop"
+    "/usr/share/applications/gnome-network-panel.desktop"
+    "/usr/share/applications/gnome-notifications-panel.desktop"
+    "/usr/share/applications/gnome-online-accounts-panel.desktop"
+    "/usr/share/applications/gnome-power-panel.desktop"
+    "/usr/share/applications/gnome-printers-panel.desktop"
+    "/usr/share/applications/gnome-region-panel.desktop"
+    "/usr/share/applications/gnome-removable-media-panel.desktop"
+    "/usr/share/applications/gnome-search-panel.desktop"
+    "/usr/share/applications/gnome-sharing-panel.desktop"
+    "/usr/share/applications/gnome-sound-panel.desktop"
+    "/usr/share/applications/gnome-thunderbolt-panel.desktop"
+    "/usr/share/applications/gnome-universal-access-panel.desktop"
+    "/usr/share/applications/gnome-usage-panel.desktop"
+    "/usr/share/applications/gnome-user-accounts-panel.desktop"
+    "/usr/share/applications/gnome-wacom-panel.desktop"
+    "/usr/share/applications/gnome-wifi-panel.desktop"
+    "/usr/share/applications/gnome-wwan-panel.desktop"
+    "/usr/share/bash-completion/completions/gnome-control-center"
+    "/usr/share/dbus-1/services/org.gnome.ControlCenter.SearchProvider.service"
+    "/usr/share/doc/gnome-control-center"
+    "/usr/share/doc/gnome-control-center/NEWS"
+    "/usr/share/doc/gnome-control-center/README.md"
+    "/usr/share/dbus-1/services/org.gnome.ControlCenter.service"
+    "/usr/share/glib-2.0/schemas/org.gnome.ControlCenter.gschema.xml"
+    "/usr/share/gnome-control-center/keybindings/00-multimedia.xml"
+    "/usr/share/gnome-control-center/keybindings/01-input-sources.xml"
+    "/usr/share/gnome-control-center/keybindings/01-launchers.xml"
+    "/usr/share/gnome-control-center/keybindings/01-screenshot.xml"
+    "/usr/share/gnome-control-center/keybindings/01-system.xml"
+    "/usr/share/gnome-control-center/keybindings/50-accessibility.xml"
+    "/usr/share/gnome-control-center/pixmaps/noise-texture-light.png"
+    "/usr/share/gnome-shell/search-providers/gnome-control-center-search-provider.ini"
+    "/usr/share/man/man1/gnome-control-center.1.gz"
+    "/usr/share/metainfo/gnome-control-center.appdata.xml"
+    "/usr/share/pixmaps/faces/astronaut.jpg"
+    "/usr/share/pixmaps/faces/baseball.png"
+    "/usr/share/pixmaps/faces/bicycle.jpg"
+    "/usr/share/pixmaps/faces/book.jpg"
+    "/usr/share/pixmaps/faces/butterfly.png"
+    "/usr/share/pixmaps/faces/calculator.jpg"
+    "/usr/share/pixmaps/faces/cat-eye.jpg"
+    "/usr/share/pixmaps/faces/cat.jpg"
+    "/usr/share/pixmaps/faces/chess.jpg"
+    "/usr/share/pixmaps/faces/coffee.jpg"
+    "/usr/share/pixmaps/faces/coffee2.jpg"
+    "/usr/share/pixmaps/faces/dice.jpg"
+    "/usr/share/pixmaps/faces/energy-arc.jpg"
+    "/usr/share/pixmaps/faces/fish.jpg"
+    "/usr/share/pixmaps/faces/flake.jpg"
+    "/usr/share/pixmaps/faces/flower.jpg"
+    "/usr/share/pixmaps/faces/flower2.jpg"
+    "/usr/share/pixmaps/faces/gamepad.jpg"
+    "/usr/share/pixmaps/faces/grapes.jpg"
+    "/usr/share/pixmaps/faces/guitar.jpg"
+    "/usr/share/pixmaps/faces/guitar2.jpg"
+    "/usr/share/pixmaps/faces/headphones.jpg"
+    "/usr/share/pixmaps/faces/hummingbird.jpg"
+    "/usr/share/pixmaps/faces/launch.jpg"
+    "/usr/share/pixmaps/faces/leaf.jpg"
+    "/usr/share/pixmaps/faces/legacy/astronaut.jpg"
+    "/usr/share/pixmaps/faces/legacy/baseball.png"
+    "/usr/share/pixmaps/faces/legacy/butterfly.png"
+    "/usr/share/pixmaps/faces/legacy/cat-eye.jpg"
+    "/usr/share/pixmaps/faces/legacy/chess.jpg"
+    "/usr/share/pixmaps/faces/legacy/coffee.jpg"
+    "/usr/share/pixmaps/faces/legacy/dice.jpg"
+    "/usr/share/pixmaps/faces/legacy/energy-arc.jpg"
+    "/usr/share/pixmaps/faces/legacy/fish.jpg"
+    "/usr/share/pixmaps/faces/legacy/flake.jpg"
+    "/usr/share/pixmaps/faces/legacy/flower.jpg"
+    "/usr/share/pixmaps/faces/legacy/grapes.jpg"
+    "/usr/share/pixmaps/faces/legacy/guitar.jpg"
+    "/usr/share/pixmaps/faces/legacy/launch.jpg"
+    "/usr/share/pixmaps/faces/legacy/leaf.jpg"
+    "/usr/share/pixmaps/faces/legacy/lightning.jpg"
+    "/usr/share/pixmaps/faces/legacy/penguin.jpg"
+    "/usr/share/pixmaps/faces/legacy/puppy.jpg"
+    "/usr/share/pixmaps/faces/legacy/sky.jpg"
+    "/usr/share/pixmaps/faces/legacy/soccerball.png"
+    "/usr/share/pixmaps/faces/legacy/sunflower.jpg"
+    "/usr/share/pixmaps/faces/legacy/sunset.jpg"
+    "/usr/share/pixmaps/faces/legacy/tennis-ball.png"
+    "/usr/share/pixmaps/faces/legacy/yellow-rose.jpg"
+    "/usr/share/pixmaps/faces/lightning.jpg"
+    "/usr/share/pixmaps/faces/mountain.jpg"
+    "/usr/share/pixmaps/faces/penguin.jpg"
+    "/usr/share/pixmaps/faces/plane.jpg"
+    "/usr/share/pixmaps/faces/puppy.jpg"
+    "/usr/share/pixmaps/faces/sky.jpg"
+    "/usr/share/pixmaps/faces/soccerball.png"
+    "/usr/share/pixmaps/faces/sunflower.jpg"
+    "/usr/share/pixmaps/faces/sunset.jpg"
+    "/usr/share/pixmaps/faces/surfer.jpg"
+    "/usr/share/pixmaps/faces/tennis-ball.png"
+    "/usr/share/pixmaps/faces/tomatoes.jpg"
+    "/usr/share/pixmaps/faces/tree.jpg"
+    "/usr/share/pixmaps/faces/yellow-rose.jpg"
+    "/usr/share/polkit-1/rules.d/gnome-control-center.rules"
+    "/usr/share/sounds/gnome/default/alerts/bark.ogg"
+    "/usr/share/sounds/gnome/default/alerts/drip.ogg"
+    "/usr/share/sounds/gnome/default/alerts/glass.ogg"
+    "/usr/share/sounds/gnome/default/alerts/sonar.ogg"
+    # gnome-session
+    "/usr/share/wayland-sessions/gnome.desktop"
+    "/usr/share/wayland-sessions/gnome-wayland.desktop"
+    "/usr/share/xsessions/gnome.desktop"
+    "/usr/share/xsessions/gnome-xorg.desktop"
+    # light-locker
+    "/etc/xdg/autostart/light-locker.desktop"
+    # plank
+    "/etc/xdg/autostart/plank.desktop"
+    # misc.
+    "/usr/share/icewm"
+)
+
+if [[ $variant != "elementary-nightly" ]]; then
+    # These elementary packages are considered broken, so we'll only keep them
+    # for this variant
+    to_remove+=(
+        # switchboard-plug-datetime
+        "/usr/lib64/switchboard/system/libdatetime.so"
+        "/usr/share/doc/switchboard-plug-datetime/"
+        # switchboard-plug-locale
+        "/usr/lib64/switchboard/personal/liblocale-plug.so"
+        "/usr/share/doc/switchboard-plug-locale/"
+        # switchboard-plug-parental-controls
+        "/usr/lib64/switchboard/system/libparental-controls.so"
+        "/usr/share/doc/switchboard-plug-parental-controls/"
+        # switchboard-plug-security-privacy
+        "/usr/lib64/switchboard/personal/libsecurity-privacy.so"
+        "/usr/share/doc/switchboard-plug-security-privacy/"
+    )
+fi
+
+for file in ${to_remove[@]}; do
+    rm -rf $file
+done
 
 ########
 # MISC #
 ########
 
-# TODO: Get default wallpaper from gschema
-ln -s /usr/share/backgrounds/default/karsten-wurth-7BjhtdogU3A-unsplash.jpg /usr/share/backgrounds/elementaryos-default
+# Sets the background System (in Switchboard) can use behind the logo
+ln -s $(get_property /usr/share/glib-2.0/schemas/io.elementary.desktop.gschema.override picture-uri | sed -E 's/file:\/\///' | sed -E "s/'//g") /usr/share/backgrounds/elementaryos-default
 
 glib-compile-schemas /usr/share/glib-2.0/schemas
 
 systemctl disable gdm
 systemctl enable generate-oemconf
 systemctl enable lightdm
-systemctl enable sodalite-install-appcenter-flatpak
 systemctl enable touchegg
+systemctl enable update-appcenter-flatpak

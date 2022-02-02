@@ -47,9 +47,9 @@ All code submitted into this repository will be [licensed as MIT](https://github
 * `issue` _(optional)_: [Issue](https://github.com/electricduck/sodalite/issues) related to commit.
 	* Surround it with square brackets (e.g. `[#1234]`).
 * `area` _(optional)_: Specific area of the codebase.
-	* Written in lowercase; proceeded with a colon (e.g. `thing`:).
+	* Written in lowercase; proceeded with a colon (e.g. `thing:`).
 	* This could be a filename (no extension), directory, or function name.
-	* For more specificness, add a "parent" area in brackets (e.g. `child-thingy (parent-thingy)`).
+	* For more specificness, add a "parent" area in brackets (e.g. `child-thingy (parent-thingy):`).
 * `message`: Brief message of changes.
 	* Written in lowercase (unless a proper noun); written in present tense  (e.g. `modify` not `modified`); begin with a verb.
 	* Some messages use a certain format:
@@ -68,12 +68,12 @@ For inspiration, have a look through the history with `git log` (or `git log <fi
 | 🆕 (`:new:`) | Addition of user-facing feature |
 | 🔧 (`:wrench:`) | Modifications or additions to code |
 | ♻️ (`:recycle:`) | Refactoring, formatting, or typo-checking parts of code |
-| 🐞 (`:beetle`) | Fixing a bug |
+| 🐞 (`:beetle:`) | Fixing a bug |
 | 🗑️ (`:wastebasket:`) | Removal of user-facing feature |
 | ✨ (`:sparkles:`) | Preparing a version release |
 | 🎨 (`:art:`) | Modifications or additions to assets, such as images |
 | 📝 (`:memo:`) | Modifications or additions to documentation |
-| 🧹 (`:broom:`) | Other non-user-facing chores, such as renaming files |
+| 🧹 (`:broom:`) | Other non-user-facing chores, such as updating LFS modules |
 | 🔀 (`:twisted_rightwards_arrows:`) | Merging branches or PRs |
 | 🤔 (`:thinking:`) | Testing or empty commits |
 | 📦 (`:package:`) | Various/unspecified changes |

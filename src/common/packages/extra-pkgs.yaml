@@ -1,9 +1,9 @@
 packages:
  # Containers
  - buildah
+ - distrobox
  - podman
  - skopeo
- - toolbox
  # Desktop apps
  - com.github.stsdc.monitor # Process monitor
  - gnome-software # Replacement for AppCenter

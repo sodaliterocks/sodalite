@@ -14,7 +14,7 @@ You better know what you're doing, sparky. To get going:
 3) Stick the kettle on and make yourself a cuppa. It'll take a while.
 4) Reboot when prompted. Sit back in awe as the desktop loads up.
 	* Updates will occur automatically if you update everything from Software (which runs in the background by default and sends desktops notifications).
-	* As they are installed via Flatpak, various GNOME apps will still be lingering. Remove these with `sudo sodalite-uninstall-gnome-apps`.
+	* As they are installed via Flatpak, various GNOME apps will still be lingering. Remove these with `sudo sodalite-hacks flatpak --remove-gnome-apps`.
 
 Confused? Head down to [Getting](#getting).
 
@@ -32,19 +32,18 @@ As a sidenote, a similar configuration exists in the [workstation-ostree-config 
 
 This project is still very much early days and there is plenty of things that are broken, mostly due to missing upstream elementary/Pantheon packages on Fedora &mdash; Pantheon is _mostly_ distro-agnostic but still some way from being complete.
 
-However, there's plenty of stuff that _does_ work rendering Sodalite entirely usable for day-to-day activites: I even used it to type up this README and build releases. Unless in this _Missing Apps_ list, every app included in elementaryOS comes with Sodalite and works 100% (probably)! That includes, **Music**, **Photos**, **Videos**, **Calendar**, **Files**, **Terminal**, **Code**, **Camera**, along with several other in-box utilities. AppCenter's Flatpak repository is also pre-installed giving you access to the ever-grown "curated" apps for elementaryOS.
+However, there's plenty of stuff that _does_ work rendering Sodalite entirely usable for day-to-day activites: it was even used to type up this README and build releases. Unless in this _Missing Apps_ list, every app included in elementaryOS comes with Sodalite and works 100% (probably)! That includes, **Music**, **Photos**, **Videos**, **Calendar**, **Files**, **Terminal**, **Code**, **Camera**, along with several other in-box utilities. AppCenter's Flatpak repository is also pre-installed giving you access to the ever-grown "curated" apps for elementaryOS.
 
 ### Missing Apps
 
 * **AppCenter**<br />Although this builds on Fedora it refuses to work properly in rpm-ostree-based distros due to the nature of everything. Without proper support for OSTree, and a lack of PackageKit in the host, errors are thrown and nothing really loads in. _GNOME Software_ instead serves as a replacement, along with the AppCenter Flatpak repository being pre-installed.
-* **Web**<br />As Fedora uses Firefox as the default browser, Web (Epiphany) is not installed by default. You can rectify this by running `sodalite-install-epiphany`.
+* **Web**<br />As Fedora uses Firefox as the default browser, Web (Epiphany) is not installed by default. You can rectify this by running `sodalite-hacks flatpak --install-epiphany`.
 
 ### Other Issues
 
 * Various System Settings (Switchboard) items are not included or do not work right.
 * Various theming issues, due to be fixed in the upstream:
 	* Some apps appear odd, such as Firefox which entirely lacks rounded corners.
-	* Many Flatpak apps will not be themed and fallback to the Adwaita theme.
 * Many Flatpak apps will be duplicated in the Dock: see [issue #64 on elementary/dock](https://github.com/elementary/dock/issues/64). Although this is one of many issues across elementary, this was worth bringing up. Nothing broke on your end!
 * ~~Not enough people are using this masterpiece.~~
 
@@ -95,13 +94,13 @@ If something breaks, you can rollback by calling `rpm-ostree rollback` at a term
 
 Unless removed beforehand, you'll have a tonne of GNOME apps still installed from Flatpak. As Flatpak apps are part of the "user" part of the OS they cannot be programatically removed during the rebase. These apps work fine in Pantheon, and will use the default Adwaita theme, but look extremely out-of-place.
 
-Run `sodalite-uninstall-gnome-apps` to remove them all.
+Run `sodalite-hacks flatpak --remove-gnome-apps` to remove them all.
 
 #### Web / Epiphany
 
 As Firefox is Fedora's default browser, we have chose to respect that decision and leave it be. However, Pantheon's preferred browser of choice is a patched version of [Epiphany](https://wiki.gnome.org/Apps/Web) distributed via the AppCenter Flatpak repository.
 
-Run `sodalite-install-epiphany` to install.
+Run `sodalite-hacks flatpak --install-epiphany` to install.
 
 ### Removal
 
@@ -117,7 +116,7 @@ See [CONTRIBUTING.md](./CONTRIBUTING.md).
 
 ## Acknowledgements
 
-* [Fabio Valentini](https://decathorpe.com/), for providing the extra packages for elementary on Fedora via the [elementary-staging Copr repository](https://copr.fedorainfracloud.org/coprs/decathorpe/elementary-staging/).
+* [Fabio Valentini ("decathorpe")](https://decathorpe.com/), for providing the extra packages for elementary on Fedora via the [elementary-staging Copr repository](https://copr.fedorainfracloud.org/coprs/decathorpe/elementary-staging/).
 * [Jorge O. Castro](https://github.com/castrojo), for including Sodalite in [awesome-immutable](https://github.com/castrojo/awesome-immutable).
 * [Timothée Ravier](https://tim.siosm.fr), for their extensive guidance to the community concerning Fedora Silverblue.
 * ["Topfi"](https://github.com/ACertainTopfi), for their various contributions (and joining [@sodaliterocks](https://github.com/sodaliterocks)!).
