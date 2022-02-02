@@ -37,13 +37,10 @@ if [ ! "$(ls -A $ostree_repo_dir)" ]; then
    ostree --repo="$ostree_repo_dir" init --mode=archive
 fi
 
-# HACK: Letting the OS know what variant it is so it can mutate the os-release
-#       accordingly. Doing it this way until we can find a better way of
-#       knowing the variant during post.
-echoc "$(write_emoji "🪛")Setting variant file..."
-echo "$variant" > "$base_dir/src/sysroot/etc/sodalite-variant"
 
 echoc "$(write_emoji "⚡")Building tree for 'sodalite-$variant'..."
+
+echo "$variant" > "$base_dir/src/sysroot/etc/sodalite-variant"
 
 rpm-ostree compose tree \
     --cachedir="$ostree_cache_dir" \
@@ -57,13 +54,11 @@ else
     ostree summary --repo="$ostree_repo_dir" --update
 fi
 
-echoc "$(write_emoji "🗑️")Resetting variant file..."
-git checkout "$base_dir/src/sysroot/etc/sodalite-variant"
-
 # TODO: Get owner and perms of parent directory
 echoc "$(write_emoji "🛡️")Correcting permissions for build directory..."
 real_user=$(get_sudo_user)
 chown -R $real_user:$real_user $working_dir
 
-echoc "$(write_emoji "🗑️")Deleting temporary build artifacts..."
+echoc "$(write_emoji "🗑️")Cleaning up..."
+git checkout "$base_dir/src/sysroot/etc/sodalite-variant"
 rm -rf  /var/tmp/rpm-ostree.*

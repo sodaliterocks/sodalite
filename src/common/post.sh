@@ -26,12 +26,9 @@ function set_property() {
 set -xeuo pipefail
 
 # HACK: This gets set with the build.sh script, so no biggy if we miss it
-variant=""
-if [[ -f /etc/sodalite-variant ]]; then
-    if [[ -s /etc/sodalite-variant ]]; then
-        variant="$(cat /etc/sodalite-variant)"
-    fi
-
+variant="unknown"
+if [[ -s /etc/sodalite-variant ]]; then
+    variant="$(cat /etc/sodalite-variant)"
     rm -f /etc/sodalite-variant
 fi
 
