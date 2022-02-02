@@ -90,6 +90,8 @@ add-files: [
   # /usr/libexec
   ["../../lib/sodaliterocks.hacks/src/plugins/cleanup.sh", "/usr/libexec/sodalite-hacks/plugins/cleanup.sh"],
   ["../../lib/sodaliterocks.hacks/src/plugins/flatpak.sh", "/usr/libexec/sodalite-hacks/plugins/flatpak.sh"],
+  ["../../lib/sodaliterocks.hacks/src/plugins/nvidia.sh", "/usr/libexec/sodalite-hacks/plugins/nvidia.sh"],
+  ["../../lib/sodaliterocks.hacks/src/plugins/vscode.sh", "/usr/libexec/sodalite-hacks/plugins/vscode.sh"],
   ["../../lib/sodaliterocks.hacks/src/utils.sh", "/usr/libexec/sodalite-hacks/utils.sh"],
 
   # /usr/share
