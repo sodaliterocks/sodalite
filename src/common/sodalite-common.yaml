@@ -49,11 +49,6 @@ exclude-packages:
 
 # File manipulation
 add-files: [
-  # Tools (/usr/bin/sodalite-*)
-  ["../../lib/sodaliterocks.common/bash/common.sh", "/usr/libexec/sodalite/bash/common.sh"],
-  ["../tools/cleanup.sh", "/usr/bin/sodalite-cleanup"],
-  ["../tools/plank-wrapper.sh", "/usr/bin/sodalite-plank-wrapper"],
-
   # /etc
   ["../../lib/elementary.default-settings/appcenter/appcenter.hiddenapps", "/etc/appcenter/appcenter.hiddenapps"],
   ["../../lib/elementary.default-settings/cups/default-testpage.pdf", "/etc/cups/default-testpage.pdf"],
@@ -83,14 +78,21 @@ add-files: [
 
   # /etc/xdg
   ["../sysroot/etc/xdg/autostart/gnome-software-service.desktop", "/etc/xdg/autostart/gnome-software-service.desktop"],
-  ["../sysroot/etc/xdg/autostart/plank-wrapper.desktop", "/etc/xdg/autostart/sodalite-plank-wrapper.desktop"],
+  ["../sysroot/etc/xdg/autostart/plank-sodalite-wrapper.desktop", "/etc/xdg/autostart/plank-sodalite-wrapper.desktop"],
 
   # /usr/bin
   ["../../lib/sodaliterocks.generate-oemconf/generate-oemconf.sh", "/usr/bin/generate-oemconf"],
+  ["../../lib/sodaliterocks.hacks/src/hacks.sh", "/usr/bin/sodalite-hacks"],
   ["../sysroot/usr/bin/detach.sh", "/usr/bin/detach"],
   ["../sysroot/usr/bin/install-appcenter-flatpak.sh", "/usr/bin/sodalite-install-appcenter-flatpak"],
   ["../sysroot/usr/bin/install-epiphany.sh", "/usr/bin/sodalite-install-epiphany"],
+  ["../sysroot/usr/bin/plank-sodalite-wrapper.sh", "/usr/bin/plank-sodalite-wrapper"],
   ["../sysroot/usr/bin/uninstall-gnome-apps.sh", "/usr/bin/sodalite-uninstall-gnome-apps"],
+  
+  # /usr/libexec
+  ["../../lib/sodaliterocks.hacks/src/plugins/cleanup.sh", "/usr/libexec/sodalite-hacks/plugins/cleanup.sh"],
+  ["../../lib/sodaliterocks.hacks/src/plugins/flatpak.sh", "/usr/libexec/sodalite-hacks/plugins/flatpak.sh"],
+  ["../../lib/sodaliterocks.hacks/src/utils.sh", "/usr/libexec/sodalite-hacks/utils.sh"],
 
   # /usr/share
   ["../sysroot/usr/share/touchegg/touchegg.conf", "/usr/share/touchegg/touchegg.conf"],

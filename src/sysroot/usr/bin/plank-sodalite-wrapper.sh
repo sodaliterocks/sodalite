@@ -1,11 +1,5 @@
 #!/usr/bin/env bash
 
-if [[ $(realpath -s "$0") == "/usr/bin/sodalite-"* ]]; then
-    . /usr/libexec/sodalite/bash/common.sh
-else
-    . "$(dirname "$(realpath -s "$0")")/../../../lib/sodaliterocks.common/bash/common.sh"
-fi
-
 shopt -s extglob
 
 current_plank_items=$(dconf read /net/launchpad/plank/docks/dock1/dock-items | sed 's/ //g')
