@@ -2,6 +2,12 @@
 
 . /usr/libexec/sodalite/bash/common.sh
 
+function get_property() {
+    file=$1
+    item=$2
+    echo $(grep -oP '(?<=^'"$item"'=).+' $config_file | tr -d '"')
+}
+
 function set_property() {
     # TODO: Handle missing properties
     file=$1
@@ -161,7 +167,7 @@ done
 ########
 
 # Sets the background System (in Switchboard) can use behind the logo
-ln -s $(get_config_item /usr/share/glib-2.0/schemas/io.elementary.desktop.gschema.override picture-uri | sed -E 's/file:\/\///' | sed -E "s/'//g") /usr/share/backgrounds/elementaryos-default
+ln -s $(get_property /usr/share/glib-2.0/schemas/io.elementary.desktop.gschema.override picture-uri | sed -E 's/file:\/\///' | sed -E "s/'//g") /usr/share/backgrounds/elementaryos-default
 
 glib-compile-schemas /usr/share/glib-2.0/schemas
 
