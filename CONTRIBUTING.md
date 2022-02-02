@@ -73,7 +73,7 @@ For inspiration, have a look through the history with `git log` (or `git log <fi
 | ✨ (`:sparkles:`) | Preparing a version release |
 | 🎨 (`:art:`) | Modifications or additions to assets, such as images |
 | 📝 (`:memo:`) | Modifications or additions to documentation |
-| 🧹 (`:broom:`) | Other non-user-facing chores, such as renaming files |
+| 🧹 (`:broom:`) | Other non-user-facing chores, such as updates LFS modules |
 | 🔀 (`:twisted_rightwards_arrows:`) | Merging branches or PRs |
 | 🤔 (`:thinking:`) | Testing or empty commits |
 | 📦 (`:package:`) | Various/unspecified changes |
