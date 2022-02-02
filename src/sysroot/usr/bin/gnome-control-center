@@ -1,10 +1,25 @@
 #!/bin/sh
 
-case $1 in
-    network)
-	    xdg-open settings://network
-	    ;;
+option=$1
+
+function setting() {
+    xdg-open settings://$1
+}
+
+case $option in
+    applications) setting applications/permissions ;;
+    backgrounds) setting desktop/wallpaper ;;
+    color) gcm-viewer ;;
+    default) setting applications ;;
+    display) setting display ;;
+    network|wifi) setting network ;;
+    notifications) setting notifications ;;
+    power) setting power ;;
+    printers) setting printer ;;
+    sound) setting sound ;;
+    universal-access) setting universal-access ;;
     *)
-	    xdg-open settings://
+        echo "No shim provided for '$option'. Trying settings://$option..."
+	    xdg-open settings://$option
 	    ;;
 esac
