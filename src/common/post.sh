@@ -15,11 +15,15 @@ function set_property() {
     value=$3
 
     if [[ -f $file ]]; then
-        if [[ $value =~ [[:space:]]+ ]]; then
-            value="\"$value\""
-        fi
+        if [[ -z $(get_property $file $property) ]]; then
+            echo "$property=\"$value\"" >> $file
+        else
+            if [[ $value =~ [[:space:]]+ ]]; then
+                value="\"$value\""
+            fi
 
-        sed -i "s/^\($property=\)\(.*\)$/\1$value/g" $file
+            sed -i "s/^\($property=\)\(.*\)$/\1$value/g" $file
+        fi
     fi
 }
 
@@ -96,10 +100,8 @@ fi
 [[ ! -z $osr_id ]] && set_property /etc/os-release "ID" $osr_id
 [[ ! -z $osr_name ]] && set_property /etc/os-release "NAME" $osr_name
 [[ ! -z $osr_name ]] && set_property /etc/os-release "PRETTY_NAME" "$osr_name $osr_version"
-#[[ ! -z $osr_variant ]] && set_property /etc/os-release "VARIANT" $osr_variant
-[[ ! -z $osr_variant ]] && echo "VARIANT=\"$osr_variant\"" >> /etc/os-release
-#[[ ! -z $osr_variant_id ]] && set_property /etc/os-release "VARIANT_ID" $osr_variant_id
-[[ ! -z $osr_variant_id ]] && echo "VARIANT_ID=\"$osr_variant_id\"" >> /etc/os-release
+[[ ! -z $osr_variant ]] && set_property /etc/os-release "VARIANT" $osr_variant
+[[ ! -z $osr_variant_id ]] && set_property /etc/os-release "VARIANT_ID" $osr_variant_id
 [[ ! -z $osr_version ]] && set_property /etc/os-release "VERSION" "$osr_version"
 [[ ! -z $osr_version_id ]] && set_property /etc/os-release "VERSION_ID" $osr_version_id
 
