@@ -74,7 +74,7 @@ add-files: [
 
   # /etc/systemd
   ["../sysroot/etc/systemd/system/generate-oemconf.service", "/etc/systemd/system/generate-oemconf.service"],
-  ["../sysroot/etc/systemd/system/sodalite-install-appcenter-flatpak.service", "/etc/systemd/system/sodalite-install-appcenter-flatpak.service"],
+  ["../sysroot/etc/systemd/system/update-appcenter-flatpak.service", "/etc/systemd/system/update-appcenter-flatpak.service"],
 
   # /etc/xdg
   ["../sysroot/etc/xdg/autostart/gnome-software-service.desktop", "/etc/xdg/autostart/gnome-software-service.desktop"],

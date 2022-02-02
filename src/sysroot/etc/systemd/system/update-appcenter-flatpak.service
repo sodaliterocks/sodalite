@@ -1,11 +1,11 @@
 [Unit]
-Description=Install AppCenter Flatpak repository
+Description=Update AppCenter Flatpak repository
 Wants=network-online.target
 After=syslog.target network.target network-online.target
 
 [Service]
 Type=simple
-ExecStart=/usr/bin/sodalite-install-appcenter-flatpak
+ExecStart=/usr/bin/sodalite-hacks flatpak --setup-appcenter
 Restart=on-failure
 RestartSec=10
 KillMode=process
