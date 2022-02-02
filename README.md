@@ -116,7 +116,7 @@ See [CONTRIBUTING.md](./CONTRIBUTING.md).
 
 ## Acknowledgements
 
-* [Fabio Valentini](https://decathorpe.com/), for providing the extra packages for elementary on Fedora via the [elementary-staging Copr repository](https://copr.fedorainfracloud.org/coprs/decathorpe/elementary-staging/).
+* [Fabio Valentini ("decathorpe")](https://decathorpe.com/), for providing the extra packages for elementary on Fedora via the [elementary-staging Copr repository](https://copr.fedorainfracloud.org/coprs/decathorpe/elementary-staging/).
 * [Jorge O. Castro](https://github.com/castrojo), for including Sodalite in [awesome-immutable](https://github.com/castrojo/awesome-immutable).
 * [Timothée Ravier](https://tim.siosm.fr), for their extensive guidance to the community concerning Fedora Silverblue.
 * ["Topfi"](https://github.com/ACertainTopfi), for their various contributions (and joining [@sodaliterocks](https://github.com/sodaliterocks)!).
