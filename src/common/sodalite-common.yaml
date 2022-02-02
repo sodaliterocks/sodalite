@@ -84,10 +84,7 @@ add-files: [
   ["../../lib/sodaliterocks.generate-oemconf/generate-oemconf.sh", "/usr/bin/generate-oemconf"],
   ["../../lib/sodaliterocks.hacks/src/hacks.sh", "/usr/bin/sodalite-hacks"],
   ["../sysroot/usr/bin/detach.sh", "/usr/bin/detach"],
-  ["../sysroot/usr/bin/install-appcenter-flatpak.sh", "/usr/bin/sodalite-install-appcenter-flatpak"],
-  ["../sysroot/usr/bin/install-epiphany.sh", "/usr/bin/sodalite-install-epiphany"],
   ["../sysroot/usr/bin/plank-sodalite-wrapper.sh", "/usr/bin/plank-sodalite-wrapper"],
-  ["../sysroot/usr/bin/uninstall-gnome-apps.sh", "/usr/bin/sodalite-uninstall-gnome-apps"],
   
   # /usr/libexec
   ["../../lib/sodaliterocks.hacks/src/plugins/cleanup.sh", "/usr/libexec/sodalite-hacks/plugins/cleanup.sh"],
