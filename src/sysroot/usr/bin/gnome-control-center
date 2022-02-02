@@ -1,5 +1,11 @@
 #!/bin/sh
 
+# GNOME Control Center "shim"
+# ---
+# This shim provides compatibility with various apps that attempt to open
+# GNOME Control Center, as it has been removed as of 9aa2081, and will attempt
+# to redirect the request to Switchboard (or whatever handles settings://).
+
 option=$1
 
 function setting() {
