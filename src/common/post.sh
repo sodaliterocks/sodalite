@@ -168,5 +168,5 @@ glib-compile-schemas /usr/share/glib-2.0/schemas
 systemctl disable gdm
 systemctl enable generate-oemconf
 systemctl enable lightdm
-systemctl enable sodalite-install-appcenter-flatpak
 systemctl enable touchegg
+systemctl enable update-appcenter-flatpak
