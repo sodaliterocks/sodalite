@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=Disks
+Comment=Manage Drives and Media
+Keywords=disk;drive;volume;harddisk;hdd;disc;cdrom;dvd;partition;iso;image;backup;restore;benchmark;raid;luks;encryption;S.M.A.R.T.;smart;
+Exec=gnome-disks
+Icon=drive-harddisk
+Terminal=false
+Type=Application
+StartupNotify=true
+Categories=System;Settings;
+DBusActivatable=true

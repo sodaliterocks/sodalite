@@ -99,6 +99,7 @@ add-files: [
 
   # /usr/share/applications
   ["../sysroot/usr/share/applications/firewall-config.desktop", "/usr/share/applications/firewall-config.desktop"],
+  ["../sysroot/usr/share/applications/org.gnome.DiskUtility.desktop", "/usr/share/applications/org.gnome.DiskUtility.desktop"],
   ["../sysroot/usr/share/applications/org.gnome.Software.desktop", "/usr/share/applications/org.gnome.Software.desktop"],
 
   # /usr/share/backgrounds
