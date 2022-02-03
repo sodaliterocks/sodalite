@@ -128,8 +128,7 @@ add-files: [
   ["../../lib/elementary.icons/apps/48/system-software-install.svg", "/usr/share/icons/elementary/apps/48/system-software-install.svg"],
   ["../../lib/elementary.icons/apps/64/system-software-install.svg", "/usr/share/icons/elementary/apps/64/system-software-install.svg"],
   ["../../lib/elementary.icons/apps/symbolic/system-software-install-symbolic.svg", "/usr/share/icons/elementary/apps/symbolic/system-software-install-symbolic.svg"],
-  ["../sysroot/usr/share/icons/default/index.theme", "/usr/share/icons/default/index.theme"],
-  ["../sysroot/usr/share/icons/hicolor/scalable/apps/org.gnome.Boxes.svg", "/usr/share/icons/hicolor/scalable/apps/org.gnome.Boxes.svg"]
+  ["../sysroot/usr/share/icons/default/index.theme", "/usr/share/icons/default/index.theme"]
 ]
 #remove-from-packages: [ # Removing files in post
 #
