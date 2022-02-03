@@ -38,6 +38,7 @@ packages-x86_64:
   - shim-x64
   - thermald
   - virtualbox-guest-additions
+  - xorg-x11-drv-amdgpu
   - xorg-x11-drv-intel
   - xorg-x11-drv-vesa
   - xorg-x11-drv-vmware
