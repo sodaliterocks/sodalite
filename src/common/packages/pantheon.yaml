@@ -80,3 +80,6 @@ packages:
   - wingpanel-indicator-session
   - wingpanel-indicator-sound
   - xdg-desktop-portal-pantheon
+exclude-packages:
+  - gnome-tour
+  - xdg-desktop-portal-gnome
