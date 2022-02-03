@@ -1,9 +1,13 @@
 # Meta
 ref: sodalite/stable/${basearch}/common
 include: [
-  #"packages/fedora-ostree-pkgs.yaml", # BUG: Circular dependency caused in packages/elementary-pkgs.yaml, so we'll need to comment this out for now
-  "packages/elementary-pkgs.yaml",
-  "packages/extra-pkgs.yaml"
+  #"packages/fedora-ostree-pkgs.yaml", # BUG: Circular dependency caused in packages/pantheon.yaml, so we'll need to comment this out for now
+  "packages/essential.yaml",
+  "packages/devenv.yaml",
+  "packages/flatpak.yaml",
+  "packages/pantheon.yaml",
+  "packages/pantheon-apps.yaml",
+  "packages/misc.yaml"
 ]
 
 # Version
@@ -44,8 +48,6 @@ packages-x86_64:
   - xorg-x11-drv-vmware
 exclude-packages:
   - PackageKit
-  - gnome-tour # GNOME is impossible to reach, so we don't need this
-  - xdg-desktop-portal-gnome
 
 # File manipulation
 add-files: [

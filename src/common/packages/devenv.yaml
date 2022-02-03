@@ -1,0 +1,9 @@
+packages:
+ # Containers
+ - buildah
+ - distrobox
+ - git-core
+ - git-lfs
+ - meson
+ - podman
+ - skopeo
