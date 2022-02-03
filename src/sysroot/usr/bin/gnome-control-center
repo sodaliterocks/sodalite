@@ -9,7 +9,11 @@
 option=$1
 
 function setting() {
-    xdg-open settings://$1
+    if [[ -z $1 ]]; then
+        io.elementary.switchboard
+    else
+        xdg-open settings://$1
+    fi
 }
 
 case $option in
@@ -24,8 +28,10 @@ case $option in
     printers) setting printer ;;
     sound) setting sound ;;
     universal-access) setting universal-access ;;
+    user-accounts) setting accounts ;;
+    "") setting ;;
     *)
         echo "No shim provided for '$option'. Trying settings://$option..."
-	    xdg-open settings://$option
+	    setting $option
 	    ;;
 esac
