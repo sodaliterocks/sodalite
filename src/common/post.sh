@@ -88,7 +88,7 @@ fi
 pretty_name="Sodalite $version"
 
 if [[ ! -z $variant ]]; then
-    pretty_name_+=" ($variant)"
+    pretty_name+=" ($variant)"
     set_property /etc/os-release "VARIANT" $variant
     set_property /etc/os-release "VARIANT_ID" $variant
 fi
