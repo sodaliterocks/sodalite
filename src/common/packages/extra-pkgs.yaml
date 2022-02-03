@@ -44,6 +44,7 @@ packages:
  # rpm-ostree
  - rpm-ostree
  # Misc
+ - firewall-config
  - git-core
  - git-lfs
  - lvm2
