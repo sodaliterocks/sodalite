@@ -1,7 +1,6 @@
 # Meta
 ref: sodalite/stable/${basearch}/common
 include: [
-  #"packages/fedora-ostree-pkgs.yaml", # BUG: Circular dependency caused in packages/pantheon.yaml, so we'll need to comment this out for now
   "packages/essential.yaml",
   "packages/devenv.yaml",
   "packages/flatpak.yaml",

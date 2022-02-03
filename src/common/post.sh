@@ -92,16 +92,16 @@ if [[ ! -z $variant ]]; then
 fi
 
 if [[ ! -z $version_id ]]; then
-    set_property /etc/upstream-release/lsb-release "ID" fedora
+    set_property /etc/upstream-release/lsb-release "ID" "fedora"
     set_property /etc/upstream-release/lsb-release "PRETTY_NAME" "Fedora Linux $version_id"
-    set_property /etc/upstream-release/lsb-release "VERSION_ID" $version_id
+    set_property /etc/upstream-release/lsb-release "VERSION_ID" "$version_id"
 fi
 
 set_property /etc/os-release "ID" "sodalite"
 set_property /etc/os-release "NAME" "Sodalite"
-set_property /etc/os-release "PRETTY_NAME" $pretty_name
-set_property /etc/os-release "VERSION" $version
-set_property /etc/os-release "VERSION_ID" $version_id
+set_property /etc/os-release "PRETTY_NAME" "$pretty_name"
+set_property /etc/os-release "VERSION" "$version"
+set_property /etc/os-release "VERSION_ID" "$version_id"
 
 ############
 # REMOVALS #
