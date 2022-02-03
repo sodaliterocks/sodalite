@@ -29,6 +29,18 @@ packages:
  - glibc-devel
  - elfutils-libelf-devel
  - kernel-devel
+ # NetworkManager VPNs
+ - NetworkManager-fortisslvpn
+ - NetworkManager-iodine
+ - NetworkManager-l2tp
+ - NetworkManager-libreswan
+ - NetworkManager-openconnect
+ - NetworkManager-openvpn
+ - NetworkManager-pptp
+ - NetworkManager-ssh
+ - NetworkManager-sstp
+ - NetworkManager-strongswan
+ - NetworkManager-vpnc
  # rpm-ostree
  - rpm-ostree
  # Misc
