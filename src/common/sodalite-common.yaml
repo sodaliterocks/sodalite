@@ -39,7 +39,6 @@ packages-x86_64:
   - thermald
   - virtualbox-guest-additions
   - xorg-x11-drv-intel
-  - xorg-x11-drv-openchrome
   - xorg-x11-drv-vesa
   - xorg-x11-drv-vmware
 exclude-packages:
