@@ -54,6 +54,7 @@ add-files: [
   ["../../lib/elementary.default-settings/cups/default-testpage.pdf", "/etc/cups/default-testpage.pdf"],
   ["../../lib/elementary.default-settings/gtk/settings.ini", "/etc/gtk/settings.ini"],
   ["../sysroot/etc/issue", "/etc/issue"],
+  ["../sysroot/etc/sodalite-commit", "/etc/sodalite-commit"],
   ["../sysroot/etc/sodalite-variant", "/etc/sodalite-variant"],
   ["../sysroot/etc/tlp.d/50-vm-writeback.conf", "/etc/tlp.d/50-vm-writeback.conf"],
   ["../sysroot/etc/upstream-release/lsb-release", "/etc/upstream-release/lsb-release"],

@@ -30,7 +30,7 @@ function set_property() {
 set -xeuo pipefail
 
 # HACK: This gets set with the build.sh script, so no biggy if we miss it
-if [[ -s /etc/sodalite-variant ]]; then
+if [[ $(cat /etc/sodalite-variant) != "" ]]; then
     variant="$(cat /etc/sodalite-variant)"
     rm -f /etc/sodalite-variant
 else
@@ -68,22 +68,18 @@ done
 # OSTREE MUTATING #
 ###################
 
-if [[ -s /etc/sodalite-release ]]; then
-    version=$(get_property /etc/sodalite-release VERSION)
-    version_id=$(get_property /etc/sodalite-release VERSION_ID)
-    
-    rm -r /etc/sodalite-release
-elif [[ $(get_property /etc/os-release VERSION) =~ (([0-9]{1,3})-([0-9]{2}.[0-9]{1,})(.([0-9]{1,}){0,1}).+) ]]; then
+if [[ $(get_property /etc/os-release VERSION) =~ (([0-9]{1,3})-([0-9]{2}.[0-9]{1,})(.([0-9]{1,}){0,1}).+) ]]; then
     version="${BASH_REMATCH[2]}-${BASH_REMATCH[3]}"
     version_id="${BASH_REMATCH[2]}"
-    
-    if [[ ${BASH_REMATCH[5]} > 0 ]]; then
-        version+=".${BASH_REMATCH[5]}"
+
+    [[ ${BASH_REMATCH[5]} > 0 ]] && version+=".${BASH_REMATCH[5]}"
+
+    if [[ $(cat /etc/sodalite-commit) != "" ]]; then
+        version+="+$(cat /etc/sodalite-commit)"
+        rm -r /etc/sodalite-commit
     fi
-    
-    if [[ ! -z $variant ]] && [[ $variant != "base" ]]; then
-        version+=" ($variant)"
-    fi
+
+    [[ ! -z $variant ]] && [[ $variant != "base" ]] && version+=" ($variant)"
 else
     version=$(get_property /etc/os-release VERSION)
     version_id=$(get_property /etc/os-release VERSION_ID)
@@ -91,7 +87,7 @@ fi
 
 set_property /etc/os-release "ID" "sodalite"
 set_property /etc/os-release "NAME" "Sodalite"
-set_property /etc/os-release "PRETTY_NAME" "$osr_name $osr_version"
+set_property /etc/os-release "PRETTY_NAME" "Sodalite $version"
 set_property /etc/os-release "VERSION" $version
 set_property /etc/os-release "VERSION_ID" $version_id
 
