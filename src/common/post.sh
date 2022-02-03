@@ -85,13 +85,10 @@ else
     version_id=$(get_property /etc/os-release VERSION_ID)
 fi
 
-set_property /etc/os-release "ID" "sodalite"
-set_property /etc/os-release "NAME" "Sodalite"
-set_property /etc/os-release "PRETTY_NAME" "Sodalite $version"
-set_property /etc/os-release "VERSION" $version
-set_property /etc/os-release "VERSION_ID" $version_id
+pretty_name="Sodalite $verison"
 
 if [[ ! -z $variant ]]; then
+    pretty_name_+=" ($variant)"
     set_property /etc/os-release "VARIANT" $variant
     set_property /etc/os-release "VARIANT_ID" $variant
 fi
@@ -101,6 +98,12 @@ if [[ ! -z $version_id ]]; then
     set_property /etc/upstream-release/lsb-release "PRETTY_NAME" "Fedora Linux $version_id"
     set_property /etc/upstream-release/lsb-release "VERSION_ID" $version_id
 fi
+
+set_property /etc/os-release "ID" "sodalite"
+set_property /etc/os-release "NAME" "Sodalite"
+set_property /etc/os-release "PRETTY_NAME" $pretty_name
+set_property /etc/os-release "VERSION" $version
+set_property /etc/os-release "VERSION_ID" $version_id
 
 ############
 # REMOVALS #
