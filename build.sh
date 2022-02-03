@@ -58,12 +58,12 @@ else
     ostree summary --repo="$ostree_repo_dir" --update
 fi
 
-# TODO: Get owner and perms of parent directory
-echoc "$(write_emoji "🛡️")Correcting permissions for build directory..."
-real_user=$(get_sudo_user)
-chown -R $real_user:$real_user $working_dir
-
 echoc "$(write_emoji "🗑️")Cleaning up..."
 echo "" > "$base_dir/src/sysroot/etc/sodalite-commit"
 echo "" > "$base_dir/src/sysroot/etc/sodalite-variant"
 rm -rf  /var/tmp/rpm-ostree.*
+
+# TODO: Get owner and perms of parent directory
+echoc "$(write_emoji "🛡️")Correcting permissions..."
+real_user=$(get_sudo_user)
+chown -R $real_user:$real_user $working_dir
