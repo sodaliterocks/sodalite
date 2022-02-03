@@ -9,7 +9,6 @@ function get_property() {
 }
 
 function set_property() {
-    # TODO: Handle missing properties
     file=$1
     property=$2
     value=$3
