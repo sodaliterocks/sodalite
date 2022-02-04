@@ -61,7 +61,7 @@ An OSTree repository has already been setup for Sodalite, so you don't even need
 	1) `ostree remote add --if-not-exists sodalite https://ostree.sodalite.rocks --no-gpg-verify`<br />This adds the remote OSTree repository.
         - `--no-gpg-verify` is important as there is no GPG verification.
         - Previous versions of this document use the remote `https://ostree.zio.sh/repo` (named `zio`). This endpoint is still up (in fact, `https://ostree.sodalite.rocks` just redirects to it) and can be used instead. If you're still using it there is no need to change it: everything will still work.
-	2) `ostree pull sodalite/stable/x86_64/base`<br />This pulls the OSTree image for Sodalite, and is split up into four parts (similar to that of Fedora Silverblue). These parts can be substituted for other values:
+	2) `ostree pull sodalite sodalite/stable/x86_64/base`<br />This pulls the OSTree image for Sodalite, and is split up into four parts (similar to that of Fedora Silverblue). These parts can be substituted for other values:
 		1) `sodalite`: The **name** of the image.
 		2) `stable`: The **version** of the image. Possible values:
             * `stable`: Rolling-release version based on the current stable version of Fedora Linux (as of currently, Fedora Linux 35).
