@@ -70,7 +70,7 @@ An OSTree repository has already been setup for Sodalite, so you don't even need
             * <s>`x86`: [What year is it!?](https://c.tenor.com/9OcQhlCBNG0AAAAd/what-year-is-it-jumanji.gif)</s>
         4) `base`: The **variant** of the image. Possible values:
             * `base`: Everything you'll need to get going (hopefully). Other variants are built on-top of this.
-            * `elementary-nightly`: Includes nightly versions of elementary/Pantheon packages. See [elementary-nightly](https://decathorpe.com/fedora-elementary-nightly-status.html) for more details.
+            * `pantheon-nightly`: Includes nightly versions of elementary/Pantheon packages. See [elementary-nightly](https://decathorpe.com/fedora-elementary-nightly-status.html) for more details.
 	3) `rpm-ostree rebase sodalite:sodalite/stable/x86_64/base`<br />This rebases the OS onto Sodalite's image. Remember to substitute any values from before into this one!
 3) Reboot when prompted with `systemctl reboot`.
 4) Once logged in, defaults should apply and everything should be as it should.
