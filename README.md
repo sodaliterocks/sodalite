@@ -65,7 +65,7 @@ An OSTree repository has already been setup for Sodalite, so you don't even need
 		1) `sodalite`: The **name** of the image.
 		2) `stable`: The **version** of the image. Possible values:
             * `stable`: Rolling-release version based on the current stable release of Fedora Linux (as of currently, Fedora Linux 35).
-            * `f35`: "Long-term" version based on Fedora Linux 35. Reaches end-of-life on 7th December 2022 (2022-12-07), to which you should rebase to a newer version.
+            * `f35`: Long-term version based on Fedora Linux 35. Reaches end-of-life on 7th December 2022 (2022-12-07), to which you should rebase to a newer version.
         3) `x86_64`: The **architecture** of the image. Possible values:
             * `x86_64`: For 64-bit CPUs (`x86_64`, `amd64`, or — please stop saying this — `x64`).
             * <s>`x86`: [What year is it!?](https://c.tenor.com/9OcQhlCBNG0AAAAd/what-year-is-it-jumanji.gif)</s>
