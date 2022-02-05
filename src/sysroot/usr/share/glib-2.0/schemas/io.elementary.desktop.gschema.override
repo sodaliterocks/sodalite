@@ -119,7 +119,7 @@ night-light-temperature=4500
 idle-dim=false
 
 [org.gnome.settings-daemon.plugins.xsettings:Pantheon]
-overrides={'Gtk/DialogsUseHeader': <0>, 'Gtk/EnablePrimaryPaste': <0>, 'Gtk/ShellShowsAppMenu': <0>, 'Gtk/DecorationLayout': <'close:menu,maximize'>}
+overrides={'Gtk/DialogsUseHeader': <0>, 'Gtk/EnablePrimaryPaste': <0>, 'Gtk/ShellShowsAppMenu': <0>, 'Gtk/DecorationLayout': <'close:menu,maximize'>,'Gtk/ShowUnicodeMenu': <0>}
 
 [org.gtk.Settings.FileChooser:Pantheon]
 sort-directories-first=true
