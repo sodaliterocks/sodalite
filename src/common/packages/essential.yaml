@@ -1,4 +1,4 @@
-include: ../../../lib/workstation-ostree-config/fedora-common-ostree.yaml
+include: ../../../lib/workstation-ostree-config/fedora-common-ostree-pkgs.yaml
 packages:
  - glibc-devel
  - elfutils-libelf-devel
