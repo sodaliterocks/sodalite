@@ -14,7 +14,7 @@ You better know what you're doing, sparky. To get going:
 3) Stick the kettle on and make yourself a cuppa. It'll take a while.
 4) Reboot when prompted. Sit back in awe as the desktop loads up.
 	* Updates will occur automatically if you update everything from Software (which runs in the background by default and sends desktops notifications).
-	* As they are installed via Flatpak, various GNOME apps will still be lingering. Remove these with `sudo sodalite-hacks flatpak --remove-gnome-apps`.
+	* As they are installed via Flatpak, various GNOME apps will still be lingering. Remove these with `sudo sodalite-hacks flatpak --uninstall-gnome-apps`.
 
 Confused? Head down to [Getting](#getting).
 
@@ -61,7 +61,7 @@ An OSTree repository has already been setup for Sodalite, so you don't even need
 	1) `ostree remote add --if-not-exists sodalite https://ostree.sodalite.rocks --no-gpg-verify`<br />This adds the remote OSTree repository.
         - `--no-gpg-verify` is important as there is no GPG verification.
         - Previous versions of this document use the remote `https://ostree.zio.sh/repo` (named `zio`). This endpoint is still up (in fact, `https://ostree.sodalite.rocks` just redirects to it) and can be used instead. If you're still using it there is no need to change it: everything will still work.
-	2) `ostree pull sodalite sodalite/stable/x86_64/base`<br />This pulls the OSTree image for Sodalite, and is split up into four parts (similar to that of Fedora Silverblue). These parts can be substituted for other values:
+	2) `ostree pull sodalite:sodalite/stable/x86_64/base`<br />This pulls the OSTree image for Sodalite, and is split up into four parts (similar to that of Fedora Silverblue). These parts can be substituted for other values:
 		1) `sodalite`: The **name** of the image.
 		2) `stable`: The **version** of the image. Possible values:
             * `stable`: Rolling-release version based on the current stable release of Fedora Linux (as of currently, Fedora Linux 35).
@@ -95,7 +95,7 @@ If something breaks, you can rollback by calling `rpm-ostree rollback` at a term
 
 Unless removed beforehand, you'll have a tonne of GNOME apps still installed from Flatpak. As Flatpak apps are part of the "user" part of the OS they cannot be programatically removed during the rebase. These apps work fine in Pantheon, and will use the default Adwaita theme, but look extremely out-of-place.
 
-Run `sodalite-hacks flatpak --remove-gnome-apps` to remove them all.
+Run `sodalite-hacks flatpak --uninstall-gnome-apps` to remove them all.
 
 #### Web / Epiphany
 
