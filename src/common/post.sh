@@ -114,9 +114,10 @@ declare -a to_remove=(
     "/etc/xdg/autostart/org.gnome.Evolution-alarm-notify.desktop"
     "/usr/libexec/evolution-data-server/evolution-alarm-notify"
     # fedora-workstation-backgrounds
-    "/usr/share/backgrounds/fedora-workstation"
-    "/usr/share/doc/fedora-workstation-backgrounds"
+    "/usr/share/backgrounds/fedora-workstation/"
+    "/usr/share/doc/fedora-workstation-backgrounds/"
     "/usr/share/gnome-background-properties/fedora-workstation-backgrounds.xml"
+    "/usr/share/licenses/fedora-workstation-backgrounds"
     # gnome-control-center
     #"/usr/bin/gnome-control-center"
     "/usr/libexec/cc-remote-login-helper"
@@ -158,19 +159,13 @@ declare -a to_remove=(
     "/usr/share/applications/gnome-wwan-panel.desktop"
     "/usr/share/bash-completion/completions/gnome-control-center"
     "/usr/share/dbus-1/services/org.gnome.ControlCenter.SearchProvider.service"
-    "/usr/share/doc/gnome-control-center"
-    "/usr/share/doc/gnome-control-center/NEWS"
-    "/usr/share/doc/gnome-control-center/README.md"
     "/usr/share/dbus-1/services/org.gnome.ControlCenter.service"
+    "/usr/share/doc/gnome-control-center/"
     "/usr/share/glib-2.0/schemas/org.gnome.ControlCenter.gschema.xml"
-    "/usr/share/gnome-control-center/keybindings/00-multimedia.xml"
-    "/usr/share/gnome-control-center/keybindings/01-input-sources.xml"
-    "/usr/share/gnome-control-center/keybindings/01-launchers.xml"
-    "/usr/share/gnome-control-center/keybindings/01-screenshot.xml"
-    "/usr/share/gnome-control-center/keybindings/01-system.xml"
-    "/usr/share/gnome-control-center/keybindings/50-accessibility.xml"
-    "/usr/share/gnome-control-center/pixmaps/noise-texture-light.png"
+    "/usr/share/gnome-control-center/"
     "/usr/share/gnome-shell/search-providers/gnome-control-center-search-provider.ini"
+    "/usr/share/locale/*/LC_MESSAGES/gnome-control-center-2.0.mo"
+    "/usr/share/locale/*/LC_MESSAGES/gnome-control-center-2.0-timezones.mo"
     "/usr/share/man/man1/gnome-control-center.1.gz"
     "/usr/share/metainfo/gnome-control-center.appdata.xml"
     "/usr/share/pixmaps/faces/astronaut.jpg"
@@ -236,11 +231,11 @@ declare -a to_remove=(
     "/usr/share/pixmaps/faces/tomatoes.jpg"
     "/usr/share/pixmaps/faces/tree.jpg"
     "/usr/share/pixmaps/faces/yellow-rose.jpg"
+    "/usr/share/polkit-1/actions/org.gnome.controlcenter.datetime.policy"
+    "/usr/share/polkit-1/actions/org.gnome.controlcenter.remote-login-helper.policy"
+    "/usr/share/polkit-1/actions/org.gnome.controlcenter.user-accounts.policy"
     "/usr/share/polkit-1/rules.d/gnome-control-center.rules"
-    "/usr/share/sounds/gnome/default/alerts/bark.ogg"
-    "/usr/share/sounds/gnome/default/alerts/drip.ogg"
-    "/usr/share/sounds/gnome/default/alerts/glass.ogg"
-    "/usr/share/sounds/gnome/default/alerts/sonar.ogg"
+    "/usr/share/sounds/gnome/"
     # gnome-session
     "/usr/share/wayland-sessions/gnome.desktop"
     "/usr/share/wayland-sessions/gnome-wayland.desktop"
@@ -251,7 +246,7 @@ declare -a to_remove=(
     # plank
     "/etc/xdg/autostart/plank.desktop"
     # misc.
-    "/usr/share/icewm"
+    "/usr/share/icewm/"
 )
 
 if [[ $variant != "elementary-nightly" ]]; then

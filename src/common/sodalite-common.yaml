@@ -2,11 +2,10 @@
 ref: sodalite/stable/${basearch}/common
 include: [
   "packages/essential.yaml",
-  "packages/devenv.yaml",
   "packages/flatpak.yaml",
   "packages/pantheon.yaml",
   "packages/pantheon-apps.yaml",
-  "packages/misc.yaml"
+  "packages/tools.yaml",
 ]
 
 # Version
@@ -21,33 +20,6 @@ repos:
   - copr_stsdc_monitor
   - fedora
   - fedora-updates
-
-# Packages
-packages:
-  - fedora-release
-  - fedora-release-ostree-desktop
-  - fedora-repos-archive
-  - fedora-repos-ostree
-packages-x86_64:
-  - efibootmgr
-  - grub2-efi-ia32
-  - grub2-efi-x64
-  - grub2-pc
-  - hyperv-daemons
-  - mcelog
-  - microcode_ctl
-  - open-vm-tools-desktop
-  - ostree-grub2
-  - shim-ia32
-  - shim-x64
-  - thermald
-  - virtualbox-guest-additions
-  - xorg-x11-drv-amdgpu
-  - xorg-x11-drv-intel
-  - xorg-x11-drv-vesa
-  - xorg-x11-drv-vmware
-exclude-packages:
-  - PackageKit
 
 # File manipulation
 add-files: [

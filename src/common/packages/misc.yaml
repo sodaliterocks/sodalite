@@ -1,5 +1,0 @@
-packages:
- - hfsplus-tools
- - smartmontools
- - tlp
- - xprop

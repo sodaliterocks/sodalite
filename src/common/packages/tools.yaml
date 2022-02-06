@@ -1,5 +1,4 @@
 packages:
- # Containers
  - buildah
  - distrobox
  - git-core
@@ -7,3 +6,7 @@ packages:
  - meson
  - podman
  - skopeo
+ - smartmontools
+ - tlp
+ - toolbox
+ - xprop
