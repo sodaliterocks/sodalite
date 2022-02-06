@@ -1,87 +1,85 @@
 packages:
-  #- appcenter                          # AppCenter does not work with rpm-ostree!
-  - contractor
-  - elementary-files
-  - elementary-greeter
-  - elementary-icon-theme
-  - elementary-notifications
-  - elementary-print
-  - elementary-settings-daemon
-  - elementary-shortcut-overlay
-  - elementary-sound-theme
-  - elementary-terminal
-  - elementary-theme
-  - elementary-wallpapers
-  - firewall-config                     # Replacement for Security Switchboard plug
-  - gala
-  - gnome-fonts
-  - gnome-help
-  - gnome-session
-  - gnome-software                      # Replacement for AppCenter
-  - google-roboto-mono-fonts            # Default Monospace font
-  - gvfs
-  - gvfs-afc
-  - gvfs-afp
-  - gvfs-fuse
-  - gvfs-gphoto2
-  - gvfs-mtp
-  - gvfs-nfs
-  - gvfs-smb
-  - indicator-application
-  - NetworkManager-fortisslvpn
-  - NetworkManager-iodine
-  - NetworkManager-l2tp
-  - NetworkManager-libreswan
-  - NetworkManager-openconnect
-  - NetworkManager-openvpn
-  - NetworkManager-pptp
-  - NetworkManager-ssh
-  - NetworkManager-sstp
-  - NetworkManager-strongswan
-  - NetworkManager-vpnc
-  - onboard
-  - opendyslexic-fonts                  # Default "dysxlexic-friendly" font
-  - pantheon-agent-geoclue2
-  - pantheon-agent-polkit
-  - pantheon-session-settings
-  - plank
-  - rsms-inter-fonts                    # Default UI font
-  - switchboard
-  - switchboard-plug-a11y
-  - switchboard-plug-about
-  - switchboard-plug-applications
-  - switchboard-plug-bluetooth
-  - switchboard-plug-datetime           # Buggy on Fedora
-  - switchboard-plug-display
-  - switchboard-plug-keyboard
-  - switchboard-plug-locale             # Buggy on Fedora (relies on apt)
-  - switchboard-plug-mouse-touchpad
-  - switchboard-plug-networking
-  - switchboard-plug-notifications
-  - switchboard-plug-onlineaccounts
-  - switchboard-plug-pantheon-shell
-  - switchboard-plug-parental-controls  # Untested
-  - switchboard-plug-printers
-  - switchboard-plug-power              # Limited functionality
-  - switchboard-plug-security-privacy   # Buggy on Fedora (relies on ufw)
-  - switchboard-plug-sharing
-  - switchboard-plug-sound
-  - switchboard-plug-useraccounts       # Untested (potentially dangerous?)
-  - touchegg
-  - wingpanel
-  - wingpanel-applications-menu
-  - wingpanel-indicator-a11y
-  - wingpanel-indicator-ayatana
-  - wingpanel-indicator-bluetooth
-  - wingpanel-indicator-datetime
-  - wingpanel-indicator-keyboard
-  - wingpanel-indicator-network
-  - wingpanel-indicator-nightlight
-  - wingpanel-indicator-notifications
-  - wingpanel-indicator-power
-  - wingpanel-indicator-session
-  - wingpanel-indicator-sound
-  - xdg-desktop-portal-pantheon
+ #- appcenter                          # AppCenter does not work with rpm-ostree!
+ - contractor
+ - elementary-files
+ - elementary-greeter
+ - elementary-icon-theme
+ - elementary-notifications
+ - elementary-print
+ - elementary-settings-daemon
+ - elementary-shortcut-overlay
+ - elementary-sound-theme
+ - elementary-terminal
+ - elementary-theme
+ - elementary-wallpapers
+ - firewall-config                     # Replacement for Security Switchboard plug
+ - gala
+ - gnome-session
+ - gnome-software                      # Replacement for AppCenter
+ - google-roboto-mono-fonts            # Default Monospace font
+ - gvfs
+ - gvfs-afc
+ - gvfs-afp
+ - gvfs-fuse
+ - gvfs-gphoto2
+ - gvfs-mtp
+ - gvfs-nfs
+ - gvfs-smb
+ - indicator-application
+ - NetworkManager-fortisslvpn
+ - NetworkManager-iodine
+ - NetworkManager-l2tp
+ - NetworkManager-libreswan
+ - NetworkManager-openconnect
+ - NetworkManager-openvpn
+ - NetworkManager-pptp
+ - NetworkManager-ssh
+ - NetworkManager-sstp
+ - NetworkManager-strongswan
+ - NetworkManager-vpnc
+ - onboard
+ - opendyslexic-fonts                  # Default "dysxlexic-friendly" font
+ - pantheon-agent-geoclue2
+ - pantheon-agent-polkit
+ - pantheon-session-settings
+ - plank
+ - rsms-inter-fonts                    # Default UI font
+ - switchboard
+ - switchboard-plug-a11y
+ - switchboard-plug-about
+ - switchboard-plug-applications
+ - switchboard-plug-bluetooth
+ - switchboard-plug-datetime           # Buggy on Fedora
+ - switchboard-plug-display
+ - switchboard-plug-keyboard
+ - switchboard-plug-locale             # Buggy on Fedora (relies on apt)
+ - switchboard-plug-mouse-touchpad
+ - switchboard-plug-networking
+ - switchboard-plug-notifications
+ - switchboard-plug-onlineaccounts
+ - switchboard-plug-pantheon-shell
+ - switchboard-plug-parental-controls  # Untested
+ - switchboard-plug-printers
+ - switchboard-plug-power              # Limited functionality
+ - switchboard-plug-security-privacy   # Buggy on Fedora (relies on ufw)
+ - switchboard-plug-sharing
+ - switchboard-plug-sound
+ - switchboard-plug-useraccounts       # Untested (potentially dangerous?)
+ - touchegg
+ - wingpanel
+ - wingpanel-applications-menu
+ - wingpanel-indicator-a11y
+ - wingpanel-indicator-ayatana
+ - wingpanel-indicator-bluetooth
+ - wingpanel-indicator-datetime
+ - wingpanel-indicator-keyboard
+ - wingpanel-indicator-network
+ - wingpanel-indicator-nightlight
+ - wingpanel-indicator-notifications
+ - wingpanel-indicator-power
+ - wingpanel-indicator-session
+ - wingpanel-indicator-sound
+ - xdg-desktop-portal-pantheon
 exclude-packages:
   - gnome-tour
   - xdg-desktop-portal-gnome

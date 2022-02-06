@@ -12,3 +12,5 @@ packages:
  - elementary-sideload
  - elementary-tasks
  - elementary-videos
+ - gnome-fonts
+ - gnome-help
