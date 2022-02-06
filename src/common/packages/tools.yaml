@@ -1,0 +1,13 @@
+packages:
+ - buildah
+ - distrobox
+ - git-core
+ - git-lfs
+ - meson
+ - podman
+ - python-pip
+ - skopeo
+ - smartmontools
+ - tlp
+ - toolbox
+ - xprop

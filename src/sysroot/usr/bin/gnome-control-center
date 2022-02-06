@@ -6,13 +6,42 @@
 # GNOME Control Center, as it has been removed as of 9aa2081, and will attempt
 # to redirect the request to Switchboard (or whatever handles settings://).
 
-option=$1
+command=$1
 
 function setting() {
-    xdg-open settings://$1
+    if [[ -z $1 ]]; then
+        io.elementary.switchboard
+    else
+        xdg-open settings://$1
+    fi
 }
 
-case $option in
+case $command in
+    "-h"|"--help")
+        echo -e "  Shim to redirect requests for GNOME Control Center to Switchboard
+        
+Usage:
+  gnome-control-center [option] [setting]
+  
+Settings:
+  applications      Switchboard ➔ Applications ➔ Permissions
+  backgrounds       Switchboard ➔ Desktop ➔ Wallpaper
+  color             Colour Profile Viewer
+  default           Switchboard ➔ Applications
+  display           Switchboard ➔ Display
+  network           Switchboard ➔ Network
+  notifications     Switchboard ➔ Notifications
+  power             Switchboard ➔ Power
+  printers          Switchboard ➔ Printers
+  sound             Switchboard ➔ Sound
+  universal-access  Switchboard ➔ Universal Access
+  wifi              Switchboard ➔ Network
+  user-accounts     Switchboard ➔ User Accounts
+  *                 Attempt to open settings://[setting]
+
+Options:
+  -h, --help\tShow help"
+        ;;
     applications) setting applications/permissions ;;
     backgrounds) setting desktop/wallpaper ;;
     color) gcm-viewer ;;
@@ -24,8 +53,10 @@ case $option in
     printers) setting printer ;;
     sound) setting sound ;;
     universal-access) setting universal-access ;;
+    user-accounts) setting accounts ;;
+    "") setting ;;
     *)
         echo "No shim provided for '$option'. Trying settings://$option..."
-	    xdg-open settings://$option
+	    setting $option
 	    ;;
 esac

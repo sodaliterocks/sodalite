@@ -1,0 +1,4 @@
+packages:
+ - flatpak
+ - xdg-desktop-portal
+ - xdg-desktop-portal-pantheon

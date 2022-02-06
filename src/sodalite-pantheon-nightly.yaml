@@ -1,0 +1,12 @@
+ref: sodalite/f35/${basearch}/pantheon-nightly
+include:
+  - common/sodalite-common.yaml
+
+repos:
+  - copr_decathorpe_elementary-nightly
+
+rojig:
+  name: sodalite-pantheon-nightly
+  summary: "Sodalite (Pantheon Nightly)"
+  license: MIT
+  description: "Beautiful. Immutable. | Sodalite with nightly Pantheon packages."

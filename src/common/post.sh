@@ -9,7 +9,6 @@ function get_property() {
 }
 
 function set_property() {
-    # TODO: Handle missing properties
     file=$1
     property=$2
     value=$3
@@ -30,10 +29,11 @@ function set_property() {
 set -xeuo pipefail
 
 # HACK: This gets set with the build.sh script, so no biggy if we miss it
-variant="unknown"
-if [[ -s /etc/sodalite-variant ]]; then
+if [[ $(cat /etc/sodalite-variant) != "" ]]; then
     variant="$(cat /etc/sodalite-variant)"
     rm -f /etc/sodalite-variant
+else
+    variant="unknown"
 fi
 
 #########
@@ -67,49 +67,41 @@ done
 # OSTREE MUTATING #
 ###################
 
-# TODO: Handle other version styles (useful for forked repos)
-version_base="0"
-version_release="00.0"
-version_build="0"
 if [[ $(get_property /etc/os-release VERSION) =~ (([0-9]{1,3})-([0-9]{2}.[0-9]{1,})(.([0-9]{1,}){0,1}).+) ]]; then
-    version_base="${BASH_REMATCH[2]}"
-    version_release="${BASH_REMATCH[3]}"
-    [[ ! -z ${BASH_REMATCH[5]} ]] && version_build="${BASH_REMATCH[5]}"
+    version="${BASH_REMATCH[2]}-${BASH_REMATCH[3]}"
+    version_id="${BASH_REMATCH[2]}"
+
+    [[ ${BASH_REMATCH[5]} > 0 ]] && version+=".${BASH_REMATCH[5]}"
+
+    if [[ $(cat /etc/sodalite-commit) != "" ]]; then
+        version+="+$(cat /etc/sodalite-commit)"
+        rm -r /etc/sodalite-commit
+    fi
+
+    [[ ! -z $variant ]] && [[ $variant != "base" ]] && version+=" ($variant)"
+else
+    version=$(get_property /etc/os-release VERSION)
+    version_id=$(get_property /etc/os-release VERSION_ID)
 fi
 
-osr_id="sodalite" # TODO: Programatically set this
-osr_name="Sodalite" # TODO: Programatically set this
-osr_variant="" # TODO: Programatically set this
-osr_variant_id="" # TODO: Programatically set this
-osr_version="$version_base-$version_release"
-osr_version_id="$version_base"
+pretty_name="Sodalite $version"
 
 if [[ ! -z $variant ]]; then
-    osr_variant_id=$variant
-    osr_variant=$variant
+    set_property /etc/os-release "VARIANT" $variant
+    set_property /etc/os-release "VARIANT_ID" $variant
 fi
 
-if [[ $version_build > 0 ]]; then
-    osr_version+=".$version_build"
+if [[ ! -z $version_id ]]; then
+    set_property /etc/upstream-release/lsb-release "ID" "fedora"
+    set_property /etc/upstream-release/lsb-release "PRETTY_NAME" "Fedora Linux $version_id"
+    set_property /etc/upstream-release/lsb-release "VERSION_ID" "$version_id"
 fi
 
-if [[ ! -z $osr_variant ]] && [[ $osr_variant != "base" ]]; then
-    osr_version+=" ($osr_variant)"
-fi
-
-[[ ! -z $osr_id ]] && set_property /etc/os-release "ID" $osr_id
-[[ ! -z $osr_name ]] && set_property /etc/os-release "NAME" $osr_name
-[[ ! -z $osr_name ]] && set_property /etc/os-release "PRETTY_NAME" "$osr_name $osr_version"
-[[ ! -z $osr_variant ]] && set_property /etc/os-release "VARIANT" $osr_variant
-[[ ! -z $osr_variant_id ]] && set_property /etc/os-release "VARIANT_ID" $osr_variant_id
-[[ ! -z $osr_version ]] && set_property /etc/os-release "VERSION" "$osr_version"
-[[ ! -z $osr_version_id ]] && set_property /etc/os-release "VERSION_ID" $osr_version_id
-
-if [[ ! -z $version_base ]]; then
-    set_property /etc/upstream-release/lsb-release "ID" fedora
-    set_property /etc/upstream-release/lsb-release "PRETTY_NAME" "Fedora Linux $version_base"
-    set_property /etc/upstream-release/lsb-release "VERSION_ID" $version_base
-fi
+set_property /etc/os-release "ID" "sodalite"
+set_property /etc/os-release "NAME" "Sodalite"
+set_property /etc/os-release "PRETTY_NAME" "$pretty_name"
+set_property /etc/os-release "VERSION" "$version"
+set_property /etc/os-release "VERSION_ID" "$version_id"
 
 ############
 # REMOVALS #
@@ -122,9 +114,10 @@ declare -a to_remove=(
     "/etc/xdg/autostart/org.gnome.Evolution-alarm-notify.desktop"
     "/usr/libexec/evolution-data-server/evolution-alarm-notify"
     # fedora-workstation-backgrounds
-    "/usr/share/backgrounds/fedora-workstation"
-    "/usr/share/doc/fedora-workstation-backgrounds"
+    "/usr/share/backgrounds/fedora-workstation/"
+    "/usr/share/doc/fedora-workstation-backgrounds/"
     "/usr/share/gnome-background-properties/fedora-workstation-backgrounds.xml"
+    "/usr/share/licenses/fedora-workstation-backgrounds"
     # gnome-control-center
     #"/usr/bin/gnome-control-center"
     "/usr/libexec/cc-remote-login-helper"
@@ -166,19 +159,13 @@ declare -a to_remove=(
     "/usr/share/applications/gnome-wwan-panel.desktop"
     "/usr/share/bash-completion/completions/gnome-control-center"
     "/usr/share/dbus-1/services/org.gnome.ControlCenter.SearchProvider.service"
-    "/usr/share/doc/gnome-control-center"
-    "/usr/share/doc/gnome-control-center/NEWS"
-    "/usr/share/doc/gnome-control-center/README.md"
     "/usr/share/dbus-1/services/org.gnome.ControlCenter.service"
+    "/usr/share/doc/gnome-control-center/"
     "/usr/share/glib-2.0/schemas/org.gnome.ControlCenter.gschema.xml"
-    "/usr/share/gnome-control-center/keybindings/00-multimedia.xml"
-    "/usr/share/gnome-control-center/keybindings/01-input-sources.xml"
-    "/usr/share/gnome-control-center/keybindings/01-launchers.xml"
-    "/usr/share/gnome-control-center/keybindings/01-screenshot.xml"
-    "/usr/share/gnome-control-center/keybindings/01-system.xml"
-    "/usr/share/gnome-control-center/keybindings/50-accessibility.xml"
-    "/usr/share/gnome-control-center/pixmaps/noise-texture-light.png"
+    "/usr/share/gnome-control-center/"
     "/usr/share/gnome-shell/search-providers/gnome-control-center-search-provider.ini"
+    "/usr/share/locale/*/LC_MESSAGES/gnome-control-center-2.0.mo"
+    "/usr/share/locale/*/LC_MESSAGES/gnome-control-center-2.0-timezones.mo"
     "/usr/share/man/man1/gnome-control-center.1.gz"
     "/usr/share/metainfo/gnome-control-center.appdata.xml"
     "/usr/share/pixmaps/faces/astronaut.jpg"
@@ -244,11 +231,11 @@ declare -a to_remove=(
     "/usr/share/pixmaps/faces/tomatoes.jpg"
     "/usr/share/pixmaps/faces/tree.jpg"
     "/usr/share/pixmaps/faces/yellow-rose.jpg"
+    "/usr/share/polkit-1/actions/org.gnome.controlcenter.datetime.policy"
+    "/usr/share/polkit-1/actions/org.gnome.controlcenter.remote-login-helper.policy"
+    "/usr/share/polkit-1/actions/org.gnome.controlcenter.user-accounts.policy"
     "/usr/share/polkit-1/rules.d/gnome-control-center.rules"
-    "/usr/share/sounds/gnome/default/alerts/bark.ogg"
-    "/usr/share/sounds/gnome/default/alerts/drip.ogg"
-    "/usr/share/sounds/gnome/default/alerts/glass.ogg"
-    "/usr/share/sounds/gnome/default/alerts/sonar.ogg"
+    "/usr/share/sounds/gnome/"
     # gnome-session
     "/usr/share/wayland-sessions/gnome.desktop"
     "/usr/share/wayland-sessions/gnome-wayland.desktop"
@@ -259,7 +246,7 @@ declare -a to_remove=(
     # plank
     "/etc/xdg/autostart/plank.desktop"
     # misc.
-    "/usr/share/icewm"
+    "/usr/share/icewm/"
 )
 
 if [[ $variant != "elementary-nightly" ]]; then

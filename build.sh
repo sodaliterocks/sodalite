@@ -42,6 +42,10 @@ echoc "$(write_emoji "⚡")Building tree for 'sodalite-$variant'..."
 
 echo "$variant" > "$base_dir/src/sysroot/etc/sodalite-variant"
 
+if [[ $(git describe --exact-match --tags $(git log -n1 --pretty='%h') 2>&1 >/dev/null) ]]; then
+    echo "$(git rev-parse --short HEAD)" > "$base_dir/src/sysroot/etc/sodalite-commit"
+fi
+
 rpm-ostree compose tree \
     --cachedir="$ostree_cache_dir" \
     --repo="$ostree_repo_dir" \
@@ -54,11 +58,12 @@ else
     ostree summary --repo="$ostree_repo_dir" --update
 fi
 
+echoc "$(write_emoji "🗑️")Cleaning up..."
+echo "" > "$base_dir/src/sysroot/etc/sodalite-commit"
+echo "" > "$base_dir/src/sysroot/etc/sodalite-variant"
+rm -rf  /var/tmp/rpm-ostree.*
+
 # TODO: Get owner and perms of parent directory
-echoc "$(write_emoji "🛡️")Correcting permissions for build directory..."
+echoc "$(write_emoji "🛡️")Correcting permissions..."
 real_user=$(get_sudo_user)
 chown -R $real_user:$real_user $working_dir
-
-echoc "$(write_emoji "🗑️")Cleaning up..."
-git checkout "$base_dir/src/sysroot/etc/sodalite-variant"
-rm -rf  /var/tmp/rpm-ostree.*

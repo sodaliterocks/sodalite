@@ -1,3 +1,0 @@
-include: ../../../lib/workstation-ostree-config/fedora-common-ostree-pkgs.yaml
-packages:
-  - rpm-ostree # Why isn't this already included!?

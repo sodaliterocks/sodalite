@@ -1,15 +1,18 @@
 # Meta
 ref: sodalite/f35/${basearch}/common
 include: [
-  #"packages/fedora-ostree-pkgs.yaml", # BUG: Circular dependency caused in packages/elementary-pkgs.yaml, so we'll need to comment this out for now
-  "packages/elementary-pkgs.yaml",
-  "packages/extra-pkgs.yaml"
+  "packages/essential.yaml",
+  "packages/flatpak.yaml",
+  "packages/pantheon.yaml",
+  "packages/pantheon-apps.yaml",
+  "packages/tools.yaml",
 ]
 
 # Version
 releasever: "35" # Fedora version
-automatic-version-prefix: "${releasever}-22.3" # <base>-<year>.<release> (SEE: https://github.com/sodaliterocks/sodalite/releases/tag/v/stable/35-22.0)
+automatic-version-prefix: "${releasever}-22.4" # <base>-<year>.<release> (SEE: https://github.com/sodaliterocks/sodalite/releases/tag/v/stable/35-22.0)
 automatic-version-suffix: "."
+mutate-os-release: "${releasever}"
 
 # Repositories
 repos:
@@ -18,35 +21,6 @@ repos:
   - fedora
   - fedora-updates
 
-# Packages
-packages:
-  - fedora-release
-  - fedora-release-ostree-desktop
-  - fedora-repos-archive
-  - fedora-repos-ostree
-packages-x86_64:
-  - efibootmgr
-  - grub2-efi-ia32
-  - grub2-efi-x64
-  - grub2-pc
-  - hyperv-daemons
-  - mcelog
-  - microcode_ctl
-  - open-vm-tools-desktop
-  - ostree-grub2
-  - shim-ia32
-  - shim-x64
-  - thermald
-  - virtualbox-guest-additions
-  - xorg-x11-drv-intel
-  - xorg-x11-drv-openchrome
-  - xorg-x11-drv-vesa
-  - xorg-x11-drv-vmware
-exclude-packages:
-  - PackageKit
-  - gnome-tour # GNOME is impossible to reach, so we don't need this
-  - xdg-desktop-portal-gnome
-
 # File manipulation
 add-files: [
   # /etc
@@ -54,6 +28,7 @@ add-files: [
   ["../../lib/elementary.default-settings/cups/default-testpage.pdf", "/etc/cups/default-testpage.pdf"],
   ["../../lib/elementary.default-settings/gtk/settings.ini", "/etc/gtk/settings.ini"],
   ["../sysroot/etc/issue", "/etc/issue"],
+  ["../sysroot/etc/sodalite-commit", "/etc/sodalite-commit"],
   ["../sysroot/etc/sodalite-variant", "/etc/sodalite-variant"],
   ["../sysroot/etc/tlp.d/50-vm-writeback.conf", "/etc/tlp.d/50-vm-writeback.conf"],
   ["../sysroot/etc/upstream-release/lsb-release", "/etc/upstream-release/lsb-release"],
@@ -83,21 +58,25 @@ add-files: [
   # /usr/bin
   ["../../lib/sodaliterocks.generate-oemconf/generate-oemconf.sh", "/usr/bin/generate-oemconf"],
   ["../../lib/sodaliterocks.hacks/src/hacks.sh", "/usr/bin/sodalite-hacks"],
-  ["../sysroot/usr/bin/detach.sh", "/usr/bin/detach"],
+  ["../sysroot/usr/bin/detach", "/usr/bin/detach"],
   ["../sysroot/usr/bin/gnome-control-center", "/usr/bin/gnome-control-center"],
-  ["../sysroot/usr/bin/plank-sodalite-wrapper.sh", "/usr/bin/plank-sodalite-wrapper"],
+  ["../sysroot/usr/bin/plank-sodalite-wrapper", "/usr/bin/plank-sodalite-wrapper"],
+  ["../sysroot/usr/bin/serve", "/usr/bin/serve"],
   
   # /usr/libexec
   ["../../lib/sodaliterocks.hacks/src/plugins/cleanup.sh", "/usr/libexec/sodalite-hacks/plugins/cleanup.sh"],
   ["../../lib/sodaliterocks.hacks/src/plugins/flatpak.sh", "/usr/libexec/sodalite-hacks/plugins/flatpak.sh"],
   ["../../lib/sodaliterocks.hacks/src/plugins/nvidia.sh", "/usr/libexec/sodalite-hacks/plugins/nvidia.sh"],
   ["../../lib/sodaliterocks.hacks/src/plugins/vscode.sh", "/usr/libexec/sodalite-hacks/plugins/vscode.sh"],
+  ["../../lib/sodaliterocks.hacks/src/plugins/winbtn.sh", "/usr/libexec/sodalite-hacks/plugins/winbtn.sh"],
   ["../../lib/sodaliterocks.hacks/src/utils.sh", "/usr/libexec/sodalite-hacks/utils.sh"],
 
   # /usr/share
   ["../sysroot/usr/share/touchegg/touchegg.conf", "/usr/share/touchegg/touchegg.conf"],
 
   # /usr/share/applications
+  ["../sysroot/usr/share/applications/firewall-config.desktop", "/usr/share/applications/firewall-config.desktop"],
+  ["../sysroot/usr/share/applications/org.gnome.DiskUtility.desktop", "/usr/share/applications/org.gnome.DiskUtility.desktop"],
   ["../sysroot/usr/share/applications/org.gnome.Software.desktop", "/usr/share/applications/org.gnome.Software.desktop"],
 
   # /usr/share/backgrounds
@@ -126,8 +105,7 @@ add-files: [
   ["../../lib/elementary.icons/apps/48/system-software-install.svg", "/usr/share/icons/elementary/apps/48/system-software-install.svg"],
   ["../../lib/elementary.icons/apps/64/system-software-install.svg", "/usr/share/icons/elementary/apps/64/system-software-install.svg"],
   ["../../lib/elementary.icons/apps/symbolic/system-software-install-symbolic.svg", "/usr/share/icons/elementary/apps/symbolic/system-software-install-symbolic.svg"],
-  ["../sysroot/usr/share/icons/default/index.theme", "/usr/share/icons/default/index.theme"],
-  ["../sysroot/usr/share/icons/hicolor/scalable/apps/org.gnome.Boxes.svg", "/usr/share/icons/hicolor/scalable/apps/org.gnome.Boxes.svg"]
+  ["../sysroot/usr/share/icons/default/index.theme", "/usr/share/icons/default/index.theme"]
 ]
 #remove-from-packages: [ # Removing files in post
 #

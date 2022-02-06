@@ -49,7 +49,6 @@ idle-delay=900
 theme-name='elementary'
 
 [org.gnome.desktop.wm.keybindings:Pantheon]
-# defaults to <Super>Up, replaced by toggle below, so we need to clear it here
 maximize=[]
 move-to-workspace-1=['<Super><Shift>1','<Super><Alt>1']
 move-to-workspace-2=['<Super><Shift>2','<Super><Alt>2']
@@ -64,11 +63,9 @@ move-to-workspace-left=['<Super><Alt>Left']
 move-to-workspace-right=['<Super><Alt>Right']
 panel-main-menu=['<Super>space','<Alt>F2']
 panel-run-dialog=[]
-# Gala shows workspaces overview instead of desktop
 show-desktop=['<Super>Down','<Super>s']
 switch-applications=[]
 switch-applications-backward=[]
-# See lp:1291788 for details about switch-input-source*
 switch-input-source=[]
 switch-input-source-backward=[]
 switch-to-workspace-left=['<Super>Left']
@@ -87,7 +84,6 @@ switch-to-workspace-9=['<Super>9']
 switch-windows=['<Alt>Tab']
 switch-windows-backward=['<Alt><Shift>Tab']
 toggle-maximized=['<Super>Up']
-# defaults to <Super>Down used above, so we need to override it
 unmaximize=['<Alt>F5']
 
 [org.gnome.desktop.wm.preferences:Pantheon]
@@ -96,17 +92,6 @@ button-layout='close:maximize'
 mouse-button-modifier='<Super>'
 resize-with-right-button=true
 theme='elementary'
-
-# Drop overrides for Epiphany - it's not the default browser on Fedora,
-# and epiphany in Feodra does not have the elementary OS downstream patches.
-#[org.gnome.Epiphany.ui:Pantheon]
-#expand-tabs-bar=false
-#tabs-bar-visibility-policy='always'
-#
-#[org.gnome.Epiphany.web:Pantheon]
-#cookies-policy='no-third-party'
-#enable-adblock=false
-#enable-smooth-scrolling=true
 
 [org.gnome.mutter:Pantheon]
 auto-maximize=false
@@ -134,7 +119,7 @@ night-light-temperature=4500
 idle-dim=false
 
 [org.gnome.settings-daemon.plugins.xsettings:Pantheon]
-overrides={'Gtk/DialogsUseHeader': <0>, 'Gtk/EnablePrimaryPaste': <0>, 'Gtk/ShellShowsAppMenu': <0>, 'Gtk/DecorationLayout': <'close:menu,maximize'>}
+overrides={'Gtk/DialogsUseHeader': <0>, 'Gtk/EnablePrimaryPaste': <0>, 'Gtk/ShellShowsAppMenu': <0>, 'Gtk/DecorationLayout': <'close:menu,maximize'>,'Gtk/ShowUnicodeMenu': <0>}
 
 [org.gtk.Settings.FileChooser:Pantheon]
 sort-directories-first=true
