@@ -61,9 +61,8 @@ add-files: [
   ["../sysroot/usr/bin/plank-sodalite-wrapper", "/usr/bin/plank-sodalite-wrapper"],
   ["../sysroot/usr/bin/serve", "/usr/bin/serve"],
   
-  # /usr/lib/sodalite-build
-  ["../sysroot/usr/lib/sodalite-build/commit", "/usr/lib/sodalite-build/commit"],
-  ["../sysroot/usr/lib/sodalite-build/variant", "/usr/lib/sodalite-build/variant"],
+  # /usr/lib
+  ["../sysroot/usr/lib/sodalite-buildinfo", "/usr/lib/sodalite-buildinfo"],
   
   # /usr/libexec
   ["../../lib/sodaliterocks.hacks/src/plugins/cleanup.sh", "/usr/libexec/sodalite-hacks/plugins/cleanup.sh"],

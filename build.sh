@@ -9,6 +9,8 @@ working_dir=$2
 
 test_root
 
+echo "🪛 Setting up..."
+
 [[ $variant == *.yaml ]] && variant="$(echo $variant | sed s/.yaml//)"
 [[ $variant == sodalite* ]] && variant="$(echo $variant | sed s/sodalite-//)"
 [[ $variant == "fedora-sodalite" ]] && variant="legacy" # BUG: Kinda breaks various messages but whatever
@@ -23,7 +25,7 @@ if [[ ! -f $treefile ]]; then
     exit
 fi
 
-lockfile="$base_dir/src/common/sodalite-common.overrides.yaml"
+lockfile="$base_dir/src/common/overrides.yaml"
 
 ostree_cache_dir="$working_dir/cache"
 ostree_repo_dir="$working_dir/repo"
@@ -33,18 +35,23 @@ mkdir -p $ostree_repo_dir
 chown -R root:root $working_dir
 
 if [ ! "$(ls -A $ostree_repo_dir)" ]; then
-   echoc "$(write_emoji "🆕")Initializing OSTree repository at '$ostree_repo_dir'..."
+   echo "🆕 Initializing OSTree repository at '$ostree_repo_dir'..."
    ostree --repo="$ostree_repo_dir" init --mode=archive
 fi
 
+echo "📄 Generating buildinfo file..."
 
-echoc "$(write_emoji "⚡")Building tree for 'sodalite-$variant'..."
+# Only put stuff in here that we actually need!
+buildinfo_file="$base_dir/src/sysroot/usr/lib/sodalite-buildinfo"
+buildinfo_content="COMMIT=$(git rev-parse --short HEAD)
+\nTAG=$(git describe --exact-match --tags $(git log -n1 --pretty='%h') 2>/dev/null)
+\nVARIANT=\"$variant\""
 
-echo "$variant" > "$base_dir/src/sysroot/usr/lib/sodalite-build/variant"
+echo -e $buildinfo_content > $buildinfo_file
 
-if [[ $(git describe --exact-match --tags $(git log -n1 --pretty='%h') 2>&1 >/dev/null) ]]; then
-    echo "$(git rev-parse --short HEAD)" > "$base_dir/src/sysroot/usr/lib/sodalite-build/commit"
-fi
+exit
+
+echo "⚡ Building tree for 'sodalite-$variant'..."
 
 rpm-ostree compose tree \
     --cachedir="$ostree_cache_dir" \
@@ -54,16 +61,15 @@ rpm-ostree compose tree \
 if [[ $? != 0 ]]; then
     echoc error "Failed to build tree"
 else
-    echoc "$(write_emoji "✏️")Generating summary for 'sodalite-$variant'..."
+    echo "✏️ Generating summary for 'sodalite-$variant'..."
     ostree summary --repo="$ostree_repo_dir" --update
 fi
 
-echoc "$(write_emoji "🗑️")Cleaning up..."
-echo "" > "$base_dir/src/sysroot/usr/lib/sodalite-build/commit"
-echo "" > "$base_dir/src/sysroot/usr/lib/sodalite-build/variant"
+echo "🗑️ Cleaning up..."
+
+rm "$base_dir/src/sysroot/usr/lib/sodalite-buildinfo"
 rm -rf  /var/tmp/rpm-ostree.*
 
 # TODO: Get owner and perms of parent directory
-echoc "$(write_emoji "🛡️")Correcting permissions..."
 real_user=$(get_sudo_user)
 chown -R $real_user:$real_user $working_dir

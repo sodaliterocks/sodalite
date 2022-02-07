@@ -2,10 +2,26 @@
 
 . /usr/libexec/sodalite/bash/common.sh
 
+buildinfo_file="/usr/lib/sodalite-buildinfo"
+
+function del_property() {
+    file=$1
+    item=$2
+    
+    if [[ -f $file ]]; then
+        if [[ ! -z $(get_property $file $property) ]]; then
+            sed -i "s/^\($property=.*\)$//g" $file
+        fi
+    fi
+}
+
 function get_property() {
     file=$1
     item=$2
-    echo $(grep -oP '(?<=^'"$item"'=).+' $file | tr -d '"')
+
+    if [[ -f $file ]]; then
+        echo $(grep -oP '(?<=^'"$item"'=).+' $file | tr -d '"')
+    fi
 }
 
 function set_property() {
@@ -28,9 +44,11 @@ function set_property() {
 
 set -xeuo pipefail
 
-# HACK: This gets set with the build.sh script
-if [[ $(cat /usr/lib/sodalite-build/variant) != "" ]]; then
-    variant="$(cat /usr/lib/sodalite-build/variant)"
+if [[ $(cat $buildinfo_file) != "" ]]; then
+    [[ ! -z $(get_property $buildinfo_file "COMMIT") ]] && \
+        commit="$(get_property $buildinfo_file "COMMIT")"
+    [[ ! -z $(get_property $buildinfo_file "VARIANT") ]] && \
+        variant="$(get_property $buildinfo_file "VARIANT")"
 else
     variant="unknown"
 fi
@@ -73,8 +91,8 @@ if [[ $(get_property /usr/lib/os-release VERSION) =~ (([0-9]{1,3})-([0-9]{2}.[0-
     [[ ${BASH_REMATCH[5]} > 0 ]] && version+=".${BASH_REMATCH[5]}"
 
     # HACK: This gets set with the build.sh script
-    if [[ $(cat /usr/lib/sodalite-build/commit) != "" ]]; then
-        version+="+$(cat /usr/lib/sodalite-build/commit)"
+    if [[ ! -z $commit ]]; then
+        version+="+$commit"
     fi
 
     [[ ! -z $variant ]] && [[ $variant != "base" ]] && version+=" ($variant)"
@@ -96,12 +114,24 @@ if [[ ! -z $version_id ]]; then
     set_property /etc/upstream-release/lsb-release "VERSION_ID" "$version_id"
 fi
 
+set_property /usr/lib/os-release "BUG_REPORT_URL" "https://sodalite.rocks/bug-report"
+set_property /usr/lib/os-release "HOME_URL" "https://sodalite.rocks"
 set_property /usr/lib/os-release "ID" "sodalite"
 set_property /usr/lib/os-release "ID_LIKE" "fedora"
 set_property /usr/lib/os-release "NAME" "Sodalite"
 set_property /usr/lib/os-release "PRETTY_NAME" "$pretty_name"
+set_property /usr/lib/os-release "SUPPORT_URL" "https://sodalite.rocks/support"
 set_property /usr/lib/os-release "VERSION" "$version"
 set_property /usr/lib/os-release "VERSION_ID" "$version_id"
+
+del_property /usr/lib/os-release "DOCUMENTATION_URL"
+del_property /usr/lib/os-release "PRIVACY_POLICY_URL"
+del_property /usr/lib/os-release "REDHAT_BUGZILLA_PRODUCT"
+del_property /usr/lib/os-release "REDHAT_BUGZILLA_PRODUCT_VERSION"
+del_property /usr/lib/os-release "REDHAT_SUPPORT_PRODUCT"
+del_property /usr/lib/os-release "REDHAT_SUPPORT_PRODUCT_VERSION"
+
+sed -i "/^$/d" /usr/lib/os-release
 
 ln -s /usr/lib/os-release /etc/os-release
 
@@ -289,4 +319,4 @@ systemctl enable lightdm
 systemctl enable touchegg
 systemctl enable update-appcenter-flatpak
 
-rm -f /usr/lib/sodalite-build
+rm -f /usr/lib/sodalite-buildinfo

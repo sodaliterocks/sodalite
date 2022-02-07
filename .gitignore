@@ -1,7 +1,6 @@
 # Runtime
 build/*
-src/sysroot/usr/lib/sodalite-build/commit
-src/sysroot/usr/lib/sodalite-build/variant
+src/sysroot/usr/lib/sodalite-buildinfo
 
 # Temporary
 *~
