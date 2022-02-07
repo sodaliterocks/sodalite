@@ -114,13 +114,13 @@ if [[ ! -z $version_id ]]; then
     set_property /etc/upstream-release/lsb-release "VERSION_ID" "$version_id"
 fi
 
-set_property /usr/lib/os-release "BUG_REPORT_URL" "https://sodalite.rocks/bug-report"
-set_property /usr/lib/os-release "HOME_URL" "https://sodalite.rocks"
+set_property /usr/lib/os-release "BUG_REPORT_URL" "https:\/\/sodalite.rocks\/bug-report"
+set_property /usr/lib/os-release "HOME_URL" "https:\/\/sodalite.rocks"
 set_property /usr/lib/os-release "ID" "sodalite"
 set_property /usr/lib/os-release "ID_LIKE" "fedora"
 set_property /usr/lib/os-release "NAME" "Sodalite"
 set_property /usr/lib/os-release "PRETTY_NAME" "$pretty_name"
-set_property /usr/lib/os-release "SUPPORT_URL" "https://sodalite.rocks/support"
+set_property /usr/lib/os-release "SUPPORT_URL" "https:\/\/sodalite.rocks\/support"
 set_property /usr/lib/os-release "VERSION" "$version"
 set_property /usr/lib/os-release "VERSION_ID" "$version_id"
 
