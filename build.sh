@@ -49,8 +49,6 @@ buildinfo_content="COMMIT=$(git rev-parse --short HEAD)
 
 echo -e $buildinfo_content > $buildinfo_file
 
-exit
-
 echo "⚡ Building tree for 'sodalite-$variant'..."
 
 rpm-ostree compose tree \
