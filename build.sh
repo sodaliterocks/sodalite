@@ -56,10 +56,12 @@ rpm-ostree compose tree \
     --cachedir="$ostree_cache_dir" \
     --repo="$ostree_repo_dir" \
     `[[ -s $lockfile ]] && echo "--ex-lockfile="$lockfile""` $treefile
+    
+[[ $? != 0 ]] && build_failed="true"
 
 echo "================================================================================"
 
-if [[ $? != 0 ]]; then
+if [[ $build_failed == "true" ]]; then
     echoc error "Failed to build tree"
 else
     echo "✏️ Generating summary..."
