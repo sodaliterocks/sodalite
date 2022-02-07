@@ -7,7 +7,17 @@ base_dir="$(dirname "$(realpath -s "$0")")"
 variant=$1
 working_dir=$2
 
+function die() {
+    message=$@
+    echo -e "\033[1;31mError: $message\033[0m"
+    exit 255
+}
+
 test_root
+
+if [[ ! $(command -v "rpm-ostree") ]]; then
+    die "rpm-ostree not installed"
+fi
 
 echo "🪛 Setting up..."
 
@@ -21,7 +31,7 @@ treefile="$base_dir/src/sodalite-$variant.yaml"
 [[ $variant == "legacy" ]] && treefile="$base_dir/src/fedora-sodalite.yaml"
 
 if [[ ! -f $treefile ]]; then
-    echoc error "sodalite-$variant does not exist"
+    die "sodalite-$variant does not exist"
     exit
 fi
 
@@ -62,7 +72,7 @@ rpm-ostree compose tree \
 echo "================================================================================"
 
 if [[ $build_failed == "true" ]]; then
-    echoc error "Failed to build tree"
+    die "Failed to build tree"
 else
     echo "✏️ Generating summary..."
     ostree summary --repo="$ostree_repo_dir" --update
