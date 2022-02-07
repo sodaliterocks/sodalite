@@ -57,14 +57,14 @@ rpm-ostree compose tree \
     --repo="$ostree_repo_dir" \
     `[[ -s $lockfile ]] && echo "--ex-lockfile="$lockfile""` $treefile
 
+echo "================================================================================"
+
 if [[ $? != 0 ]]; then
     echoc error "Failed to build tree"
 else
-    echo "✏️ Generating summary for 'sodalite-$variant'..."
+    echo "✏️ Generating summary..."
     ostree summary --repo="$ostree_repo_dir" --update
 fi
-
-echo "================================================================================"
 
 echo "🗑️ Cleaning up..."
 
