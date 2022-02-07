@@ -67,12 +67,13 @@ done
 # OSTREE MUTATING #
 ###################
 
-if [[ $(get_property /etc/os-release VERSION) =~ (([0-9]{1,3})-([0-9]{2}.[0-9]{1,})(.([0-9]{1,}){0,1}).+) ]]; then
+if [[ $(get_property /usr/lib/os-release VERSION) =~ (([0-9]{1,3})-([0-9]{2}.[0-9]{1,})(.([0-9]{1,}){0,1}).+) ]]; then
     version="${BASH_REMATCH[2]}-${BASH_REMATCH[3]}"
     version_id="${BASH_REMATCH[2]}"
 
     [[ ${BASH_REMATCH[5]} > 0 ]] && version+=".${BASH_REMATCH[5]}"
 
+    # HACK: This gets set with the build.sh script
     if [[ $(cat /etc/sodalite-commit) != "" ]]; then
         version+="+$(cat /etc/sodalite-commit)"
         rm -r /etc/sodalite-commit
@@ -80,15 +81,15 @@ if [[ $(get_property /etc/os-release VERSION) =~ (([0-9]{1,3})-([0-9]{2}.[0-9]{1
 
     [[ ! -z $variant ]] && [[ $variant != "base" ]] && version+=" ($variant)"
 else
-    version=$(get_property /etc/os-release VERSION)
-    version_id=$(get_property /etc/os-release VERSION_ID)
+    version=$(get_property /usr/lib/os-release VERSION)
+    version_id=$(get_property /usr/lib/os-release VERSION_ID)
 fi
 
 pretty_name="Sodalite $version"
 
 if [[ ! -z $variant ]]; then
-    set_property /etc/os-release "VARIANT" $variant
-    set_property /etc/os-release "VARIANT_ID" $variant
+    set_property /usr/lib/os-release "VARIANT" $variant
+    set_property /usr/lib/os-release "VARIANT_ID" $variant
 fi
 
 if [[ ! -z $version_id ]]; then
@@ -97,11 +98,14 @@ if [[ ! -z $version_id ]]; then
     set_property /etc/upstream-release/lsb-release "VERSION_ID" "$version_id"
 fi
 
-set_property /etc/os-release "ID" "sodalite"
-set_property /etc/os-release "NAME" "Sodalite"
-set_property /etc/os-release "PRETTY_NAME" "$pretty_name"
-set_property /etc/os-release "VERSION" "$version"
-set_property /etc/os-release "VERSION_ID" "$version_id"
+set_property /usr/lib/os-release "ID" "sodalite"
+set_property /usr/lib/os-release "ID_LIKE" "fedora"
+set_property /usr/lib/os-release "NAME" "Sodalite"
+set_property /usr/lib/os-release "PRETTY_NAME" "$pretty_name"
+set_property /usr/lib/os-release "VERSION" "$version"
+set_property /usr/lib/os-release "VERSION_ID" "$version_id"
+
+ln -s /usr/lib/os-release /etc/os-release
 
 ############
 # REMOVALS #
