@@ -49,7 +49,8 @@ buildinfo_content="COMMIT=$(git rev-parse --short HEAD)
 
 echo -e $buildinfo_content > $buildinfo_file
 
-echo "⚡ Building tree for 'sodalite-$variant'..."
+echo "⚡ Building tree..."
+echo "================================================================================"
 
 rpm-ostree compose tree \
     --cachedir="$ostree_cache_dir" \
@@ -62,6 +63,8 @@ else
     echo "✏️ Generating summary for 'sodalite-$variant'..."
     ostree summary --repo="$ostree_repo_dir" --update
 fi
+
+echo "================================================================================"
 
 echo "🗑️ Cleaning up..."
 

@@ -6,7 +6,7 @@ buildinfo_file="/usr/lib/sodalite-buildinfo"
 
 function del_property() {
     file=$1
-    item=$2
+    property=$2
     
     if [[ -f $file ]]; then
         if [[ ! -z $(get_property $file $property) ]]; then
@@ -17,10 +17,10 @@ function del_property() {
 
 function get_property() {
     file=$1
-    item=$2
+    property=$2
 
     if [[ -f $file ]]; then
-        echo $(grep -oP '(?<=^'"$item"'=).+' $file | tr -d '"')
+        echo $(grep -oP '(?<=^'"$property"'=).+' $file | tr -d '"')
     fi
 }
 
@@ -84,7 +84,7 @@ done
 # OSTREE MUTATING #
 ###################
 
-if [[ $(get_property /usr/lib/os-release VERSION) =~ (([0-9]{1,3})-([0-9]{2}.[0-9]{1,})(.([0-9]{1,}){0,1}).+) ]]; then
+if [[ $(get_property /etc/os-release VERSION) =~ (([0-9]{1,3})-([0-9]{2}.[0-9]{1,})(.([0-9]{1,}){0,1}).+) ]]; then
     version="${BASH_REMATCH[2]}-${BASH_REMATCH[3]}"
     version_id="${BASH_REMATCH[2]}"
 
@@ -97,8 +97,8 @@ if [[ $(get_property /usr/lib/os-release VERSION) =~ (([0-9]{1,3})-([0-9]{2}.[0-
 
     [[ ! -z $variant ]] && [[ $variant != "base" ]] && version+=" ($variant)"
 else
-    version=$(get_property /usr/lib/os-release VERSION)
-    version_id=$(get_property /usr/lib/os-release VERSION_ID)
+    version=$(get_property /etc/os-release VERSION)
+    version_id=$(get_property /etc/os-release VERSION_ID)
 fi
 
 pretty_name="Sodalite $version"
