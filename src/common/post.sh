@@ -28,10 +28,9 @@ function set_property() {
 
 set -xeuo pipefail
 
-# HACK: This gets set with the build.sh script, so no biggy if we miss it
-if [[ $(cat /etc/sodalite-variant) != "" ]]; then
-    variant="$(cat /etc/sodalite-variant)"
-    rm -f /etc/sodalite-variant
+# HACK: This gets set with the build.sh script
+if [[ $(cat /usr/lib/sodalite-build/variant) != "" ]]; then
+    variant="$(cat /usr/lib/sodalite-build/variant)"
 else
     variant="unknown"
 fi
@@ -74,9 +73,8 @@ if [[ $(get_property /usr/lib/os-release VERSION) =~ (([0-9]{1,3})-([0-9]{2}.[0-
     [[ ${BASH_REMATCH[5]} > 0 ]] && version+=".${BASH_REMATCH[5]}"
 
     # HACK: This gets set with the build.sh script
-    if [[ $(cat /etc/sodalite-commit) != "" ]]; then
-        version+="+$(cat /etc/sodalite-commit)"
-        rm -r /etc/sodalite-commit
+    if [[ $(cat /usr/lib/sodalite-build/commit) != "" ]]; then
+        version+="+$(cat /usr/lib/sodalite-build/commit)"
     fi
 
     [[ ! -z $variant ]] && [[ $variant != "base" ]] && version+=" ($variant)"
@@ -290,3 +288,5 @@ systemctl enable generate-oemconf
 systemctl enable lightdm
 systemctl enable touchegg
 systemctl enable update-appcenter-flatpak
+
+rm -f /usr/lib/sodalite-build

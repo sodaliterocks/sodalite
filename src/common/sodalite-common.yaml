@@ -28,8 +28,6 @@ add-files: [
   ["../../lib/elementary.default-settings/cups/default-testpage.pdf", "/etc/cups/default-testpage.pdf"],
   ["../../lib/elementary.default-settings/gtk/settings.ini", "/etc/gtk/settings.ini"],
   ["../sysroot/etc/issue", "/etc/issue"],
-  ["../sysroot/etc/sodalite-commit", "/etc/sodalite-commit"],
-  ["../sysroot/etc/sodalite-variant", "/etc/sodalite-variant"],
   ["../sysroot/etc/tlp.d/50-vm-writeback.conf", "/etc/tlp.d/50-vm-writeback.conf"],
   ["../sysroot/etc/upstream-release/lsb-release", "/etc/upstream-release/lsb-release"],
 
@@ -62,6 +60,10 @@ add-files: [
   ["../sysroot/usr/bin/gnome-control-center", "/usr/bin/gnome-control-center"],
   ["../sysroot/usr/bin/plank-sodalite-wrapper", "/usr/bin/plank-sodalite-wrapper"],
   ["../sysroot/usr/bin/serve", "/usr/bin/serve"],
+  
+  # /usr/lib/sodalite-build
+  ["../sysroot/usr/lib/sodalite-build/commit", "/usr/lib/sodalite-build/commit"],
+  ["../sysroot/usr/lib/sodalite-build/variant", "/usr/lib/sodalite-build/variant"],
   
   # /usr/libexec
   ["../../lib/sodaliterocks.hacks/src/plugins/cleanup.sh", "/usr/libexec/sodalite-hacks/plugins/cleanup.sh"],
