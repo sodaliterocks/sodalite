@@ -133,6 +133,7 @@ del_property /usr/lib/os-release "REDHAT_SUPPORT_PRODUCT_VERSION"
 
 sed -i "/^$/d" /usr/lib/os-release
 
+rm /etc/os-release
 ln -s /usr/lib/os-release /etc/os-release
 
 ############
