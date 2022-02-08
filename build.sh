@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 # Usage: ./build.sh [<variant>] [<working-dir>]
 
-. "$(dirname "$(realpath -s "$0")")/lib/sodaliterocks.common/bash/common.sh"
-
 base_dir="$(dirname "$(realpath -s "$0")")"
 variant=$1
 working_dir=$2
@@ -13,7 +11,9 @@ function die() {
     exit 255
 }
 
-test_root
+if ! [[ $(id -u) = 0 ]]; then
+    die "Permission denied (are you root?)"
+fi
 
 if [[ ! $(command -v "rpm-ostree") ]]; then
     die "rpm-ostree not installed"
@@ -82,7 +82,4 @@ echo "🗑️ Cleaning up..."
 
 rm "$base_dir/src/sysroot/usr/lib/sodalite-buildinfo"
 rm -rf  /var/tmp/rpm-ostree.*
-
-# TODO: Get owner and perms of parent directory
-real_user=$(get_sudo_user)
-chown -R $real_user:$real_user $working_dir
+chown -R $SUDO_USER:$SUDO_USER $working_dir
