@@ -10,7 +10,7 @@ include: [
 
 # Version
 releasever: "35" # Fedora version
-automatic-version-prefix: "${releasever}-22.4" # <base>-<year>.<release> (SEE: https://github.com/sodaliterocks/sodalite/releases/tag/v/stable/35-22.0)
+automatic-version-prefix: "${releasever}-22.5" # <base>-<year>.<release> (SEE: https://github.com/sodaliterocks/sodalite/releases/tag/v/stable/35-22.0)
 automatic-version-suffix: "."
 mutate-os-release: "${releasever}"
 
@@ -28,8 +28,6 @@ add-files: [
   ["../../lib/elementary.default-settings/cups/default-testpage.pdf", "/etc/cups/default-testpage.pdf"],
   ["../../lib/elementary.default-settings/gtk/settings.ini", "/etc/gtk/settings.ini"],
   ["../sysroot/etc/issue", "/etc/issue"],
-  ["../sysroot/etc/sodalite-commit", "/etc/sodalite-commit"],
-  ["../sysroot/etc/sodalite-variant", "/etc/sodalite-variant"],
   ["../sysroot/etc/tlp.d/50-vm-writeback.conf", "/etc/tlp.d/50-vm-writeback.conf"],
   ["../sysroot/etc/upstream-release/lsb-release", "/etc/upstream-release/lsb-release"],
 
@@ -63,6 +61,9 @@ add-files: [
   ["../sysroot/usr/bin/plank-sodalite-wrapper", "/usr/bin/plank-sodalite-wrapper"],
   ["../sysroot/usr/bin/serve", "/usr/bin/serve"],
   
+  # /usr/lib
+  ["../sysroot/usr/lib/sodalite-buildinfo", "/usr/lib/sodalite-buildinfo"],
+  
   # /usr/libexec
   ["../../lib/sodaliterocks.hacks/src/plugins/cleanup.sh", "/usr/libexec/sodalite-hacks/plugins/cleanup.sh"],
   ["../../lib/sodaliterocks.hacks/src/plugins/flatpak.sh", "/usr/libexec/sodalite-hacks/plugins/flatpak.sh"],
@@ -76,6 +77,8 @@ add-files: [
 
   # /usr/share/applications
   ["../sysroot/usr/share/applications/firewall-config.desktop", "/usr/share/applications/firewall-config.desktop"],
+  ["../sysroot/usr/share/applications/org.freedesktop.IBus.Setup.desktop", "/usr/share/applications/org.freedesktop.IBus.Setup.desktop"],
+  ["../sysroot/usr/share/applications/nm-connection-editor.desktop", "/usr/share/applications/nm-connection-editor.desktop"],
   ["../sysroot/usr/share/applications/org.gnome.DiskUtility.desktop", "/usr/share/applications/org.gnome.DiskUtility.desktop"],
   ["../sysroot/usr/share/applications/org.gnome.Software.desktop", "/usr/share/applications/org.gnome.Software.desktop"],
 

@@ -2,10 +2,26 @@
 
 . /usr/libexec/sodalite/bash/common.sh
 
+buildinfo_file="/usr/lib/sodalite-buildinfo"
+
+function del_property() {
+    file=$1
+    property=$2
+    
+    if [[ -f $file ]]; then
+        if [[ ! -z $(get_property $file $property) ]]; then
+            sed -i "s/^\($property=.*\)$//g" $file
+        fi
+    fi
+}
+
 function get_property() {
     file=$1
-    item=$2
-    echo $(grep -oP '(?<=^'"$item"'=).+' $file | tr -d '"')
+    property=$2
+
+    if [[ -f $file ]]; then
+        echo $(grep -oP '(?<=^'"$property"'=).+' $file | tr -d '"')
+    fi
 }
 
 function set_property() {
@@ -28,10 +44,14 @@ function set_property() {
 
 set -xeuo pipefail
 
-# HACK: This gets set with the build.sh script, so no biggy if we miss it
-if [[ $(cat /etc/sodalite-variant) != "" ]]; then
-    variant="$(cat /etc/sodalite-variant)"
-    rm -f /etc/sodalite-variant
+commit=""
+variant=""
+
+if [[ $(cat $buildinfo_file) != "" ]]; then
+    [[ ! -z $(get_property $buildinfo_file "COMMIT") ]] && \
+        commit="$(get_property $buildinfo_file "COMMIT")"
+    [[ ! -z $(get_property $buildinfo_file "VARIANT") ]] && \
+        variant="$(get_property $buildinfo_file "VARIANT")"
 else
     variant="unknown"
 fi
@@ -73,9 +93,9 @@ if [[ $(get_property /etc/os-release VERSION) =~ (([0-9]{1,3})-([0-9]{2}.[0-9]{1
 
     [[ ${BASH_REMATCH[5]} > 0 ]] && version+=".${BASH_REMATCH[5]}"
 
-    if [[ $(cat /etc/sodalite-commit) != "" ]]; then
-        version+="+$(cat /etc/sodalite-commit)"
-        rm -r /etc/sodalite-commit
+    # HACK: This gets set with the build.sh script
+    if [[ ! -z $commit ]]; then
+        version+="+$commit"
     fi
 
     [[ ! -z $variant ]] && [[ $variant != "base" ]] && version+=" ($variant)"
@@ -87,8 +107,8 @@ fi
 pretty_name="Sodalite $version"
 
 if [[ ! -z $variant ]]; then
-    set_property /etc/os-release "VARIANT" $variant
-    set_property /etc/os-release "VARIANT_ID" $variant
+    set_property /usr/lib/os-release "VARIANT" $variant
+    set_property /usr/lib/os-release "VARIANT_ID" $variant
 fi
 
 if [[ ! -z $version_id ]]; then
@@ -97,11 +117,27 @@ if [[ ! -z $version_id ]]; then
     set_property /etc/upstream-release/lsb-release "VERSION_ID" "$version_id"
 fi
 
-set_property /etc/os-release "ID" "sodalite"
-set_property /etc/os-release "NAME" "Sodalite"
-set_property /etc/os-release "PRETTY_NAME" "$pretty_name"
-set_property /etc/os-release "VERSION" "$version"
-set_property /etc/os-release "VERSION_ID" "$version_id"
+set_property /usr/lib/os-release "BUG_REPORT_URL" "https:\/\/sodalite.rocks\/bug-report"
+set_property /usr/lib/os-release "HOME_URL" "https:\/\/sodalite.rocks"
+set_property /usr/lib/os-release "ID" "sodalite"
+set_property /usr/lib/os-release "ID_LIKE" "fedora"
+set_property /usr/lib/os-release "NAME" "Sodalite"
+set_property /usr/lib/os-release "PRETTY_NAME" "$pretty_name"
+set_property /usr/lib/os-release "SUPPORT_URL" "https:\/\/sodalite.rocks\/support"
+set_property /usr/lib/os-release "VERSION" "$version"
+set_property /usr/lib/os-release "VERSION_ID" "$version_id"
+
+del_property /usr/lib/os-release "DOCUMENTATION_URL"
+del_property /usr/lib/os-release "PRIVACY_POLICY_URL"
+del_property /usr/lib/os-release "REDHAT_BUGZILLA_PRODUCT"
+del_property /usr/lib/os-release "REDHAT_BUGZILLA_PRODUCT_VERSION"
+del_property /usr/lib/os-release "REDHAT_SUPPORT_PRODUCT"
+del_property /usr/lib/os-release "REDHAT_SUPPORT_PRODUCT_VERSION"
+
+sed -i "/^$/d" /usr/lib/os-release
+
+rm /etc/os-release
+ln -s /usr/lib/os-release /etc/os-release
 
 ############
 # REMOVALS #
@@ -243,6 +279,8 @@ declare -a to_remove=(
     "/usr/share/xsessions/gnome-xorg.desktop"
     # light-locker
     "/etc/xdg/autostart/light-locker.desktop"
+    # malcontent-control
+    "/usr/share/applications/org.freedesktop.MalcontentControl.desktop"
     # plank
     "/etc/xdg/autostart/plank.desktop"
     # misc.
@@ -286,3 +324,5 @@ systemctl enable generate-oemconf
 systemctl enable lightdm
 systemctl enable touchegg
 systemctl enable update-appcenter-flatpak
+
+rm -f /usr/lib/sodalite-buildinfo

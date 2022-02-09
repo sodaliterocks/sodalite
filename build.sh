@@ -1,13 +1,25 @@
 #!/usr/bin/env bash
 # Usage: ./build.sh [<variant>] [<working-dir>]
 
-. "$(dirname "$(realpath -s "$0")")/lib/sodaliterocks.common/bash/common.sh"
-
 base_dir="$(dirname "$(realpath -s "$0")")"
 variant=$1
 working_dir=$2
 
-test_root
+function die() {
+    message=$@
+    echo -e "\033[1;31mError: $message\033[0m"
+    exit 255
+}
+
+if ! [[ $(id -u) = 0 ]]; then
+    die "Permission denied (are you root?)"
+fi
+
+if [[ ! $(command -v "rpm-ostree") ]]; then
+    die "rpm-ostree not installed"
+fi
+
+echo "🪛 Setting up..."
 
 [[ $variant == *.yaml ]] && variant="$(echo $variant | sed s/.yaml//)"
 [[ $variant == sodalite* ]] && variant="$(echo $variant | sed s/sodalite-//)"
@@ -19,11 +31,11 @@ treefile="$base_dir/src/sodalite-$variant.yaml"
 [[ $variant == "legacy" ]] && treefile="$base_dir/src/fedora-sodalite.yaml"
 
 if [[ ! -f $treefile ]]; then
-    echoc error "sodalite-$variant does not exist"
+    die "sodalite-$variant does not exist"
     exit
 fi
 
-lockfile="$base_dir/src/common/sodalite-common.overrides.yaml"
+lockfile="$base_dir/src/common/overrides.yaml"
 
 ostree_cache_dir="$working_dir/cache"
 ostree_repo_dir="$working_dir/repo"
@@ -33,37 +45,41 @@ mkdir -p $ostree_repo_dir
 chown -R root:root $working_dir
 
 if [ ! "$(ls -A $ostree_repo_dir)" ]; then
-   echoc "$(write_emoji "🆕")Initializing OSTree repository at '$ostree_repo_dir'..."
+   echo "🆕 Initializing OSTree repository at '$ostree_repo_dir'..."
    ostree --repo="$ostree_repo_dir" init --mode=archive
 fi
 
+echo "📄 Generating buildinfo file..."
 
-echoc "$(write_emoji "⚡")Building tree for 'sodalite-$variant'..."
+# Only put stuff in here that we actually need!
+buildinfo_file="$base_dir/src/sysroot/usr/lib/sodalite-buildinfo"
+buildinfo_content="COMMIT=$(git rev-parse --short HEAD)
+\nTAG=$(git describe --exact-match --tags $(git log -n1 --pretty='%h') 2>/dev/null)
+\nVARIANT=\"$variant\""
 
-echo "$variant" > "$base_dir/src/sysroot/etc/sodalite-variant"
+echo -e $buildinfo_content > $buildinfo_file
 
-if [[ $(git describe --exact-match --tags $(git log -n1 --pretty='%h') 2>&1 >/dev/null) ]]; then
-    echo "$(git rev-parse --short HEAD)" > "$base_dir/src/sysroot/etc/sodalite-commit"
-fi
+echo "⚡ Building tree..."
+echo "================================================================================"
 
 rpm-ostree compose tree \
     --cachedir="$ostree_cache_dir" \
     --repo="$ostree_repo_dir" \
     `[[ -s $lockfile ]] && echo "--ex-lockfile="$lockfile""` $treefile
+    
+[[ $? != 0 ]] && build_failed="true"
 
-if [[ $? != 0 ]]; then
-    echoc error "Failed to build tree"
+echo "================================================================================"
+
+if [[ $build_failed == "true" ]]; then
+    die "Failed to build tree"
 else
-    echoc "$(write_emoji "✏️")Generating summary for 'sodalite-$variant'..."
+    echo "✏️ Generating summary..."
     ostree summary --repo="$ostree_repo_dir" --update
 fi
 
-echoc "$(write_emoji "🗑️")Cleaning up..."
-echo "" > "$base_dir/src/sysroot/etc/sodalite-commit"
-echo "" > "$base_dir/src/sysroot/etc/sodalite-variant"
-rm -rf  /var/tmp/rpm-ostree.*
+echo "🗑️ Cleaning up..."
 
-# TODO: Get owner and perms of parent directory
-echoc "$(write_emoji "🛡️")Correcting permissions..."
-real_user=$(get_sudo_user)
-chown -R $real_user:$real_user $working_dir
+rm "$base_dir/src/sysroot/usr/lib/sodalite-buildinfo"
+rm -rf  /var/tmp/rpm-ostree.*
+chown -R $SUDO_USER:$SUDO_USER $working_dir

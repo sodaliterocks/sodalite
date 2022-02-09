@@ -1,4 +1,5 @@
 packages:
  - flatpak
  - xdg-desktop-portal
+ - xdg-desktop-portal-gnome
  - xdg-desktop-portal-pantheon
