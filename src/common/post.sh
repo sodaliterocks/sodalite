@@ -44,6 +44,9 @@ function set_property() {
 
 set -xeuo pipefail
 
+commit=""
+variant=""
+
 if [[ $(cat $buildinfo_file) != "" ]]; then
     [[ ! -z $(get_property $buildinfo_file "COMMIT") ]] && \
         commit="$(get_property $buildinfo_file "COMMIT")"
