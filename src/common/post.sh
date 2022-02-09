@@ -276,6 +276,8 @@ declare -a to_remove=(
     "/usr/share/xsessions/gnome-xorg.desktop"
     # light-locker
     "/etc/xdg/autostart/light-locker.desktop"
+    # malcontent-control
+    "/usr/share/applications/org.freedesktop.MalcontentControl.desktop"
     # plank
     "/etc/xdg/autostart/plank.desktop"
     # misc.
