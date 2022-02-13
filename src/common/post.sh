@@ -133,6 +133,7 @@ del_property /usr/lib/os-release "REDHAT_BUGZILLA_PRODUCT"
 del_property /usr/lib/os-release "REDHAT_BUGZILLA_PRODUCT_VERSION"
 del_property /usr/lib/os-release "REDHAT_SUPPORT_PRODUCT"
 del_property /usr/lib/os-release "REDHAT_SUPPORT_PRODUCT_VERSION"
+del_property /usr/lib/os-release "VERSION_CODENAME"
 
 sed -i "/^$/d" /usr/lib/os-release
 
