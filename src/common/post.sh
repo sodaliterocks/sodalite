@@ -284,6 +284,19 @@ declare -a to_remove=(
     "/usr/share/applications/org.freedesktop.MalcontentControl.desktop"
     # plank
     "/etc/xdg/autostart/plank.desktop"
+    # ufw
+    "/etc/default/ufw"
+    "/etc/ufw/"
+    "/usr/lib/python3.10/site-packages/ufw/"
+    "/usr/lib/systemd/system/ufw.service"
+    "/usr/libexec/ufw/"
+    "/usr/sbin/ufw"
+    "/usr/share/doc/ufw/"
+    "/usr/share/licenses/ufw/"
+    "/usr/share/locale/*/LC_MESSAGES/ufw.mo"
+    "/usr/share/man/man8/ufw-framework.8.gz"
+    "/usr/share/man/man8/ufw.8.gz"
+    "/usr/share/ufw/"
     # misc.
     "/usr/share/icewm/"
 )
