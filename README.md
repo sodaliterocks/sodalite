@@ -42,8 +42,7 @@ However, there's plenty of stuff that _does_ work rendering Sodalite entirely us
 ### Other Issues
 
 * Various System Settings (Switchboard) items are not included or do not work right.
-* Various theming issues, due to be fixed in the upstream:
-	* Some apps appear odd, such as Firefox which entirely lacks rounded corners.
+* Some apps lack rounded corners due to upstream theming issues.
 * Many Flatpak apps will be duplicated in the Dock: see [issue #64 on elementary/dock](https://github.com/elementary/dock/issues/64). Although this is one of many issues across elementary, this was worth bringing up. Nothing broke on your end!
 * ~~Not enough people are using this masterpiece.~~
 
