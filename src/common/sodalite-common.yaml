@@ -24,7 +24,6 @@ repos:
 # File manipulation
 add-files: [
   # /etc
-  ["../../lib/elementary.default-settings/appcenter/appcenter.hiddenapps", "/etc/appcenter/appcenter.hiddenapps"],
   ["../../lib/elementary.default-settings/cups/default-testpage.pdf", "/etc/cups/default-testpage.pdf"],
   ["../../lib/elementary.default-settings/gtk/settings.ini", "/etc/gtk/settings.ini"],
   ["../sysroot/etc/issue", "/etc/issue"],
