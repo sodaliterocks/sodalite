@@ -44,12 +44,12 @@ function set_property() {
 
 set -xeuo pipefail
 
-commit=""
 variant=""
+version_tag=""
 
 if [[ $(cat $buildinfo_file) != "" ]]; then
-    [[ ! -z $(get_property $buildinfo_file "COMMIT") ]] && \
-        commit="$(get_property $buildinfo_file "COMMIT")"
+    [[ -z $(get_property $buildinfo_file "GIT_TAG") ]] && \
+        version_tag="$(get_property $buildinfo_file "GIT_COMMIT")"
     [[ ! -z $(get_property $buildinfo_file "VARIANT") ]] && \
         variant="$(get_property $buildinfo_file "VARIANT")"
 else
@@ -94,8 +94,8 @@ if [[ $(get_property /etc/os-release VERSION) =~ (([0-9]{1,3})-([0-9]{2}.[0-9]{1
     [[ ${BASH_REMATCH[5]} > 0 ]] && version+=".${BASH_REMATCH[5]}"
 
     # HACK: This gets set with the build.sh script
-    if [[ ! -z $commit ]]; then
-        version+="+$commit"
+    if [[ ! -z $version_tag ]]; then
+        version+="+$version_tag"
     fi
 
     [[ ! -z $variant ]] && [[ $variant != "base" ]] && version+=" ($variant)"
@@ -133,6 +133,7 @@ del_property /usr/lib/os-release "REDHAT_BUGZILLA_PRODUCT"
 del_property /usr/lib/os-release "REDHAT_BUGZILLA_PRODUCT_VERSION"
 del_property /usr/lib/os-release "REDHAT_SUPPORT_PRODUCT"
 del_property /usr/lib/os-release "REDHAT_SUPPORT_PRODUCT_VERSION"
+del_property /usr/lib/os-release "VERSION_CODENAME"
 
 sed -i "/^$/d" /usr/lib/os-release
 

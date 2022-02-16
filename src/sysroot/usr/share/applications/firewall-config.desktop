@@ -1,10 +1,10 @@
 [Desktop Entry]
-Name=Firewall
+Name=Advanced Firewall Configuration
 Comment=Configure Firewall daemon
 Icon=network-firewall
-Categories=System;Settings;Security;
-Keywords=firewall;network;security;iptables;netfilter;
-Exec=/usr/bin/firewall-config
-Type=Application
-StartupNotify=true
+Exec=firewall-config
 Terminal=false
+StartupNotify=true
+Type=Application
+Categories=GNOME;GTK;Settings;X-GNOME-NetworkSettings;X-GNOME-Utilities;
+NotShowIn=GNOME;
