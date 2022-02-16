@@ -3,6 +3,7 @@ packages:
  - distrobox
  - git-core
  - git-lfs
+ - lm_sensors
  - meson
  - podman
  - python-pip
