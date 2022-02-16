@@ -53,8 +53,8 @@ echo "📄 Generating buildinfo file..."
 
 # Only put stuff in here that we actually need!
 buildinfo_file="$base_dir/src/sysroot/usr/lib/sodalite-buildinfo"
-buildinfo_content="COMMIT=$(git rev-parse --short HEAD)
-\nTAG=$(git describe --exact-match --tags $(git log -n1 --pretty='%h') 2>/dev/null)
+buildinfo_content="GIT_COMMIT=$(git -C $base_dir rev-parse --short HEAD)
+\nGIT_TAG=$(git -C $base_dir describe --exact-match --tags $(git -C $base_dir log -n1 --pretty='%h') 2>/dev/null)
 \nVARIANT=\"$variant\""
 
 echo -e $buildinfo_content > $buildinfo_file
