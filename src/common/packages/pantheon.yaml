@@ -75,6 +75,7 @@ packages:
  - switchboard-plug-security-privacy   # Buggy on Fedora (relies on ufw)
  - switchboard-plug-sharing
  - switchboard-plug-sound
+ - switchboard-plug-tweaks
  - switchboard-plug-useraccounts       # Untested (potentially dangerous?)
  - touchegg
  - wingpanel
