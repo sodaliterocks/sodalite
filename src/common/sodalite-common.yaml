@@ -5,6 +5,7 @@ include: [
   "packages/flatpak.yaml",
   "packages/pantheon.yaml",
   "packages/pantheon-apps.yaml",
+  "packages/pantheon-extras.yaml",
   "packages/tools.yaml",
 ]
 

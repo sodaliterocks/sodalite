@@ -1,0 +1,26 @@
+packages:
+ - firewall-config # Replacement for Security Switchboard plug
+ - gnome-software # Replacement for AppCenter
+ - NetworkManager-fortisslvpn
+ - NetworkManager-fortisslvpn-gnome
+ - NetworkManager-iodine
+ - NetworkManager-iodine-gnome
+ - NetworkManager-l2tp
+ - NetworkManager-l2tp-gnome
+ - NetworkManager-libreswan
+ - NetworkManager-libreswan-gnome
+ - NetworkManager-openconnect
+ - NetworkManager-openconnect-gnome
+ - NetworkManager-openvpn
+ - NetworkManager-openvpn-gnome
+ - NetworkManager-pptp
+ - NetworkManager-pptp-gnome
+ - NetworkManager-ssh
+ - NetworkManager-ssh-gnome
+ - NetworkManager-sstp
+ - NetworkManager-sstp-gnome
+ - NetworkManager-strongswan
+ - NetworkManager-strongswan-gnome
+ - NetworkManager-vpnc
+ - NetworkManager-vpnc-gnome
+ - wingpanel-indicator-ayatana
