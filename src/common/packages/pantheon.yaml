@@ -23,7 +23,6 @@ packages:
  - gvfs-mtp
  - gvfs-nfs
  - gvfs-smb
- - indicator-application
  - onboard
  - opendyslexic-fonts
  - pantheon-agent-geoclue2
