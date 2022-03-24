@@ -10,8 +10,8 @@ include: [
 ]
 
 # Version
-releasever: "36" # Fedora version
-automatic-version-prefix: "${releasever}-22.6" # <base>-<year>.<release> (SEE: https://github.com/sodaliterocks/sodalite/releases/tag/v/stable/35-22.0)
+releasever: "35" # Fedora version
+automatic-version-prefix: "${releasever}-22.7" # <base>-<year>.<release> (SEE: https://github.com/sodaliterocks/sodalite/releases/tag/v/stable/35-22.0)
 automatic-version-suffix: "."
 mutate-os-release: "${releasever}"
 
