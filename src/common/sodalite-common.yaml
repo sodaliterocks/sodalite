@@ -12,7 +12,7 @@ include: [
 
 # Version
 releasever: "36" # Fedora version
-automatic-version-prefix: "${releasever}-22.7" # Version is modified in post.sh (as <year>.<release>[.<update>]-<base>[+<commit>]), but only if the pre-determined pattern matches
+automatic-version-prefix: "${releasever}-22.7"
 automatic-version-suffix: "."
 mutate-os-release: "${releasever}"
 
