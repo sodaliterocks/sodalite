@@ -1,7 +1,7 @@
 # Meta
 ref: sodalite/stable/${basearch}/common
 include: [
-  "../../../lib/workstation-ostree-config_f36/fedora-common-ostree-pkgs.yaml",
+  "../../lib/workstation-ostree-config_f36/fedora-common-ostree-pkgs.yaml",
   "packages/essential.yaml",
   "packages/flatpak.yaml",
   "packages/pantheon.yaml",
