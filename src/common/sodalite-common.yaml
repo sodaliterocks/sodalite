@@ -18,10 +18,10 @@ mutate-os-release: "${releasever}"
 
 # Repositories
 repos:
-  - copr_decathorpe_elementary-staging
-  - copr_stsdc_monitor
-  - fedora
-  - fedora-updates
+ - copr_decathorpe_elementary-staging
+ - copr_stsdc_monitor
+ - fedora
+ - fedora-updates
 
 # File manipulation
 add-files: [

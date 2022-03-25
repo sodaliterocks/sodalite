@@ -1,5 +1,5 @@
 packages:
- #- appcenter                          # AppCenter does not work with rpm-ostree!
+ #- appcenter # AppCenter does not work with rpm-ostree!
  - contractor
  - elementary-files
  - elementary-greeter
@@ -66,4 +66,4 @@ packages:
  - wingpanel-indicator-session
  - wingpanel-indicator-sound
 exclude-packages:
-  - gnome-tour
+ - gnome-tour
