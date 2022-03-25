@@ -88,7 +88,7 @@ done
 ###################
 
 if [[ $(get_property /etc/os-release VERSION) =~ (([0-9]{1,3})-([0-9]{2}.[0-9]{1,})(.([0-9]{1,}){0,1}).+) ]]; then
-    version="${BASH_REMATCH[3]}-${BASH_REMATCH[2]}"
+    version="${BASH_REMATCH[2]}-${BASH_REMATCH[3]}"
     version_id="${BASH_REMATCH[2]}"
 
     [[ ${BASH_REMATCH[5]} > 0 ]] && version+=".${BASH_REMATCH[5]}"
