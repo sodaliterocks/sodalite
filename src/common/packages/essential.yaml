@@ -1,4 +1,3 @@
-include: ../../../lib/workstation-ostree-config/fedora-common-ostree-pkgs.yaml
 packages:
  - fedora-release
  - fedora-release-ostree-desktop
@@ -29,4 +28,4 @@ packages-x86_64:
  - xorg-x11-drv-vesa
  - xorg-x11-drv-vmware
 exclude-packages:
-  - PackageKit
+ - PackageKit
