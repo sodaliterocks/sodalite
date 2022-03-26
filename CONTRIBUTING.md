@@ -32,7 +32,7 @@ All code submitted into this repository will be [licensed as MIT](https://github
 	* Is merged into `devel` when work is complete.
 * `release/*`: **Release branches**
 	* Contains other versions besides `stable` (and `stable` itself).
-	* `main` in cherry-picked into here, being careful not to adjust the `ref` properties in treefiles for other versions.
+	* `main` in merged (or cherry-picked) into here, being careful not to adjust the `ref` or `releasever` properties in treefiles for other versions.
 	* This is the working code that is built on [the OSTree server](https://ostree.sodalite.rocks).
 
 ### Commit Messages
