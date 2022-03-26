@@ -144,7 +144,7 @@ ln -s /usr/lib/os-release /etc/os-release
 # REMOVALS #
 ############
 
-# HACK: Removing files here instead because we're not using --unified-core (see https://github.com/electricduck/sodalite/issues/9#issuecomment-1010384738)
+# HACK: Removing files here instead because we're not using --unified-core (see https://github.com/sodaliterocks/sodalite/issues/9#issuecomment-1010384738)
 
 declare -a to_remove=(
     # evolution-data-server
