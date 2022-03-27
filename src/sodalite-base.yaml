@@ -1,4 +1,4 @@
-ref: sodalite/stable/${basearch}/base
+ref: sodalite/f36/${basearch}/base
 include:
   - common/sodalite-common.yaml
 

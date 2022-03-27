@@ -1,4 +1,4 @@
-ref: sodalite/stable/${basearch}/pantheon-nightly
+ref: sodalite/f36/${basearch}/pantheon-nightly
 include:
   - common/sodalite-common.yaml
 
