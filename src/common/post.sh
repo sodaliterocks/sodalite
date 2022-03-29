@@ -137,8 +137,11 @@ del_property /usr/lib/os-release "VERSION_CODENAME"
 
 sed -i "/^$/d" /usr/lib/os-release
 
+echo "$pretty_name" > /usr/lib/sodalite-release
+
 rm /etc/os-release
 ln -s /usr/lib/os-release /etc/os-release
+ln -s /usr/lib/sodalite-release /etc/sodalite-release
 
 ############
 # REMOVALS #
