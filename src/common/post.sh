@@ -291,8 +291,8 @@ declare -a to_remove=(
     "/usr/share/icewm/"
 )
 
-if [[ $variant != "elementary-nightly" ]]; then
-    # These elementary packages are considered broken, so we'll only keep them
+if [[ $variant != "pantheon-nightly" ]]; then
+    # These Pantheon packages are considered broken, so we'll only keep them
     # for this variant
     to_remove+=(
         # switchboard-plug-datetime
