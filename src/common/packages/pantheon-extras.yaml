@@ -1,7 +1,8 @@
 packages:
  - firewall-config # Replacement for Security Switchboard plug
  - gnome-software # Replacement for AppCenter
- - NetworkManager-fortisslvpn
+ - gstreamer1-plugins-good-gtk # Camera does not work without this
+ - NetworkManager-fortisslvpn # NetworkManager VPN plugins
  - NetworkManager-fortisslvpn-gnome
  - NetworkManager-iodine
  - NetworkManager-iodine-gnome
