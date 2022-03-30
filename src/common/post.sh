@@ -137,14 +137,17 @@ del_property /usr/lib/os-release "VERSION_CODENAME"
 
 sed -i "/^$/d" /usr/lib/os-release
 
+echo "$pretty_name" > /usr/lib/sodalite-release
+
 rm /etc/os-release
 ln -s /usr/lib/os-release /etc/os-release
+ln -s /usr/lib/sodalite-release /etc/sodalite-release
 
 ############
 # REMOVALS #
 ############
 
-# HACK: Removing files here instead because we're not using --unified-core (see https://github.com/electricduck/sodalite/issues/9#issuecomment-1010384738)
+# HACK: Removing files here instead because we're not using --unified-core (see https://github.com/sodaliterocks/sodalite/issues/9#issuecomment-1010384738)
 
 declare -a to_remove=(
     # evolution-data-server
@@ -284,25 +287,12 @@ declare -a to_remove=(
     "/usr/share/applications/org.freedesktop.MalcontentControl.desktop"
     # plank
     "/etc/xdg/autostart/plank.desktop"
-    # ufw
-    "/etc/default/ufw"
-    "/etc/ufw/"
-    "/usr/lib/python3.10/site-packages/ufw/"
-    "/usr/lib/systemd/system/ufw.service"
-    "/usr/libexec/ufw/"
-    "/usr/sbin/ufw"
-    "/usr/share/doc/ufw/"
-    "/usr/share/licenses/ufw/"
-    "/usr/share/locale/*/LC_MESSAGES/ufw.mo"
-    "/usr/share/man/man8/ufw-framework.8.gz"
-    "/usr/share/man/man8/ufw.8.gz"
-    "/usr/share/ufw/"
     # misc.
     "/usr/share/icewm/"
 )
 
-if [[ $variant != "elementary-nightly" ]]; then
-    # These elementary packages are considered broken, so we'll only keep them
+if [[ $variant != "pantheon-nightly" ]]; then
+    # These Pantheon packages are considered broken, so we'll only keep them
     # for this variant
     to_remove+=(
         # switchboard-plug-datetime
@@ -314,6 +304,9 @@ if [[ $variant != "elementary-nightly" ]]; then
         # switchboard-plug-parental-controls
         "/usr/lib64/switchboard/system/libparental-controls.so"
         "/usr/share/doc/switchboard-plug-parental-controls/"
+        # switchboard-plug-security-privacy
+        "/usr/lib64/switchboard/personal/libsecurity-privacy.so"
+        "/usr/share/doc/switchboard-plug-security-privacy/"
     )
 fi
 

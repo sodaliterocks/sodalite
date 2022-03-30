@@ -23,12 +23,10 @@ echo "🪛 Setting up..."
 
 [[ $variant == *.yaml ]] && variant="$(echo $variant | sed s/.yaml//)"
 [[ $variant == sodalite* ]] && variant="$(echo $variant | sed s/sodalite-//)"
-[[ $variant == "fedora-sodalite" ]] && variant="legacy" # BUG: Kinda breaks various messages but whatever
 [[ -z $variant ]] && variant="custom"
 [[ -z $working_dir ]] && working_dir="$base_dir/build"
 
 treefile="$base_dir/src/sodalite-$variant.yaml"
-[[ $variant == "legacy" ]] && treefile="$base_dir/src/fedora-sodalite.yaml"
 
 if [[ ! -f $treefile ]]; then
     die "sodalite-$variant does not exist"
