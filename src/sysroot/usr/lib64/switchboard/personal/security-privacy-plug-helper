@@ -15,7 +15,7 @@ function get_status() {
     esac
 }
 
-function list_rules() {
+function list_rules_old() {
      echo -e "Status: $(get_status)\n"
      echo -e "\n"
      echo -e "     To                         Action      From\n"
@@ -73,7 +73,7 @@ function list_rules() {
      done
 }
 
-function add_rule() {
+function add_rule_old() {
     ufw_options="$@"
 
     if [[ "$ufw_options" =~ ((allow|deny|reject|limit) (in|out) proto (tcp|udp) to ([0-9\.\/]{9,18}|[\:\/0-9A-Fa-f]{4,43}|any) port ([0-9]{1,5}) from ([0-9\.\/]{9,18}|[\:\/0-9A-Fa-f]{4,43}|any)) ]]; then
@@ -111,7 +111,7 @@ function add_rule() {
     fi
 }
 
-function del_rule() {
+function del_rule_old() {
     id=0
     firewall-cmd --list-rich-rules --permanent | while read line; do
         id=$((id+1))
