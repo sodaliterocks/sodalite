@@ -159,7 +159,7 @@ declare -a to_remove=(
     "/usr/share/gnome-background-properties/fedora-workstation-backgrounds.xml"
     "/usr/share/licenses/fedora-workstation-backgrounds"
     # firefox
-    "/usr/lib64/firefox/browser/defaults/preferences/firefox-redhat-defaults-prefs.js"
+    "/usr/lib64/firefox/browser/defaults/preferences/firefox-redhat-default-prefs.js"
     # gnome-control-center
     #"/usr/bin/gnome-control-center"
     "/usr/libexec/cc-remote-login-helper"
@@ -265,7 +265,7 @@ done
 # MISC #
 ########
 
-# Sets the background System (in Switchboard) can use behind the logo
+# Sets background for System (in Switchboard) to use behind the logo
 ln -s $(get_property /usr/share/glib-2.0/schemas/io.elementary.desktop.gschema.override picture-uri | sed -E 's/file:\/\///' | sed -E "s/'//g") /usr/share/backgrounds/elementaryos-default
 
 glib-compile-schemas /usr/share/glib-2.0/schemas
