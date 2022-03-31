@@ -290,6 +290,7 @@ declare -a to_remove=(
     # plank
     "/etc/xdg/autostart/plank.desktop"
     # ufw
+    "/etc/ufw/"
     "/usr/lib/python3.10/site-packages/ufw/"
     "/usr/lib/systemd/system/ufw.service"
     "/usr/libexec/ufw/"
