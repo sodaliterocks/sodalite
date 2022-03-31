@@ -29,19 +29,19 @@ function check_chain() {
     if [[ $(firewall-cmd --permanent --direct --query-chain $protocol filter $chain) == "no" ]]; then
         # TODO: Remove chain if not needed
         firewall-cmd --permanent --direct --add-chain $protocol filter $chain
-
-        case ${chain} in
-            "sodalite-allow") check_passthrough $protocol "--append sodalite-allow --jump ACCEPT" ;;
-            "sodalite-deny") check_passthrough $protocol "--append sodalite-deny --jump DROP" ;;
-            "sodalite-reject") check_passthrough $protocol "--append sodalite-reject --jump REJECT" ;;
-            "sodalite-limit")
-                check_passthrough $protocol "--append sodalite-limit --match limit --limit 3/min --limit-burst 10 --jump ACCEPT"
-                check_passthrough $protocol "--append sodalite-limit --jump DROP"
-                ;;
-            *)
-                firewall-cmd --permanent --direct --remove-chain $protocol filter $chain
-        esac
     fi
+    
+    case ${chain} in
+        "sodalite-allow") check_passthrough $protocol "--append sodalite-allow --jump ACCEPT" ;;
+        "sodalite-deny") check_passthrough $protocol "--append sodalite-deny --jump DROP" ;;
+        "sodalite-reject") check_passthrough $protocol "--append sodalite-reject --jump REJECT" ;;
+        "sodalite-limit")
+            check_passthrough $protocol "--append sodalite-limit --match limit --limit 3/min --limit-burst 10 --jump ACCEPT"
+            check_passthrough $protocol "--append sodalite-limit --jump DROP"
+            ;;
+        *)
+            firewall-cmd --permanent --direct --remove-chain $protocol filter $chain
+    esac
 }
 
 function get_status() {
@@ -165,7 +165,6 @@ while getopts "12345:6:" OPTION; do
     case ${OPTION} in
         2)
              systemctl enable --now firewalld
-            setup_chains
              ;;
         3)
              systemctl disable --now firewalld
