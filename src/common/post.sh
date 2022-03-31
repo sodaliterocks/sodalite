@@ -309,9 +309,6 @@ if [[ $variant != "pantheon-nightly" ]]; then
     # These Pantheon packages are considered broken, so we'll only keep them
     # for this variant
     to_remove+=(
-        # switchboard-plug-datetime
-        "/usr/lib64/switchboard/system/libdatetime.so"
-        "/usr/share/doc/switchboard-plug-datetime/"
         # switchboard-plug-locale
         "/usr/lib64/switchboard/personal/liblocale-plug.so"
         "/usr/share/doc/switchboard-plug-locale/"
