@@ -64,6 +64,7 @@ add-files: [
   
   # /usr/lib
   ["../sysroot/usr/lib/sodalite-buildinfo", "/usr/lib/sodalite-buildinfo"],
+  ["../sysroot/usr/lib/hotfix-test", "/usr/lib/hotfix-test"],
   
   # /usr/lib64
   ["../sysroot/usr/lib64/switchboard/personal/security-privacy-plug-helper", "/usr/lib64/switchboard/personal/security-privacy-plug-helper"],
