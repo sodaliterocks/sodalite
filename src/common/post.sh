@@ -158,6 +158,8 @@ declare -a to_remove=(
     "/usr/share/doc/fedora-workstation-backgrounds/"
     "/usr/share/gnome-background-properties/fedora-workstation-backgrounds.xml"
     "/usr/share/licenses/fedora-workstation-backgrounds"
+    # firefox
+    "/usr/lib64/firefox/browser/defaults/preferences/firefox-redhat-defaults-prefs.js"
     # gnome-control-center
     #"/usr/bin/gnome-control-center"
     "/usr/libexec/cc-remote-login-helper"
@@ -288,6 +290,7 @@ declare -a to_remove=(
     # plank
     "/etc/xdg/autostart/plank.desktop"
     # misc.
+    "/usr/share/bookmarks/"
     "/usr/share/icewm/"
 )
 
