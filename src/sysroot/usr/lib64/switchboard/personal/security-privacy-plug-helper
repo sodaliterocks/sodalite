@@ -32,7 +32,7 @@ function check_chain() {
 
         case ${chain} in
             "sodalite-allow") check_passthrough $protocol "--append sodalite-allow --jump ACCEPT" ;;
-            "sodalite-deny") check_passthrough $protocol "--append sodalite-deny --jump DENY" ;;
+            "sodalite-deny") check_passthrough $protocol "--append sodalite-deny --jump DROP" ;;
             "sodalite-reject") check_passthrough $protocol "--append sodalite-reject --jump REJECT" ;;
             "sodalite-limit")
                 check_passthrough $protocol "--append sodalite-limit --match limit --limit 3/min --limit-burst 10 --jump ACCEPT"
