@@ -67,3 +67,4 @@ packages:
  - wingpanel-indicator-sound
 exclude-packages:
  - gnome-tour
+ - ufw
