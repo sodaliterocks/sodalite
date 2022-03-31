@@ -161,25 +161,60 @@ function del_rule() {
     done
 }
 
-while getopts "12345:6:" OPTION; do
-    case ${OPTION} in
-        2)
-             systemctl enable --now firewalld
-             ;;
-        3)
-             systemctl disable --now firewalld
-             ;;
-        4|1)
-             list_rules
-             ;;
-        5)
-             add_rule $2
-             ;;
-        6)
-             del_rule $OPTARG
-             ;;
-        *)
-             die "Not implemented"
-             ;;
-    esac
-done
+fw_daemon="firewalld"
+
+if [[ -x "$(command -v ufw)" ]]; then
+    fw_daemon="ufw"
+fi
+
+case ${fw_daemon} in
+    "firewalld")
+        while getopts "12345:6:" OPTION; do
+            case ${OPTION} in
+                2)
+                    systemctl enable --now firewalld
+                    ;;
+                3)
+                    systemctl disable --now firewalld
+                    ;;
+                4|1)
+                    list_rules
+                    ;;
+                5)
+                    add_rule $2
+                    ;;
+                6)
+                    del_rule $OPTARG
+                    ;;
+                *)
+                    die "Not implemented"
+                    ;;
+            esac
+        done
+        ;;
+    "ufw")
+        # https://github.com/elementary/switchboard-plug-security-privacy/blob/1119b7fd1441f1b06d37caea19f38216ad1f24da/data/security-privacy-plug-helper#L3-L24
+        while getopts "12345:6:" OPTION; do
+            case ${OPTION} in
+                1)
+                    LANGUAGE=C
+                    export LANGUAGE
+                    ufw status;;
+                2)
+                    ufw --force enable;;
+                3)
+                    ufw disable;;
+                4)
+                    LANGUAGE=C
+                    export LANGUAGE
+                    ufw status numbered;;
+                5)
+                    ufw $2;;
+                6)
+                    ufw --force delete $OPTARG;;
+                \?)
+                    exit 1;;
+            esac
+        done
+        ;;
+esac
