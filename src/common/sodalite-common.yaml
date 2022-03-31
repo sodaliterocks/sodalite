@@ -65,6 +65,9 @@ add-files: [
   # /usr/lib
   ["../sysroot/usr/lib/sodalite-buildinfo", "/usr/lib/sodalite-buildinfo"],
   
+  # /usr/lib64
+  ["../sysroot/usr/lib64/switchboard/personal/security-privacy-plug-helper", "/usr/lib64/switchboard/personal/security-privacy-plug-helper"],
+  
   # /usr/libexec
   ["../../lib/sodaliterocks.hacks/src/plugins/cleanup.sh", "/usr/libexec/sodalite-hacks/plugins/cleanup.sh"],
   ["../../lib/sodaliterocks.hacks/src/plugins/flatpak.sh", "/usr/libexec/sodalite-hacks/plugins/flatpak.sh"],
