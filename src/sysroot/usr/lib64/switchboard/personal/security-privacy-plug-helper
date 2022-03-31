@@ -5,120 +5,158 @@ function die() {
     exit 1
 }
 
+function get_option() {
+    args="$1"
+    option="$2"
+
+    echo $(echo $args | grep -o -P "(?<=--$option |-$option ).*?(?:(?= -| --)|$)")
+}
+
+function check_chain() {
+    protocol="$1"
+    chain="sodalite-$2"
+
+    function check_passthrough() {
+        protocol="$1"
+        args="$2"
+
+        if [[ $(firewall-cmd --permanent --direct --query-passthrough $protocol $args) == "no" ]]; then
+            # TODO: Remove passthrough if not needed
+            firewall-cmd --permanent --direct --add-passthrough $protocol $args
+        fi
+    }
+
+    if [[ $(firewall-cmd --permanent --direct --query-chain $protocol filter $chain) == "no" ]]; then
+        # TODO: Remove chain if not needed
+        firewall-cmd --permanent --direct --add-chain $protocol filter $chain
+
+        case ${chain} in
+            "sodalite-allow") check_passthrough $protocol "--append sodalite-allow --jump ACCEPT" ;;
+            "sodalite-deny") check_passthrough $protocol "--append sodalite-deny --jump DENY" ;;
+            "sodalite-reject") check_passthrough $protocol "--append sodalite-reject --jump REJECT" ;;
+            "sodalite-limit")
+                check_passthrough $protocol "--append sodalite-limit --match limit --limit 3/min --limit-burst 10 --jump ACCEPT"
+                check_passthrough $protocol "--append sodalite-limit --jump DROP"
+                ;;
+            *)
+                firewall-cmd --permanent --direct --remove-chain $protocol filter $chain
+        esac
+    fi
+}
+
 function get_status() {
     fwc_state="$(firewall-cmd --state)"
 
     case ${fwc_state} in
-        "running") echo "active";;
-        "not running") echo "inactive";;
-        *) echo "unknown";;
+        "running") echo "active" ;;
+        *) echo "inactive" ;;
     esac
 }
 
-function list_rules_old() {
-     echo -e "Status: $(get_status)\n"
-     echo -e "\n"
-     echo -e "     To                         Action      From\n"
-     echo -e "     --                         ------      ----\n"
+function list_rules() {
+    echo -e "Status: $(get_status)"
+    echo -e ""
+    echo -e "     To                         Action      From"
+    echo -e "     --                         ------      ----"
 
-     id=0
-     firewall-cmd --list-rich-rules --permanent | while read line; do
-         action=""
-         direction=""
-         from=""
-         id=$((id+1))
-         to=""
+    id=0
+    firewall-cmd --permanent --direct --get-all-rules | while read line; do
+        id=$((id+1))
+    
+        if [[ $line =~ ((ipv4|ipv6) filter (INPUT|OUTPUT) ([[:digit:]]+) (.*)) ]]; then
+            args="${BASH_REMATCH[5]}"
+            direction="${BASH_REMATCH[3]}"
+            protocol="${BASH_REMATCH[2]}"
 
-         if [[ $line =~ ((port|source-port) port=\"([0-9]{1,5})\" protocol=\"(tcp|udp)\") ]]; then
-             to="${BASH_REMATCH[3]}/${BASH_REMATCH[4]}"
+            ipt_jump="$(get_option "$args" "j")"
+            ipt_port="$(get_option "$args" "dport")"
+            ipt_protocol="$(get_option "$args" "p")"
+            ipt_source="$(get_option "$args" "s")"
 
-             case "${BASH_REMATCH[2]}" in
-                 "port") direction="IN";;
-                 "source-port") direction="OUT";;
-             esac
-         fi
+            if [[ $ipt_jump == "sodalite"* ]]; then
+                ufw_action=""
+                ufw_direction=""
+                ufw_from="Anywhere"
+                ufw_id=$id
+                ufw_to="$ipt_port/$ipt_protocol"
 
-         if [[ $line =~ (accept limit|accept|drop|reject) ]]; then
-             case "${BASH_REMATCH[1]}" in
-                 "accept") action="ALLOW";;
-                 "accept limit") action="LIMIT";;
-                 "drop") action="DENY";;
-                 "reject") action="REJECT";;
-             esac
-         fi
+                case "$ipt_jump" in
+                    "sodalite-allow") ufw_action="ALLOW" ;;
+                    "sodalite-deny") ufw_action="DENY" ;;
+                    "sodalite-limit") ufw_action="LIMIT" ;;
+                    "sodalite-reject") ufw_action="REJECT" ;;
+                esac
 
-         if [[ $line =~ (source address=\"([0-9\.\/]{9,18}|[\:\/0-9A-Fa-f]{4,43})\") ]]; then
-             if { [[ "${BASH_REMATCH[2]}" == "0.0.0.0/0" ]] || [[ "${BASH_REMATCH[2]}" == "::/0" ]]; }; then
-                 from="Anywhere"
-             else
-                 from="${BASH_REMATCH[2]}"
-             fi
-         else
-             from="Anywhere"
-         fi
+                case "$direction" in
+                    "INPUT") ufw_direction="IN" ;;
+                    "OUTPUT") ufw_direction="OUT" ;;
+                esac
 
-         if [[ ! -z $to ]]; then
-             if [[ $line =~ (family=\"(ipv4|ipv6)\") ]]; then
-                 if [[ "${BASH_REMATCH[2]}" == "ipv6" ]]; then
-                     to+=" (v6)"
-                     from+=" (v6)"
-                 fi
+                if [[ -n $ipt_source ]]; then
+                    ufw_from="$ipt_source"
+                fi
 
-                 echo -e "[$id] $to  $action $direction  $from\n"
-             else
-                 echo -e "[$id] $to  $action $direction  Anywhere\n"
-                 echo -e "[$id] $to (v6)  $action $direction  Anywhere (v6)\n"
-             fi
-         fi
-     done
+                if [[ $protocol == "ipv6" ]]; then
+                    ufw_to+=" (v6)"
+                    ufw_from+=" (v6)"
+                fi
+
+                echo -e "[$ufw_id] $ufw_to  $ufw_action $ufw_direction  $ufw_from  +$line"
+            fi
+        fi
+    done
 }
 
-function add_rule_old() {
+function add_rule() {
     ufw_options="$@"
 
     if [[ "$ufw_options" =~ ((allow|deny|reject|limit) (in|out) proto (tcp|udp) to ([0-9\.\/]{9,18}|[\:\/0-9A-Fa-f]{4,43}|any) port ([0-9]{1,5}) from ([0-9\.\/]{9,18}|[\:\/0-9A-Fa-f]{4,43}|any)) ]]; then
-        action="${BASH_REMATCH[2]}"
-        direction="${BASH_REMATCH[3]}"
-        element="port"
-        from="${BASH_REMATCH[7]}"
-        port="${BASH_REMATCH[6]}"
-        protocol="${BASH_REMATCH[4]}"
-        to="${BASH_REMATCH[5]}"
-
-        [[ $direction == "out" ]] && element="source-port"
-
-        case ${action} in
-            "allow") action="accept";;
-            "deny") action="drop";;
-            "limit") action="accept limit value=\"30/s\"";;
-            "reject") action="reject";;
+        ufw_action="${BASH_REMATCH[2]}"
+        ufw_direction="${BASH_REMATCH[3]}"
+        ufw_from="${BASH_REMATCH[7]}"
+        ufw_port="${BASH_REMATCH[6]}"
+        ufw_protocol="${BASH_REMATCH[4]}"
+        ufw_to="${BASH_REMATCH[5]}"
+        
+        fwd_args="-p $ufw_protocol --dport $ufw_port -j sodalite-$ufw_action"
+        fwd_direction=""
+        
+        case ${ufw_direction} in
+            "in") fwd_direction="INPUT" ;;
+            "out") fwd_direction="OUTPUT" ;;
         esac
-
-        echo "$action"
-
-        if [[ $to == "any" ]]; then
-            firewall-cmd --add-rich-rule='rule '"family=ipv4 $element port=$port protocol=$protocol source address=0.0.0.0/0 $action"'' --permanent
-            firewall-cmd --add-rich-rule='rule '"family=ipv6 $element port=$port protocol=$protocol source address=::/0 $action"'' --permanent
-        else
-            if [[ $(echo $from | grep ":") ]]; then
-                firewall-cmd --add-rich-rule='rule '"family=ipv6 $element port=$port protocol=$protocol source address=$from $action"'' --permanent
-            else
-                firewall-cmd --add-rich-rule='rule '"family=ipv4 $element port=$port protocol=$protocol source address=$from $action"'' --permanent
-            fi
+        
+        if { [[ $ufw_from != "0.0.0.0/0" ]] && [[ $ufw_from != "::/0" ]] && [[ $ufw_from != "any" ]]; }; then
+            fwd_args+=" -s $ufw_from"
         fi
-    else
-        die "Could not parse options"
+
+        if [[ $ufw_to =~ ([0-9\.\/]{9,18}|any) ]]; then
+            check_chain ipv4 $ufw_action
+            firewall-cmd --permanent --direct --add-rule ipv4 filter $fwd_direction 0 $fwd_args
+        fi
+
+        if [[ $ufw_to =~ ([\:\/0-9A-Fa-f]{4,43}|any) ]]; then
+            check_chain ipv6 $ufw_action
+            firewall-cmd --permanent --direct --add-rule ipv6 filter $fwd_direction 0 $fwd_args
+        fi
+
+        firewall-cmd --reload
     fi
 }
 
-function del_rule_old() {
-    id=0
-    firewall-cmd --list-rich-rules --permanent | while read line; do
-        id=$((id+1))
+function del_rule() {
+    id=$1
 
-        if [[ $id == $1 ]]; then
-            firewall-cmd --remove-rich-rule=''"$line"'' --permanent
-            break
+    list_rules | while read line; do
+        if [[ $line =~ (\[([[:digit:]]+)\] [^*]*\+(.*)) ]]; then
+            ufw_id="${BASH_REMATCH[2]}"
+            ufw_args="${BASH_REMATCH[3]}"
+
+            if [[ $ufw_id == $id ]]; then
+                firewall-cmd --permanent --direct --remove-rule $ufw_args
+                firewall-cmd --reload
+                break
+            fi
         fi
     done
 }
@@ -127,6 +165,7 @@ while getopts "12345:6:" OPTION; do
     case ${OPTION} in
         2)
              systemctl enable --now firewalld
+            setup_chains
              ;;
         3)
              systemctl disable --now firewalld

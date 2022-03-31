@@ -1,7 +1,7 @@
 # Meta
 ref: sodalite/stable/${basearch}/common
 include: [
-  "../../lib/workstation-ostree-config_f36/fedora-common-ostree-pkgs.yaml",
+  "../../lib/workstation-ostree-config_f35/fedora-common-ostree-pkgs.yaml",
   "packages/essential.yaml",
   "packages/flatpak.yaml",
   "packages/pantheon.yaml",
@@ -11,7 +11,7 @@ include: [
 ]
 
 # Version
-releasever: "36" # Fedora version
+releasever: "35" # Fedora version
 automatic-version-prefix: "${releasever}-22.8"
 automatic-version-suffix: "."
 mutate-os-release: "${releasever}"
