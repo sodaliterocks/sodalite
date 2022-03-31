@@ -132,15 +132,15 @@ function add_rule() {
 
         if [[ $ufw_to =~ ([0-9\.\/]{9,18}|any) ]]; then
             check_chain ipv4 $ufw_action
-            firewall-cmd --permanent --direct --add-rule ipv4 filter $fwd_direction 0 $fwd_args
+            firewall-cmd --permanent --direct --add-rule ipv4 filter $fwd_direction 0 $fwd_args || die "Failed to add rule ($fwd_args)"
         fi
 
         if [[ $ufw_to =~ ([\:\/0-9A-Fa-f]{4,43}|any) ]]; then
             check_chain ipv6 $ufw_action
-            firewall-cmd --permanent --direct --add-rule ipv6 filter $fwd_direction 0 $fwd_args
+            firewall-cmd --permanent --direct --add-rule ipv6 filter $fwd_direction 0 $fwd_args || die "Failed to add rule ($fwd_args)"
         fi
 
-        firewall-cmd --reload
+        firewall-cmd --reload || die "Failed to reload"
     fi
 }
 
