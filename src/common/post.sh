@@ -304,9 +304,6 @@ if [[ $variant != "pantheon-nightly" ]]; then
         # switchboard-plug-parental-controls
         "/usr/lib64/switchboard/system/libparental-controls.so"
         "/usr/share/doc/switchboard-plug-parental-controls/"
-        # switchboard-plug-security-privacy
-        "/usr/lib64/switchboard/personal/libsecurity-privacy.so"
-        "/usr/share/doc/switchboard-plug-security-privacy/"
     )
 fi
 
