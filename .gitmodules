@@ -23,3 +23,6 @@
 [submodule "lib/workstation-ostree-config_f36"]
 	path = lib/workstation-ostree-config_f36
 	url = https://pagure.io/workstation-ostree-config
+[submodule "lib/workstation-ostree-config_f37"]
+	path = lib/workstation-ostree-config_f37
+	url = https://pagure.io/workstation-ostree-config
