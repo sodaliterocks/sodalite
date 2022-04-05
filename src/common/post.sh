@@ -116,15 +116,12 @@ rm /etc/os-release
 ln -s /usr/lib/os-release /etc/os-release
 ln -s /usr/lib/sodalite-release /etc/sodalite-release
 
-############
-# REMOVALS #
-############
-
 #########
 # HACKS #
 #########
 
-# TODO: Work out if we even need these. These issues are pretty old.
+# TODO: Work out if we even need some of these, as the related issues are
+#       pretty old.
 
 # BUG: https://github.com/projectatomic/rpm-ostree/issues/1542#issuecomment-419684977
 for x in /etc/yum.repos.d/*modular.repo; do
@@ -148,11 +145,19 @@ for x in /usr/sbin/glibc_post_upgrade.*; do
 done
 
 # SEE: https://github.com/coreos/fedora-coreos-tracker/issues/1139
+# rpm in Fedora 36 has moved location and symlinks to /usr/lib/sysimage/rpm,
+# which already exists, so we'll just delete it until the issue is fixed in the
+# upstream
 if [[ $version_id -gt 35 ]]; then
     rm -rf /usr/lib/sysimage/rpm
 fi
 
-# HACK: Removing files here instead because we're not using --unified-core (see https://github.com/sodaliterocks/sodalite/issues/9#issuecomment-1010384738)
+############
+# REMOVALS #
+############
+
+# HACK: Removing files here instead because we're not using --unified-core
+#       (see https://github.com/sodaliterocks/sodalite/issues/9#issuecomment-1010384738)
 
 declare -a to_remove=(
     # evolution-data-server
