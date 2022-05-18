@@ -91,6 +91,7 @@ if [[ ! -z $version_id ]]; then
 fi
 
 set_property /usr/lib/os-release "BUG_REPORT_URL" "https:\/\/sodalite.rocks\/bug-report"
+set_property /usr/lib/os-release "DOCUMENTATION_URL" "https:\/\/sodalite.rocks/docs"
 set_property /usr/lib/os-release "HOME_URL" "https:\/\/sodalite.rocks"
 set_property /usr/lib/os-release "ID" "sodalite"
 set_property /usr/lib/os-release "ID_LIKE" "fedora"
@@ -100,7 +101,6 @@ set_property /usr/lib/os-release "SUPPORT_URL" "https:\/\/sodalite.rocks\/suppor
 set_property /usr/lib/os-release "VERSION" "$version"
 set_property /usr/lib/os-release "VERSION_ID" "$version_id"
 
-del_property /usr/lib/os-release "DOCUMENTATION_URL"
 del_property /usr/lib/os-release "PRIVACY_POLICY_URL"
 del_property /usr/lib/os-release "REDHAT_BUGZILLA_PRODUCT"
 del_property /usr/lib/os-release "REDHAT_BUGZILLA_PRODUCT_VERSION"
