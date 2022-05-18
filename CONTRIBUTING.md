@@ -25,14 +25,14 @@ All code submitted into this repository will be [licensed as MIT](https://github
 		* If you do they will be adjusted to point to `devel`, and rejected if they do not merge automatically.
 * `devel`: **Development branch**
 	* Contains the latest development version of `stable`.
-	* Is merged into `main` when work is complete.
+	* Is merged (or cherry-picked) into `main` when work is complete.
 	* **This is likely where you'll spend most of your time.**
 * `feature/*`: **Feature branches**
 	* Contains upcoming large feature work.
 	* Is merged into `devel` when work is complete.
 * `release/*`: **Release branches**
 	* Contains other versions besides `stable` (and `stable` itself).
-	* `main` in cherry-picked into here, being careful not to adjust the `ref` properties in treefiles for other versions.
+	* `main` in merged (or cherry-picked) into here, being careful not to adjust the `ref` or `releasever` properties in treefiles for other versions.
 	* This is the working code that is built on [the OSTree server](https://ostree.sodalite.rocks).
 
 ### Commit Messages

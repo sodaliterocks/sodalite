@@ -56,33 +56,6 @@ else
     variant="unknown"
 fi
 
-#########
-# HACKS #
-#########
-
-# TODO: Work out if we even need these. These issues are pretty old.
-
-# BUG: https://github.com/projectatomic/rpm-ostree/issues/1542#issuecomment-419684977
-for x in /etc/yum.repos.d/*modular.repo; do
-    sed -i -e 's,enabled=[01],enabled=0,' ${x}
-done
-
-# BUG: https://bugzilla.redhat.com/show_bug.cgi?id=1265295
-if ! grep -q '^Storage=persistent' /etc/systemd/journald.conf; then
-    (cat /etc/systemd/journald.conf && echo 'Storage=persistent') > /etc/systemd.journald.conf.new
-    mv /etc/systemd.journald.conf{.new,}
-fi
-
-# SEE: https://src.fedoraproject.org/rpms/glibc/pull-request/4
-# Basically that program handles deleting old shared library directories
-# mid-transaction, which never applies to rpm-ostree. This is structured as a
-# loop/glob to avoid hardcoding (or trying to match) the architecture.
-for x in /usr/sbin/glibc_post_upgrade.*; do
-    if test -f ${x}; then
-        ln -srf /usr/bin/true ${x}
-    fi
-done
-
 ###################
 # OSTREE MUTATING #
 ###################
@@ -137,14 +110,54 @@ del_property /usr/lib/os-release "VERSION_CODENAME"
 
 sed -i "/^$/d" /usr/lib/os-release
 
+echo "$pretty_name" > /usr/lib/sodalite-release
+
 rm /etc/os-release
 ln -s /usr/lib/os-release /etc/os-release
+ln -s /usr/lib/sodalite-release /etc/sodalite-release
+
+#########
+# HACKS #
+#########
+
+# TODO: Work out if we even need some of these, as the related issues are
+#       pretty old.
+
+# BUG: https://github.com/projectatomic/rpm-ostree/issues/1542#issuecomment-419684977
+for x in /etc/yum.repos.d/*modular.repo; do
+    sed -i -e 's,enabled=[01],enabled=0,' ${x}
+done
+
+# BUG: https://bugzilla.redhat.com/show_bug.cgi?id=1265295
+if ! grep -q '^Storage=persistent' /etc/systemd/journald.conf; then
+    (cat /etc/systemd/journald.conf && echo 'Storage=persistent') > /etc/systemd.journald.conf.new
+    mv /etc/systemd.journald.conf{.new,}
+fi
+
+# SEE: https://src.fedoraproject.org/rpms/glibc/pull-request/4
+# Basically that program handles deleting old shared library directories
+# mid-transaction, which never applies to rpm-ostree. This is structured as a
+# loop/glob to avoid hardcoding (or trying to match) the architecture.
+for x in /usr/sbin/glibc_post_upgrade.*; do
+    if test -f ${x}; then
+        ln -srf /usr/bin/true ${x}
+    fi
+done
+
+# SEE: https://github.com/coreos/fedora-coreos-tracker/issues/1139
+# rpm in Fedora 36 has moved location and symlinks to /usr/lib/sysimage/rpm,
+# which already exists, so we'll just delete it until the issue is fixed in the
+# upstream
+if [[ $version_id -gt 35 ]]; then
+    rm -rf /usr/lib/sysimage/rpm
+fi
 
 ############
 # REMOVALS #
 ############
 
-# HACK: Removing files here instead because we're not using --unified-core (see https://github.com/sodaliterocks/sodalite/issues/9#issuecomment-1010384738)
+# HACK: Removing files here instead because we're not using --unified-core
+#       (see https://github.com/sodaliterocks/sodalite/issues/9#issuecomment-1010384738)
 
 declare -a to_remove=(
     # evolution-data-server
@@ -155,6 +168,8 @@ declare -a to_remove=(
     "/usr/share/doc/fedora-workstation-backgrounds/"
     "/usr/share/gnome-background-properties/fedora-workstation-backgrounds.xml"
     "/usr/share/licenses/fedora-workstation-backgrounds"
+    # firefox
+    "/usr/lib64/firefox/browser/defaults/preferences/firefox-redhat-default-prefs.js"
     # gnome-control-center
     #"/usr/bin/gnome-control-center"
     "/usr/libexec/cc-remote-login-helper"
@@ -205,69 +220,6 @@ declare -a to_remove=(
     "/usr/share/locale/*/LC_MESSAGES/gnome-control-center-2.0-timezones.mo"
     "/usr/share/man/man1/gnome-control-center.1.gz"
     "/usr/share/metainfo/gnome-control-center.appdata.xml"
-    "/usr/share/pixmaps/faces/astronaut.jpg"
-    "/usr/share/pixmaps/faces/baseball.png"
-    "/usr/share/pixmaps/faces/bicycle.jpg"
-    "/usr/share/pixmaps/faces/book.jpg"
-    "/usr/share/pixmaps/faces/butterfly.png"
-    "/usr/share/pixmaps/faces/calculator.jpg"
-    "/usr/share/pixmaps/faces/cat-eye.jpg"
-    "/usr/share/pixmaps/faces/cat.jpg"
-    "/usr/share/pixmaps/faces/chess.jpg"
-    "/usr/share/pixmaps/faces/coffee.jpg"
-    "/usr/share/pixmaps/faces/coffee2.jpg"
-    "/usr/share/pixmaps/faces/dice.jpg"
-    "/usr/share/pixmaps/faces/energy-arc.jpg"
-    "/usr/share/pixmaps/faces/fish.jpg"
-    "/usr/share/pixmaps/faces/flake.jpg"
-    "/usr/share/pixmaps/faces/flower.jpg"
-    "/usr/share/pixmaps/faces/flower2.jpg"
-    "/usr/share/pixmaps/faces/gamepad.jpg"
-    "/usr/share/pixmaps/faces/grapes.jpg"
-    "/usr/share/pixmaps/faces/guitar.jpg"
-    "/usr/share/pixmaps/faces/guitar2.jpg"
-    "/usr/share/pixmaps/faces/headphones.jpg"
-    "/usr/share/pixmaps/faces/hummingbird.jpg"
-    "/usr/share/pixmaps/faces/launch.jpg"
-    "/usr/share/pixmaps/faces/leaf.jpg"
-    "/usr/share/pixmaps/faces/legacy/astronaut.jpg"
-    "/usr/share/pixmaps/faces/legacy/baseball.png"
-    "/usr/share/pixmaps/faces/legacy/butterfly.png"
-    "/usr/share/pixmaps/faces/legacy/cat-eye.jpg"
-    "/usr/share/pixmaps/faces/legacy/chess.jpg"
-    "/usr/share/pixmaps/faces/legacy/coffee.jpg"
-    "/usr/share/pixmaps/faces/legacy/dice.jpg"
-    "/usr/share/pixmaps/faces/legacy/energy-arc.jpg"
-    "/usr/share/pixmaps/faces/legacy/fish.jpg"
-    "/usr/share/pixmaps/faces/legacy/flake.jpg"
-    "/usr/share/pixmaps/faces/legacy/flower.jpg"
-    "/usr/share/pixmaps/faces/legacy/grapes.jpg"
-    "/usr/share/pixmaps/faces/legacy/guitar.jpg"
-    "/usr/share/pixmaps/faces/legacy/launch.jpg"
-    "/usr/share/pixmaps/faces/legacy/leaf.jpg"
-    "/usr/share/pixmaps/faces/legacy/lightning.jpg"
-    "/usr/share/pixmaps/faces/legacy/penguin.jpg"
-    "/usr/share/pixmaps/faces/legacy/puppy.jpg"
-    "/usr/share/pixmaps/faces/legacy/sky.jpg"
-    "/usr/share/pixmaps/faces/legacy/soccerball.png"
-    "/usr/share/pixmaps/faces/legacy/sunflower.jpg"
-    "/usr/share/pixmaps/faces/legacy/sunset.jpg"
-    "/usr/share/pixmaps/faces/legacy/tennis-ball.png"
-    "/usr/share/pixmaps/faces/legacy/yellow-rose.jpg"
-    "/usr/share/pixmaps/faces/lightning.jpg"
-    "/usr/share/pixmaps/faces/mountain.jpg"
-    "/usr/share/pixmaps/faces/penguin.jpg"
-    "/usr/share/pixmaps/faces/plane.jpg"
-    "/usr/share/pixmaps/faces/puppy.jpg"
-    "/usr/share/pixmaps/faces/sky.jpg"
-    "/usr/share/pixmaps/faces/soccerball.png"
-    "/usr/share/pixmaps/faces/sunflower.jpg"
-    "/usr/share/pixmaps/faces/sunset.jpg"
-    "/usr/share/pixmaps/faces/surfer.jpg"
-    "/usr/share/pixmaps/faces/tennis-ball.png"
-    "/usr/share/pixmaps/faces/tomatoes.jpg"
-    "/usr/share/pixmaps/faces/tree.jpg"
-    "/usr/share/pixmaps/faces/yellow-rose.jpg"
     "/usr/share/polkit-1/actions/org.gnome.controlcenter.datetime.policy"
     "/usr/share/polkit-1/actions/org.gnome.controlcenter.remote-login-helper.policy"
     "/usr/share/polkit-1/actions/org.gnome.controlcenter.user-accounts.policy"
@@ -284,26 +236,34 @@ declare -a to_remove=(
     "/usr/share/applications/org.freedesktop.MalcontentControl.desktop"
     # plank
     "/etc/xdg/autostart/plank.desktop"
+    # ufw
+    "/etc/ufw/"
+    "/usr/lib/python3.10/site-packages/ufw/"
+    "/usr/lib/systemd/system/ufw.service"
+    "/usr/libexec/ufw/"
+    "/usr/sbin/ufw"
+    "/usr/share/doc/ufw/"
+    "/usr/share/licenses/ufw/"
+    "/usr/share/locale/*/LC_MESSAGES/ufw.mo"
+    "/usr/share/man/man8/ufw-framework.8.gz"
+    "/usr/share/man/man8/ufw.8.gz"
+    "/usr/share/ufw/"
     # misc.
+    "/usr/share/bookmarks/"
     "/usr/share/icewm/"
+    "/usr/share/pixmaps/faces/"
 )
 
-if [[ $variant != "elementary-nightly" ]]; then
-    # These elementary packages are considered broken, so we'll only keep them
+if [[ $variant != "pantheon-nightly" ]]; then
+    # These Pantheon packages are considered broken, so we'll only keep them
     # for this variant
     to_remove+=(
-        # switchboard-plug-datetime
-        "/usr/lib64/switchboard/system/libdatetime.so"
-        "/usr/share/doc/switchboard-plug-datetime/"
         # switchboard-plug-locale
         "/usr/lib64/switchboard/personal/liblocale-plug.so"
         "/usr/share/doc/switchboard-plug-locale/"
         # switchboard-plug-parental-controls
         "/usr/lib64/switchboard/system/libparental-controls.so"
         "/usr/share/doc/switchboard-plug-parental-controls/"
-        # switchboard-plug-security-privacy
-        "/usr/lib64/switchboard/personal/libsecurity-privacy.so"
-        "/usr/share/doc/switchboard-plug-security-privacy/"
     )
 fi
 
@@ -315,7 +275,7 @@ done
 # MISC #
 ########
 
-# Sets the background System (in Switchboard) can use behind the logo
+# Sets background for System (in Switchboard) to use behind the logo
 ln -s $(get_property /usr/share/glib-2.0/schemas/io.elementary.desktop.gschema.override picture-uri | sed -E 's/file:\/\///' | sed -E "s/'//g") /usr/share/backgrounds/elementaryos-default
 
 glib-compile-schemas /usr/share/glib-2.0/schemas

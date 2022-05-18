@@ -11,6 +11,22 @@ function die() {
     exit 255
 }
 
+function print_time() {
+    ((h=${1}/3600))
+    ((m=(${1}%3600)/60))
+    ((s=${1}%60))
+    
+    h_string="hours"
+    m_string="minutes"
+    s_string="seconds"
+    
+    [[ $h == 1 ]] && h_string="hour"
+    [[ $m == 1 ]] && m_string="minute"
+    [[ $s == 1 ]] && s_string="second"
+    
+    printf "%d $h_string %d $m_string %d $s_string\n" $h $m $s
+}
+
 if ! [[ $(id -u) = 0 ]]; then
     die "Permission denied (are you root?)"
 fi
@@ -19,6 +35,7 @@ if [[ ! $(command -v "rpm-ostree") ]]; then
     die "rpm-ostree not installed"
 fi
 
+start_time=$(date +%s)
 echo "🪛 Setting up..."
 
 [[ $variant == *.yaml ]] && variant="$(echo $variant | sed s/.yaml//)"
@@ -81,3 +98,5 @@ echo "🗑️ Cleaning up..."
 rm "$base_dir/src/sysroot/usr/lib/sodalite-buildinfo"
 rm -rf  /var/tmp/rpm-ostree.*
 chown -R $SUDO_USER:$SUDO_USER $working_dir
+end_time=$(( $(date +%s) - $start_time ))
+echo "✅ Success (took $(print_time $end_time))"

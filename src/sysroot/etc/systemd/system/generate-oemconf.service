@@ -1,14 +1,14 @@
 [Unit]
- Description=Generate OEM information
- Wants=network-online.target
- After=syslog.target network.target network-online.target
+Description=Generate OEM information
+Wants=network-online.target
+After=syslog.target network.target network-online.target
 
- [Service]
- Type=simple
- ExecStart=generate-oemconf -g
- Restart=on-failure
- RestartSec=10
- KillMode=process
+[Service]
+Type=simple
+ExecStart=/usr/bin/sodalite-hacks oemconf --generate
+Restart=on-failure
+RestartSec=10
+KillMode=process
 
- [Install]
- WantedBy=multi-user.target
+[Install]
+WantedBy=multi-user.target

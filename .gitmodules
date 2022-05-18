@@ -8,9 +8,6 @@
 [submodule "lib/sodaliterocks.common"]
 	path = lib/sodaliterocks.common
 	url = https://github.com/sodaliterocks/common
-[submodule "lib/sodaliterocks.generate-oemconf"]
-	path = lib/sodaliterocks.generate-oemconf
-	url = https://github.com/sodaliterocks/generate-oemconf
 [submodule "lib/elementary.icons"]
 	path = lib/elementary.icons
 	url = https://github.com/elementary/icons
@@ -22,4 +19,7 @@
 	url = https://pagure.io/workstation-ostree-config
 [submodule "lib/workstation-ostree-config_f36"]
 	path = lib/workstation-ostree-config_f36
+	url = https://pagure.io/workstation-ostree-config
+[submodule "lib/workstation-ostree-config_f37"]
+	path = lib/workstation-ostree-config_f37
 	url = https://pagure.io/workstation-ostree-config
