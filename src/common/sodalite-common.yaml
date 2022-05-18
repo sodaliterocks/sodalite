@@ -55,7 +55,6 @@ add-files: [
   ["../sysroot/etc/xdg/autostart/plank-sodalite-wrapper.desktop", "/etc/xdg/autostart/plank-sodalite-wrapper.desktop"],
 
   # /usr/bin
-  ["../../lib/sodaliterocks.generate-oemconf/generate-oemconf.sh", "/usr/bin/generate-oemconf"],
   ["../../lib/sodaliterocks.hacks/src/hacks.sh", "/usr/bin/sodalite-hacks"],
   ["../sysroot/usr/bin/detach", "/usr/bin/detach"],
   ["../sysroot/usr/bin/gnome-control-center", "/usr/bin/gnome-control-center"],
@@ -76,6 +75,7 @@ add-files: [
   ["../../lib/sodaliterocks.hacks/src/plugins/cleanup.sh", "/usr/libexec/sodalite-hacks/plugins/cleanup.sh"],
   ["../../lib/sodaliterocks.hacks/src/plugins/flatpak.sh", "/usr/libexec/sodalite-hacks/plugins/flatpak.sh"],
   ["../../lib/sodaliterocks.hacks/src/plugins/nvidia.sh", "/usr/libexec/sodalite-hacks/plugins/nvidia.sh"],
+  ["../../lib/sodaliterocks.hacks/src/plugins/oemconf.sh", "/usr/libexec/sodalite-hacks/plugins/oemconf.sh"],
   ["../../lib/sodaliterocks.hacks/src/plugins/vscode.sh", "/usr/libexec/sodalite-hacks/plugins/vscode.sh"],
   ["../../lib/sodaliterocks.hacks/src/plugins/winbtn.sh", "/usr/libexec/sodalite-hacks/plugins/winbtn.sh"],
   ["../../lib/sodaliterocks.hacks/src/utils.sh", "/usr/libexec/sodalite-hacks/utils.sh"],
