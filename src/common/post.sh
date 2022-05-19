@@ -91,7 +91,7 @@ if [[ ! -z $version_id ]]; then
 fi
 
 set_property /usr/lib/os-release "BUG_REPORT_URL" "https:\/\/sodalite.rocks\/bug-report"
-set_property /usr/lib/os-release "DOCUMENTATION_URL" "https:\/\/sodalite.rocks/docs"
+set_property /usr/lib/os-release "DOCUMENTATION_URL" "https:\/\/sodalite.rocks\/docs"
 set_property /usr/lib/os-release "HOME_URL" "https:\/\/sodalite.rocks"
 set_property /usr/lib/os-release "ID" "sodalite"
 set_property /usr/lib/os-release "ID_LIKE" "fedora"
