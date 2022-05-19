@@ -1,6 +1,6 @@
 [copr_decathorpe_elementary-staging]
 name=Copr: decathorpe/elementary-staging
-baseurl=https://download.copr.fedorainfracloud.org/results/decathorpe/elementary-staging/fedora-$releasever-$basearch/
+baseurl=https://download.copr.fedorainfracloud.org/results/decathorpe/elementary-staging/fedora-36-$basearch/
 type=rpm-md
 skip_if_unavailable=True
 gpgcheck=1

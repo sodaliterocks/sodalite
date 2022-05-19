@@ -4,7 +4,7 @@
 #
 # See https://rpm-ostree.readthedocs.io/en/stable/manual/treefile/ for help.
 
-ref: sodalite/stable/${basearch}/custom
+ref: sodalite/next/${basearch}/custom
 include:
   - common/sodalite-common.yaml
 
