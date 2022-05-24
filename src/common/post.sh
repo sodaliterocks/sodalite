@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-. /usr/libexec/sodalite/bash/common.sh
-
 buildinfo_file="/usr/lib/sodalite-buildinfo"
 
 function del_property() {
