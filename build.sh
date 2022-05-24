@@ -37,27 +37,33 @@ fi
 
 start_time=$(date +%s)
 echo "🪛 Setting up..."
-
 [[ $variant == *.yaml ]] && variant="$(echo $variant | sed s/.yaml//)"
 [[ $variant == sodalite* ]] && variant="$(echo $variant | sed s/sodalite-//)"
 [[ -z $variant ]] && variant="custom"
 [[ -z $working_dir ]] && working_dir="$base_dir/build"
 
+ostree_cache_dir="$working_dir/cache"
+ostree_repo_dir="$working_dir/repo"
+lockfile="$base_dir/src/common/overrides.yaml"
 treefile="$base_dir/src/sodalite-$variant.yaml"
+
+mkdir -p $ostree_cache_dir
+mkdir -p $ostree_repo_dir
+chown -R root:root $working_dir
+
+if [[ $(command -v "git") ]]; then
+    if [[ -d "$base_dir/.git" ]]; then
+        git config --global --add safe.directory $base_dir
+
+        git_commit=$(git -C $base_dir rev-parse --short HEAD)
+        git_tag=$(git -C $base_dir describe --exact-match --tags $(git -C $base_dir log -n1 --pretty='%h') 2>/dev/null)
+    fi
+fi
 
 if [[ ! -f $treefile ]]; then
     die "sodalite-$variant does not exist"
     exit
 fi
-
-lockfile="$base_dir/src/common/overrides.yaml"
-
-ostree_cache_dir="$working_dir/cache"
-ostree_repo_dir="$working_dir/repo"
-mkdir -p $ostree_cache_dir
-mkdir -p $ostree_repo_dir
-
-chown -R root:root $working_dir
 
 if [ ! "$(ls -A $ostree_repo_dir)" ]; then
    echo "🆕 Initializing OSTree repository at '$ostree_repo_dir'..."
@@ -66,10 +72,9 @@ fi
 
 echo "📄 Generating buildinfo file..."
 
-# Only put stuff in here that we actually need!
 buildinfo_file="$base_dir/src/sysroot/usr/lib/sodalite-buildinfo"
-buildinfo_content="GIT_COMMIT=$(git -C $base_dir rev-parse --short HEAD)
-\nGIT_TAG=$(git -C $base_dir describe --exact-match --tags $(git -C $base_dir log -n1 --pretty='%h') 2>/dev/null)
+buildinfo_content="GIT_COMMIT=$git_commit
+\nGIT_TAG=$git_tag
 \nVARIANT=\"$variant\""
 
 echo -e $buildinfo_content > $buildinfo_file
