@@ -1,7 +1,7 @@
 [Desktop Entry]
-Name=Plank (Sodalite wrapper)
+Name=Plank (Sodalite)
 Comment=Stupidly simple (and awesome).
-Exec=plank-sodalite-wrapper
+Exec=sodalite-plank
 Icon=plank
 Terminal=false
 Type=Application
