@@ -252,7 +252,7 @@ declare -a to_remove=(
     "/usr/share/pixmaps/faces/"
 )
 
-if [[ $variant != "pantheon-nightly" ]]; then
+if [[ $variant != "experimental-pantheon-nightly" ]]; then
     # These Pantheon packages are considered broken, so we'll only keep them
     # for this variant
     to_remove+=(
