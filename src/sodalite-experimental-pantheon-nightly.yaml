@@ -9,4 +9,3 @@ rojig:
   name: sodalite-experimental-pantheon-nightly
   summary: "Sodalite (Experimental: Pantheon Nightly)"
   license: MIT
-  description: "Beautiful. Immutable. | Experimental variant with nightly Pantheon packages."
