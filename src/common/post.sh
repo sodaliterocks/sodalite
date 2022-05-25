@@ -58,6 +58,8 @@ fi
 # OSTREE MUTATING #
 ###################
 
+cpe="cpe:/o:sodaliterocks:sodalite" # cpe:/<part>:<vendor>:<product>:<version>:<update>:<edition>:<language>
+
 if [[ $(get_property /etc/os-release VERSION) =~ (([0-9]{1,3})-([0-9]{2}.[0-9]{1,})(.([0-9]{1,}){0,1}).+) ]]; then
     version="${BASH_REMATCH[2]}-${BASH_REMATCH[3]}"
     version_id="${BASH_REMATCH[2]}"
@@ -70,9 +72,13 @@ if [[ $(get_property /etc/os-release VERSION) =~ (([0-9]{1,3})-([0-9]{2}.[0-9]{1
     fi
 
     [[ ! -z $variant ]] && [[ $variant != "base" ]] && version+=" ($variant)"
+
+    cpe+=":$version_id:$(echo $version | cut -f2- -d"-")"
 else
     version=$(get_property /etc/os-release VERSION)
     version_id=$(get_property /etc/os-release VERSION_ID)
+
+    cpe+=":$version_id:-"
 fi
 
 pretty_name="Sodalite $version"
@@ -80,6 +86,8 @@ pretty_name="Sodalite $version"
 if [[ ! -z $variant ]]; then
     set_property /usr/lib/os-release "VARIANT" $variant
     set_property /usr/lib/os-release "VARIANT_ID" $variant
+
+    cpe+=":$variant_id"
 fi
 
 if [[ ! -z $version_id ]]; then
@@ -89,6 +97,7 @@ if [[ ! -z $version_id ]]; then
 fi
 
 set_property /usr/lib/os-release "BUG_REPORT_URL" "https:\/\/sodalite.rocks\/bug-report"
+set_property /usr/lib/os-release "CPE_NAME" "$cpe"
 set_property /usr/lib/os-release "DOCUMENTATION_URL" "https:\/\/sodalite.rocks\/docs"
 set_property /usr/lib/os-release "HOME_URL" "https:\/\/sodalite.rocks"
 set_property /usr/lib/os-release "ID" "sodalite"
@@ -109,10 +118,17 @@ del_property /usr/lib/os-release "VERSION_CODENAME"
 sed -i "/^$/d" /usr/lib/os-release
 
 echo "$pretty_name" > /usr/lib/sodalite-release
+echo "$pretty_name" > /usr/lib/system-release
+echo "$cpe" > /usr/lib/system-release-cpe
 
 rm /etc/os-release
+rm /etc/system-release
+rm /etc/system-release-cpe
+
 ln -s /usr/lib/os-release /etc/os-release
 ln -s /usr/lib/sodalite-release /etc/sodalite-release
+ln -s /usr/lib/system-release /etc/system-release
+ln -s /usr/lib/system-release-cpe /etc/system-release-cpe
 
 #########
 # HACKS #
