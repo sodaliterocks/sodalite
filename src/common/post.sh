@@ -99,6 +99,7 @@ set_property /usr/lib/os-release "SUPPORT_URL" "https:\/\/sodalite.rocks\/suppor
 set_property /usr/lib/os-release "VERSION" "$version_pretty"
 set_property /usr/lib/os-release "VERSION_ID" "$version_id"
 
+del_property /usr/lib/os-release "ANSI_COLOR"
 del_property /usr/lib/os-release "PRIVACY_POLICY_URL"
 del_property /usr/lib/os-release "REDHAT_BUGZILLA_PRODUCT"
 del_property /usr/lib/os-release "REDHAT_BUGZILLA_PRODUCT_VERSION"
