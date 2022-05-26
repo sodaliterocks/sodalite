@@ -78,7 +78,7 @@ buildinfo_content="BUILD_DATE=$(date +"%Y-%m-%d %T %z")
 \nBUILD_HOST_NAME=\"$(hostname -f)\"
 \nBUILD_HOST_OS=\"$(cat /usr/lib/os-release | grep "PRETTY_NAME" | sed "s/PRETTY_NAME=//" | tr -d '"')\"
 \nBUILD_HOST_KERNEL=\"$(uname -srp)\"
-\nBUILD_RPMOSTREE=\"rpm-ostree $($rpmostree_version | grep "Version:" | sed "s/ Version: //" | tr -d "'")+$($rpmostree_version | grep "Git:" | sed "s/ Git: //")\"
+\nBUILD_RPMOSTREE=\"rpm-ostree $(echo $rpmostree_version | grep "Version:" | sed "s/ Version: //" | tr -d "'")+$(echo $rpmostree_version | grep "Git:" | sed "s/ Git: //")\"
 \nGIT_COMMIT=$git_commit
 \nGIT_TAG=$git_tag
 \nTREEFILE_VARIANT=\"$variant\""
