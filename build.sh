@@ -62,7 +62,6 @@ fi
 
 if [[ ! -f $treefile ]]; then
     die "sodalite-$variant does not exist"
-    exit
 fi
 
 if [ ! "$(ls -A $ostree_repo_dir)" ]; then
@@ -73,9 +72,14 @@ fi
 echo "📄 Generating buildinfo file..."
 
 buildinfo_file="$base_dir/src/sysroot/usr/lib/sodalite-buildinfo"
-buildinfo_content="GIT_COMMIT=$git_commit
+buildinfo_content="BUILD_DATE=$(date +"%Y-%m-%d %T %z")
+\nBUILD_HOST_NAME=\"$(hostname -f)\"
+\nBUILD_HOST_OS=\"$(cat /usr/lib/os-release | grep "PRETTY_NAME" | sed "s/PRETTY_NAME=//" | tr -d '"')\"
+\nBUILD_HOST_KERNEL=\"$(uname -srp)\"
+\nBUILD_RPMOSTREE=\"rpm-ostree $(rpm-ostree --version | grep "Version:" | sed "s/ Version: //" | tr -d "'")\"
+\nGIT_COMMIT=$git_commit
 \nGIT_TAG=$git_tag
-\nVARIANT=\"$variant\""
+\nTREEFILE_VARIANT=\"$variant\""
 
 echo -e $buildinfo_content > $buildinfo_file
 
