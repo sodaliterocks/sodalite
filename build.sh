@@ -74,11 +74,11 @@ echo "📄 Generating buildinfo file..."
 rpmostree_version="$(rpm-ostree --version)"
 
 buildinfo_file="$base_dir/src/sysroot/usr/lib/sodalite-buildinfo"
-buildinfo_content="BUILD_DATE=$(date +"%Y-%m-%d %T %z")
+buildinfo_content="\"BUILD_DATE=$(date +"%Y-%m-%d %T %z")\"
 \nBUILD_HOST_NAME=\"$(hostname -f)\"
 \nBUILD_HOST_OS=\"$(cat /usr/lib/os-release | grep "PRETTY_NAME" | sed "s/PRETTY_NAME=//" | tr -d '"')\"
 \nBUILD_HOST_KERNEL=\"$(uname -srp)\"
-\nBUILD_RPMOSTREE=\"rpm-ostree $(echo $rpmostree_version | grep "Version:" | sed "s/ Version: //" | tr -d "'")+$(echo $rpmostree_version | grep "Git:" | sed "s/ Git: //")\"
+\nBUILD_RPMOSTREE=\"rpm-ostree $(echo "$rpmostree_version" | grep "Version:" | sed "s/ Version: //" | tr -d "'")+$(echo "$rpmostree_version" | grep "Git:" | sed "s/ Git: //")\"
 \nGIT_COMMIT=$git_commit
 \nGIT_TAG=$git_tag
 \nTREEFILE_VARIANT=\"$variant\""
@@ -106,7 +106,7 @@ fi
 
 echo "🗑️ Cleaning up..."
 
-rm "$base_dir/src/sysroot/usr/lib/sodalite-buildinfo"
+rm $buildinfo_file
 rm -rf  /var/tmp/rpm-ostree.*
 chown -R $SUDO_USER:$SUDO_USER $working_dir
 end_time=$(( $(date +%s) - $start_time ))
