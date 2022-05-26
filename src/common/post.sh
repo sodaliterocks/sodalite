@@ -45,8 +45,8 @@ set -xeuo pipefail
 if [[ $(cat $buildinfo_file) != "" ]]; then
     [[ -z $(get_property $buildinfo_file "GIT_TAG") ]] && \
         version_tag="$(get_property $buildinfo_file "GIT_COMMIT")"
-    [[ ! -z $(get_property $buildinfo_file "TREEFILE_VARIANT") ]] && \
-        variant="$(get_property $buildinfo_file "TREEFILE_VARIANT")"
+    [[ ! -z $(get_property $buildinfo_file "VARIANT") ]] && \
+        variant="$(get_property $buildinfo_file "VARIANT")"
 fi
 
 ###################

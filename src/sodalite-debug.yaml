@@ -1,0 +1,11 @@
+ref: sodalite/stable/${basearch}/debug
+include:
+  - common/sodalite-common.yaml
+  
+packages:
+  - xorg-x11-server-Xephyr
+
+rojig:
+  name: sodalite-debug
+  summary: "Sodalite (Debug)"
+  license: MIT

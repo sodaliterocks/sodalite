@@ -4,10 +4,19 @@
 base_dir="$(dirname "$(realpath -s "$0")")"
 variant=$1
 working_dir=$2
+buildinfo_file="$base_dir/src/sysroot/usr/lib/sodalite-buildinfo"
+
+function cleanup() {
+    echo "🗑️ Cleaning up..."
+
+    rm $buildinfo_file
+    rm -rf  /var/tmp/rpm-ostree.*
+    chown -R $SUDO_USER:$SUDO_USER $working_dir
+}
 
 function die() {
-    message=$@
-    echo -e "\033[1;31mError: $message\033[0m"
+    echo -e "🛑 \033[1;31mError: $@\033[0m"
+    cleanup
     exit 255
 }
 
@@ -47,9 +56,7 @@ ostree_repo_dir="$working_dir/repo"
 lockfile="$base_dir/src/common/overrides.yaml"
 treefile="$base_dir/src/sodalite-$variant.yaml"
 
-mkdir -p $ostree_cache_dir
-mkdir -p $ostree_repo_dir
-chown -R root:root $working_dir
+ref="$(echo "$(cat "$treefile")" | grep "ref:" | sed "s/ref: //" | sed "s/\${basearch}/$(uname -m)/")"
 
 if [[ $(command -v "git") ]]; then
     if [[ -d "$base_dir/.git" ]]; then
@@ -59,6 +66,10 @@ if [[ $(command -v "git") ]]; then
         git_tag=$(git -C $base_dir describe --exact-match --tags $(git -C $base_dir log -n1 --pretty='%h') 2>/dev/null)
     fi
 fi
+
+mkdir -p $ostree_cache_dir
+mkdir -p $ostree_repo_dir
+chown -R root:root $working_dir
 
 if [[ ! -f $treefile ]]; then
     die "sodalite-$variant does not exist"
@@ -73,7 +84,6 @@ echo "📄 Generating buildinfo file..."
 
 rpmostree_version="$(rpm-ostree --version)"
 
-buildinfo_file="$base_dir/src/sysroot/usr/lib/sodalite-buildinfo"
 buildinfo_content="BUILD_DATE=\"$(date +"%Y-%m-%d %T %z")\"
 \nBUILD_HOST_NAME=\"$(hostname -f)\"
 \nBUILD_HOST_OS=\"$(cat /usr/lib/os-release | grep "PRETTY_NAME" | sed "s/PRETTY_NAME=//" | tr -d '"')\"
@@ -81,7 +91,8 @@ buildinfo_content="BUILD_DATE=\"$(date +"%Y-%m-%d %T %z")\"
 \nBUILD_RPMOSTREE=\"rpm-ostree $(echo "$rpmostree_version" | grep "Version:" | sed "s/ Version: //" | tr -d "'")+$(echo "$rpmostree_version" | grep "Git:" | sed "s/ Git: //")\"
 \nGIT_COMMIT=$git_commit
 \nGIT_TAG=$git_tag
-\nTREEFILE_VARIANT=\"$variant\""
+\nREF=\"$ref\"
+\nVARIANT=\"$variant\""
 
 echo -e $buildinfo_content > $buildinfo_file
 
@@ -92,7 +103,7 @@ rpm-ostree compose tree \
     --cachedir="$ostree_cache_dir" \
     --repo="$ostree_repo_dir" \
     `[[ -s $lockfile ]] && echo "--ex-lockfile="$lockfile""` $treefile
-    
+
 [[ $? != 0 ]] && build_failed="true"
 
 echo "================================================================================"
@@ -100,14 +111,49 @@ echo "==========================================================================
 if [[ $build_failed == "true" ]]; then
     die "Failed to build tree"
 else
-    echo "✏️ Generating summary..."
-    ostree summary --repo="$ostree_repo_dir" --update
+    tests_dir="$base_dir/tests"
+    test_failed_count=0
+
+    if [[ -d $tests_dir ]]; then
+        if (( $(ls -A "$tests_dir" | wc -l) > 0 )); then
+            echo "🧪 Testing tree..."
+
+            commit="$(ostree --repo="$ostree_repo_dir" log $ref)" | grep commit | head -1 | sed "s/commit //"
+
+            function ost() {
+                command="$@"
+                echo "$(ostree --repo="$ostree_repo_dir" $@)"
+            }
+
+            for test_file in $tests_dir/*.sh; do
+                export -f ost
+
+                result=$(. "$test_file" 2>&1)
+
+                if [[ $result != "true" ]]; then
+                    test_message_prefix="   Fail"
+                    test_message_color="31"
+                    ((test_failed_count++))
+                else
+                    test_message_prefix="Success"
+                    test_message_color="32"
+                fi
+
+                echo -e "   ⤷ \033[0;${test_message_color}m${test_message_prefix}: $(basename "$test_file" | cut -d. -f1)\033[0m"
+            done
+        fi
+    fi
+
+    if (( $test_failed_count > 0 )); then
+        ostree prune --repo="$ostree_repo_dir" --delete-commit="$commit"
+        die "Failed to satisfy tests ($test_failed_count failed)"
+    else
+        echo "✏️ Generating summary..."
+        ostree summary --repo="$ostree_repo_dir" --update
+    fi
 fi
 
-echo "🗑️ Cleaning up..."
+cleanup
 
-rm $buildinfo_file
-rm -rf  /var/tmp/rpm-ostree.*
-chown -R $SUDO_USER:$SUDO_USER $working_dir
 end_time=$(( $(date +%s) - $start_time ))
 echo "✅ Success (took $(print_time $end_time))"
