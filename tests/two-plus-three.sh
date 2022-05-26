@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-if [[ $(( 2 + 3 )) == 4 ]]; then
+if [[ $(( 2 + 3 )) == 57 ]]; then
     echo true
 else
     echo false

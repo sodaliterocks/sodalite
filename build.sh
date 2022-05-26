@@ -1,18 +1,12 @@
 #!/usr/bin/env bash
 # Usage: ./build.sh [<variant>] [<working-dir>]
 
-base_dir="$(dirname "$(realpath -s "$0")")"
 variant=$1
 working_dir=$2
+base_dir="$(dirname "$(realpath -s "$0")")"
 buildinfo_file="$base_dir/src/sysroot/usr/lib/sodalite-buildinfo"
-
-function cleanup() {
-    echo "🗑️ Cleaning up..."
-
-    rm $buildinfo_file
-    rm -rf  /var/tmp/rpm-ostree.*
-    chown -R $SUDO_USER:$SUDO_USER $working_dir
-}
+tests_dir="$base_dir/tests"
+start_time=$(date +%s)
 
 function die() {
     echo -e "🛑 \033[1;31mError: $@\033[0m"
@@ -20,20 +14,39 @@ function die() {
     exit 255
 }
 
+function cleanup() {
+    echo "🗑️ Cleaning up..."
+
+    rm -f $buildinfo_file
+    rm -rf  /var/tmp/rpm-ostree.*
+    chown -R $SUDO_USER:$SUDO_USER $working_dir
+}
+
 function print_time() {
     ((h=${1}/3600))
     ((m=(${1}%3600)/60))
     ((s=${1}%60))
-    
+
     h_string="hours"
     m_string="minutes"
     s_string="seconds"
-    
+
     [[ $h == 1 ]] && h_string="hour"
     [[ $m == 1 ]] && m_string="minute"
     [[ $s == 1 ]] && s_string="second"
-    
+
     printf "%d $h_string %d $m_string %d $s_string\n" $h $m $s
+}
+
+function ost() {
+    command=$1
+    options="${@:2}"
+
+    if [[ -z $ostree_repo_dir ]]; then
+        die "\$ostree_repo_dir not set"
+    fi
+
+    ostree $command --repo="$ostree_repo_dir" $options
 }
 
 if ! [[ $(id -u) = 0 ]]; then
@@ -44,7 +57,6 @@ if [[ ! $(command -v "rpm-ostree") ]]; then
     die "rpm-ostree not installed"
 fi
 
-start_time=$(date +%s)
 echo "🪛 Setting up..."
 [[ $variant == *.yaml ]] && variant="$(echo $variant | sed s/.yaml//)"
 [[ $variant == sodalite* ]] && variant="$(echo $variant | sed s/sodalite-//)"
@@ -76,19 +88,15 @@ if [[ ! -f $treefile ]]; then
 fi
 
 if [ ! "$(ls -A $ostree_repo_dir)" ]; then
-   echo "🆕 Initializing OSTree repository at '$ostree_repo_dir'..."
-   ostree --repo="$ostree_repo_dir" init --mode=archive
+   echo "🆕 Initializing OSTree repository..."
+   ost init --mode=archive
 fi
-
-echo "📄 Generating buildinfo file..."
-
-rpmostree_version="$(rpm-ostree --version)"
 
 buildinfo_content="BUILD_DATE=\"$(date +"%Y-%m-%d %T %z")\"
 \nBUILD_HOST_NAME=\"$(hostname -f)\"
 \nBUILD_HOST_OS=\"$(cat /usr/lib/os-release | grep "PRETTY_NAME" | sed "s/PRETTY_NAME=//" | tr -d '"')\"
 \nBUILD_HOST_KERNEL=\"$(uname -srp)\"
-\nBUILD_RPMOSTREE=\"rpm-ostree $(echo "$rpmostree_version" | grep "Version:" | sed "s/ Version: //" | tr -d "'")+$(echo "$rpmostree_version" | grep "Git:" | sed "s/ Git: //")\"
+\nBUILD_RPMOSTREE=\"rpm-ostree $(echo "$(rpm-ostree --version)" | grep "Version:" | sed "s/ Version: //" | tr -d "'")+$(echo "$(rpm-ostree --version)" | grep "Git:" | sed "s/ Git: //")\"
 \nGIT_COMMIT=$git_commit
 \nGIT_TAG=$git_tag
 \nREF=\"$ref\"
@@ -108,49 +116,50 @@ rpm-ostree compose tree \
 
 echo "================================================================================"
 
-if [[ $build_failed == "true" ]]; then
-    die "Failed to build tree"
-else
-    tests_dir="$base_dir/tests"
-    test_failed_count=0
+[[ $build_failed == "true" ]] && die "Failed to build tree"
 
-    if [[ -d $tests_dir ]]; then
-        if (( $(ls -A "$tests_dir" | wc -l) > 0 )); then
-            echo "🧪 Testing tree..."
+test_failed_count=0
 
-            commit="$(ostree --repo="$ostree_repo_dir" log $ref)" | grep commit | head -1 | sed "s/commit //"
+if [[ -d $tests_dir ]]; then
+    if (( $(ls -A "$tests_dir" | wc -l) > 0 )); then
+        echo "🧪 Testing tree..."
 
-            function ost() {
-                command="$@"
-                echo "$(ostree --repo="$ostree_repo_dir" $@)"
-            }
+        all_commits="$(ost log $ref | grep "commit " | sed "s/commit //")"
+        commit="$(echo "$all_commits" | head -1)"
+        commit_prev="$(echo "$all_commits" | head -2 | tail -1)"
 
-            for test_file in $tests_dir/*.sh; do
-                export -f ost
+        [[ $commit == $commit_prev ]] && commit_prev=""
 
-                result=$(. "$test_file" 2>&1)
+        for test_file in $tests_dir/*.sh; do
+            export -f ost
 
-                if [[ $result != "true" ]]; then
-                    test_message_prefix="   Fail"
-                    test_message_color="31"
-                    ((test_failed_count++))
-                else
-                    test_message_prefix="Success"
-                    test_message_color="32"
-                fi
+            result=$(. "$test_file" 2>&1)
 
-                echo -e "   ⤷ \033[0;${test_message_color}m${test_message_prefix}: $(basename "$test_file" | cut -d. -f1)\033[0m"
-            done
-        fi
+            if [[ $result != "true" ]]; then
+                test_message_prefix="Fail"
+                test_message_color="31"
+                ((test_failed_count++))
+            else
+                test_message_prefix="Pass"
+                test_message_color="32"
+            fi
+
+            echo -e "   ⤷ \033[0;${test_message_color}m${test_message_prefix}: $(basename "$test_file" | cut -d. -f1)\033[0m"
+        done
     fi
+fi
 
-    if (( $test_failed_count > 0 )); then
-        ostree prune --repo="$ostree_repo_dir" --delete-commit="$commit"
-        die "Failed to satisfy tests ($test_failed_count failed)"
+if (( $test_failed_count > 0 )); then
+    if [[ -z $commit_prev ]]; then
+        ost refs --delete $ref
     else
-        echo "✏️ Generating summary..."
-        ostree summary --repo="$ostree_repo_dir" --update
+        ost reset $ref $commit_prev
     fi
+
+    die "Failed to satisfy tests ($test_failed_count failed). Removed commit '$commit'"
+else
+    echo "✏️ Generating summary..."
+    ost summary --update
 fi
 
 cleanup
