@@ -74,7 +74,7 @@ echo "📄 Generating buildinfo file..."
 rpmostree_version="$(rpm-ostree --version)"
 
 buildinfo_file="$base_dir/src/sysroot/usr/lib/sodalite-buildinfo"
-buildinfo_content="\"BUILD_DATE=$(date +"%Y-%m-%d %T %z")\"
+buildinfo_content="BUILD_DATE=\"$(date +"%Y-%m-%d %T %z")\"
 \nBUILD_HOST_NAME=\"$(hostname -f)\"
 \nBUILD_HOST_OS=\"$(cat /usr/lib/os-release | grep "PRETTY_NAME" | sed "s/PRETTY_NAME=//" | tr -d '"')\"
 \nBUILD_HOST_KERNEL=\"$(uname -srp)\"
