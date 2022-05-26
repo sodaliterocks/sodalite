@@ -111,7 +111,7 @@ sed -i "/^$/d" /usr/lib/os-release
 
 echo "$pretty_name" > /usr/lib/sodalite-release
 echo "$pretty_name" > /usr/lib/system-release
-echo "$cpe" > /usr/lib/system-release-cpe
+echo $(echo "$cpe" | sed "s@\\\\@@g") > /usr/lib/system-release-cpe
 
 rm /etc/os-release
 rm /etc/system-release
