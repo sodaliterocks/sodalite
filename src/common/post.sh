@@ -291,5 +291,3 @@ systemctl enable generate-oemconf
 systemctl enable lightdm
 systemctl enable touchegg
 systemctl enable update-appcenter-flatpak
-
-rm -f /usr/lib/sodalite-buildinfo
