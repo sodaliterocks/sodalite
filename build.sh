@@ -145,6 +145,12 @@ if [[ -d $tests_dir ]]; then
             fi
 
             echo -e "   ⤷ \033[0;${test_message_color}m${test_message_prefix}: $(basename "$test_file" | cut -d. -f1)\033[0m"
+
+            if [[ $result != "true" ]]; then
+                if [[ ! -z $result ]] && [[ $result != "false" ]]; then
+                    echo -e "     \033[0;37m${result}\033[0m"
+                fi
+            fi
         done
     fi
 fi
