@@ -158,6 +158,16 @@ if [[ $version_id -gt 35 ]]; then
     rm -rf /usr/lib/sysimage/rpm
 fi
 
+# BUG: Parent Controls doesn't appear to work correctly for Fedora versions
+#      under 35. We'll remove various things immediately visible to the user,
+#      but leave `malcontent-control` intact.
+
+if [[ $version_id -lt 36 ]]; then
+    rm -f "/usr/share/applications/org.freedesktop.MalcontentControl.desktop"
+    rm -f "/usr/lib64/switchboard/system/libparental-controls.so"
+    rm -rf "/usr/share/doc/switchboard-plug-parental-controls/"
+fi
+
 ############
 # REMOVALS #
 ############
@@ -238,8 +248,6 @@ declare -a to_remove=(
     "/usr/share/xsessions/gnome-xorg.desktop"
     # light-locker
     "/etc/xdg/autostart/light-locker.desktop"
-    # malcontent-control
-    "/usr/share/applications/org.freedesktop.MalcontentControl.desktop"
     # plank
     "/etc/xdg/autostart/plank.desktop"
     # ufw
@@ -267,9 +275,6 @@ if [[ $variant != "experimental-pantheon-nightly" ]]; then
         # switchboard-plug-locale
         "/usr/lib64/switchboard/personal/liblocale-plug.so"
         "/usr/share/doc/switchboard-plug-locale/"
-        # switchboard-plug-parental-controls
-        "/usr/lib64/switchboard/system/libparental-controls.so"
-        "/usr/share/doc/switchboard-plug-parental-controls/"
     )
 fi
 
