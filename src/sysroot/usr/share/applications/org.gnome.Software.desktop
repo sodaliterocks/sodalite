@@ -9,7 +9,7 @@ Terminal=false
 Type=Application
 StartupNotify=true
 Categories=GNOME;GTK;System;PackageManager;
-#MimeType=x-scheme-handler/appstream;
+MimeType=x-scheme-handler/appstream;
 X-GNOME-UsesNotifications=true
 
 [Desktop Action ModeUpdates]

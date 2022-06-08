@@ -60,6 +60,7 @@ add-files: [
   ["../../lib/sodaliterocks.hacks/src/hacks.sh", "/usr/bin/sodalite-hacks"],
   ["../sysroot/usr/bin/detach", "/usr/bin/detach"],
   ["../sysroot/usr/bin/gnome-control-center", "/usr/bin/gnome-control-center"],
+  ["../sysroot/usr/bin/gnome-software-wrapper", "/usr/bin/gnome-software-wrapper"],
   ["../sysroot/usr/bin/sodalite-plank", "/usr/bin/sodalite-plank"],
   ["../sysroot/usr/bin/serve", "/usr/bin/serve"],
   

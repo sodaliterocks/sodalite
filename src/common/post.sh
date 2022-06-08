@@ -289,8 +289,14 @@ done
 # Sets background for System (in Switchboard) to use behind the logo
 ln -s $(get_property /usr/share/glib-2.0/schemas/io.elementary.desktop.gschema.override picture-uri | sed -E 's/file:\/\///' | sed -E "s/'//g") /usr/share/backgrounds/elementaryos-default
 
+# Updates schemas
 glib-compile-schemas /usr/share/glib-2.0/schemas
 
+# Sets up Software wrapper
+mv /usr/bin/gnome-software /usr/bin/gnome-software-bin
+mv /usr/bin/gnome-software-wrapper /usr/bin/gnome-software
+
+# Enables/disables various systemd services
 systemctl disable gdm
 systemctl enable generate-oemconf
 systemctl enable lightdm
