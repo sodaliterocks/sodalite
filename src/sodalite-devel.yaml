@@ -1,0 +1,13 @@
+ref: sodalite/stable/${basearch}/devel
+include:
+  - common/sodalite-common.yaml
+  - common/packages/pantheon-devel.yaml
+  
+packages:
+  - xorg-x11-server-Xephyr
+  - xprop
+
+rojig:
+  name: sodalite-devel
+  summary: "Sodalite (Developer)"
+  license: MIT
