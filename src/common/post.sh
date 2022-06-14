@@ -176,6 +176,14 @@ fi
 #       (see https://github.com/sodaliterocks/sodalite/issues/9#issuecomment-1010384738)
 
 declare -a to_remove=(
+    # desktop-backgrounds-compat
+    "/usr/share/backgrounds/default.png"
+    "/usr/share/backgrounds/default.xml"
+    "/usr/share/backgrounds/images"
+    "/usr/share/backgrounds/images/default-16_10.png"
+    "/usr/share/backgrounds/images/default-16_9.png"
+    "/usr/share/backgrounds/images/default-5_4.png"
+    "/usr/share/backgrounds/images/default.png"
     # evolution-data-server
     "/etc/xdg/autostart/org.gnome.Evolution-alarm-notify.desktop"
     "/usr/libexec/evolution-data-server/evolution-alarm-notify"
@@ -246,6 +254,12 @@ declare -a to_remove=(
     "/usr/share/wayland-sessions/gnome-wayland.desktop"
     "/usr/share/xsessions/gnome.desktop"
     "/usr/share/xsessions/gnome-xorg.desktop"
+    # gnome-themes-extra
+    "/usr/share/doc/gnome-themes-extra/"
+    "/usr/share/licenses/gnome-themes-extra/"
+    "/usr/share/themes/Adwaita-dark/"
+    "/usr/share/themes/Adwaita/"
+    "/usr/share/themes/HighContrast/"
     # light-locker
     "/etc/xdg/autostart/light-locker.desktop"
     # plank
@@ -267,6 +281,21 @@ declare -a to_remove=(
     "/usr/share/icewm/"
     "/usr/share/pixmaps/faces/"
 )
+
+if [[ $variant != "experimental-alt-greeter" ]]; then
+    to_remove+=(
+        # elementary-greeter
+        "/etc/lightdm/io.elementary.greeter.conf"
+        "/etc/lightdm/lightdm.conf.d/40-io.elementary.greeter.conf"
+        "/usr/bin/io.elementary.greeter-compositor"
+        "/usr/sbin/io.elementary.greeter"
+        "/usr/share/doc/elementary-greeter/"
+        "/usr/share/licenses/elementary-greeter/"
+        "/usr/share/locale/*/LC_MESSAGES/io.elementary.greeter.mo"
+        "/usr/share/metainfo/io.elementary.greeter.appdata.xml"
+        "/usr/share/xgreeters/io.elementary.greeter.desktop"
+    )
+fi
 
 if [[ $variant != "experimental-pantheon-nightly" ]]; then
     # These Pantheon packages are considered broken, so we'll only keep them
