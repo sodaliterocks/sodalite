@@ -156,13 +156,13 @@ if [[ -d $tests_dir ]]; then
 fi
 
 if (( $test_failed_count > 0 )); then
+    die "Failed to satisfy tests ($test_failed_count failed). Removing commit '$commit'..."
+
     if [[ -z $commit_prev ]]; then
         ost refs --delete $ref
     else
         ost reset $ref $commit_prev
     fi
-
-    die "Failed to satisfy tests ($test_failed_count failed). Removed commit '$commit'"
 else
     echo "✏️ Generating summary..."
     ost summary --update
