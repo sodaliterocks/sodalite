@@ -277,12 +277,13 @@ declare -a to_remove=(
     "/usr/share/man/man8/ufw.8.gz"
     "/usr/share/ufw/"
     # misc.
+    "/usr/share/backgrounds/f36/"
     "/usr/share/bookmarks/"
     "/usr/share/icewm/"
     "/usr/share/pixmaps/faces/"
 )
 
-if [[ $variant != "experimental-alt-greeter" ]]; then
+if [[ $variant == "experimental-alt-greeter" ]]; then
     to_remove+=(
         # elementary-greeter
         "/etc/lightdm/io.elementary.greeter.conf"
