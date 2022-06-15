@@ -4,6 +4,7 @@ include:
   - common/packages/pantheon-devel.yaml
   
 packages:
+  - git-lfs
   - xorg-x11-server-Xephyr
   - xprop
 

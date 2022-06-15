@@ -277,6 +277,7 @@ declare -a to_remove=(
     "/usr/share/man/man8/ufw.8.gz"
     "/usr/share/ufw/"
     # misc.
+    "/usr/share/backgrounds/f36/"
     "/usr/share/bookmarks/"
     "/usr/share/icewm/"
     "/usr/share/pixmaps/faces/"
