@@ -282,7 +282,7 @@ declare -a to_remove=(
     "/usr/share/pixmaps/faces/"
 )
 
-if [[ $variant != "experimental-alt-greeter" ]]; then
+if [[ $variant == "experimental-alt-greeter" ]]; then
     to_remove+=(
         # elementary-greeter
         "/etc/lightdm/io.elementary.greeter.conf"
