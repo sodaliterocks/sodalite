@@ -42,6 +42,9 @@ function set_property() {
 
 set -xeuo pipefail
 
+variant=""
+version_tag=""
+
 if [[ $(cat $buildinfo_file) != "" ]]; then
     [[ -z $(get_property $buildinfo_file "GIT_TAG") ]] && \
         version_tag="$(get_property $buildinfo_file "GIT_COMMIT")"
