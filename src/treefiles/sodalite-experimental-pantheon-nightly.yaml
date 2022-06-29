@@ -1,0 +1,11 @@
+ref: sodalite/f36/${basearch}/experimental-pantheon-nightly
+include:
+  - ../common/sodalite-common.yaml
+
+repos:
+  - copr_decathorpe_elementary-nightly
+
+rojig:
+  name: sodalite-experimental-pantheon-nightly
+  summary: "Sodalite (Experimental: Pantheon Nightly)"
+  license: MIT

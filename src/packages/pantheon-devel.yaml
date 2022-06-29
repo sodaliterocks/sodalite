@@ -1,0 +1,13 @@
+packages:
+  - accountsservice-devel # libaccountsservice-dev
+  - desktop-file-utils
+  - gdk-pixbuf2-devel # libgdk-pixbuf2.0-dev
+  - gnome-settings-daemon
+  - granite-devel # libgranite-dev
+  - gtk3-devel # libgtk-3-dev
+  - libhandy-devel # libhandy-1-dev
+  - libX11-devel # libx11-dev
+  - lightdm-gobject-devel # liblightdm-gobject-1-dev
+  - meson # meson
+  - mutter-devel # libmutter-6-dev
+  - vala # valac

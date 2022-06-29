@@ -1,0 +1,15 @@
+ref: sodalite/f36/${basearch}/experimental-alt-greeter
+include:
+  - ../common/sodalite-common.yaml
+
+packages:
+  - lightdm-gtk-greeter
+
+add-files: [
+  ["../sysroot/experimental-alt-greeter/usr/share/lightdm/lightdm.conf.d/lightdm-gtk-greeter.conf", "/usr/share/lightdm/lightdm.conf.d/lightdm-gtk-greeter.conf"],
+]
+
+rojig:
+  name: sodalite-experimental-alt-greeter
+  summary: "Sodalite (Experimental: Alt. Greeter)"
+  license: MIT
