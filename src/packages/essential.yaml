@@ -1,4 +1,5 @@
 packages:
+ - distribution-gpg-keys
  - fedora-release
  - fedora-release-ostree-desktop
  - fedora-repos-archive
