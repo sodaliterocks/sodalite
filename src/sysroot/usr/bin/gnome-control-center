@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
 
+setting="$@"
+[[ $@ = "" ]] && setting="default"
+
 SODALITE_HACKS_OVERRIDE_USAGE_PREFIX="$0"
-. sodalite-hacks gcc-shim $@
+. sodalite-hacks gcc-shim $setting
