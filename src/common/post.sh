@@ -64,7 +64,12 @@ if [[ $(get_property /etc/os-release VERSION) =~ (([0-9]{1,3})-([0-9]{2}.[0-9]{1
 
     [[ ${BASH_REMATCH[5]} > 0 ]] && version+=".${BASH_REMATCH[5]}"
     [[ ! -z $version_tag ]] && version+="+$version_tag"
-    [[ ! -z $variant ]] && [[ $variant != "base" ]] && version_pretty="$version ($variant)"
+
+    if [[ ! -z $variant ]] && [[ $variant != "base" ]]; then
+        version_pretty="$version ($variant)"
+    else
+        version_pretty="$version"
+    fi
 
     cpe+=":$version_id:$(echo $version | cut -f2- -d"-")"
 else
