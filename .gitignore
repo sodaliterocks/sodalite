@@ -1,6 +1,6 @@
 # Runtime
 build/*
-src/sysroot/usr/lib/sodalite-buildinfo
+src/sysroot/common/usr/lib/sodalite-buildinfo
 
 # Temporary
 *~

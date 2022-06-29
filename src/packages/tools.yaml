@@ -1,0 +1,11 @@
+packages:
+ - buildah
+ - distrobox
+ - git-core
+ - lm_sensors
+ - meson
+ - podman
+ - skopeo
+ - smartmontools
+ - tlp
+ - toolbox

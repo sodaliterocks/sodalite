@@ -5,9 +5,6 @@
 [submodule "lfs"]
 	path = lfs
 	url = https://git.zio.sh/sodaliterocks/lfs
-[submodule "lib/sodaliterocks.common"]
-	path = lib/sodaliterocks.common
-	url = https://github.com/sodaliterocks/common
 [submodule "lib/elementary.icons"]
 	path = lib/elementary.icons
 	url = https://github.com/elementary/icons
