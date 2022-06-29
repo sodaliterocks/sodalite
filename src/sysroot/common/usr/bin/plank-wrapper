@@ -9,7 +9,7 @@ revert_to_default=false
 declare -a default_plank_items_regex=(
     "(\['firefox\.dockitem','io\.elementary\.calendar\.dockitem','io\.elementary\.music\.dockitem','io\.elementary\.videos\.dockitem','io\.elementary\.photos-viewer\.dockitem','io\.elementary\.mail\.dockitem'\])"
     "(\['gala-multitaskingview\.dockitem','firefox\.dockitem','io\.elementary\.calendar\.dockitem','io\.elementary\.music\.dockitem','io\.elementary\.photos\.dockitem','io\.elementary\.files\.dockitem','org\.gnome\.Software\.dockitem'\])"
-    "(\['gala-multitaskingview\.dockitem', 'firefox\.dockitem', 'io\.elementary\.calendar\.dockitem', 'io\.elementary\.tasks\.dockitem', 'io\.elementary\.mail\.dockitem', 'io\.elementary\.photos\.dockitem', 'io\.elementary\.files\.dockitem', 'io\.elementary\.terminal\.dockitem', 'org\.gnome\.Software\.dockitem'\])"
+    "(\['gala-multitaskingview\.dockitem','firefox\.dockitem','io\.elementary\.calendar\.dockitem','io\.elementary\.tasks\.dockitem','io\.elementary\.mail\.dockitem','io\.elementary\.photos\.dockitem','io\.elementary\.files\.dockitem','io\.elementary\.terminal\.dockitem','org\.gnome\.Software\.dockitem'\])"
 )
 
 if [[ -z $current_plank_items ]]; then
@@ -18,7 +18,7 @@ elif [[ $current_plank_items == "@as[]" ]]; then
     revert_to_default=true
 else
     for val in ${default_plank_items_regex[@]}; do
-        if { [[ $revert_to_default == false ]] && [[ $current_plank_items =~ $val ]]; }; then
+        if { [[ $revert_to_default == false ]] && [[ "$current_plank_items" =~ $val ]]; }; then
             revert_to_default=true
         fi
     done
