@@ -1,6 +1,6 @@
 ref: sodalite/stable/${basearch}/base
 include:
-  - common/sodalite-common.yaml
+  - ../common/sodalite-common.yaml
 
 rojig:
   name: sodalite

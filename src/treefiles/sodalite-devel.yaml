@@ -1,7 +1,7 @@
 ref: sodalite/stable/${basearch}/devel
 include:
-  - common/sodalite-common.yaml
-  - common/packages/pantheon-devel.yaml
+  - ../common/sodalite-common.yaml
+  - ../packages/pantheon-devel.yaml
   
 packages:
   - git-lfs

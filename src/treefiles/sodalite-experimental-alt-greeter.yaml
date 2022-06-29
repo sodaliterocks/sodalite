@@ -1,12 +1,12 @@
 ref: sodalite/stable/${basearch}/experimental-alt-greeter
 include:
-  - common/sodalite-common.yaml
+  - ../common/sodalite-common.yaml
 
 packages:
   - lightdm-gtk-greeter
 
 add-files: [
-  ["./sysroot/_experimental-alt-greeter/usr/share/lightdm/lightdm.conf.d/lightdm-gtk-greeter.conf", "/usr/share/lightdm/lightdm.conf.d/lightdm-gtk-greeter.conf"],
+  ["../sysroot/experimental-alt-greeter/usr/share/lightdm/lightdm.conf.d/lightdm-gtk-greeter.conf", "/usr/share/lightdm/lightdm.conf.d/lightdm-gtk-greeter.conf"],
 ]
 
 rojig:

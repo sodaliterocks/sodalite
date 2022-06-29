@@ -1,0 +1,9 @@
+BUILD_DATE="2022-06-29 04:32:47 +0100" 
+BUILD_HOST_KERNEL="Linux 5.18.5-200.fc36.x86_64 x86_64" 
+BUILD_HOST_NAME="Scoter" 
+BUILD_HOST_OS="Sodalite 36-22.10.26" 
+BUILD_TOOL="rpm-ostree 2022.10+2a22c47b0b1b0ec470b8cb3e1a66587c8b0eb278" 
+GIT_COMMIT=bc9a5e2 
+GIT_TAG= 
+REF="sodalite/stable/x86_64/base" 
+VARIANT="base"

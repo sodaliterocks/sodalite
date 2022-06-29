@@ -4,7 +4,7 @@
 variant=$1
 working_dir=$2
 base_dir="$(dirname "$(realpath -s "$0")")"
-buildinfo_file="$base_dir/src/sysroot/usr/lib/sodalite-buildinfo"
+buildinfo_file="$base_dir/src/sysroot/common/usr/lib/sodalite-buildinfo"
 tests_dir="$base_dir/tests"
 start_time=$(date +%s)
 
@@ -66,7 +66,7 @@ echo "🪛 Setting up..."
 ostree_cache_dir="$working_dir/cache"
 ostree_repo_dir="$working_dir/repo"
 lockfile="$base_dir/src/common/overrides.yaml"
-treefile="$base_dir/src/sodalite-$variant.yaml"
+treefile="$base_dir/src/treefiles/sodalite-$variant.yaml"
 
 ref="$(echo "$(cat "$treefile")" | grep "ref:" | sed "s/ref: //" | sed "s/\${basearch}/$(uname -m)/")"
 
