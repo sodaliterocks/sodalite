@@ -26,6 +26,7 @@ repos:
 # File manipulation
 add-files: [
   # /etc
+  ["../sysroot/common/etc/dconf/db/local.d/01-elementary-theme", "/etc/dconf/db/local.d/10-elementary-theme"],
   ["../../lib/elementary.default-settings/cups/default-testpage.pdf", "/etc/cups/default-testpage.pdf"],
   ["../../lib/elementary.default-settings/gtk/settings.ini", "/etc/gtk/settings.ini"],
   ["../sysroot/common/etc/issue", "/etc/issue"],

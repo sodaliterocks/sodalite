@@ -324,6 +324,7 @@ ln -s $(get_property /usr/share/glib-2.0/schemas/io.elementary.desktop.gschema.o
 
 # Updates schemas
 glib-compile-schemas /usr/share/glib-2.0/schemas
+dconf update
 
 # Sets up Software wrapper
 mv /usr/bin/gnome-software /usr/bin/gnome-software-bin

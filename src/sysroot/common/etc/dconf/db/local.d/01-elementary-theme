@@ -1,0 +1,5 @@
+[org/gnome/desktop/interface]
+font-name='Inter 9'
+gtk-theme='io.elementary.stylesheet.blueberry'
+icon-theme='elementary'
+
