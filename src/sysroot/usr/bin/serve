@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
-SODALITE_HACKS_OVERRIDE_USAGE_PREFIX="$0"
+SODALITE_HACKS_OVERRIDE_USAGE_PREFIX="$(basename $0)"
 . sodalite-hacks serve $@

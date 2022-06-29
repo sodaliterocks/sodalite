@@ -1,19 +1,3 @@
 #!/usr/bin/env bash
 
-# Useful lil' tool for running stuff from the terminal but not having it stay
-# there and vomit up its logs and other nonsense
-
-command=$@
-
-case $command in
-    "-h"|"--help")
-        echo -e "Usage:
-  detatch [option] [program]
-  
-Options:
-  -h, --help\tShow help"
-        ;;
-    *)
-        "$command" &>/dev/null & disown
-        ;;
-esac
+"$@" &>/dev/null & disown
