@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+if [[ $(command -v "gnome-software-bin") ]]; then
+    if [[ $@ =~ ^appstream:\/\/(.*)$ ]]; then
+        gnome-software-bin --search="${BASH_REMATCH[1]//%20/ }"
+    else
+        gnome-software-bin $@
+    fi
+else
+    exit 1
+fi

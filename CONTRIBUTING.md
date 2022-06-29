@@ -18,22 +18,26 @@ All code submitted into this repository will be [licensed as MIT](https://github
 
 ### Branches
 
-* `main` (default): **Production branch**
-	* Contains the latest production version of `stable` (as in the `stable` in `sodalite/stable/x86_64/base`) for all variants.
-	* Is merged into `release/stable` as-soon-as-possible.
-	* **Do not submit PRs to this branch!**
-		* If you do they will be adjusted to point to `devel`, and rejected if they do not merge automatically.
-* `devel`: **Development branch**
-	* Contains the latest development version of `stable`.
-	* Is merged (or cherry-picked) into `main` when work is complete.
-	* **This is likely where you'll spend most of your time.**
-* `feature/*`: **Feature branches**
-	* Contains upcoming large feature work.
-	* Is merged into `devel` when work is complete.
-* `release/*`: **Release branches**
-	* Contains other versions besides `stable` (and `stable` itself).
-	* `main` in merged (or cherry-picked) into here, being careful not to adjust the `ref` or `releasever` properties in treefiles for other versions.
-	* This is the working code that is built on [the OSTree server](https://ostree.sodalite.rocks).
+**This does not follow GitFlow.**
+
+* `main` (default): **Development branch**
+    * Contains the latest development version of `release/stable`.
+    * Is merged (or cherry-picked) into `release/stable` when work is complete.
+* `issue/*`: **Issue branches**
+	* Contains work relating to an [issue](https://github.com/sodaliterocks/sodalite/issues).
+	* Is merged into `main` when the issue is closed.
+	* Named `issue/<id>-<short-name>`, where:
+	    * `id`: Issue ID.
+	    * `short-name`: Shortened kebab-case of issue title. For example:
+	        * _Thing is broken_ becomes `thing-is-broken`;
+	        * _Include this because it's better than that_ becomes `include-this`.
+* `release/*`: **Production branches**
+    * Contains the branches:
+        * `release/stable`: **Ref for `sodalite/stable/<arch>/<variant>`**
+        * `release/f<base>`: **Ref for `sodalite/f<base>/<arch>/<variant>`**
+        * `release/next`: **Ref for `sodalite/next/<arch>/<variant>`**
+    * Working code that is built on [the OSTree server](https://ostree.sodalite.rocks).
+    * `main` in merged (or cherry-picked) into here, being careful not to adjust the `ref` or `releasever` properties in treefiles for other versions.
 
 ### Commit Messages
 

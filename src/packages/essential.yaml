@@ -1,0 +1,33 @@
+packages:
+ - distribution-gpg-keys
+ - fedora-release
+ - fedora-release-ostree-desktop
+ - fedora-repos-archive
+ - fedora-repos-ostree
+ - elfutils-libelf-devel
+ - firewalld
+ - glibc-devel
+ - hfsplus-tools
+ - kernel-devel
+ - lvm2
+ - rpm-ostree
+packages-x86_64:
+ - efibootmgr
+ - grub2-efi-ia32
+ - grub2-efi-x64
+ - grub2-pc
+ - hyperv-daemons
+ - mcelog
+ - microcode_ctl
+ - open-vm-tools-desktop
+ - ostree-grub2
+ - shim-ia32
+ - shim-x64
+ - thermald
+ - virtualbox-guest-additions
+ - xorg-x11-drv-amdgpu
+ - xorg-x11-drv-intel
+ - xorg-x11-drv-vesa
+ - xorg-x11-drv-vmware
+exclude-packages:
+ - PackageKit

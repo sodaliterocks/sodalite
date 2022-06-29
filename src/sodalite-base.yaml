@@ -1,9 +1,0 @@
-ref: sodalite/f35/${basearch}/base
-include:
-  - common/sodalite-common.yaml
-
-rojig:
-  name: sodalite
-  summary: "Sodalite"
-  license: MIT
-  description: "Beautiful. Immutable."

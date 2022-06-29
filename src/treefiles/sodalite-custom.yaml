@@ -1,0 +1,14 @@
+# If you want to make your own build of Sodalite, it's a good idea to use this
+# file. This is also the default file ./build.sh uses (which can be changed
+# with `./build.sh [variant]`; for example, `./build.sh base`).
+#
+# See https://rpm-ostree.readthedocs.io/en/stable/manual/treefile/ for help.
+
+ref: sodalite/f35/${basearch}/custom
+include:
+  - ../common/sodalite-common.yaml
+
+rojig:
+  name: sodalite-custom
+  summary: "Sodalite (Custom)"
+  license: MIT
