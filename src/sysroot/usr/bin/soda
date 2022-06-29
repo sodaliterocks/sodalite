@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+if [[ $@ != "" ]]; then
+    sudo $@
+else
+    echo "Drink up!"
+fi
