@@ -54,15 +54,15 @@ add-files: [
 
   # /etc/xdg
   ["../sysroot/etc/xdg/autostart/gnome-software-service.desktop", "/etc/xdg/autostart/gnome-software-service.desktop"],
-  ["../sysroot/etc/xdg/autostart/sodalite-plank.desktop", "/etc/xdg/autostart/sodalite-plank.desktop"],
+  ["../sysroot/etc/xdg/autostart/plank-wrapper.desktop", "/etc/xdg/autostart/plank-wrapper.desktop"],
 
   # /usr/bin
   ["../../lib/sodaliterocks.hacks/src/hacks.sh", "/usr/bin/sodalite-hacks"],
   ["../sysroot/usr/bin/detach", "/usr/bin/detach"],
   ["../sysroot/usr/bin/gnome-control-center", "/usr/bin/gnome-control-center"],
   ["../sysroot/usr/bin/gnome-software-wrapper", "/usr/bin/gnome-software-wrapper"],
+  ["../sysroot/usr/bin/plank-wrapper", "/usr/bin/plank-wrapper"],
   ["../sysroot/usr/bin/soda", "/usr/bin/soda"],
-  ["../sysroot/usr/bin/sodalite-plank", "/usr/bin/sodalite-plank"],
   ["../sysroot/usr/bin/serve", "/usr/bin/serve"],
   
   # /usr/lib
