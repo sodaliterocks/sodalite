@@ -22,6 +22,7 @@ repos:
  - copr_stsdc_monitor
  - fedora
  - fedora-updates
+ - fedora-36 # HACK: elementary packages are not yet in F37 repos (unsure why?)
 
 # File manipulation
 add-files: [
