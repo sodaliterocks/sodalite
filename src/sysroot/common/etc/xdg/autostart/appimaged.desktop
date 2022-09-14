@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=appimaged
+Comment=Daemon that integrates AppImages into the system
+Exec=appimaged
+Icon=application-default-icon
+Terminal=false
+Type=Application
+Categories=Utility;
+NoDisplay=true

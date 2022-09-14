@@ -56,11 +56,13 @@ add-files: [
   ["../sysroot/common/etc/systemd/system/update-appcenter-flatpak.service", "/etc/systemd/system/update-appcenter-flatpak.service"],
 
   # /etc/xdg
-  ["../../lfs/binaries/indicator-application-patched/0.1/etc/xdg/autostart/indicator-application.desktop", "/etc/xdg/autostart/indicator-application.desktop"],
+  ["../../lfs/binaries/debian/indicator-application-patched/0.1/etc/xdg/autostart/indicator-application.desktop", "/etc/xdg/autostart/indicator-application.desktop"],
+  ["../sysroot/common/etc/xdg/autostart/appimaged.desktop", "/etc/xdg/autostart/appimaged.desktop"],
   ["../sysroot/common/etc/xdg/autostart/gnome-software-service.desktop", "/etc/xdg/autostart/gnome-software-service.desktop"],
   ["../sysroot/common/etc/xdg/autostart/plank-wrapper.desktop", "/etc/xdg/autostart/plank-wrapper.desktop"],
 
   # /usr/bin
+  ["../../lfs/binaries/appimage/appimaged_718~x86_64.AppImage", "/usr/bin/appimaged"],
   ["../../lib/sodaliterocks.hacks/src/hacks.sh", "/usr/bin/sodalite-hacks"],
   ["../sysroot/common/usr/bin/detach", "/usr/bin/detach"],
   ["../sysroot/common/usr/bin/gnome-control-center", "/usr/bin/gnome-control-center"],
@@ -70,13 +72,13 @@ add-files: [
   ["../sysroot/common/usr/bin/serve", "/usr/bin/serve"],
   
   # /usr/lib
-  ["../../lfs/binaries/com.github.lafydev.wingpanel-indicator-ayatana/2.0.8/usr/lib/x86_64-linux-gnu/wingpanel/libayatana.so", "/usr/lib64/wingpanel/libayatana.so"],
-  ["../../lfs/binaries/indicator-application-patched/0.1/usr/lib/indicators3/7/libapplication.so", "/usr/lib/indicators3/7/libapplication.so"],
-  ["../../lfs/binaries/indicator-application-patched/0.1/usr/lib/systemd/user/indicator-application.service", "/usr/lib/systemd/user/indicator-application.service"],
+  ["../../lfs/binaries/debian/com.github.lafydev.wingpanel-indicator-ayatana/2.0.8/usr/lib/x86_64-linux-gnu/wingpanel/libayatana.so", "/usr/lib64/wingpanel/libayatana.so"],
+  ["../../lfs/binaries/debian/indicator-application-patched/0.1/usr/lib/indicators3/7/libapplication.so", "/usr/lib/indicators3/7/libapplication.so"],
+  ["../../lfs/binaries/debian/indicator-application-patched/0.1/usr/lib/systemd/user/indicator-application.service", "/usr/lib/systemd/user/indicator-application.service"],
   ["../sysroot/common/usr/lib/sodalite-buildinfo", "/usr/lib/sodalite-buildinfo"],
   
   # /usr/lib64
-  ["../../lfs/binaries/indicator-application-patched/0.1/usr/lib/x86_64-linux-gnu/indicator-application/indicator-application-service", "/usr/lib64/indicator-application/indicator-application-service"],
+  ["../../lfs/binaries/debian/indicator-application-patched/0.1/usr/lib/x86_64-linux-gnu/indicator-application/indicator-application-service", "/usr/lib64/indicator-application/indicator-application-service"],
   ["../sysroot/common/usr/lib64/switchboard/personal/security-privacy-plug-helper", "/usr/lib64/switchboard/personal/security-privacy-plug-helper"],
   
   # /usr/lib64/firefox
