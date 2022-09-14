@@ -17,7 +17,7 @@ case $fedora_release in
     34) eol=$(is_eol 20220601) ;;
     35) eol=$(is_eol 20221207) ;;
     36) eol=$(is_eol 20230516) ;;
-    37) eol=$(is_eol 20231122) ;;
+    37) eol=$(is_eol 20231114) ;;
     38) eol=$(is_eol 20240514)
     *) eol="true" ;;
 esac
