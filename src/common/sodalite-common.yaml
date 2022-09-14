@@ -20,9 +20,10 @@ mutate-os-release: "${releasever}"
 repos:
  - copr_decathorpe_elementary-staging
  - copr_stsdc_monitor
+ - fedora-36 # HACK: elementary packages are not yet in F37 repos (unsure why?)
+ - fedora-36-updates
  - fedora
  - fedora-updates
- - fedora-36 # HACK: elementary packages are not yet in F37 repos (unsure why?)
 
 # File manipulation
 add-files: [
