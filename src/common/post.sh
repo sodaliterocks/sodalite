@@ -324,6 +324,14 @@ for file in ${to_remove[@]}; do
     rm -rf $file
 done
 
+###########
+# FIREFOX #
+###########
+
+/usr/lib64/firefox-sodalite/setup.sh
+rm -rf /usr/lib64/firefox-sodalite
+rm -f /usr/lib64/firefox/browser/omni.ja_backup
+
 ########
 # MISC #
 ########
