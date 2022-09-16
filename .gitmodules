@@ -20,3 +20,9 @@
 [submodule "lib/workstation-ostree-config_f37"]
 	path = lib/workstation-ostree-config_f37
 	url = https://pagure.io/workstation-ostree-config
+[submodule "lib/workstation-ostree-config_f38"]
+	path = lib/workstation-ostree-config_f38
+	url = https://pagure.io/workstation-ostree-config
+[submodule "lib/sodaliterocks.firefox"]
+	path = lib/sodaliterocks.firefox
+	url = https://github.com/sodaliterocks/firefox
