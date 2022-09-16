@@ -158,15 +158,7 @@ for x in /usr/sbin/glibc_post_upgrade.*; do
     fi
 done
 
-# SEE: https://github.com/coreos/fedora-coreos-tracker/issues/1139
-# rpm in Fedora 36 has moved location and symlinks to /usr/lib/sysimage/rpm,
-# which already exists, so we'll just delete it until the issue is fixed in the
-# upstream
-if [[ $version_id -gt 35 ]]; then
-    rm -rf /usr/lib/sysimage/rpm
-fi
-
-# BUG: Parent Controls doesn't appear to work correctly for Fedora versions
+# BUG: Parental Controls doesn't appear to work correctly for Fedora versions
 #      under 35. We'll remove various things immediately visible to the user,
 #      but leave `malcontent-control` intact.
 
@@ -175,6 +167,10 @@ if [[ $version_id -lt 36 ]]; then
     rm -f "/usr/lib64/switchboard/system/libparental-controls.so"
     rm -rf "/usr/share/doc/switchboard-plug-parental-controls/"
 fi
+
+# Some hacks for libayatana to work properly. Might stop working one day.
+ln -s /usr/lib64/libwingpanel.so.3 /usr/lib64/libwingpanel-2.0.so.0
+sed -i 's/lib\/x86_64-linux-gnu/lib64/g' /etc/xdg/autostart/indicator-application.desktop
 
 ############
 # REMOVALS #
@@ -320,12 +316,30 @@ for file in ${to_remove[@]}; do
     rm -rf $file
 done
 
-########
-# MISC #
-########
+#############
+# WALLPAPER #
+#############
 
-# Sets background for System (in Switchboard) to use behind the logo
-ln -s $(get_property /usr/share/glib-2.0/schemas/io.elementary.desktop.gschema.override picture-uri | sed -E 's/file:\/\///' | sed -E "s/'//g") /usr/share/backgrounds/elementaryos-default
+case $version_id in
+    35) wallpaper="karsten-wurth-7BjhtdogU3A-unsplash" ;;
+    36) wallpaper="max-okhrimenko-R-CoXmMrWFk-unsplash" ;;
+    37) wallpaper="zara-walker-_pC5hT6aXfs-unsplash" ;;
+    *) wallpaper="jack-b-vcNPMwS08UI-unsplash" ;;
+esac
+
+if [[ -f "/usr/share/backgrounds/default/$wallpaper.jpg" ]]; then
+    set_property /usr/share/glib-2.0/schemas/io.elementary.desktop.gschema.override picture-uri "'file:\/\/\/usr\/share\/backgrounds\/default\/$wallpaper.jpg'"
+    ln -s /usr/share/backgrounds/default/$wallpaper.jpg /usr/share/backgrounds/elementaryos-default
+fi
+
+##########
+# EXTRAS #
+##########
+
+# Customize Firefox
+/usr/lib64/firefox-sodalite/setup.sh
+rm -rf /usr/lib64/firefox-sodalite
+rm -f /usr/lib64/firefox/browser/omni.ja_backup
 
 # Updates schemas
 glib-compile-schemas /usr/share/glib-2.0/schemas

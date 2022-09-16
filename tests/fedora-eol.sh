@@ -11,15 +11,19 @@ function is_eol() {
 }
 
 fedora_release="$(ost cat $commit /usr/lib/fedora-release | sed "s/Fedora release //" | sed "s/ (.*//")"
-eol="false"
+eol="true"
 
 case $fedora_release in
-    34) eol=$(is_eol 20220601) ;;
-    35) eol=$(is_eol 20221207) ;;
+    34) eol=$(is_eol 20220607) ;;
+    35) eol=$(is_eol 20221115) ;;
     36) eol=$(is_eol 20230516) ;;
-    37) eol=$(is_eol 20231122) ;;
+    37) eol=$(is_eol 20231114) ;;
     38) eol=$(is_eol 20240514) ;;
-    *) eol="true" ;;
+    *)
+        if (( $fedora_release > 38 )); then
+            eol="false"
+        fi
+    ;;
 esac
 
 if [[ $eol == "true" ]]; then
