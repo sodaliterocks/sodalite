@@ -158,15 +158,7 @@ for x in /usr/sbin/glibc_post_upgrade.*; do
     fi
 done
 
-# SEE: https://github.com/coreos/fedora-coreos-tracker/issues/1139
-# rpm in Fedora 36 has moved location and symlinks to /usr/lib/sysimage/rpm,
-# which already exists, so we'll just delete it until the issue is fixed in the
-# upstream
-if [[ $version_id -gt 35 ]]; then
-    rm -rf /usr/lib/sysimage/rpm
-fi
-
-# BUG: Parent Controls doesn't appear to work correctly for Fedora versions
+# BUG: Parental Controls doesn't appear to work correctly for Fedora versions
 #      under 35. We'll remove various things immediately visible to the user,
 #      but leave `malcontent-control` intact.
 
