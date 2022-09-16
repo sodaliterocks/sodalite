@@ -57,7 +57,7 @@ add-files: [
 
   # /etc/xdg
   ["../../lfs/binaries/debian/indicator-application-patched/0.1/etc/xdg/autostart/indicator-application.desktop", "/etc/xdg/autostart/indicator-application.desktop"],
-  ["../sysroot/common/etc/xdg/autostart/appimaged.desktop", "/etc/xdg/autostart/appimaged.desktop"],
+  #["../sysroot/common/etc/xdg/autostart/appimaged.desktop", "/etc/xdg/autostart/appimaged.desktop"], # BUG: https://github.com/sodaliterocks/sodalite/issues/42
   ["../sysroot/common/etc/xdg/autostart/gnome-software-service.desktop", "/etc/xdg/autostart/gnome-software-service.desktop"],
   ["../sysroot/common/etc/xdg/autostart/plank-wrapper.desktop", "/etc/xdg/autostart/plank-wrapper.desktop"],
 
