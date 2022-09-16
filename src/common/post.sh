@@ -324,20 +324,30 @@ for file in ${to_remove[@]}; do
     rm -rf $file
 done
 
-###########
-# FIREFOX #
-###########
+#############
+# WALLPAPER #
+#############
 
+case $version_id in
+    35) wallpaper="karsten-wurth-7BjhtdogU3A-unsplash" ;;
+    36) wallpaper="max-okhrimenko-R-CoXmMrWFk-unsplash" ;;
+    37) wallpaper="zara-walker-_pC5hT6aXfs-unsplash" ;;
+    *) wallpaper="jack-b-vcNPMwS08UI-unsplash" ;;
+esac
+
+if [[ -f "/usr/share/backgrounds/default/$wallpaper.jpg" ]]; then
+    set_property /usr/share/glib-2.0/schemas/io.elementary.desktop.gschema.override picture-uri "'file:\/\/\/usr\/share\/backgrounds\/default\/$wallpaper.jpg'"
+    ln -s /usr/share/backgrounds/default/$wallpaper.jpg /usr/share/backgrounds/elementaryos-default
+fi
+
+##########
+# EXTRAS #
+##########
+
+# Customize Firefox
 /usr/lib64/firefox-sodalite/setup.sh
 rm -rf /usr/lib64/firefox-sodalite
 rm -f /usr/lib64/firefox/browser/omni.ja_backup
-
-########
-# MISC #
-########
-
-# Sets background for System (in Switchboard) to use behind the logo
-ln -s $(get_property /usr/share/glib-2.0/schemas/io.elementary.desktop.gschema.override picture-uri | sed -E 's/file:\/\///' | sed -E "s/'//g") /usr/share/backgrounds/elementaryos-default
 
 # Updates schemas
 glib-compile-schemas /usr/share/glib-2.0/schemas
