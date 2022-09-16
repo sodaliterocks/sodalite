@@ -12,7 +12,7 @@ include: [
 
 # Version
 releasever: "36" # Fedora version
-automatic-version-prefix: "${releasever}-22.11"
+automatic-version-prefix: "${releasever}-22.12"
 automatic-version-suffix: "."
 mutate-os-release: "${releasever}"
 
@@ -54,10 +54,13 @@ add-files: [
   ["../sysroot/common/etc/systemd/system/update-appcenter-flatpak.service", "/etc/systemd/system/update-appcenter-flatpak.service"],
 
   # /etc/xdg
+  ["../../lfs/binaries/debian/indicator-application-patched/0.1/etc/xdg/autostart/indicator-application.desktop", "/etc/xdg/autostart/indicator-application.desktop"],
+  #["../sysroot/common/etc/xdg/autostart/appimaged.desktop", "/etc/xdg/autostart/appimaged.desktop"], # BUG: https://github.com/sodaliterocks/sodalite/issues/42
   ["../sysroot/common/etc/xdg/autostart/gnome-software-service.desktop", "/etc/xdg/autostart/gnome-software-service.desktop"],
   ["../sysroot/common/etc/xdg/autostart/plank-wrapper.desktop", "/etc/xdg/autostart/plank-wrapper.desktop"],
 
   # /usr/bin
+  ["../../lfs/binaries/appimage/appimaged_718~x86_64.AppImage", "/usr/bin/appimaged"],
   ["../../lib/sodaliterocks.hacks/src/hacks.sh", "/usr/bin/sodalite-hacks"],
   ["../sysroot/common/usr/bin/detach", "/usr/bin/detach"],
   ["../sysroot/common/usr/bin/gnome-control-center", "/usr/bin/gnome-control-center"],
@@ -67,15 +70,21 @@ add-files: [
   ["../sysroot/common/usr/bin/serve", "/usr/bin/serve"],
   
   # /usr/lib
+  ["../../lfs/binaries/debian/com.github.lafydev.wingpanel-indicator-ayatana/2.0.8/usr/lib/x86_64-linux-gnu/wingpanel/libayatana.so", "/usr/lib64/wingpanel/libayatana.so"],
+  ["../../lfs/binaries/debian/indicator-application-patched/0.1/usr/lib/indicators3/7/libapplication.so", "/usr/lib/indicators3/7/libapplication.so"],
+  ["../../lfs/binaries/debian/indicator-application-patched/0.1/usr/lib/systemd/user/indicator-application.service", "/usr/lib/systemd/user/indicator-application.service"],
   ["../sysroot/common/usr/lib/sodalite-buildinfo", "/usr/lib/sodalite-buildinfo"],
   
   # /usr/lib64
+  ["../../lfs/binaries/debian/indicator-application-patched/0.1/usr/lib/x86_64-linux-gnu/indicator-application/indicator-application-service", "/usr/lib64/indicator-application/indicator-application-service"],
   ["../sysroot/common/usr/lib64/switchboard/personal/security-privacy-plug-helper", "/usr/lib64/switchboard/personal/security-privacy-plug-helper"],
   
-  # /usr/lib64/firefox
-  ["../sysroot/common/usr/lib64/firefox/browser/defaults/preferences/firefox-sodalite-default-prefs.js", "/usr/lib64/firefox/browser/defaults/preferences/firefox-sodalite-default-prefs.js"],
-  ["../sysroot/common/usr/lib64/firefox/distribution/distribution.ini", "/usr/lib64/firefox/distribution/distribution.ini"],
-  
+  # /usr/lib64/firefox-sodalite
+  ["../../lib/sodaliterocks.firefox/config/browser/defaults/preferences/firefox.js", "/usr/lib64/firefox-sodalite/config/browser/defaults/preferences/firefox.js"],
+  ["../../lib/sodaliterocks.firefox/config/distribution/distribution.ini", "/usr/lib64/firefox-sodalite/config/distribution/distribution.ini"],
+  ["../../lib/sodaliterocks.firefox/omni/chrome/browser/content/browser/default-bookmarks.html", "/usr/lib64/firefox-sodalite/omni/chrome/browser/content/browser/default-bookmarks.html"],
+  ["../../lib/sodaliterocks.firefox/setup.sh", "/usr/lib64/firefox-sodalite/setup.sh"],
+
   # /usr/libexec
   ["../../lib/sodaliterocks.hacks/src/plugins/cleanup.sh", "/usr/libexec/sodalite-hacks/plugins/cleanup.sh"],
   ["../../lib/sodaliterocks.hacks/src/plugins/flatpak.sh", "/usr/libexec/sodalite-hacks/plugins/flatpak.sh"],
