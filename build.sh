@@ -19,7 +19,10 @@ function cleanup() {
 
     rm -f $buildinfo_file
     rm -rf  /var/tmp/rpm-ostree.*
-    chown -R $SUDO_USER:$SUDO_USER $working_dir
+
+    if [[ $SUDO_USER != "" ]]; then
+        chown -R $SUDO_USER:$SUDO_USER $working_dir
+    fi
 }
 
 function print_time() {
