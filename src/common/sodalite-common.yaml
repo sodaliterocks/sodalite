@@ -11,8 +11,8 @@ include: [
 ]
 
 # Version
-releasever: "37" # Fedora version
-automatic-version-prefix: "${releasever}-22.11"
+releasever: "36" # Fedora version
+automatic-version-prefix: "${releasever}-22.12"
 automatic-version-suffix: "."
 mutate-os-release: "${releasever}"
 
@@ -20,8 +20,6 @@ mutate-os-release: "${releasever}"
 repos:
  - copr_decathorpe_elementary-staging
  - copr_stsdc_monitor
- - fedora-36 # HACK: elementary packages are not yet in F37 repos (unsure why?)
- - fedora-36-updates
  - fedora
  - fedora-updates
 
