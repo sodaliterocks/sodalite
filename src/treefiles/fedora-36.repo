@@ -1,6 +1,0 @@
-[fedora-36]
-name=Fedora $releasever ($basearch)
-mirrorlist=https://mirrors.fedoraproject.org/metalink?repo=fedora-36&arch=$basearch
-enabled=0
-gpgcheck=1
-metadata_expire=1d

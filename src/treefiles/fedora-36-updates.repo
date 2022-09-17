@@ -1,6 +1,0 @@
-[fedora-36-updates]
-name=Fedora $releasever ($basearch) - Updates
-mirrorlist=https://mirrors.fedoraproject.org/metalink?repo=updates-released-f36&arch=$basearch
-enabled=0
-gpgcheck=1
-metadata_expire=1d
