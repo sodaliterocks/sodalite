@@ -7,5 +7,4 @@ packages:
  - podman
  - skopeo
  - smartmontools
- - tlp
  - toolbox
