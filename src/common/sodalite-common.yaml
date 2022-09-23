@@ -12,7 +12,7 @@ include: [
 
 # Version
 releasever: "35" # Fedora version
-automatic-version-prefix: "${releasever}-22.12"
+automatic-version-prefix: "${releasever}-22.13"
 automatic-version-suffix: "."
 mutate-os-release: "${releasever}"
 
