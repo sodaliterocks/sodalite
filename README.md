@@ -1,6 +1,6 @@
 # Sodalite
 
-![Screenshot of Sodalite](https://git.zio.sh/ducky/sodalite-lfs/raw/branch/main/screenshots/screenshot.png?u=4)
+![Screenshot of Sodalite](https://git.zio.sh/sodaliterocks/lfs/media/branch/main/screenshots/screenshot.png?u=5)
 
 ## Quickstart
 
@@ -66,13 +66,14 @@ An OSTree repository has already been setup for Sodalite, so you don't even need
             * `stable`: Rolling-release version based on the current stable release of Fedora Linux (currently 36).
             * `f35`: Long-term version based on Fedora Linux 35. Reaches end-of-life on 7th December 2022 (2022-12-07), to which you should rebase to a newer version.
             * `f36`: Long-term version based on Fedora Linux 36. Reaches end-of-life on 24th May 2023 (2023-05-24), to which you should rebase to a newer version.
-            * `next`: Rolling-release version based on the next upcoming version of Fedora Linux (currently 37).
+            * `next`: Rolling-release version based on the next upcoming version of Fedora Linux (currently 38).
         3) `x86_64`: The **architecture** of the image. Possible values:
             * `x86_64`: For 64-bit CPUs (`x86_64`, `amd64`, or — please stop saying this — `x64`).
             * <s>`x86`: [What year is it!?](https://c.tenor.com/9OcQhlCBNG0AAAAd/what-year-is-it-jumanji.gif)</s>
         4) `base`: The **variant** of the image. Possible values (not all are available for every `version`):
             * `base`: Everything you'll need to get going (hopefully). Other variants are built on-top of this.
-            * `pantheon-nightly`: Includes nightly versions of elementary/Pantheon packages. See [elementary-nightly](https://decathorpe.com/fedora-elementary-nightly-status.html) for more details.
+            * `experimental-<experiment>`: **Experimental** branches for testing unstable and/or uncoming features and fixes. These are only available on the `stable` version.<br />Substitutions for `<experiment>` are:
+                * `pantheon-nightly`: Includes nightly versions of elementary/Pantheon packages. See [COPR ➔ decathorpe/elementary-nightly](https://copr.fedorainfracloud.org/coprs/decathorpe/elementary-nightly/) for more details.
 	3) `rpm-ostree rebase sodalite:sodalite/stable/x86_64/base`<br />This rebases the OS onto Sodalite's image. Remember to substitute any values from before into this one!
 3) Reboot when prompted with `systemctl reboot`.
 4) Once logged in, defaults should apply and everything should be as it should.
