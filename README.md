@@ -130,6 +130,7 @@ See [CONTRIBUTING.md](./CONTRIBUTING.md).
 	* [Cody Fitzgerald](https://unsplash.com/@cfitz)
 	* [Dustin Humes](https://unsplash.com/@dustinhumes_photography)
 	* [Jack B.](https://unsplash.com/@nervum)
+	* [Jeremy Gerritsen](https://unsplash.com/@jeremygerritsen)
 	* [Karsten Würth](https://unsplash.com/@karsten_wuerth)
 	* [Max Okhrimenko](https://unsplash.com/@maxokhrimenko)
 	* [Nathan Dumlao](https://unsplash.com/@nate_dumlao)
