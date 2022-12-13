@@ -1,5 +1,5 @@
 # Meta
-ref: sodalite/f36/${basearch}/common
+ref: sodalite/stable/${basearch}/common
 include: [
   "../../lib/workstation-ostree-config_f36/fedora-common-ostree-pkgs.yaml",
   "../packages/essential.yaml",
@@ -12,7 +12,7 @@ include: [
 
 # Version
 releasever: "36" # Fedora version
-automatic-version-prefix: "${releasever}-22.13"
+automatic-version-prefix: "${releasever}-22.14"
 automatic-version-suffix: "."
 mutate-os-release: "${releasever}"
 
@@ -112,7 +112,7 @@ add-files: [
   ["../../lfs/wallpapers/cody-fitzgerald-iUBG6hQe4N0-unsplash.jpg", "/usr/share/backgrounds/default/cody-fitzgerald-iUBG6hQe4N0-unsplash.jpg"],
   ["../../lfs/wallpapers/dustin-humes-OrO_HSqlZMY-unsplash.jpg", "/usr/share/backgrounds/default/dustin-humes-OrO_HSqlZMY-unsplash.jpg"],
   ["../../lfs/wallpapers/jack-b-vcNPMwS08UI-unsplash.jpg", "/usr/share/backgrounds/default/jack-b-vcNPMwS08UI-unsplash.jpg"],
-  ["../../lfs/wallpapers/karsten-wurth-7BjhtdogU3A-unsplash.jpg", "/usr/share/backgrounds/default/karsten-wurth-7BjhtdogU3A-unsplash.jpg"],
+  ["../../lfs/wallpapers/jeremy-gerritsen-_iviuukstI4-unsplash.jpg", "/usr/share/backgrounds/default/jeremy-gerritsen-_iviuukstI4-unsplash.jpg"],
   ["../../lfs/wallpapers/max-okhrimenko-R-CoXmMrWFk-unsplash.jpg", "/usr/share/backgrounds/default/max-okhrimenko-R-CoXmMrWFk-unsplash.jpg"],
   ["../../lfs/wallpapers/nathan-dumlao-y_qtd7IizFE-unsplash.jpg", "/usr/share/backgrounds/default/nathan-dumlao-y_qtd7IizFE-unsplash.jpg"],
   ["../../lfs/wallpapers/ryan-stone-U3cctUBucn0-unsplash.jpg", "/usr/share/backgrounds/default/ryan-stone-U3cctUBucn0-unsplash.jpg"],
