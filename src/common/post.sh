@@ -325,6 +325,7 @@ case $version_id in
     36) wallpaper="max-okhrimenko-R-CoXmMrWFk-unsplash" ;;
     38) wallpaper="zara-walker-_pC5hT6aXfs-unsplash" ;;
     39) wallpaper="jack-b-vcNPMwS08UI-unsplash" ;;
+    40) wallpaper="jeremy-gerritsen-_iviuukstI4-unsplash"
 esac
 
 if [[ -f "/usr/share/backgrounds/default/$wallpaper.jpg" ]]; then
