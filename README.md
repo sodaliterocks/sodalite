@@ -63,9 +63,8 @@ An OSTree repository has already been setup for Sodalite, so you don't even need
 	2) `ostree pull sodalite:sodalite/stable/x86_64/base`<br />This pulls the OSTree image for Sodalite, and is split up into four parts (similar to that of Fedora Silverblue). These parts can be substituted for other values:
 		1) `sodalite`: The **name** of the image.
 		2) `stable`: The **version** of the image. Possible values:
-            * `stable`: Rolling-release version based on the current stable release of Fedora Linux (currently 36).
-            * `f35`: Long-term version based on Fedora Linux 35. Reaches end-of-life on 7th December 2022 (2022-12-07), to which you should rebase to a newer version.
-            * `f36`: Long-term version based on Fedora Linux 36. Reaches end-of-life on 24th May 2023 (2023-05-24), to which you should rebase to a newer version.
+            * `stable`: Rolling-release version based on the current stable release of Fedora Linux (currently 36 &mdash; [37 has been abandoned](https://github.com/sodaliterocks/sodalite/issues/44)).
+            * `f36`: Long-term version based on Fedora Linux 36. Reaches end-of-life on 16th May 2023 (2023-05-16), to which you should rebase to a newer version.
             * `next`: Rolling-release version based on the next upcoming version of Fedora Linux (currently 38).
         3) `x86_64`: The **architecture** of the image. Possible values:
             * `x86_64`: For 64-bit CPUs (`x86_64`, `amd64`, or — please stop saying this — `x64`).
