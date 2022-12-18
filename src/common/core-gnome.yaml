@@ -1,0 +1,8 @@
+include: [
+  "./core.yaml",
+  "../packages/gnome.yaml"
+]
+
+add-files: [
+  ["../sysroot/cores/gnome/usr/lib/sodalite-core", "/usr/lib/sodalite-core"],
+]

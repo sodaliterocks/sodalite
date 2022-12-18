@@ -1,5 +1,0 @@
-include: [
-  "./base.yaml",
-  "../packages/gnome.yaml"
-]
-

@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 buildinfo_file="/usr/lib/sodalite-buildinfo"
+core_file="/usr/lib/sodalite-core"
 
 function del_property() {
     file=$1
@@ -42,8 +43,13 @@ function set_property() {
 
 set -xeuo pipefail
 
+core=""
 variant=""
 version_tag=""
+
+if [[ -f $core_file ]]; then
+    core="$(cat $core_file)"
+fi
 
 if [[ $(cat $buildinfo_file) != "" ]]; then
     [[ -z $(get_property $buildinfo_file "GIT_TAG") ]] && \
@@ -65,7 +71,7 @@ if [[ $(get_property /etc/os-release VERSION) =~ (([0-9]{1,3})-([0-9]{2}.[0-9]{1
     [[ ${BASH_REMATCH[5]} > 0 ]] && version+=".${BASH_REMATCH[5]}"
     [[ ! -z $version_tag ]] && version+="+$version_tag"
 
-    if [[ ! -z $variant ]] && [[ $variant != "base" ]]; then
+    if [[ ! -z $variant ]] && [[ $variant != "desktop"* ]]; then
         version_pretty="$version ($variant)"
     else
         version_pretty="$version"

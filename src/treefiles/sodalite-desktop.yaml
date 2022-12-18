@@ -1,6 +1,6 @@
 ref: sodalite/stable/${basearch}/desktop
 include:
-  - ../common/base-pantheon.yaml
+  - ../common/core-pantheon.yaml
 
 rojig:
   name: sodalite-desktop

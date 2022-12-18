@@ -1,5 +1,5 @@
 include: [
-  "./base.yaml",
+  "./core.yaml",
   "../packages/pantheon.yaml",
   "../packages/pantheon-apps.yaml",
   "../packages/pantheon-extras.yaml"
@@ -11,7 +11,7 @@ repos:
  
 add-files: [
   # /etc
-  ["../sysroot/desktops/pantheon/etc/dconf/db/local.d/01-elementary-theme", "/etc/dconf/db/local.d/10-elementary-theme"],
+  ["../sysroot/cores/pantheon/etc/dconf/db/local.d/01-elementary-theme", "/etc/dconf/db/local.d/10-elementary-theme"],
   ["../../lib/elementary.default-settings/cups/default-testpage.pdf", "/etc/cups/default-testpage.pdf"],
   ["../../lib/elementary.default-settings/gtk/settings.ini", "/etc/gtk/settings.ini"],
 
@@ -24,43 +24,44 @@ add-files: [
   ["../../lib/elementary.default-settings/skel/plank/dock1/launchers/io.elementary.tasks.dockitem", "/etc/skel/.config/plank/dock1/launchers/io.elementary.tasks.dockitem"],
   ["../../lib/elementary.default-settings/skel/.inputrc", "/etc/skel/.inputrc"],
   ["../../lib/elementary.default-settings/sudoers.d/pwfeedback", "/etc/sudoers.d/pwfeedback"],
-  ["../sysroot/desktops/pantheon/etc/skel/dot.bashrc", "/etc/skel/.bashrc"],
-  ["../sysroot/desktops/pantheon/etc/skel/dot.config/plank/dock1/launchers/firefox.dockitem", "/etc/skel/.config/plank/dock1/launchers/firefox.dockitem"],
-  ["../sysroot/desktops/pantheon/etc/skel/dot.config/plank/dock1/launchers/io.elementary.files.dockitem", "/etc/skel/.config/plank/dock1/launchers/io.elementary.files.dockitem"],
-  ["../sysroot/desktops/pantheon/etc/skel/dot.config/plank/dock1/launchers/io.elementary.terminal.dockitem", "/etc/skel/.config/plank/dock1/launchers/io.elementary.terminal.dockitem"],
-  ["../sysroot/desktops/pantheon/etc/skel/dot.config/plank/dock1/launchers/org.gnome.Software.dockitem", "/etc/skel/.config/plank/dock1/launchers/org.gnome.Software.dockitem"],
+  ["../sysroot/cores/pantheon/etc/skel/dot.bashrc", "/etc/skel/.bashrc"],
+  ["../sysroot/cores/pantheon/etc/skel/dot.config/plank/dock1/launchers/firefox.dockitem", "/etc/skel/.config/plank/dock1/launchers/firefox.dockitem"],
+  ["../sysroot/cores/pantheon/etc/skel/dot.config/plank/dock1/launchers/io.elementary.files.dockitem", "/etc/skel/.config/plank/dock1/launchers/io.elementary.files.dockitem"],
+  ["../sysroot/cores/pantheon/etc/skel/dot.config/plank/dock1/launchers/io.elementary.terminal.dockitem", "/etc/skel/.config/plank/dock1/launchers/io.elementary.terminal.dockitem"],
+  ["../sysroot/cores/pantheon/etc/skel/dot.config/plank/dock1/launchers/org.gnome.Software.dockitem", "/etc/skel/.config/plank/dock1/launchers/org.gnome.Software.dockitem"],
 
   # /etc/xdg
   ["../../lfs/binaries/debian/indicator-application-patched/0.1/etc/xdg/autostart/indicator-application.desktop", "/etc/xdg/autostart/indicator-application.desktop"],
-  ["../sysroot/desktops/pantheon/etc/xdg/autostart/gnome-software-service.desktop", "/etc/xdg/autostart/gnome-software-service.desktop"],
-  ["../sysroot/desktops/pantheon/etc/xdg/autostart/plank-wrapper.desktop", "/etc/xdg/autostart/plank-wrapper.desktop"],
+  ["../sysroot/cores/pantheon/etc/xdg/autostart/gnome-software-service.desktop", "/etc/xdg/autostart/gnome-software-service.desktop"],
+  ["../sysroot/cores/pantheon/etc/xdg/autostart/plank-wrapper.desktop", "/etc/xdg/autostart/plank-wrapper.desktop"],
 
   # /usr/bin
-  ["../sysroot/desktops/pantheon/usr/bin/gnome-control-center", "/usr/bin/gnome-control-center"],
-  ["../sysroot/desktops/pantheon/usr/bin/gnome-software-wrapper", "/usr/bin/gnome-software-wrapper"],
-  ["../sysroot/desktops/pantheon/usr/bin/plank-wrapper", "/usr/bin/plank-wrapper"],
+  ["../sysroot/cores/pantheon/usr/bin/gnome-control-center", "/usr/bin/gnome-control-center"],
+  ["../sysroot/cores/pantheon/usr/bin/gnome-software-wrapper", "/usr/bin/gnome-software-wrapper"],
+  ["../sysroot/cores/pantheon/usr/bin/plank-wrapper", "/usr/bin/plank-wrapper"],
 
   # /usr/lib
   ["../../lfs/binaries/debian/com.github.lafydev.wingpanel-indicator-ayatana/2.0.8/usr/lib/x86_64-linux-gnu/wingpanel/libayatana.so", "/usr/lib64/wingpanel/libayatana.so"],
   ["../../lfs/binaries/debian/indicator-application-patched/0.1/usr/lib/indicators3/7/libapplication.so", "/usr/lib/indicators3/7/libapplication.so"],
   ["../../lfs/binaries/debian/indicator-application-patched/0.1/usr/lib/systemd/user/indicator-application.service", "/usr/lib/systemd/user/indicator-application.service"],
+  ["../sysroot/cores/pantheon/usr/lib/sodalite-core", "/usr/lib/sodalite-core"],
 
   # /usr/lib64
   ["../../lfs/binaries/debian/indicator-application-patched/0.1/usr/lib/x86_64-linux-gnu/indicator-application/indicator-application-service", "/usr/lib64/indicator-application/indicator-application-service"],
-  ["../sysroot/desktops/pantheon/usr/lib64/switchboard/personal/security-privacy-plug-helper", "/usr/lib64/switchboard/personal/security-privacy-plug-helper"],
+  ["../sysroot/cores/pantheon/usr/lib64/switchboard/personal/security-privacy-plug-helper", "/usr/lib64/switchboard/personal/security-privacy-plug-helper"],
 
   # /usr/libexec
   ["../../lib/sodaliterocks.hacks/src/plugins/gcc-shim.sh", "/usr/libexec/sodalite-hacks/plugins/gcc-shim.sh"],
 
   # /usr/share/applications
-  ["../sysroot/desktops/pantheon/usr/share/applications/firewall-config.desktop", "/usr/share/applications/firewall-config.desktop"],
-  ["../sysroot/desktops/pantheon/usr/share/applications/org.freedesktop.IBus.Setup.desktop", "/usr/share/applications/org.freedesktop.IBus.Setup.desktop"],
-  ["../sysroot/desktops/pantheon/usr/share/applications/nm-connection-editor.desktop", "/usr/share/applications/nm-connection-editor.desktop"],
-  ["../sysroot/desktops/pantheon/usr/share/applications/org.gnome.DiskUtility.desktop", "/usr/share/applications/org.gnome.DiskUtility.desktop"],
-  ["../sysroot/desktops/pantheon/usr/share/applications/org.gnome.Software.desktop", "/usr/share/applications/org.gnome.Software.desktop"],
+  ["../sysroot/cores/pantheon/usr/share/applications/firewall-config.desktop", "/usr/share/applications/firewall-config.desktop"],
+  ["../sysroot/cores/pantheon/usr/share/applications/org.freedesktop.IBus.Setup.desktop", "/usr/share/applications/org.freedesktop.IBus.Setup.desktop"],
+  ["../sysroot/cores/pantheon/usr/share/applications/nm-connection-editor.desktop", "/usr/share/applications/nm-connection-editor.desktop"],
+  ["../sysroot/cores/pantheon/usr/share/applications/org.gnome.DiskUtility.desktop", "/usr/share/applications/org.gnome.DiskUtility.desktop"],
+  ["../sysroot/cores/pantheon/usr/share/applications/org.gnome.Software.desktop", "/usr/share/applications/org.gnome.Software.desktop"],
 
   # /usr/share/glib-2.0
-  ["../sysroot/desktops/pantheon/usr/share/glib-2.0/schemas/io.elementary.desktop.gschema.override", "/usr/share/glib-2.0/schemas/io.elementary.desktop.gschema.override"],
+  ["../sysroot/cores/pantheon/usr/share/glib-2.0/schemas/io.elementary.desktop.gschema.override", "/usr/share/glib-2.0/schemas/io.elementary.desktop.gschema.override"],
 
   # /usr/share/icons
   ["../../lib/elementary.icons/apps/128/system-software-install.svg", "/usr/share/icons/elementary/apps/128/system-software-install.svg"],
@@ -70,5 +71,5 @@ add-files: [
   ["../../lib/elementary.icons/apps/48/system-software-install.svg", "/usr/share/icons/elementary/apps/48/system-software-install.svg"],
   ["../../lib/elementary.icons/apps/64/system-software-install.svg", "/usr/share/icons/elementary/apps/64/system-software-install.svg"],
   ["../../lib/elementary.icons/apps/symbolic/system-software-install-symbolic.svg", "/usr/share/icons/elementary/apps/symbolic/system-software-install-symbolic.svg"],
-  ["../sysroot/desktops/pantheon/usr/share/icons/default/index.theme", "/usr/share/icons/default/index.theme"]
+  ["../sysroot/cores/pantheon/usr/share/icons/default/index.theme", "/usr/share/icons/default/index.theme"]
 ]
