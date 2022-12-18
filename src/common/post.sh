@@ -328,9 +328,11 @@ case $version_id in
     40) wallpaper="jeremy-gerritsen-_iviuukstI4-unsplash"
 esac
 
-if [[ -f "/usr/share/backgrounds/default/$wallpaper.jpg" ]]; then
-    set_property /usr/share/glib-2.0/schemas/io.elementary.desktop.gschema.override picture-uri "'file:\/\/\/usr\/share\/backgrounds\/default\/$wallpaper.jpg'"
-    ln -s /usr/share/backgrounds/default/$wallpaper.jpg /usr/share/backgrounds/elementaryos-default
+if [[ $core == "pantheon" ]]; then
+    if [[ -f "/usr/share/backgrounds/default/$wallpaper.jpg" ]]; then
+        set_property /usr/share/glib-2.0/schemas/io.elementary.desktop.gschema.override picture-uri "'file:\/\/\/usr\/share\/backgrounds\/default\/$wallpaper.jpg'"
+        ln -s /usr/share/backgrounds/default/$wallpaper.jpg /usr/share/backgrounds/elementaryos-default
+    fi
 fi
 
 ##########
