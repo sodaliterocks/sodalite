@@ -60,6 +60,9 @@ if [[ ! $(command -v "rpm-ostree") ]]; then
     die "rpm-ostree not installed"
 fi
 
+[[ $variant == "gnome" ]] && variant="desktop-gnome"
+[[ $variant == "pantheon" ]] && variant="desktop"
+
 echo "🪛 Setting up..."
 [[ $variant == *.yaml ]] && variant="$(echo $variant | sed s/.yaml//)"
 [[ $variant == sodalite* ]] && variant="$(echo $variant | sed s/sodalite-//)"
