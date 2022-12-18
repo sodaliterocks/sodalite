@@ -65,6 +65,8 @@ packages:
  - wingpanel-indicator-power
  - wingpanel-indicator-session
  - wingpanel-indicator-sound
+ - xdg-desktop-portal-gnome
+ - xdg-desktop-portal-pantheon
 exclude-packages:
  - gnome-tour
  #- ufw
