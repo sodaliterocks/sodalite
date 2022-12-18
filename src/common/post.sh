@@ -6,7 +6,7 @@ core_file="/usr/lib/sodalite-core"
 function del_property() {
     file=$1
     property=$2
-    
+
     if [[ -f $file ]]; then
         if [[ ! -z $(get_property $file $property) ]]; then
             sed -i "s/^\($property=.*\)$//g" $file
@@ -175,137 +175,141 @@ sed -i 's/lib\/x86_64-linux-gnu/lib64/g' /etc/xdg/autostart/indicator-applicatio
 # HACK: Removing files here instead because we're not using --unified-core
 #       (see https://github.com/sodaliterocks/sodalite/issues/9#issuecomment-1010384738)
 
-declare -a to_remove=(
-    # desktop-backgrounds-compat
-    "/usr/share/backgrounds/default.png"
-    "/usr/share/backgrounds/default.xml"
-    "/usr/share/backgrounds/images"
-    "/usr/share/backgrounds/images/default-16_10.png"
-    "/usr/share/backgrounds/images/default-16_9.png"
-    "/usr/share/backgrounds/images/default-5_4.png"
-    "/usr/share/backgrounds/images/default.png"
-    # evolution-data-server
-    "/etc/xdg/autostart/org.gnome.Evolution-alarm-notify.desktop"
-    "/usr/libexec/evolution-data-server/evolution-alarm-notify"
-    # fedora-workstation-backgrounds
-    "/usr/share/backgrounds/fedora-workstation/"
-    "/usr/share/doc/fedora-workstation-backgrounds/"
-    "/usr/share/gnome-background-properties/fedora-workstation-backgrounds.xml"
-    "/usr/share/licenses/fedora-workstation-backgrounds"
-    # firefox
-    "/usr/lib64/firefox/browser/defaults/preferences/firefox-redhat-default-prefs.js"
-    # gnome-control-center
-    #"/usr/bin/gnome-control-center"
-    "/usr/libexec/cc-remote-login-helper"
-    "/usr/libexec/gnome-control-center-print-renderer"
-    "/usr/libexec/gnome-control-center-search-provider"
-    "/usr/share/applications/gnome-applications-panel.desktop"
-    "/usr/share/applications/gnome-background-panel.desktop"
-    "/usr/share/applications/gnome-bluetooth-panel.desktop"
-    "/usr/share/applications/gnome-camera-panel.desktop"
-    "/usr/share/applications/gnome-color-panel.desktop"
-    "/usr/share/applications/gnome-control-center.desktop"
-    "/usr/share/applications/gnome-datetime-panel.desktop"
-    "/usr/share/applications/gnome-default-apps-panel.desktop"
-    "/usr/share/applications/gnome-diagnostics-panel.desktop"
-    "/usr/share/applications/gnome-display-panel.desktop"
-    "/usr/share/applications/gnome-info-overview-panel.desktop"
-    "/usr/share/applications/gnome-keyboard-panel.desktop"
-    "/usr/share/applications/gnome-location-panel.desktop"
-    "/usr/share/applications/gnome-lock-panel.desktop"
-    "/usr/share/applications/gnome-microphone-panel.desktop"
-    "/usr/share/applications/gnome-mouse-panel.desktop"
-    "/usr/share/applications/gnome-multitasking-panel.desktop"
-    "/usr/share/applications/gnome-network-panel.desktop"
-    "/usr/share/applications/gnome-notifications-panel.desktop"
-    "/usr/share/applications/gnome-online-accounts-panel.desktop"
-    "/usr/share/applications/gnome-power-panel.desktop"
-    "/usr/share/applications/gnome-printers-panel.desktop"
-    "/usr/share/applications/gnome-region-panel.desktop"
-    "/usr/share/applications/gnome-removable-media-panel.desktop"
-    "/usr/share/applications/gnome-search-panel.desktop"
-    "/usr/share/applications/gnome-sharing-panel.desktop"
-    "/usr/share/applications/gnome-sound-panel.desktop"
-    "/usr/share/applications/gnome-thunderbolt-panel.desktop"
-    "/usr/share/applications/gnome-universal-access-panel.desktop"
-    "/usr/share/applications/gnome-usage-panel.desktop"
-    "/usr/share/applications/gnome-user-accounts-panel.desktop"
-    "/usr/share/applications/gnome-wacom-panel.desktop"
-    "/usr/share/applications/gnome-wifi-panel.desktop"
-    "/usr/share/applications/gnome-wwan-panel.desktop"
-    "/usr/share/bash-completion/completions/gnome-control-center"
-    "/usr/share/dbus-1/services/org.gnome.ControlCenter.SearchProvider.service"
-    "/usr/share/dbus-1/services/org.gnome.ControlCenter.service"
-    "/usr/share/doc/gnome-control-center/"
-    "/usr/share/glib-2.0/schemas/org.gnome.ControlCenter.gschema.xml"
-    "/usr/share/gnome-control-center/"
-    "/usr/share/gnome-shell/search-providers/gnome-control-center-search-provider.ini"
-    "/usr/share/locale/*/LC_MESSAGES/gnome-control-center-2.0.mo"
-    "/usr/share/locale/*/LC_MESSAGES/gnome-control-center-2.0-timezones.mo"
-    "/usr/share/man/man1/gnome-control-center.1.gz"
-    "/usr/share/metainfo/gnome-control-center.appdata.xml"
-    "/usr/share/polkit-1/actions/org.gnome.controlcenter.datetime.policy"
-    "/usr/share/polkit-1/actions/org.gnome.controlcenter.remote-login-helper.policy"
-    "/usr/share/polkit-1/actions/org.gnome.controlcenter.user-accounts.policy"
-    "/usr/share/polkit-1/rules.d/gnome-control-center.rules"
-    "/usr/share/sounds/gnome/"
-    # gnome-session
-    "/usr/share/wayland-sessions/gnome.desktop"
-    "/usr/share/wayland-sessions/gnome-wayland.desktop"
-    "/usr/share/xsessions/gnome.desktop"
-    "/usr/share/xsessions/gnome-xorg.desktop"
-    # gnome-themes-extra
-    "/usr/share/doc/gnome-themes-extra/"
-    "/usr/share/licenses/gnome-themes-extra/"
-    "/usr/share/themes/Adwaita-dark/"
-    "/usr/share/themes/Adwaita/"
-    "/usr/share/themes/HighContrast/"
-    # light-locker
-    "/etc/xdg/autostart/light-locker.desktop"
-    # plank
-    "/etc/xdg/autostart/plank.desktop"
-    # ufw
-    "/etc/ufw/"
-    "/usr/lib/python3.10/site-packages/ufw/"
-    "/usr/lib/systemd/system/ufw.service"
-    "/usr/libexec/ufw/"
-    "/usr/sbin/ufw"
-    "/usr/share/doc/ufw/"
-    "/usr/share/licenses/ufw/"
-    "/usr/share/locale/*/LC_MESSAGES/ufw.mo"
-    "/usr/share/man/man8/ufw-framework.8.gz"
-    "/usr/share/man/man8/ufw.8.gz"
-    "/usr/share/ufw/"
-    # misc.
-    "/usr/share/backgrounds/f36/"
-    "/usr/share/bookmarks/"
-    "/usr/share/icewm/"
-    "/usr/share/pixmaps/faces/"
-)
+declare -a to_remove
 
-if [[ $variant == "experimental-alt-greeter" ]]; then
-    to_remove+=(
-        # elementary-greeter
-        "/etc/lightdm/io.elementary.greeter.conf"
-        "/etc/lightdm/lightdm.conf.d/40-io.elementary.greeter.conf"
-        "/usr/bin/io.elementary.greeter-compositor"
-        "/usr/sbin/io.elementary.greeter"
-        "/usr/share/doc/elementary-greeter/"
-        "/usr/share/licenses/elementary-greeter/"
-        "/usr/share/locale/*/LC_MESSAGES/io.elementary.greeter.mo"
-        "/usr/share/metainfo/io.elementary.greeter.appdata.xml"
-        "/usr/share/xgreeters/io.elementary.greeter.desktop"
-    )
-fi
+if [[ $core == "pantheon" ]]; then
+  declare -a to_remove=(
+      # desktop-backgrounds-compat
+      "/usr/share/backgrounds/default.png"
+      "/usr/share/backgrounds/default.xml"
+      "/usr/share/backgrounds/images"
+      "/usr/share/backgrounds/images/default-16_10.png"
+      "/usr/share/backgrounds/images/default-16_9.png"
+      "/usr/share/backgrounds/images/default-5_4.png"
+      "/usr/share/backgrounds/images/default.png"
+      # evolution-data-server
+      "/etc/xdg/autostart/org.gnome.Evolution-alarm-notify.desktop"
+      "/usr/libexec/evolution-data-server/evolution-alarm-notify"
+      # fedora-workstation-backgrounds
+      "/usr/share/backgrounds/fedora-workstation/"
+      "/usr/share/doc/fedora-workstation-backgrounds/"
+      "/usr/share/gnome-background-properties/fedora-workstation-backgrounds.xml"
+      "/usr/share/licenses/fedora-workstation-backgrounds"
+      # firefox
+      "/usr/lib64/firefox/browser/defaults/preferences/firefox-redhat-default-prefs.js"
+      # gnome-control-center
+      #"/usr/bin/gnome-control-center"
+      "/usr/libexec/cc-remote-login-helper"
+      "/usr/libexec/gnome-control-center-print-renderer"
+      "/usr/libexec/gnome-control-center-search-provider"
+      "/usr/share/applications/gnome-applications-panel.desktop"
+      "/usr/share/applications/gnome-background-panel.desktop"
+      "/usr/share/applications/gnome-bluetooth-panel.desktop"
+      "/usr/share/applications/gnome-camera-panel.desktop"
+      "/usr/share/applications/gnome-color-panel.desktop"
+      "/usr/share/applications/gnome-control-center.desktop"
+      "/usr/share/applications/gnome-datetime-panel.desktop"
+      "/usr/share/applications/gnome-default-apps-panel.desktop"
+      "/usr/share/applications/gnome-diagnostics-panel.desktop"
+      "/usr/share/applications/gnome-display-panel.desktop"
+      "/usr/share/applications/gnome-info-overview-panel.desktop"
+      "/usr/share/applications/gnome-keyboard-panel.desktop"
+      "/usr/share/applications/gnome-location-panel.desktop"
+      "/usr/share/applications/gnome-lock-panel.desktop"
+      "/usr/share/applications/gnome-microphone-panel.desktop"
+      "/usr/share/applications/gnome-mouse-panel.desktop"
+      "/usr/share/applications/gnome-multitasking-panel.desktop"
+      "/usr/share/applications/gnome-network-panel.desktop"
+      "/usr/share/applications/gnome-notifications-panel.desktop"
+      "/usr/share/applications/gnome-online-accounts-panel.desktop"
+      "/usr/share/applications/gnome-power-panel.desktop"
+      "/usr/share/applications/gnome-printers-panel.desktop"
+      "/usr/share/applications/gnome-region-panel.desktop"
+      "/usr/share/applications/gnome-removable-media-panel.desktop"
+      "/usr/share/applications/gnome-search-panel.desktop"
+      "/usr/share/applications/gnome-sharing-panel.desktop"
+      "/usr/share/applications/gnome-sound-panel.desktop"
+      "/usr/share/applications/gnome-thunderbolt-panel.desktop"
+      "/usr/share/applications/gnome-universal-access-panel.desktop"
+      "/usr/share/applications/gnome-usage-panel.desktop"
+      "/usr/share/applications/gnome-user-accounts-panel.desktop"
+      "/usr/share/applications/gnome-wacom-panel.desktop"
+      "/usr/share/applications/gnome-wifi-panel.desktop"
+      "/usr/share/applications/gnome-wwan-panel.desktop"
+      "/usr/share/bash-completion/completions/gnome-control-center"
+      "/usr/share/dbus-1/services/org.gnome.ControlCenter.SearchProvider.service"
+      "/usr/share/dbus-1/services/org.gnome.ControlCenter.service"
+      "/usr/share/doc/gnome-control-center/"
+      "/usr/share/glib-2.0/schemas/org.gnome.ControlCenter.gschema.xml"
+      "/usr/share/gnome-control-center/"
+      "/usr/share/gnome-shell/search-providers/gnome-control-center-search-provider.ini"
+      "/usr/share/locale/*/LC_MESSAGES/gnome-control-center-2.0.mo"
+      "/usr/share/locale/*/LC_MESSAGES/gnome-control-center-2.0-timezones.mo"
+      "/usr/share/man/man1/gnome-control-center.1.gz"
+      "/usr/share/metainfo/gnome-control-center.appdata.xml"
+      "/usr/share/polkit-1/actions/org.gnome.controlcenter.datetime.policy"
+      "/usr/share/polkit-1/actions/org.gnome.controlcenter.remote-login-helper.policy"
+      "/usr/share/polkit-1/actions/org.gnome.controlcenter.user-accounts.policy"
+      "/usr/share/polkit-1/rules.d/gnome-control-center.rules"
+      "/usr/share/sounds/gnome/"
+      # gnome-session
+      "/usr/share/wayland-sessions/gnome.desktop"
+      "/usr/share/wayland-sessions/gnome-wayland.desktop"
+      "/usr/share/xsessions/gnome.desktop"
+      "/usr/share/xsessions/gnome-xorg.desktop"
+      # gnome-themes-extra
+      "/usr/share/doc/gnome-themes-extra/"
+      "/usr/share/licenses/gnome-themes-extra/"
+      "/usr/share/themes/Adwaita-dark/"
+      "/usr/share/themes/Adwaita/"
+      "/usr/share/themes/HighContrast/"
+      # light-locker
+      "/etc/xdg/autostart/light-locker.desktop"
+      # plank
+      "/etc/xdg/autostart/plank.desktop"
+      # ufw
+      "/etc/ufw/"
+      "/usr/lib/python3.10/site-packages/ufw/"
+      "/usr/lib/systemd/system/ufw.service"
+      "/usr/libexec/ufw/"
+      "/usr/sbin/ufw"
+      "/usr/share/doc/ufw/"
+      "/usr/share/licenses/ufw/"
+      "/usr/share/locale/*/LC_MESSAGES/ufw.mo"
+      "/usr/share/man/man8/ufw-framework.8.gz"
+      "/usr/share/man/man8/ufw.8.gz"
+      "/usr/share/ufw/"
+      # misc.
+      "/usr/share/backgrounds/f36/"
+      "/usr/share/bookmarks/"
+      "/usr/share/icewm/"
+      "/usr/share/pixmaps/faces/"
+  )
 
-if [[ $variant != "experimental-pantheon-nightly" ]]; then
-    # These Pantheon packages are considered broken, so we'll only keep them
-    # for this variant
-    to_remove+=(
-        # switchboard-plug-locale
-        "/usr/lib64/switchboard/personal/liblocale-plug.so"
-        "/usr/share/doc/switchboard-plug-locale/"
-    )
+  if [[ $variant == "experimental-alt-greeter" ]]; then
+      to_remove+=(
+          # elementary-greeter
+          "/etc/lightdm/io.elementary.greeter.conf"
+          "/etc/lightdm/lightdm.conf.d/40-io.elementary.greeter.conf"
+          "/usr/bin/io.elementary.greeter-compositor"
+          "/usr/sbin/io.elementary.greeter"
+          "/usr/share/doc/elementary-greeter/"
+          "/usr/share/licenses/elementary-greeter/"
+          "/usr/share/locale/*/LC_MESSAGES/io.elementary.greeter.mo"
+          "/usr/share/metainfo/io.elementary.greeter.appdata.xml"
+          "/usr/share/xgreeters/io.elementary.greeter.desktop"
+      )
+  fi
+
+  if [[ $variant != "experimental-pantheon-nightly" ]]; then
+      # These Pantheon packages are considered broken, so we'll only keep them
+      # for this variant
+      to_remove+=(
+          # switchboard-plug-locale
+          "/usr/lib64/switchboard/personal/liblocale-plug.so"
+          "/usr/share/doc/switchboard-plug-locale/"
+      )
+  fi
 fi
 
 for file in ${to_remove[@]}; do
@@ -333,22 +337,22 @@ fi
 # EXTRAS #
 ##########
 
-# Customize Firefox
 /usr/lib64/firefox-sodalite/setup.sh
 rm -rf /usr/lib64/firefox-sodalite
 rm -f /usr/lib64/firefox/browser/omni.ja_backup
 
-# Updates schemas
 glib-compile-schemas /usr/share/glib-2.0/schemas
 dconf update
 
-# Sets up Software wrapper
-mv /usr/bin/gnome-software /usr/bin/gnome-software-bin
-mv /usr/bin/gnome-software-wrapper /usr/bin/gnome-software
-
-# Enables/disables various systemd services
-systemctl disable gdm
-systemctl enable generate-oemconf
-systemctl enable lightdm
 systemctl enable touchegg
-systemctl enable update-appcenter-flatpak
+
+if [[ $core == "pantheon" ]]; then
+  mv /usr/bin/gnome-software /usr/bin/gnome-software-bin
+  mv /usr/bin/gnome-software-wrapper /usr/bin/gnome-software
+  
+  systemctl disable gdm
+  systemctl enable generate-oemconf
+  systemctl enable lightdm
+  systemctl enable update-appcenter-flatpak
+fi
+
