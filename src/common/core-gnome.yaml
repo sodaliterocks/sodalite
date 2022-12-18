@@ -5,4 +5,5 @@ include: [
 
 add-files: [
   ["../sysroot/cores/gnome/usr/lib/sodalite-core", "/usr/lib/sodalite-core"],
+  ["../sysroot/cores/gnome/usr/share/glib-2.0/schemas/00_sodalite.gschema.override", "/usr/share/glib-2.0/schemas/00_sodalite.gschema.override"]
 ]
