@@ -1,0 +1,8 @@
+include:
+ - ../../lib/workstation-ostree-config_f36/gnome-desktop-pkgs.yaml
+packages:
+ - evince-previewer
+ - evince-thumbnailer
+ - pinentry-gnome3
+ - totem-video-thumbnailer
+ - xdg-desktop-portal-gnome

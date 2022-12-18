@@ -1,0 +1,8 @@
+ref: sodalite/stable/${basearch}/desktop-gnome
+include:
+  - ../common/base-gnome.yaml
+
+rojig:
+  name: sodalite-desktop-gnome
+  summary: "Sodalite (GNOME)"
+  license: MIT
