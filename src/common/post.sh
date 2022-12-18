@@ -158,16 +158,6 @@ for x in /usr/sbin/glibc_post_upgrade.*; do
     fi
 done
 
-# BUG: Parental Controls doesn't appear to work correctly for Fedora versions
-#      under 35. We'll remove various things immediately visible to the user,
-#      but leave `malcontent-control` intact.
-
-if [[ $version_id -lt 36 ]]; then
-    rm -f "/usr/share/applications/org.freedesktop.MalcontentControl.desktop"
-    rm -f "/usr/lib64/switchboard/system/libparental-controls.so"
-    rm -rf "/usr/share/doc/switchboard-plug-parental-controls/"
-fi
-
 # Some hacks for libayatana to work properly. Might stop working one day.
 ln -s /usr/lib64/libwingpanel.so.3 /usr/lib64/libwingpanel-2.0.so.0
 sed -i 's/lib\/x86_64-linux-gnu/lib64/g' /etc/xdg/autostart/indicator-application.desktop
