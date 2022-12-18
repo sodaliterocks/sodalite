@@ -6,7 +6,7 @@ packages:
   - lightdm-gtk-greeter
 
 add-files: [
-  ["../sysroot/experimental-alt-greeter/usr/share/lightdm/lightdm.conf.d/lightdm-gtk-greeter.conf", "/usr/share/lightdm/lightdm.conf.d/lightdm-gtk-greeter.conf"],
+  ["../sysroot/variants/experimental-alt-greeter/usr/share/lightdm/lightdm.conf.d/lightdm-gtk-greeter.conf", "/usr/share/lightdm/lightdm.conf.d/lightdm-gtk-greeter.conf"],
 ]
 
 rojig:

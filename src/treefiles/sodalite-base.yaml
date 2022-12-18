@@ -1,8 +1,8 @@
 ref: sodalite/stable/${basearch}/base
 include:
-  - ../common/sodalite-common.yaml
+  - ./common/sodalite-desktop.yaml
 
 rojig:
   name: sodalite
-  summary: "Sodalite"
+  summary: "Sodalite (Legacy)"
   license: MIT

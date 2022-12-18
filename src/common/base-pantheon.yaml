@@ -48,7 +48,10 @@ add-files: [
   # /usr/lib64
   ["../../lfs/binaries/debian/indicator-application-patched/0.1/usr/lib/x86_64-linux-gnu/indicator-application/indicator-application-service", "/usr/lib64/indicator-application/indicator-application-service"],
   ["../sysroot/desktops/pantheon/usr/lib64/switchboard/personal/security-privacy-plug-helper", "/usr/lib64/switchboard/personal/security-privacy-plug-helper"],
-  
+
+  # /usr/libexec
+  ["../../lib/sodaliterocks.hacks/src/plugins/gcc-shim.sh", "/usr/libexec/sodalite-hacks/plugins/gcc-shim.sh"],
+
   # /usr/share/applications
   ["../sysroot/desktops/pantheon/usr/share/applications/firewall-config.desktop", "/usr/share/applications/firewall-config.desktop"],
   ["../sysroot/desktops/pantheon/usr/share/applications/org.freedesktop.IBus.Setup.desktop", "/usr/share/applications/org.freedesktop.IBus.Setup.desktop"],

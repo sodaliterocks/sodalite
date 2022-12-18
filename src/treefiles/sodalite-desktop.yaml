@@ -1,0 +1,8 @@
+ref: sodalite/stable/${basearch}/desktop
+include:
+  - ../common/base-pantheon.yaml
+
+rojig:
+  name: sodalite
+  summary: "Sodalite"
+  license: MIT
