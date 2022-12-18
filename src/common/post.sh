@@ -305,6 +305,8 @@ if [[ $core == "pantheon" ]]; then
             "/usr/share/doc/switchboard-plug-locale/"
         )
     else
+        # If we're on this variant, remove the lightdm-gtk-greeter files so it
+        # doesn't interfere with elementary-greeter
         to_remove+=(
             # lightdm-gtk-greeter
             "/etc/lightdm/lightdm-gtk-greeter.conf"
