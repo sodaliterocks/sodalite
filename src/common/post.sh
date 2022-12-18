@@ -164,9 +164,11 @@ for x in /usr/sbin/glibc_post_upgrade.*; do
     fi
 done
 
-# Some hacks for libayatana to work properly. Might stop working one day.
-ln -s /usr/lib64/libwingpanel.so.3 /usr/lib64/libwingpanel-2.0.so.0
-sed -i 's/lib\/x86_64-linux-gnu/lib64/g' /etc/xdg/autostart/indicator-application.desktop
+if [[ $core == "pantheon" ]]; then
+    # Some hacks for libayatana to work properly. Might stop working one day.
+    ln -s /usr/lib64/libwingpanel.so.3 /usr/lib64/libwingpanel-2.0.so.0
+    sed -i 's/lib\/x86_64-linux-gnu/lib64/g' /etc/xdg/autostart/indicator-application.desktop
+fi
 
 ############
 # REMOVALS #
@@ -349,15 +351,14 @@ rm -f /usr/lib64/firefox/browser/omni.ja_backup
 glib-compile-schemas /usr/share/glib-2.0/schemas
 dconf update
 
-systemctl enable touchegg
-
 if [[ $core == "pantheon" ]]; then
   mv /usr/bin/gnome-software /usr/bin/gnome-software-bin
   mv /usr/bin/gnome-software-wrapper /usr/bin/gnome-software
-  
+
   systemctl disable gdm
   systemctl enable generate-oemconf
   systemctl enable lightdm
+  systemctl enable touchegg
   systemctl enable update-appcenter-flatpak
 fi
 

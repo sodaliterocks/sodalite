@@ -30,6 +30,7 @@ add-files: [
   ["../sysroot/cores/pantheon/etc/skel/dot.config/plank/dock1/launchers/io.elementary.files.dockitem", "/etc/skel/.config/plank/dock1/launchers/io.elementary.files.dockitem"],
   ["../sysroot/cores/pantheon/etc/skel/dot.config/plank/dock1/launchers/io.elementary.terminal.dockitem", "/etc/skel/.config/plank/dock1/launchers/io.elementary.terminal.dockitem"],
   ["../sysroot/cores/pantheon/etc/skel/dot.config/plank/dock1/launchers/org.gnome.Software.dockitem", "/etc/skel/.config/plank/dock1/launchers/org.gnome.Software.dockitem"],
+  ["../sysroot/cores/pantheon/etc/skel/dot.config/touchegg/touchegg.conf", "/etc/skel/.config/touchegg/touchegg.conf"],
 
   # /etc/xdg
   ["../../lfs/binaries/debian/indicator-application-patched/0.1/etc/xdg/autostart/indicator-application.desktop", "/etc/xdg/autostart/indicator-application.desktop"],
@@ -53,6 +54,7 @@ add-files: [
 
   # /usr/libexec
   ["../../lib/sodaliterocks.hacks/src/plugins/gcc-shim.sh", "/usr/libexec/sodalite-hacks/plugins/gcc-shim.sh"],
+  ["../sysroot/cores/pantheon/usr/share/touchegg/touchegg.conf", "/usr/share/touchegg/touchegg.conf"],
 
   # /usr/share/applications
   ["../sysroot/cores/pantheon/usr/share/applications/firewall-config.desktop", "/usr/share/applications/firewall-config.desktop"],

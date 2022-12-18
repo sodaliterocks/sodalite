@@ -20,9 +20,6 @@ add-files: [
   ["../sysroot/common/etc/tlp.d/50-vm-writeback.conf", "/etc/tlp.d/50-vm-writeback.conf"],
   ["../sysroot/common/etc/upstream-release/lsb-release", "/etc/upstream-release/lsb-release"],
 
-  # /etc/skel
-  ["../sysroot/common/etc/skel/dot.config/touchegg/touchegg.conf", "/etc/skel/.config/touchegg/touchegg.conf"],
-
   # /etc/systemd
   ["../sysroot/common/etc/systemd/system/generate-oemconf.service", "/etc/systemd/system/generate-oemconf.service"],
   ["../sysroot/common/etc/systemd/system/update-appcenter-flatpak.service", "/etc/systemd/system/update-appcenter-flatpak.service"],
@@ -55,9 +52,6 @@ add-files: [
   ["../../lib/sodaliterocks.firefox/config/distribution/distribution.ini", "/usr/lib64/firefox-sodalite/config/distribution/distribution.ini"],
   ["../../lib/sodaliterocks.firefox/omni/chrome/browser/content/browser/default-bookmarks.html", "/usr/lib64/firefox-sodalite/omni/chrome/browser/content/browser/default-bookmarks.html"],
   ["../../lib/sodaliterocks.firefox/setup.sh", "/usr/lib64/firefox-sodalite/setup.sh"],
-  
-  # /usr/share
-  ["../sysroot/common/usr/share/touchegg/touchegg.conf", "/usr/share/touchegg/touchegg.conf"],
 
   # /usr/share/backgrounds
   ["../../lfs/wallpapers/adrien-olichon-gXqgs6Smvw-unsplash.jpg", "/usr/share/backgrounds/default/adrien-olichon-gXqgs6Smvw-unsplash.jpg"],
