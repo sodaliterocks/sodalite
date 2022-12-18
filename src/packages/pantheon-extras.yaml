@@ -2,6 +2,7 @@ packages:
  - firewall-config # Replacement for Security Switchboard plug
  - gnome-software # Replacement for AppCenter
  - gstreamer1-plugins-good-gtk # Camera does not work without this
+ - lightdm-gtk-greeter # Pantheon Greeter is pretty broken
  - NetworkManager-openconnect
  - NetworkManager-openconnect-gnome
  - NetworkManager-openvpn
