@@ -6,7 +6,7 @@ include: [
 ]
 
 releasever: "36" # Fedora version
-automatic-version-prefix: "${releasever}-22.15"
+automatic-version-prefix: "${releasever}-22.14"
 automatic-version-suffix: "."
 mutate-os-release: "${releasever}"
 
