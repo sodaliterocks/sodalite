@@ -3,6 +3,6 @@ include:
   - ../common/base-pantheon.yaml
 
 rojig:
-  name: sodalite
+  name: sodalite-desktop
   summary: "Sodalite"
   license: MIT
