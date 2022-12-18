@@ -71,6 +71,10 @@ ostree_repo_dir="$working_dir/repo"
 lockfile="$base_dir/src/common/overrides.yaml"
 treefile="$base_dir/src/treefiles/sodalite-$variant.yaml"
 
+if [[ ! -f $treefile ]]; then
+    die "sodalite-$variant does not exist"
+fi
+
 ref="$(echo "$(cat "$treefile")" | grep "ref:" | sed "s/ref: //" | sed "s/\${basearch}/$(uname -m)/")"
 
 if [[ $(command -v "git") ]]; then
@@ -85,10 +89,6 @@ fi
 mkdir -p $ostree_cache_dir
 mkdir -p $ostree_repo_dir
 chown -R root:root $working_dir
-
-if [[ ! -f $treefile ]]; then
-    die "sodalite-$variant does not exist"
-fi
 
 if [ ! "$(ls -A $ostree_repo_dir)" ]; then
    echo "🆕 Initializing OSTree repository..."
