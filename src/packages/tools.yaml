@@ -9,3 +9,4 @@ packages:
  - skopeo
  - smartmontools
  - toolbox
+ - zenity
