@@ -19,16 +19,13 @@ add-files: [
   # /etc/skel
   ["../../lib/elementary.default-settings/skel/flatpak/repo/appcenter.trustedkeys.gpg", "/usr/share/gnupg/appcenter.gpg"],
   ["../../lib/elementary.default-settings/skel/plank/dock1/launchers/gala-multitaskingview.dockitem", "/etc/skel/.config/plank/dock1/launchers/gala-multitaskingview.dockitem"],
-  ["../../lib/elementary.default-settings/skel/plank/dock1/launchers/io.elementary.calendar.dockitem", "/etc/skel/.config/plank/dock1/launchers/io.elementary.calendar.dockitem"],
-  ["../../lib/elementary.default-settings/skel/plank/dock1/launchers/io.elementary.mail.dockitem", "/etc/skel/.config/plank/dock1/launchers/io.elementary.mail.dockitem"],
-  ["../../lib/elementary.default-settings/skel/plank/dock1/launchers/io.elementary.photos.dockitem", "/etc/skel/.config/plank/dock1/launchers/io.elementary.photos.dockitem"],
-  ["../../lib/elementary.default-settings/skel/plank/dock1/launchers/io.elementary.tasks.dockitem", "/etc/skel/.config/plank/dock1/launchers/io.elementary.tasks.dockitem"],
   ["../../lib/elementary.default-settings/skel/.inputrc", "/etc/skel/.inputrc"],
   ["../../lib/elementary.default-settings/sudoers.d/pwfeedback", "/etc/sudoers.d/pwfeedback"],
   ["../sysroot/cores/pantheon/etc/skel/dot.bashrc", "/etc/skel/.bashrc"],
   ["../sysroot/cores/pantheon/etc/skel/dot.config/plank/dock1/launchers/firefox.dockitem", "/etc/skel/.config/plank/dock1/launchers/firefox.dockitem"],
   ["../sysroot/cores/pantheon/etc/skel/dot.config/plank/dock1/launchers/io.elementary.files.dockitem", "/etc/skel/.config/plank/dock1/launchers/io.elementary.files.dockitem"],
   ["../sysroot/cores/pantheon/etc/skel/dot.config/plank/dock1/launchers/io.elementary.terminal.dockitem", "/etc/skel/.config/plank/dock1/launchers/io.elementary.terminal.dockitem"],
+  ["../sysroot/cores/pantheon/etc/skel/dot.config/plank/dock1/launchers/io.elementary.code.dockitem", "/etc/skel/.config/plank/dock1/launchers/io.elementary.code.dockitem"],
   ["../sysroot/cores/pantheon/etc/skel/dot.config/plank/dock1/launchers/org.gnome.Software.dockitem", "/etc/skel/.config/plank/dock1/launchers/org.gnome.Software.dockitem"],
   ["../sysroot/cores/pantheon/etc/skel/dot.config/touchegg/touchegg.conf", "/etc/skel/.config/touchegg/touchegg.conf"],
 
