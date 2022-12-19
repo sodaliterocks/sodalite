@@ -1,9 +1,45 @@
 #!/usr/bin/env bash
 
-. /usr/lib/sodalite-hacks/utils.sh
-
 buildinfo_file="/usr/lib/sodalite-buildinfo"
 core_file="/usr/lib/sodalite-core"
+
+function del_property() {
+    file=$1
+    property=$2
+
+    if [[ -f $file ]]; then
+        if [[ ! -z $(get_property $file $property) ]]; then
+            sed -i "s/^\($property=.*\)$//g" $file
+        fi
+    fi
+}
+
+function get_property() {
+    file=$1
+    property=$2
+
+    if [[ -f $file ]]; then
+        echo $(grep -oP '(?<=^'"$property"'=).+' $file | tr -d '"')
+    fi
+}
+
+function set_property() {
+    file=$1
+    property=$2
+    value=$3
+
+    if [[ -f $file ]]; then
+        if [[ -z $(get_property $file $property) ]]; then
+            echo "$property=\"$value\"" >> $file
+        else
+            if [[ $value =~ [[:space:]]+ ]]; then
+                value="\"$value\""
+            fi
+
+            sed -i "s/^\($property=\)\(.*\)$/\1$value/g" $file
+        fi
+    fi
+}
 
 set -xeuo pipefail
 
