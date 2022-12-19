@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+
+migrate_pidfile="/var/run/sodalite-hacks/migrate.pid"
+migrate_status_file="/var/run/sodalite-hacks/migrate-status"
+
+function check_migration_status() {
+    while true
+    do
+        if [[ -f "$migrate_pidfile" ]]; then
+            if [[ "$(cat "$migrate_status_file")" != "" ]]; then
+                {
+                    while true
+                    do
+                        if [[ -f $migrate_pidfile ]]; then
+                            echo "# $(cat $migrate_status_file)"; sleep 1
+                        else
+                            break
+                        fi
+                    done
+                } | zenity --progress \
+                    --title="Migrating" \
+                    --text="Doing things..." \
+                    --pulsate \
+                    --no-cancel \
+                    --auto-close \
+                    --auto-kill
+
+                break
+            else
+                sleep 1
+            fi
+        else
+            exit
+        fi
+    done
+}
+
+check_migration_status
