@@ -1,5 +1,6 @@
 packages:
  - buildah
+ - dialog
  - distrobox
  - git-core
  - lm_sensors
