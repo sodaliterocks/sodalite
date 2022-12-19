@@ -68,7 +68,7 @@ add-files: [
   ["../../lfs/wallpapers/zara-walker-_pC5hT6aXfs-unsplash.jpg", "/usr/share/backgrounds/default/zara-walker-_pC5hT6aXfs-unsplash.jpg"],
 
   # /usr/share/icons
-  ["../../lfs/logo/logo.png", "/usr/share/icons/hicolor/256x256/apps/fedora-logo-icon.png"]
+  ["../../lfs/graphics/logo/logo.png", "/usr/share/icons/hicolor/256x256/apps/fedora-logo-icon.png"]
 ]
 
 boot-location: modules
