@@ -43,6 +43,7 @@ add-files: [
   # /usr/libexec
   ["../../lib/sodaliterocks.hacks/src/plugins/cleanup.sh", "/usr/libexec/sodalite-hacks/plugins/cleanup.sh"],
   #["../../lib/sodaliterocks.hacks/src/plugins/flatpak.sh", "/usr/libexec/sodalite-hacks/plugins/flatpak.sh"],
+  ["../../lib/sodaliterocks.hacks/src/plugins/migrate.sh", "/usr/libexec/sodalite-hacks/plugins/migrate.sh"],
   ["../../lib/sodaliterocks.hacks/src/plugins/nvidia.sh", "/usr/libexec/sodalite-hacks/plugins/nvidia.sh"],
   ["../../lib/sodaliterocks.hacks/src/plugins/oemconf.sh", "/usr/libexec/sodalite-hacks/plugins/oemconf.sh"],
   ["../../lib/sodaliterocks.hacks/src/plugins/serve.sh", "/usr/libexec/sodalite-hacks/plugins/serve.sh"],
