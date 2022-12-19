@@ -43,7 +43,7 @@ add-files: [
   ["../sysroot/cores/pantheon/usr/bin/plank-wrapper", "/usr/bin/plank-wrapper"],
 
   # /usr/lib
-  ["../../lfs/binaries/debian/com.github.mvbonin.switchboard-plug-indicators/0.1~amd64/usr/lib/x86_64-linux-gnu/switchboard/hardware/libindicators.so", "/usr/lib64/x86_64-linux-gnu/switchboard/hardware/libindicators.so"],
+  ["../../lfs/binaries/debian/com.github.mvbonin.switchboard-plug-indicators/0.1~amd64/usr/lib/x86_64-linux-gnu/switchboard/hardware/libindicators.so", "/usr/lib64/x86_64-linux-gnu/switchboard/personal/libindicators.so"],
   ["../../lfs/binaries/debian/com.github.mvbonin.wingpanel-community-indicators/2.0.9~amd64/usr/lib/x86_64-linux-gnu/wingpanel/libayatana.so", "/usr/lib64/wingpanel/libayatana.so"],
   ["../../lfs/binaries/debian/indicator-application-patched/0.1/usr/lib/indicators3/7/libapplication.so", "/usr/lib/indicators3/7/libapplication.so"],
   ["../../lfs/binaries/debian/indicator-application-patched/0.1/usr/lib/systemd/user/indicator-application.service", "/usr/lib/systemd/user/indicator-application.service"],
