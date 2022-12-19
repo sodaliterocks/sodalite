@@ -20,6 +20,7 @@ function check_migration_status() {
                 } | zenity --progress \
                     --title="Migrating" \
                     --text="Doing things..." \
+                    --width 300 \
                     --pulsate \
                     --no-cancel \
                     --auto-close \
