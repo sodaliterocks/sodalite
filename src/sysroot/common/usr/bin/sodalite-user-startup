@@ -41,6 +41,8 @@ function check_migration_status() {
 }
 
 function set_locale() {
+    # TODO: Change in AccountsService
+
     system_locale=$(localectl status | grep "System Locale:" | cut -d ':' -f2 | cut -d '=' -f2)
     gtk_locale=$(gsettings get org.gnome.system.locale region)
 
@@ -56,4 +58,4 @@ function set_locale() {
 }
 
 check_migration_status
-set_locale
+#set_locale
