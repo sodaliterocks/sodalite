@@ -179,6 +179,16 @@ fi
 
 declare -a to_remove
 
+if [[ $core == "gnome" ]]; then
+    to_remove+=(
+        # misc.
+        "/usr/share/gnome-shell/extensions/apps-menu@gnome-shell-extensions.gcampax.github.com"
+        "/usr/share/gnome-shell/extensions/launch-new-instance@gnome-shell-extensions.gcampax.github.com"
+        "/usr/share/gnome-shell/extensions/places-menu@gnome-shell-extensions.gcampax.github.com"
+        "/usr/share/gnome-shell/extensions/window-list@gnome-shell-extensions.gcampax.github.com"
+    )
+fi
+
 if [[ $core == "pantheon" ]]; then
     to_remove+=(
         # desktop-backgrounds-compat
@@ -282,7 +292,6 @@ if [[ $core == "pantheon" ]]; then
         "/usr/share/man/man8/ufw.8.gz"
         "/usr/share/ufw/"
         # misc.
-        "/usr/share/backgrounds/f36/"
         "/usr/share/bookmarks/"
         "/usr/share/glib-2.0/schemas/io.elementary.desktop.gschema.override"
         "/usr/share/icewm/"
@@ -318,6 +327,11 @@ if [[ $core == "pantheon" ]]; then
     fi
 fi
 
+to_remove+=(
+    "/usr/share/backgrounds/f36"
+    "/usr/share/backgrounds/fedora-workstation"
+)
+
 for file in ${to_remove[@]}; do
     rm -rf $file
 done
@@ -334,11 +348,9 @@ case $version_id in
     40) wallpaper="jeremy-gerritsen-_iviuukstI4-unsplash"
 esac
 
-if [[ $core == "pantheon" ]]; then
-    if [[ -f "/usr/share/backgrounds/default/$wallpaper.jpg" ]]; then
-        set_property /usr/share/glib-2.0/schemas/io.elementary.desktop.gschema.override picture-uri "'file:\/\/\/usr\/share\/backgrounds\/default\/$wallpaper.jpg'"
-        ln -s /usr/share/backgrounds/default/$wallpaper.jpg /usr/share/backgrounds/elementaryos-default
-    fi
+if [[ -f "/usr/share/backgrounds/default/$wallpaper.jpg" ]]; then
+    set_property /usr/share/glib-2.0/schemas/00_sodalite.gschema.override picture-uri "'file:\/\/\/usr\/share\/backgrounds\/default\/$wallpaper.jpg'"
+    [[ $core == "pantheon" ]] && ln -s /usr/share/backgrounds/default/$wallpaper.jpg /usr/share/backgrounds/elementaryos-default
 fi
 
 ##########
@@ -351,6 +363,20 @@ rm -f /usr/lib64/firefox/browser/omni.ja_backup
 
 glib-compile-schemas /usr/share/glib-2.0/schemas
 dconf update
+
+if [[ $core == "gnome" ]]; then
+    gnome_extensions_prefix="/usr/share/gnome-shell/extensions"
+
+    declare -a gnome_extensions=(
+        "AlphabeticalAppGrid@stuarthayhurst"
+    )
+
+    for gnome_extension in ${gnome_extensions[@]}; do
+        mkdir -p "$gnome_extensions_prefix/$gnome_extension"
+        unzip "$gnome_extensions_prefix/$gnome_extension.shell-extension.zip" -d "$gnome_extensions_prefix/$gnome_extension"
+        rm "$gnome_extensions_prefix/$gnome_extension.shell-extension.zip"
+    done
+fi
 
 if [[ $core == "pantheon" ]]; then
   mv /usr/bin/gnome-software /usr/bin/gnome-software-bin
