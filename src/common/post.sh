@@ -284,6 +284,7 @@ if [[ $core == "pantheon" ]]; then
         # misc.
         "/usr/share/backgrounds/f36/"
         "/usr/share/bookmarks/"
+        "/usr/share/glib-2.0/schemas/io.elementary.desktop.gschema.override"
         "/usr/share/icewm/"
         "/usr/share/pixmaps/faces/"
     )

@@ -62,9 +62,6 @@ add-files: [
   ["../sysroot/cores/pantheon/usr/share/applications/org.gnome.DiskUtility.desktop", "/usr/share/applications/org.gnome.DiskUtility.desktop"],
   ["../sysroot/cores/pantheon/usr/share/applications/org.gnome.Software.desktop", "/usr/share/applications/org.gnome.Software.desktop"],
 
-  # /usr/share/glib-2.0
-  ["../sysroot/cores/pantheon/usr/share/glib-2.0/schemas/io.elementary.desktop.gschema.override", "/usr/share/glib-2.0/schemas/io.elementary.desktop.gschema.override"],
-
   # /usr/share/icons
   ["../../lib/elementary.icons/apps/128/system-software-install.svg", "/usr/share/icons/elementary/apps/128/system-software-install.svg"],
   ["../../lib/elementary.icons/apps/16/system-software-install.svg", "/usr/share/icons/elementary/apps/16/system-software-install.svg"],

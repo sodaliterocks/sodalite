@@ -1,9 +1,0 @@
-[org.gnome.desktop.interface:GNOME]
-font-antialiasing='grayscale'
-font-hinting='slight'
-font-name='Inter 9'
-monospace-font-name='Roboto Mono 10'
-
-[org.gnome.desktop.wm.preferences:GNOME]
-action-middle-click-titlebar='minimize'
-button-layout='close:appmenu'
