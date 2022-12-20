@@ -2,6 +2,7 @@
 
 migrate_pidfile="/var/run/sodalite-hacks/migrate.pid"
 migrate_status_file="/var/run/sodalite-hacks/migrate-status"
+zenity_width="300"
 
 function check_migration_status() {
     while true
@@ -31,7 +32,7 @@ function check_migration_status() {
                 sleep 1
             fi
         else
-            exit
+            break
         fi
     done
 }
@@ -40,8 +41,13 @@ function set_locale() {
     system_locale=$(localectl status | grep "System Locale:" | cut -d ':' -f2 | cut -d '=' -f2)
     gtk_locale=$(gsettings get org.gnome.system.locale region)
 
-    if [[ $gtk_locale != $system_locale ]]; then
+    if [[ "$gtk_locale" == "'$system_locale'" ]]; then
         gsettings set org.gnome.system.locale region $system_locale
+        zenity --info \
+            --icon-name "info" \
+            --title "Sodalite" \
+            --text "Locale set to '$system_locale'. Re-login to see changes." \
+            --width $zenity_width
     fi
 
 }
