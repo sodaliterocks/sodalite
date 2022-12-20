@@ -3,12 +3,12 @@ picture-options='zoom'
 picture-uri=''
 primary-color='#3689E6'
 
-
-[org.gnome.desktop.interface:GNOME]
+[org.gnome.desktop.interface]
 font-antialiasing='grayscale'
 font-hinting='slight'
 font-name='Inter 9'
 monospace-font-name='Roboto Mono 10'
+
 
 [org.gnome.desktop.wm.preferences:GNOME]
 action-middle-click-titlebar='minimize'
@@ -17,6 +17,14 @@ button-layout='close:appmenu'
 [org.gnome.shell:GNOME]
 enabled-extensions=['AlphabeticalAppGrid@stuarthayhurst']
 favorite-apps=['firefox.desktop', 'org.gnome.Nautilus.desktop', 'org.gnome.Terminal.desktop', 'org.gnome.TextEditor.desktop', 'org.gnome.Software.desktop']
+
+[org.gnome.shell.extensions.dash-to-dock:GNOME]
+apply-custom-theme=true
+click-action='minimize'
+dock-position='BOTTOM'
+intellihide-mode='FOCUS_APPLICATION_WINDOWS'
+require-pressure-to-show=false
+show-trash=false
 
 
 [net.launchpad.plank.dock.settings:Pantheon]
@@ -43,12 +51,8 @@ xkb-options=['grp:alt_shift_toggle']
 [org.gnome.desktop.interface:Pantheon]
 cursor-theme='elementary'
 document-font-name='Open Sans 10'
-font-antialiasing='grayscale'
-font-hinting='slight'
-font-name='Inter 9'
 gtk-theme='io.elementary.stylesheet.blueberry'
 icon-theme='elementary'
-monospace-font-name='Roboto Mono 10'
 
 [org.gnome.desktop.peripherals.touchpad:Pantheon]
 natural-scroll=true
