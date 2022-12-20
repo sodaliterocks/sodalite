@@ -1,3 +1,9 @@
+[org.gnome.desktop.background]
+picture-options='zoom'
+picture-uri=''
+primary-color='#3689E6'
+
+
 [org.gnome.desktop.interface:GNOME]
 font-antialiasing='grayscale'
 font-hinting='slight'
@@ -24,11 +30,6 @@ triggers=['<Control>space']
 
 [org.freedesktop.ibus.panel:Pantheon]
 show=1
-
-[org.gnome.desktop.background:Pantheon]
-picture-options='zoom'
-picture-uri=''
-primary-color='#3689E6'
 
 [org.gnome.desktop.datetime:Pantheon]
 automatic-timezone=true
