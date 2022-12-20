@@ -5,6 +5,10 @@ migrate_pidfile="/var/run/sodalite-hacks/migrate.pid"
 migrate_status_file="/var/run/sodalite-hacks/migrate-status"
 zenity_width="300"
 
+function touchp() {
+    mkdir -p "$(dirname "$1")/" && touch "$1"
+}
+
 function check_migration_status() {
     waiting=0
 
@@ -40,6 +44,21 @@ function check_migration_status() {
     done
 }
 
+function install_skel() {
+    skel="/etc/skel"
+    files=(
+        ".bashrc"
+        ".config/touchegg/touchegg.conf"
+    )
+
+    for file in "${files[@]}"; do
+        if [[ ! -f "$HOME/$file" ]]; then
+            touchp "$HOME/$file"
+            cp -f "$skel/$file" "$HOME/$file"
+        fi
+    done
+}
+
 function set_locale() {
     # TODO: Change in AccountsService
 
@@ -57,5 +76,6 @@ function set_locale() {
 
 }
 
+install_skel
 check_migration_status
 #set_locale
