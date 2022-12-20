@@ -36,4 +36,15 @@ function check_migration_status() {
     done
 }
 
+function set_locale() {
+    system_locale=$(localectl status | grep "System Locale:" | cut -d ':' -f2 | cut -d '=' -f2)
+    gtk_locale=$(gsettings get org.gnome.system.locale region)
+
+    if [[ $gtk_locale != $system_locale ]]; then
+        gsettings set org.gnome.system.locale region $system_locale
+    fi
+
+}
+
 check_migration_status
+set_locale
