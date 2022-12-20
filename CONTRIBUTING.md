@@ -21,8 +21,9 @@ All code submitted into this repository will be [licensed as MIT](https://github
 **This does not follow GitFlow.**
 
 * `main` (default): **Development branch**
-    * Contains the latest development version of `release/stable`.
-    * Is merged (or cherry-picked) into `release/stable` when work is complete.
+    * Contains the latest development version (with ref `sodalite/devel/<arch>/<variant>`).
+    * Is merged (or cherry-picked) into `release/*` branches when work is complete.
+        * Be careful you don't clobber the refs in these branches!
 * `issue/*`: **Issue branches**
 	* Contains work relating to an [issue](https://github.com/sodaliterocks/sodalite/issues).
 	* Is merged into `main` when the issue is closed.
