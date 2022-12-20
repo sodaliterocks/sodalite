@@ -2,6 +2,7 @@
 
 migrate_pidfile="/var/run/sodalite-hacks/migrate.pid"
 migrate_status_file="/var/run/sodalite-hacks/migrate-status"
+pidfile="/var/run/user/$UID/sodalite-user-daemon.pid"
 zenity_width="300"
 
 function touchp() {
@@ -69,9 +70,17 @@ function set_locale() {
 
 }
 
+if [[ -f $pidfile ]]; then
+    exit
+else
+    touch "$pidfile"
+    echo "$$" > "$pidfile"
+fi
+
 install_skel
 #set_locale
 
 check_migration_status &
 
 wait
+rm $pidfile
