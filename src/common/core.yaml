@@ -28,7 +28,7 @@ add-files: [
   # /etc/systemd
   ["../sysroot/common/etc/systemd/system/generate-oemconf.service", "/etc/systemd/system/generate-oemconf.service"],
   ["../sysroot/common/etc/systemd/system/sodalite-migrate.service", "/etc/systemd/system/sodalite-migrate.service"],
-  
+
   # /etc/xdg
   #["../sysroot/common/etc/xdg/autostart/appimaged.desktop", "/etc/xdg/autostart/appimaged.desktop"], # BUG: https://github.com/sodaliterocks/sodalite/issues/42
   ["../sysroot/common/etc/xdg/autostart/sodalite-user-daemon.desktop", "/etc/xdg/autostart/sodalite-user-daemon.desktop"],
@@ -59,9 +59,9 @@ add-files: [
   ["../../lib/sodaliterocks.firefox/config/distribution/distribution.ini", "/usr/lib64/firefox-sodalite/config/distribution/distribution.ini"],
   ["../../lib/sodaliterocks.firefox/omni/chrome/browser/content/browser/default-bookmarks.html", "/usr/lib64/firefox-sodalite/omni/chrome/browser/content/browser/default-bookmarks.html"],
   ["../../lib/sodaliterocks.firefox/setup.sh", "/usr/lib64/firefox-sodalite/setup.sh"],
-  
+
   # /usr/share
-  ["../sysroot/common/usr/share/glib-2.0/schemas/00_sodalite.gschema.override", "/usr/share/glib-2.0/schemas/00_sodalite.gschema.override"]
+  ["../sysroot/common/usr/share/glib-2.0/schemas/00_sodalite.gschema.override", "/usr/share/glib-2.0/schemas/00_sodalite.gschema.override"],
 
   # /usr/share/backgrounds
   ["../../lfs/wallpapers/adrien-olichon-gXqgs6Smvw-unsplash.jpg", "/usr/share/backgrounds/default/adrien-olichon-gXqgs6Smvw-unsplash.jpg"],
