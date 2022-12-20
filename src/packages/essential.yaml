@@ -1,4 +1,5 @@
 packages:
+ - dbus-x11
  - distribution-gpg-keys
  - fedora-release
  - fedora-release-ostree-desktop
