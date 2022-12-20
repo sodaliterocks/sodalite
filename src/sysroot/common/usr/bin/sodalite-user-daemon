@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-migrate_max_wait=600
 migrate_pidfile="/var/run/sodalite-hacks/migrate.pid"
 migrate_status_file="/var/run/sodalite-hacks/migrate-status"
 zenity_width="300"
@@ -32,14 +31,8 @@ function check_migration_status() {
                 --no-cancel \
                 --auto-close \
                 --auto-kill
-
-            break
         else
             sleep 1
-            waiting=$(($waiting+1))
-            if [[ $waiting == $migrate_max_wait ]]; then
-                break
-            fi
         fi
     done
 }
@@ -77,5 +70,8 @@ function set_locale() {
 }
 
 install_skel
-check_migration_status
 #set_locale
+
+check_migration_status &
+
+wait
