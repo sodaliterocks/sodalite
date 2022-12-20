@@ -61,7 +61,7 @@ add-files: [
   ["../../lib/sodaliterocks.firefox/setup.sh", "/usr/lib64/firefox-sodalite/setup.sh"],
   
   # /usr/share
-  ["../sysroot/common/usr/share/glib-2.0/schemas/00_sodalite.gschema.override", "/usr/share/glib-2.0/schemas/00_sodalite.gschema.override"]
+  ["../sysroot/common/usr/share/glib-2.0/schemas/00_sodalite.gschema.override", "/usr/share/glib-2.0/schemas/00_sodalite.gschema.override"],
 
   # /usr/share/backgrounds
   ["../../lfs/wallpapers/adrien-olichon-gXqgs6Smvw-unsplash.jpg", "/usr/share/backgrounds/default/adrien-olichon-gXqgs6Smvw-unsplash.jpg"],
@@ -76,6 +76,20 @@ add-files: [
   ["../../lfs/wallpapers/smaran-alva-hno1wDtV1X4-unsplash.jpg", "/usr/share/backgrounds/default/smaran-alva-hno1wDtV1X4-unsplash.jpg"],
   ["../../lfs/wallpapers/william-daigneault-7c8z4KEvgds-unsplash.jpg", "/usr/share/backgrounds/default/william-daigneault-7c8z4KEvgds-unsplash.jpg"],
   ["../../lfs/wallpapers/zara-walker-_pC5hT6aXfs-unsplash.jpg", "/usr/share/backgrounds/default/zara-walker-_pC5hT6aXfs-unsplash.jpg"],
+  
+  # /usr/share/gnome-background-properties
+  ["../sysroot/common/usr/share/gnome-background-properties/adrien-olichon.xml", "/usr/share/gnome-background-properties/adrien-olichon.xml"],
+  ["../sysroot/common/usr/share/gnome-background-properties/austin-neill.xml", "/usr/share/gnome-background-properties/austin-neill.xml"],
+  ["../sysroot/common/usr/share/gnome-background-properties/cody-fitzgerald.xml", "/usr/share/gnome-background-properties/cody-fitzgerald.xml"],
+  ["../sysroot/common/usr/share/gnome-background-properties/dustin-humes.xml", "/usr/share/gnome-background-properties/dustin-humes.xml"],
+  ["../sysroot/common/usr/share/gnome-background-properties/jack-b.xml", "/usr/share/gnome-background-properties/jack-b.xml"],
+  ["../sysroot/common/usr/share/gnome-background-properties/jeremy-gerritsen.xml", "/usr/share/gnome-background-properties/jeremy-gerritsen.xml"],
+  ["../sysroot/common/usr/share/gnome-background-properties/max-okhrimenko.xml", "/usr/share/gnome-background-properties/max-okhrimenko.xml"],
+  ["../sysroot/common/usr/share/gnome-background-properties/nathan-dumlao.xml", "/usr/share/gnome-background-properties/nathan-dumlao.xml"],
+  ["../sysroot/common/usr/share/gnome-background-properties/ryan-stone.xml", "/usr/share/gnome-background-properties/ryan-stone.xml"],
+  ["../sysroot/common/usr/share/gnome-background-properties/smaran-alva.xml", "/usr/share/gnome-background-properties/smaran-alva.xml"],
+  ["../sysroot/common/usr/share/gnome-background-properties/william-daigneault.xml", "/usr/share/gnome-background-properties/william-daigneault.xml"],
+  ["../sysroot/common/usr/share/gnome-background-properties/zara-walker.xml", "/usr/share/gnome-background-properties/zara-walker.xml"],
 
   # /usr/share/icons
   ["../../lfs/graphics/logo/logo.png", "/usr/share/icons/hicolor/256x256/apps/fedora-logo-icon.png"]
