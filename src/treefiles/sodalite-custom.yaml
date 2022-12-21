@@ -6,7 +6,7 @@
 
 ref: sodalite/devel/${basearch}/custom
 include:
-  - ../common/core-gnome.yaml
+  - ../common/core-pantheon.yaml
 
 rojig:
   name: sodalite-custom
