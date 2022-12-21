@@ -53,33 +53,17 @@ function install_skel() {
     done
 }
 
-function set_locale() {
-    # TODO: Change in AccountsService
-
-    system_locale=$(localectl status | grep "System Locale:" | cut -d ':' -f2 | cut -d '=' -f2)
-    gtk_locale=$(gsettings get org.gnome.system.locale region)
-
-    if [[ "$gtk_locale" != "'$system_locale'" ]]; then
-        gsettings set org.gnome.system.locale region $system_locale
-        zenity --info \
-            --icon-name "info" \
-            --title "Sodalite" \
-            --text "Locale set to '$system_locale'. Re-login to see changes." \
-            --width $zenity_width
-    fi
-
-}
-
 if [[ -f $pidfile ]]; then
-    exit
-else
-    touch "$pidfile"
-    echo "$$" > "$pidfile"
+    pid="$(cat $pidfile)"
+    if ps -p $pid > /dev/null; then
+        exit
+    fi
 fi
 
-install_skel
-#set_locale
+touch "$pidfile"
+echo "$$" > "$pidfile"
 
+install_skel
 check_migration_status &
 
 wait
