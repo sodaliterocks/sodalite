@@ -385,7 +385,8 @@ if [[ $core == "pantheon" ]]; then
   systemctl disable gdm
   systemctl enable generate-oemconf
   systemctl enable lightdm
-  systemctl enable sodalite-migrate
   systemctl enable touchegg
 fi
+
+systemctl enable sodalite-migrate
 
