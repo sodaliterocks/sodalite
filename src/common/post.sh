@@ -45,6 +45,7 @@ set -xeuo pipefail
 
 core=""
 variant=""
+variant_pretty=""
 version_tag=""
 
 if [[ -f $core_file ]]; then
@@ -56,6 +57,13 @@ if [[ $(cat $buildinfo_file) != "" ]]; then
         version_tag="$(get_property $buildinfo_file "GIT_COMMIT")"
     [[ ! -z $(get_property $buildinfo_file "VARIANT") ]] && \
         variant="$(get_property $buildinfo_file "VARIANT")"
+fi
+
+if [[ -n $variant ]]; then
+    case "$variant" in
+        "desktop-gnome") variant_pretty="GNOME" ;;
+        *) variant_pretty="$variant" ;;
+    esac
 fi
 
 ###################
@@ -72,7 +80,7 @@ if [[ $(get_property /etc/os-release VERSION) =~ (([0-9]{1,3})-([0-9]{2}.[0-9]{1
     [[ ! -z $version_tag ]] && version+="+$version_tag"
 
     if [[ ! -z $variant ]] && [[ $variant != "desktop"* ]]; then
-        version_pretty="$version ($variant)"
+        version_pretty="$version ($variant_pretty)"
     else
         version_pretty="$version"
     fi
@@ -87,7 +95,7 @@ else
 fi
 
 if [[ ! -z $variant ]]; then
-    set_property /usr/lib/os-release "VARIANT" $variant
+    set_property /usr/lib/os-release "VARIANT" "$variant_pretty"
     set_property /usr/lib/os-release "VARIANT_ID" $variant
 
     cpe+=":$variant"
