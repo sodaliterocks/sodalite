@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+. /usr/libexec/sodalite-hacks/utils.sh
+
 migrate_pidfile="/var/run/sodalite-hacks/migrate.pid"
 migrate_status_file="/var/run/sodalite-hacks/migrate-status"
 pidfile="/var/run/user/$UID/sodalite-user-daemon.pid"
@@ -53,6 +55,19 @@ function install_skel() {
     done
 }
 
+function update_gconf() {
+    current_wallpaper="$(parse_file_uri $(gsettings get org.gnome.desktop.background picture-uri))"
+
+    if [[ $(get_core) == "pantheon" ]]; then
+        system_locale="$(localectl status | grep "System Locale:" | cut -d "=" -f2)"
+        gsettings set org.gnome.system.locale region '$system_locale'
+    fi
+
+    if [[ $current_wallpaper != "" ]] && [[ ! -f $current_wallpaper ]]; then
+        gsettings reset org.gnome.desktop.background picture-uri
+    fi
+}
+
 if [[ -f $pidfile ]]; then
     pid="$(cat $pidfile)"
     if ps -p $pid > /dev/null; then
@@ -64,6 +79,7 @@ touch "$pidfile"
 echo "$$" > "$pidfile"
 
 install_skel
+update_gconf
 check_migration_status &
 
 wait

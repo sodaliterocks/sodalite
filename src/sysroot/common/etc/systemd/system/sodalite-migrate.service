@@ -5,7 +5,7 @@ After=syslog.target network.target network-online.target
 
 [Service]
 Type=simple
-ExecStart=/usr/bin/sodalite-hacks migrate
+ExecStart=/usr/bin/sodalite-hacks migrate --all
 Restart=on-failure
 RestartSec=10
 KillMode=process
