@@ -7,10 +7,6 @@ migrate_status_file="/var/run/sodalite-hacks/migrate-status"
 pidfile="/var/run/user/$UID/sodalite-user-daemon.pid"
 zenity_width="300"
 
-function touchp() {
-    mkdir -p "$(dirname "$1")/" && touch "$1"
-}
-
 function check_migration_status() {
     waiting=0
 
@@ -36,21 +32,6 @@ function check_migration_status() {
                 --auto-kill
         else
             sleep 1
-        fi
-    done
-}
-
-function install_skel() {
-    skel="/etc/skel"
-    files=(
-        ".bashrc"
-        ".config/touchegg/touchegg.conf"
-    )
-
-    for file in "${files[@]}"; do
-        if [[ ! -f "$HOME/$file" ]]; then
-            touchp "$HOME/$file"
-            cp -f "$skel/$file" "$HOME/$file"
         fi
     done
 }
