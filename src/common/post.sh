@@ -365,8 +365,8 @@ fi
 # EXTRAS #
 ##########
 
-/usr/lib64/firefox-sodalite/setup.sh
-rm -rf /usr/lib64/firefox-sodalite
+/usr/src/rocks.sodalite.firefox/setup.sh
+rm -rf /usr/src/rocks.sodalite.firefox
 rm -f /usr/lib64/firefox/browser/omni.ja_backup
 
 glib-compile-schemas /usr/share/glib-2.0/schemas
