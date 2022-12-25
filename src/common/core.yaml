@@ -31,7 +31,7 @@ add-files: [
 
   # /etc/xdg
   #["../sysroot/common/etc/xdg/autostart/appimaged.desktop", "/etc/xdg/autostart/appimaged.desktop"], # BUG: https://github.com/sodaliterocks/sodalite/issues/42
-  ["../sysroot/common/etc/xdg/autostart/rocks.sodalite.user-daemon.desktop", "/etc/xdg/autostart/rocks.sodalite.daemon.desktop"],
+  ["../sysroot/common/etc/xdg/autostart/rocks.sodalite.user-daemon.desktop", "/etc/xdg/autostart/rocks.sodalite.user-daemon.desktop"],
 
   # /usr/bin
   ["../../lfs/binaries/appimage/appimaged_718~x86_64.AppImage", "/usr/bin/appimaged"],
