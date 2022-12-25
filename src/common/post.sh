@@ -361,9 +361,43 @@ if [[ -f "/usr/share/backgrounds/default/$wallpaper.jpg" ]]; then
     [[ $core == "pantheon" ]] && ln -s /usr/share/backgrounds/default/$wallpaper.jpg /usr/share/backgrounds/elementaryos-default
 fi
 
+###################
+# FLATPAK ALIASES #
+###################
+
+declare -a flatpak_app_aliases
+
+if [[ $core == "pantheon" ]]; then
+    flatpak_app_aliases+=(
+        "org.gnome.Evince:org.gnome.Evince"
+        "org.gnome.FileRoller:org.gnome.FileRoller"
+        "io.elementary.calculator:io.elementary.calculator"
+        "io.elementary.calendar:io.elementary.calendar"
+        "io.elementary.camera:io.elementary.camera"
+        "io.elementary.capnet-assist:io.elementary.capnet-assist"
+        "io.elementary.screenshot:io.elementary.screenshot"
+        "io.elementary.videos:io.elementary.videos"
+    )
+fi
+
+for flatpak_app_alias in ${flatpak_app_aliases[@]}; do
+    app="$($flatpak_app_alias | cut -d ":" -f1)"
+    alias="$($flatpak_app_alias | cut -d ":" -f2)"
+    alias_path="/usr/bin/$alias"
+
+    if [[ ! -f "$alias_path" ]]; then
+        echo -e "#\x21/usr/bin/env bash" > "$alias_path"
+        echo -e "rocks.sodalite.flatpak-helper $app \$@" >> "$alias_path"
+        chmod +x "$alias_path"
+    fi
+done
+
 ##########
 # EXTRAS #
 ##########
+
+ln -s /usr/bin/rocks.sodalite.hacks /usr/bin/sodalite-hacks
+ln -s /usr/bin/firefox /usr/bin/rocks.sodalite.firefox
 
 /usr/src/rocks.sodalite.firefox/setup.sh
 rm -rf /usr/src/rocks.sodalite.firefox

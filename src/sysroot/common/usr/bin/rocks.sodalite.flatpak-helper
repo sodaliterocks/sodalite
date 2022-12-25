@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+. /usr/libexec/sodalite-hacks/utils.sh
+
+app="$1"
+app_args="${@:2}"
+
+if [[ ! -n "$app" ]]; then
+    echo -e "\033[1;31mError: No application provided\033[0m"
+    exit 255
+fi
+
+if flatpak info $1 > /dev/null 2>&1; then
+    flatpak run "$app" $app_args
+else
+    if [[ $(get_answer "'$app' not installed. Attempt to install?") == "y" ]]; then
+        flatpak install "$app"
+    else
+        exit
+    fi
+fi

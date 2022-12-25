@@ -35,8 +35,9 @@ add-files: [
 
   # /usr/bin
   ["../../lfs/binaries/appimage/appimaged_718~x86_64.AppImage", "/usr/bin/appimaged"],
-  ["../../lib/sodaliterocks.hacks/src/hacks.sh", "/usr/bin/sodalite-hacks"],
+  ["../../lib/sodaliterocks.hacks/src/hacks.sh", "/usr/bin/rocks.sodalite.hacks"],
   ["../sysroot/common/usr/bin/detach", "/usr/bin/detach"],
+  ["../sysroot/common/usr/bin/rocks.sodalite.flatpak-helper", "/usr/bin/rocks.sodalite.flatpak-helper"],
   ["../sysroot/common/usr/bin/rocks.sodalite.user-daemon", "/usr/bin/rocks.sodalite.user-daemon"],
   ["../sysroot/common/usr/bin/serve", "/usr/bin/serve"],
   ["../sysroot/common/usr/bin/soda", "/usr/bin/soda"],
