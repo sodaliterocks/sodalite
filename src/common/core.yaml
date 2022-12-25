@@ -38,8 +38,8 @@ add-files: [
   ["../../lib/sodaliterocks.hacks/src/hacks.sh", "/usr/bin/rocks.sodalite.hacks"],
   ["../sysroot/common/usr/bin/detach", "/usr/bin/detach"],
   ["../sysroot/common/usr/bin/rocks.sodalite.flatpak-helper", "/usr/bin/rocks.sodalite.flatpak-helper"],
+  ["../sysroot/common/usr/bin/rocks.sodalite.http-server", "/usr/bin/rocks.sodalite.http-server"],
   ["../sysroot/common/usr/bin/rocks.sodalite.user-daemon", "/usr/bin/rocks.sodalite.user-daemon"],
-  ["../sysroot/common/usr/bin/serve", "/usr/bin/serve"],
   ["../sysroot/common/usr/bin/soda", "/usr/bin/soda"],
 
   # /usr/lib

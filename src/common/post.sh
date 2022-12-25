@@ -381,8 +381,8 @@ if [[ $core == "pantheon" ]]; then
 fi
 
 for flatpak_app_alias in ${flatpak_app_aliases[@]}; do
-    app="$($flatpak_app_alias | cut -d ":" -f1)"
-    alias="$($flatpak_app_alias | cut -d ":" -f2)"
+    app="$(echo $flatpak_app_alias | cut -d ":" -f1)"
+    alias="$(echo $flatpak_app_alias | cut -d ":" -f2)"
     alias_path="/usr/bin/$alias"
 
     if [[ ! -f "$alias_path" ]]; then
