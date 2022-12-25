@@ -59,7 +59,6 @@ fi
 touch "$pidfile"
 echo "$$" > "$pidfile"
 
-install_skel
 update_gconf
 check_migration_status &
 
