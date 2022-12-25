@@ -31,15 +31,15 @@ add-files: [
 
   # /etc/xdg
   #["../sysroot/common/etc/xdg/autostart/appimaged.desktop", "/etc/xdg/autostart/appimaged.desktop"], # BUG: https://github.com/sodaliterocks/sodalite/issues/42
-  ["../sysroot/common/etc/xdg/autostart/sodalite-user-daemon.desktop", "/etc/xdg/autostart/sodalite-user-daemon.desktop"],
+  ["../sysroot/common/etc/xdg/autostart/rocks.sodalite.user-daemon.desktop", "/etc/xdg/autostart/rocks.sodalite.daemon.desktop"],
 
   # /usr/bin
   ["../../lfs/binaries/appimage/appimaged_718~x86_64.AppImage", "/usr/bin/appimaged"],
   ["../../lib/sodaliterocks.hacks/src/hacks.sh", "/usr/bin/sodalite-hacks"],
   ["../sysroot/common/usr/bin/detach", "/usr/bin/detach"],
-  ["../sysroot/common/usr/bin/soda", "/usr/bin/soda"],
-  ["../sysroot/common/usr/bin/sodalite-user-daemon", "/usr/bin/sodalite-user-daemon"],
+  ["../sysroot/common/usr/bin/rocks.sodalite.user-daemon", "/usr/bin/rocks.sodalite.user-daemon"],
   ["../sysroot/common/usr/bin/serve", "/usr/bin/serve"],
+  ["../sysroot/common/usr/bin/soda", "/usr/bin/soda"],
 
   # /usr/lib
   ["../sysroot/common/usr/lib/sodalite-buildinfo", "/usr/lib/sodalite-buildinfo"],

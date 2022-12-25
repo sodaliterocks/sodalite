@@ -3,6 +3,6 @@ include:
   - ./sodalite-desktop.yaml
 
 rojig:
-  name: sodalite-legacy
+  name: rocks.sodalite.os.legacy
   summary: "Sodalite (Legacy)"
   license: MIT

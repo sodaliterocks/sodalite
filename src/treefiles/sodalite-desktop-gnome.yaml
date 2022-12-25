@@ -3,6 +3,6 @@ include:
   - ../common/core-gnome.yaml
 
 rojig:
-  name: sodalite-desktop-gnome
+  name: rocks.sodalite.os.desktop-gnome
   summary: "Sodalite (GNOME)"
   license: MIT

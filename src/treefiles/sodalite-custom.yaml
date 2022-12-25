@@ -9,6 +9,6 @@ include:
   - ../common/core-pantheon.yaml
 
 rojig:
-  name: sodalite-custom
+  name: rocks.sodalite.os.custom
   summary: "Sodalite (Custom)"
   license: MIT
