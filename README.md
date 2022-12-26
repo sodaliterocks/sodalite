@@ -33,8 +33,6 @@ git submodule update --init --recursive
 
 ...
 
-## ✏️ Contributing
-
 ## 🤝 Acknowledgements
 
 * [Fabio Valentini ("decathorpe")](https://decathorpe.com/), for providing the extra packages for elementary on Fedora via the [elementary-staging Copr repository](https://copr.fedorainfracloud.org/coprs/decathorpe/elementary-staging/).
