@@ -18,7 +18,7 @@
 
 ### 2. Getting
 
-```ps
+```sh
 git clone https://github.com/sodaliterocks/sodalite.git
 cd sodalite
 git submodule sync
