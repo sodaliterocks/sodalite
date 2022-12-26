@@ -6,6 +6,34 @@
 
 **Sodalite** is a ...
 
+## 🎉 Quickstart
+
+Know what you're in for? Here goes:
+
+1. Install an rpm-ostree-based version of Fedora, such as [Fedora Silverblue](https://silverblue.fedoraproject.org/), or use an install you already have.
+2. Fire up a terminal and issue these commands:
+   - `sudo ostree remote add --if-not-exists sodalite https://ostree.sodalite.rocks --no-gpg-verify`
+   - `sudo ostree pull sodalite:sodalite/stable/x86_64/desktop`
+   - `sudo rpm-ostree rebase sodalite:sodalite/stable/x86_64/desktop`
+3. Stick the kettle on and make yourself a cuppa. It'll take a while.
+4. Reboot when prompted. Use it, enjoy it, make something cool with it, (try to) break it &mdash; [submit a ticket if you do](https://github.com/sodaliterocks/sodalite/issues/new)!
+
+### Updating
+
+_(todo)_
+
+### Versioning
+
+_(todo)_
+
+---
+
+**See [Sodalite Docs](https://docs.sodalite.rocks) for more information** &mdash; the README beyond this is intended mostly for developers.
+
+## 🤔 Status
+
+_(todo)_
+
 ## 🏗️ Building
 
 ### 1. Prerequisites
@@ -63,3 +91,24 @@ git submodule update --init --recursive
 * **[📄 Code of Conduct](CODE_OF_CONDUCT.MD)** &mdash; Contributor Covenant CoC
 * **[📄 Contributing](CONTRIBUTING.MD)**
 * **[📄 License](LICENSE)** &mdash; MIT, &copy; 2022 Sodalite contributors
+
+---
+
+<p align="center">
+This README was entirely overhauled on ??-??-???, and removed a lot of fluff that was no longer needed, but if you're looking for the previous version see [README.MD@d482f66](https://github.com/sodaliterocks/sodalite/blob/d482f66c7dfe300f02d0cc045bbe22a0720e6858/README.md).
+</p>
+
+---
+
+## Scratch junk. Don't merge. Ducks are cute.
+
+   - Updates will be received automatically from _Software_ (which runs in the background and sends desktop notifications), or you can update with `sudo rpm-ostree upgrade`.
+   - Providing you stay on the `stable` branch (the "`stable`" in "`sodalite/stable/x86_64/desktop`"), you do not need to manually intervene to update to the next base version of Fedora.
+     - **This is currently partially untrue as there will not be a 37-based version of Sodalite** &mdash; see [#44](https://github.com/sodaliterocks/sodalite/issues/44).
+     - Versioning (which can be seen in **System Settings ➔ About**) is encoded as `<base>-<year>.<release>[.<update>]`, where:
+       - `<base>` Base version of **Fedora**.
+       - `<year>` Year of release using just two digits (i.e. 2023 becomes 23).
+       - `<release>` Incremental release version; for additions, changes, and removals. Resets when a new year occurs, but does **not** reset on a new base version of Fedora.
+       - `<release>` _(optional)_ Incremental update version that occurs when the server rebuilds the exact same release version to update packages.
+   - Unlike most other rpm-ostree distros, a migration tool will be ran on each boot to correct a few things from previous installs, such as rectify various Flatpak apps (removing pre-installed GNOME apps and installing Pantheon apps), as well as clear up things from the previous install. The first one will take a while and you'll likely see a progress window on first login: don't worry, it will try its best to not cause murder and mayhem.
+5. 
