@@ -6,6 +6,6 @@ repos:
   - copr_decathorpe_elementary-nightly
 
 rojig:
-  name: sodalite-experimental-pantheon-nightly
+  name: rocks.sodalite.os.experimental-pantheon-nightly
   summary: "Sodalite (Experimental: Pantheon Nightly)"
   license: MIT
