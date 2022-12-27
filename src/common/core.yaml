@@ -51,7 +51,7 @@ add-files: [
   ["../../lib/sodaliterocks.hacks/src/plugins/migrate.sh", "/usr/libexec/rocks.sodalite.hacks/plugins/migrate.sh"],
   ["../../lib/sodaliterocks.hacks/src/plugins/nvidia.sh", "/usr/libexec/rocks.sodalite.hacks/plugins/nvidia.sh"],
   ["../../lib/sodaliterocks.hacks/src/plugins/oemconf.sh", "/usr/libexec/rocks.sodalite.hacks/plugins/oemconf.sh"],
-  ["../../lib/sodaliterocks.hacks/src/plugins/serve.sh", "/usr/libexec/rocks.sodalite.hacksplugins/serve.sh"],
+  ["../../lib/sodaliterocks.hacks/src/plugins/serve.sh", "/usr/libexec/rocks.sodalite.hacks/plugins/serve.sh"],
   ["../../lib/sodaliterocks.hacks/src/plugins/vscode.sh", "/usr/libexec/rocks.sodalite.hacks/plugins/vscode.sh"],
   ["../../lib/sodaliterocks.hacks/src/utils.sh", "/usr/libexec/rocks.sodalite.hacks/utils.sh"],
 
