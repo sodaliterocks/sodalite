@@ -1,0 +1,66 @@
+#!/usr/bin/env bash
+
+. /usr/libexec/rocks.sodalite.hacks/utils.sh
+
+migrate_pidfile="/var/run/rocks.sodalite.hacks/migrate.pid"
+migrate_status_file="/var/run/rocks.sodalite.hacks/migrate-status"
+pidfile="/var/run/user/$UID/rocks.sodalite.user-daemon.pid"
+zenity_width="300"
+
+function check_migration_status() {
+    waiting=0
+
+    while true
+    do
+        if [[ -f "$migrate_pidfile" ]] && [[ "$(cat "$migrate_status_file")" != "" ]]; then
+            {
+                while true
+                do
+                    if [[ -f $migrate_pidfile ]]; then
+                        echo "# $(cat $migrate_status_file)"; sleep 1
+                    else
+                        break
+                    fi
+                done
+            } | zenity --progress \
+                --title="Migrating" \
+                --text="Doing things..." \
+                --width 300 \
+                --pulsate \
+                --no-cancel \
+                --auto-close \
+                --auto-kill
+        else
+            sleep 1
+        fi
+    done
+}
+
+function update_gconf() {
+    current_wallpaper="$(parse_file_uri $(gsettings get org.gnome.desktop.background picture-uri))"
+
+    if [[ $(get_core) == "pantheon" ]]; then
+        system_locale="$(localectl status | grep "System Locale:" | cut -d "=" -f2)"
+        gsettings set org.gnome.system.locale region '$system_locale'
+    fi
+
+    if [[ $current_wallpaper != "" ]] && [[ ! -f $current_wallpaper ]]; then
+        gsettings reset org.gnome.desktop.background picture-uri
+    fi
+}
+
+if [[ -f $pidfile ]]; then
+    pid="$(cat $pidfile)"
+    if ps -p $pid > /dev/null; then
+        exit
+    fi
+fi
+
+touch "$pidfile"
+echo "$$" > "$pidfile"
+
+update_gconf
+check_migration_status &
+
+wait
+rm $pidfile

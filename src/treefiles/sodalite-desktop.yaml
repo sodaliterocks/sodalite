@@ -1,0 +1,8 @@
+ref: sodalite/f36/${basearch}/desktop
+include:
+  - ../common/core-pantheon.yaml
+
+rojig:
+  name: rocks.sodalite.os.desktop
+  summary: "Sodalite"
+  license: MIT

@@ -14,7 +14,6 @@ packages:
  - elementary-wallpapers
  - gala
  - gnome-session
- - google-roboto-mono-fonts
  - gvfs
  - gvfs-afc
  - gvfs-afp
@@ -24,12 +23,10 @@ packages:
  - gvfs-nfs
  - gvfs-smb
  - onboard
- - opendyslexic-fonts
  - pantheon-agent-geoclue2
  - pantheon-agent-polkit
  - pantheon-session-settings
  - plank
- - rsms-inter-fonts
  - switchboard
  - switchboard-plug-a11y
  - switchboard-plug-about
@@ -65,6 +62,8 @@ packages:
  - wingpanel-indicator-power
  - wingpanel-indicator-session
  - wingpanel-indicator-sound
+ - xdg-desktop-portal-gnome
+ - xdg-desktop-portal-pantheon
 exclude-packages:
  - gnome-tour
  #- ufw
