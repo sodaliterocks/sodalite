@@ -4,7 +4,7 @@
 	Sodalite
 </h1>
 
-**Sodalite** is an immutable desktop OS built with [rpm-ostree](https://coreos.github.io/rpm-ostree/) &mdash; similar to [Fedora Silverblue](https://silverblue.fedoraproject.org/) &mdash; making use of the [Pantheon desktop](https://elementary.io/docs/learning-the-basics), sticking closely to the ethos and workflow perpetrated by [elementary](https://elementary.io/open-source). A work-in-progress but entirely usable as a production desktop.
+**Sodalite** is an immutable desktop OS built with [rpm-ostree](https://coreos.github.io/rpm-ostree/) and on-top of [Fedora](https://getfedora.org/) &mdash; similar to [Fedora Silverblue](https://silverblue.fedoraproject.org/) &mdash; making use of the [Pantheon desktop](https://elementary.io/docs/learning-the-basics), sticking closely to the ethos and workflow perpetrated by [elementary](https://elementary.io/open-source). A work-in-progress but entirely usable as a production desktop.
 
 This is mostly a developer-orientated README; you're probably better off heading to [Sodalite Docs](https://docs.sodalite.rocks) if you're a user, or you can head down to **Quickstart** to get going.
 
@@ -47,12 +47,13 @@ _(todo)_
 ### 1. Prerequisites
 
 - [Fedora Linux](https://getfedora.org/) (or other Fedora-based/compatible distros)
+	- WSL2 is confirmed to work.
 - [rpm-ostree](https://coreos.github.io/rpm-ostree/)
 	- On most Fedora-based distros, this can be installed with `dnf install rpm-ostree`.
 - Bash
 - [Git LFS](https://git-lfs.com/)
 	- As well as including pretty wallpapers, the LFS also includes vital binaries that Sodalite needs to work properly, so don't miss installing this!
-	- Unsure if you have LFS support? Just type `git lfs`: you'll get the help output if you've got it installed.
+	- Unsure if you have LFS support? Tpe `git lfs`: a help output prints if installed.
 - Permission to `sudo`
 - &gt;10GiB disk space
 	- The repository itself (including submodules) takes up ~300MiB.
