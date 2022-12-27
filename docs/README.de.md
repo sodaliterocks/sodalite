@@ -13,7 +13,7 @@ _(todo)_
 ---
 
 <p align="center">
-  Diese README wurde am 00-Dez-2022 komplett überarbeitet und eine Menge nicht mehr benötigter Dinge entfernt, aber wenn Sie nach der vorherigen Version suchen, lesen Sie <a href="https://github.com/sodaliterocks/sodalite/blob/d482f66c7dfe300f02d0cc045bbe22a0720e6858/README.md">README.md@d482f66</a> (nur in Englisch verfügbar).
+    Übersetzung von <a href="../README.md">README</a> aktualisiert am 27-Dez-2022
 </p>
 
 <p align="center">
