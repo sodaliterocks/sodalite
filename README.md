@@ -43,10 +43,6 @@ If you chose to use a `f<version>` "long-term" branch (see <a href="#branches">B
 
 It's vital you carry out this process as updates stop the day the base version reaches end-of-life and you will be left without updates to vital system components (however, Flatpak apps will continue to update). See [Fedora Docs Fedora ➔ Linux Release Life Cycle](https://docs.fedoraproject.org/en-US/releases/lifecycle/) for more.
 
-### Versioning
-
-_(todo)_
-
 ### Branches
 
 To allow for several versions to co-exist and be developed in tandem with each other, Sodalite &mdash; like any other rpm-ostree distro &mdash; carries a ref to distinguish itself. Where `<name>/<version>/<arch>/<edition>`, the format and possible values are as follows:
@@ -68,6 +64,23 @@ To allow for several versions to co-exist and be developed in tandem with each o
   - `base`: Legacy version of `desktop`. **Do not use.**
 
 **As mentioned above, most uses will want `sodalite/stable/x86_64/desktop`.**
+
+### Versioning
+
+Versioning is as follows, where `<base>-<year>.<release>[.<update>][+<commit>]`:
+
+* `<base>`: Base version of **Fedora Linux**.
+* `<year>`: Year of release using just two digits (i.e. 2023 becomes `23`).
+* `<release>` Incremental release version; for additions, changes, and removals. Resets when a new year occurs, but **does not** reset on a new base version of Fedora Linux.
+  - An example progression would be: `39-23.0` ➔ `39-23.1` ➔ `40-23.2`  ➔ `40-23.3` ➔ `40-24.0`.
+* `<update>` _(optional)_: Incremental update version that occurs when the server rebuilds the exact same release version to update packages.
+  - An example progression would be: `39-23.0` ➔ `39-23.0.1` ➔ `39-23.0.2` ➔ `39-23.1` ➔ `39-23.1.1`.
+  - As builds are not created if no changes are present, this may drift out-of-sync between branches.
+* `<commit>` _(optional)_: Git commit (short version) for non-production versions.
+  - This will only appear from:
+    - Rebasing to the `devel` version (see <a href="#branches">Branches</a> above).
+    - Building Sodalite yourself with a commit that has not been tagged.
+    - A mistake, usually occuring from a tag that hasn't been pushed (oops!).
 
 #### Available Branches
 
