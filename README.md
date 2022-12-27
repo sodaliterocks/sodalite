@@ -63,7 +63,7 @@ To allow for several versions to co-exist and be developed in tandem with each o
   - `experimental-pantheon-nightly`: Experimental Pantheon desktop with nightly Pantheon packages.
   - `base`: Legacy version of `desktop`. **Do not use.**
 
-**As mentioned above, most uses will want `sodalite/stable/x86_64/desktop`.**
+**As mentioned above, most users will want `sodalite/stable/x86_64/desktop`.**
 
 #### Available Branches
 
