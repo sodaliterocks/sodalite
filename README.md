@@ -1,7 +1,7 @@
 ![Screenshot of Sodalite](https://git.zio.sh/sodaliterocks/lfs/media/branch/main/screenshots/screenshot.png?u=5)
 
 <h1 align="center">
-	Sodalite
+    Sodalite
 </h1>
 
 **Sodalite** is an immutable desktop OS built with [rpm-ostree](https://coreos.github.io/rpm-ostree/) and on-top of [Fedora](https://getfedora.org/) &mdash; similar to [Fedora Silverblue](https://silverblue.fedoraproject.org/) &mdash; making use of the [Pantheon desktop](https://elementary.io/docs/learning-the-basics), sticking closely to the ethos and workflow perpetrated by [elementary](https://elementary.io/open-source). A work-in-progress but entirely usable as a production desktop.
@@ -35,10 +35,10 @@ _(todo)_
 ---
 
 <p align="center">
-<b>See <a href="https://docs.sodalite.rocks)">Sodalite Docs</a> for more information</b> &mdash; the README beyond this is intended mostly for developers.
+    <s><b>See <a href="https://docs.sodalite.rocks)">Sodalite Docs</a> for more information</b></s> <i>(Docs are still a work-in-progress)</i> &mdash; the README beyond this is intended mostly for developers.
 </p>
 
-## 🤔 Status
+## ✨ Status
 
 _(todo)_
 
@@ -46,21 +46,25 @@ _(todo)_
 
 ### 1. Prerequisites
 
-- [Fedora Linux](https://getfedora.org/) (or other Fedora-based/compatible distros)
-	- WSL2 is confirmed to work.
-- [rpm-ostree](https://coreos.github.io/rpm-ostree/)
-	- On most Fedora-based distros, this can be installed with `dnf install rpm-ostree`.
-- Bash
-- [Git LFS](https://git-lfs.com/)
-	- As well as including pretty wallpapers, the LFS also includes vital binaries that Sodalite needs to work properly, so don't miss installing this!
-	- Unsure if you have LFS support? Tpe `git lfs`: a help output prints if installed.
-- Permission to `sudo`
-- &gt;10GiB disk space
-	- The repository itself (including submodules) takes up ~300MiB.
-	- Initial builds will take up ~4GiB, with subsequent builds adding to this.
-- Unlimited Internet
-	- The build process caches **a lot** of Fedora packages (around 2.5GiB), so think carefully about doing this on mobile broadband or any other service that imposes a small data allowance on you.
-- A cuppa _(optional)_ &mdash; this can take a while
+#### Software
+
+* [Fedora Linux](https://getfedora.org/) (or other Fedora-based/compatible distros)
+* [rpm-ostree](https://coreos.github.io/rpm-ostree/)
+  - On most Fedora-based distros, this can be installed with `dnf install rpm-ostree`.
+* Bash
+* [Git LFS](https://git-lfs.com/)
+  - As well as including pretty wallpapers, the LFS also includes vital binaries that Sodalite needs to work properly, so don't miss installing this!
+  - Unsure if you have LFS support? Tpe `git lfs`: a help output prints if installed.
+
+#### Environment
+* Permission to `sudo`
+  - `rpm-ostree` needs superuser access to work: there's no way around this.
+* &gt;10GiB disk space
+  - The repository itself (including submodules) takes up ~300MiB.
+  - Initial builds will take up ~4GiB, with subsequent builds adding to this.
+* Unlimited Internet
+  - The build process caches **a lot** of Fedora packages (around 2.5GiB), so think carefully about doing this on mobile broadband or any other service that imposes a small data allowance on you.
+* A cuppa _(optional)_ &mdash; this can take a while
 
 ### 2. Getting
 
@@ -103,28 +107,28 @@ This will usually take 10-15 minutes. Remember when I told you to grab a cuppa? 
 
 ##### Arguments
 
- - `<edition>` _(optional)_ Edition/variant of Sodalite (defaults to `custom`)
-	 - This is any of the `sodalite-<edition>.yaml` files listed in `./src/treefiles/`. Either use `sodalite-<edition>` or just `<edition>` as the argument. Currently, there is:
-	   - `desktop`: Standard Pantheon desktop.
-       - `desktop-gnome`: Alternate GNOME desktop, intended for possible future versions.
-       - `experimental-pantheon-nightly`: Experimental Pantheon desktop with nightly Pantheon packages.
-	   - `base`: Old legacy version sourcing `desktop`, purely there for compatibility and will be removed soon.
-       - `custom`: See below point.
-     - `sodalite-custom.yaml` is a good place to employ your own changes instead of modifying any of the other treefiles.
- - `<working-dir>` _(optional)_ Directory for build output (defaults to `./build`)
+* `<edition>` _(optional)_ Edition/variant of Sodalite (defaults to `custom`)
+  - This is any of the `sodalite-<edition>.yaml` files listed in `./src/treefiles/`. Either use `sodalite-<edition>` or just `<edition>` as the argument. Currently, there is:
+    - `desktop`: Standard Pantheon desktop.
+    - `desktop-gnome`: Alternate GNOME desktop, intended for possible future versions.
+    - `experimental-pantheon-nightly`: Experimental Pantheon desktop with nightly Pantheon packages.
+	- `base`: Old legacy version sourcing `desktop`, purely there for compatibility and will be removed soon.
+    - `custom`: See below point.
+  - `sodalite-custom.yaml` is a good place to employ your own changes instead of modifying any of the other treefiles.
+* `<working-dir>` _(optional)_ Directory for build output (defaults to `./build`)
 
 #### Cleaning Up
 
-Build contents is located at `./build/` (or whatever you set `<working-dir>` to), which can be deleted to start afresh. Specifically this holds the following (which can be individually deleted instead):
+Build contents is located at `./build/` (or whatever you set `<working-dir>` to), which can be deleted to start afresh. Specifically this holds the following files/directories (of which can be individually deleted instead):
 
- - `./build/repo/` &mdash; OSTree repository for Sodalite
- - `./build/cache/` &mdash; Cache for Fedora packages
+* `./build/repo/` &mdash; OSTree repository for Sodalite
+* `./build/cache/` &mdash; Cache for Fedora packages
 
 Unless stopped manually, `build.sh` will clean itself up whenever it exits (on both success and failure). It will correct permissions (to your user) for the `./build/` directory, as well as removing the following files/directories:
 
- - `./src/sysroot/common/usr/lib/sodalite-buildinfo`
- - `/var/tmp/rpm-ostree.*/`
-   - This can get large quickly; watch out if you're not letting `build.sh` exit.
+* `./src/sysroot/common/usr/lib/sodalite-buildinfo`
+* `/var/tmp/rpm-ostree.*/`
+  - This can get large quickly; watch out if you're not letting `build.sh` exit.
 
 ### 4. Using
 
