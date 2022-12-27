@@ -21,7 +21,7 @@ function cleanup() {
     rm -rf  /var/tmp/rpm-ostree.*
 
     if [[ $SUDO_USER != "" ]]; then
-        chown -R $SUDO_USER:$SUDO_USER $working_dir
+        chown -R $SUDO_USER:$SUDO_USER "$working_dir"
     fi
 }
 
@@ -67,7 +67,7 @@ echo "🪛 Setting up..."
 [[ $variant == *.yaml ]] && variant="$(echo $variant | sed s/.yaml//)"
 [[ $variant == sodalite* ]] && variant="$(echo $variant | sed s/sodalite-//)"
 [[ -z $variant ]] && variant="custom"
-[[ -z $working_dir ]] && working_dir="$base_dir/build"
+[[ -z "$working_dir" ]] && working_dir="$base_dir/build"
 
 ostree_cache_dir="$working_dir/cache"
 ostree_repo_dir="$working_dir/repo"
@@ -91,7 +91,7 @@ fi
 
 mkdir -p $ostree_cache_dir
 mkdir -p $ostree_repo_dir
-chown -R root:root $working_dir
+chown -R root:root "$working_dir"
 
 if [ ! "$(ls -A $ostree_repo_dir)" ]; then
    echo "🆕 Initializing OSTree repository..."
