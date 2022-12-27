@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-. /usr/libexec/sodalite-hacks/utils.sh
+. /usr/libexec/rocks.sodalite.hacks/utils.sh
 
 migrate_pidfile="/var/run/rocks.sodalite.hacks/migrate.pid"
 migrate_status_file="/var/run/rocks.sodalite.hacks/migrate-status"
