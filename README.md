@@ -73,7 +73,7 @@ Possible combinations built on the OSTree remote (`ostree.sodalite.rocks`) are a
 |-|-|-|-|
 |`sodalite`|`stable`|`x86_64`|`desktop`<br />`experimental-pantheon-nightly`<br />`base`|
 |`sodalite`|`f36`|`x86_64`|`desktop`<br />`base`|
-|`sodalite`|`next`|`x86_64`|`desktop`<br />`base`|
+|`sodalite`|`next`|`x86_64`|`desktop`<br />`experimental-pantheon-nightly`<br />`base`|
 |`sodalite`|`devel`|`x86_64`|`desktop`<br />`desktop-gnome`|
 
 _For example, `sodalite/stable/x86_64/desktop` exists on the build server and can be pulled, but `sodalite/f36/x86_64/experimental-pantheon-nightly` does not._
