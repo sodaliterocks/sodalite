@@ -42,11 +42,17 @@ _(todo)_
 
 - [Fedora Linux](https://getfedora.org/) (or other Fedora-based/compatible distros)
 - [rpm-ostree](https://coreos.github.io/rpm-ostree/)
-	- On most Fedora-based distros, this can be installed with `dnf install rpm-ostree`
+	- On most Fedora-based distros, this can be installed with `dnf install rpm-ostree`.
 - Bash
 - [Git LFS](https://git-lfs.com/)
 	- As well as including pretty wallpapers, the LFS also includes vital binaries that Sodalite needs to work properly, so don't miss installing this!
-	- Unsure if you have LFS support? Just type `git lfs`.
+	- Unsure if you have LFS support? Just type `git lfs`: you'll get the help output if you've got it installed.
+- Permission to `sudo`
+- &gt;10GiB disk space
+	- The repository itself (including submodules) takes up ~300MiB.
+	- Initial builds will take up ~4GiB, with subsequent builds adding to this.
+- Unlimited Internet
+	- The build process caches **a lot** of Fedora packages (around 2.5GiB), so think carefully about doing this on mobile broadband or any other service that imposes a small data allowance on you.
 - A cuppa _(optional)_ &mdash; this can take a while
 
 ### 2. Getting
@@ -58,9 +64,60 @@ git submodule sync
 git submodule update --init --recursive
 ```
 
+#### Future Pulls
+
+When updating in the future, don't forget to update submodules with:
+
+```sh
+git submodule update --recursive
+```
+
+**Do not** use `git submodule foreach git pull`: this blindly updates all submodules to their latest version, not the commit this parent repo has checked out. This is important for some submodules that are checked out at specific tags/commits (such as `./lib/sodaliterocks.firefox`).
+
+The `./lib/workstation-ostree-config_f*` submodules &mdash; serving as a basis for Sodalite for its various different Fedora-based versions &mdash; are removed every so often so make sure you delete them accordingly. For example, when Fedora 36 reaches EoL, `./lib/workstation-ostree-config_f36` will be removed shortly afterwards. You can use `git clean -i` to do the work for you.
+
+#### LFS
+
+There is an LFS submodule located at `./lfs`. It's important to note this is not hosted on GitHub, but [Zio Git](https://git.zio.sh) &mdash; a server we control &mdash; as GitHub's LFS allowances are tight ([only 1GiB bandwidth and storage](https://docs.github.com/en/repositories/working-with-files/managing-large-files/about-storage-and-bandwidth-usage)).
+
+Any issues regarding the LFS should be submitted to [sodaliterocks/sodalite on GitHub](https://github.com/sodaliterocks/sodalite). Currently, as Zio Git does not allow for arbitrary sign-ups, PRs cannot be directly submitted.
+
+#### Usage of GitHub
+
+Unless the world collectively favours GitLab, or anything else, Sodalite will stay on GitHub as it makes everyone's lives easier. Microsoft is just another company; they're not going to hurt you.
+
 ### 3. Building
 
-...
+```sh
+sudo ./build.sh [<edition>] [<working-dir>]
+```
+
+This will usually take 10-15 minutes. Remember when I told you to grab a cuppa? Or maybe a cold one?
+
+##### Arguments
+
+ - `<edition>` _(optional)_ Edition/variant of Sodalite (defaults to `custom`)
+	 - This is any of the `sodalite-<edition>.yaml` files listed in `./src/treefiles/`. Either use `sodalite-<edition>` or just `<edition>` as the argument. Currently, there is:
+	   - `desktop`: Standard Pantheon desktop.
+       - `desktop-gnome`: Alternate GNOME desktop, intended for possible future versions.
+       - `experimental-pantheon-nightly`: Experimental Pantheon desktop with nightly Pantheon packages.
+	   - `base`: Old legacy version sourcing `desktop`, purely there for compatibility and will be removed soon.
+       - `custom`: See below point.
+     - `sodalite-custom.yaml` is a good place to employ your own changes instead of modifying any of the other treefiles.
+ - `<working-dir>` _(optional)_ Directory for build output (defaults to `./build`)
+
+#### Cleaning Up
+
+Build contents is located at `./build/` (or whatever you set `<working-dir>` to), which can be deleted to start afresh. Specifically this holds:
+
+ - `./build/repo/` &mdash; OSTree repository for Sodalite
+ - `./build/cache/` &mdash; Cache for Fedora packages
+
+Unless stopped manually, `build.sh` will clean itself up whenever it exits (on both success and failure). It will correct permissions (to your user) for the `./build/` directory, as well as removing the following files/directories:
+
+ - `./src/sysroot/common/usr/lib/sodalite-buildinfo`
+ - `/var/tmp/rpm-ostree.*/`
+   - This can get large quickly; watch out!
 
 ### 4. Using
 
