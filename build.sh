@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 # Usage: ./build.sh [<variant>] [<working-dir>]
 
-variant=$1
-working_dir=$2
+variant="$1"
+working_dir="$2"
 base_dir="$(dirname "$(realpath -s "$0")")"
 buildinfo_file="$base_dir/src/sysroot/common/usr/lib/sodalite-buildinfo"
 tests_dir="$base_dir/tests"
