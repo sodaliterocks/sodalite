@@ -43,6 +43,9 @@ _(todo)_
 	- On most Fedora-based distros, this can be installed with `dnf install rpm-ostree`
 - Bash
 - [Git LFS](https://git-lfs.com/)
+	- As well as including pretty wallpapers, the LFS also includes vital binaries that Sodalite needs to work properly, so don't miss installing this!
+	- Unsure if you have LFS support? Just type `git lfs`.
+- A cuppa _(optional)_ &mdash; this can take a while
 
 ### 2. Getting
 
@@ -95,7 +98,7 @@ git submodule update --init --recursive
 ---
 
 <p align="center">
-This README was entirely overhauled on ??-??-???, and removed a lot of fluff that is no longer needed, but if you're looking for the previous version see <a href="https://github.com/sodaliterocks/sodalite/blob/d482f66c7dfe300f02d0cc045bbe22a0720e6858/README.md">README.md@d482f66</a>.
+This README was entirely overhauled on 28-Dec-2022, and removed a lot of fluff that was no longer needed, but if you're looking for the previous version see <a href="https://github.com/sodaliterocks/sodalite/blob/d482f66c7dfe300f02d0cc045bbe22a0720e6858/README.md">README.md@d482f66</a>.
 </p>
 
 ---
