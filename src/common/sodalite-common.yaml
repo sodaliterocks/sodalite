@@ -1,5 +1,0 @@
-# Note: Included for backwards-compatibility
-
-include: [
-  "./base-pantheon.yaml"
-]

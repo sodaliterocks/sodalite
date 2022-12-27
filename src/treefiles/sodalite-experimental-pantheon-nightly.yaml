@@ -1,6 +1,6 @@
 ref: sodalite/devel/${basearch}/experimental-pantheon-nightly
 include:
-  - ../common/sodalite-common.yaml
+  - ../common/core-pantheon.yaml
 
 repos:
   - copr_decathorpe_elementary-nightly
