@@ -12,7 +12,7 @@ This is mostly a developer-orientated README; you're probably better off heading
 
 Know what you're in for? Here goes:
 
-1. Install an rpm-ostree-based version of Fedora, such as [Fedora Silverblue](https://silverblue.fedoraproject.org/), or use an install you already have.
+1. Install an rpm-ostree-based version of Fedora, such as [Fedora Silverblue](https://silverblue.fedoraproject.org/), or use an already-existing install.
 2. Fire up a terminal and issue these commands:
    - `sudo ostree remote add --if-not-exists sodalite https://ostree.sodalite.rocks --no-gpg-verify`
    - `sudo ostree pull sodalite:sodalite/stable/x86_64/desktop`
@@ -25,6 +25,10 @@ Know what you're in for? Here goes:
 _(todo)_
 
 ### Versioning
+
+_(todo)_
+
+### Branches
 
 _(todo)_
 
