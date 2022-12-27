@@ -175,8 +175,8 @@ _(todo)_
 
 ## 👀 See Also
 
-* **[📄 Code of Conduct](CODE_OF_CONDUCT.MD)** &mdash; Contributor Covenant CoC
-* **[📄 Contributing](CONTRIBUTING.MD)**
+* **[📄 Code of Conduct](CODE_OF_CONDUCT.md)** &mdash; Contributor Covenant CoC
+* **[📄 Contributing](CONTRIBUTING.md)**
 * **[🔗 Docs](https://docs.sodalite.rocks)**
 * **[📄 License](LICENSE)** &mdash; MIT, &copy; 2022 Sodalite contributors
 
