@@ -28,7 +28,9 @@ _(todo)_
 
 ---
 
-**See [Sodalite Docs](https://docs.sodalite.rocks) for more information** &mdash; the README beyond this is intended mostly for developers.
+<p align="center">
+<b>See <a href="https://docs.sodalite.rocks)">Sodalite Docs</a> for more information</b> &mdash; the README beyond this is intended mostly for developers.
+</p>
 
 ## 🤔 Status
 
@@ -72,27 +74,15 @@ git submodule update --init --recursive
 * ["Topfi"](https://github.com/ACertainTopfi), for their various contributions.
 * The [elementary team](https://elementary.io/team), for building lovely stuff.
 * The contributors to [workstation-ostree-config](https://pagure.io/workstation-ostree-config), for a solid ground to work from.
-* The amazing photographers/artists of the included wallpapers:
-	* [Adrien Olichon](https://unsplash.com/@adrienolichon)
-	* [Austin Neill](https://unsplash.com/@arstyy)
-	* [Cody Fitzgerald](https://unsplash.com/@cfitz)
-	* [Dustin Humes](https://unsplash.com/@dustinhumes_photography)
-	* [Jack B.](https://unsplash.com/@nervum)
-	* [Jeremy Gerritsen](https://unsplash.com/@jeremygerritsen)
-	* [Karsten Würth](https://unsplash.com/@karsten_wuerth)
-	* [Max Okhrimenko](https://unsplash.com/@maxokhrimenko)
-	* [Nathan Dumlao](https://unsplash.com/@nate_dumlao)
-	* [Ryan Stone](https://unsplash.com/@rstone_design)
-	* [Smaran Alva](https://unsplash.com/@smal)
-	* [Willian Daigneault](https://unsplash.com/@williamdaigneault)
-	* [Zara Walker](https://unsplash.com/@mojoblogs)
+* The amazing photographers/artists of the included wallpapers &mdash; [Adrien Olichon](https://unsplash.com/@adrienolichon), [Austin Neill](https://unsplash.com/@arstyy), [Cody Fitzgerald](https://unsplash.com/@cfitz), [Dustin Humes](https://unsplash.com/@dustinhumes_photography), [Jack B.](https://unsplash.com/@nervum), [Jeremy Gerritsen](https://unsplash.com/@jeremygerritsen), [Karsten Würth](https://unsplash.com/@karsten_wuerth), [Max Okhrimenko](https://unsplash.com/@maxokhrimenko), [Nathan Dumlao](https://unsplash.com/@nate_dumlao), [Ryan Stone](https://unsplash.com/@rstone_design), [Smaran Alva](https://unsplash.com/@smal), [Willian Daigneault](https://unsplash.com/@williamdaigneault), and [Zara Walker](https://unsplash.com/@mojoblogs).
 * The [Sodalite mineral](https://en.wikipedia.org/wiki/Sodalite), for the name. [It's a mineral, not a rock, Jesus](https://www.youtube.com/watch?v=r1yYJBzf1VQ)!
-* The Omicron variant of COVID-19, for giving [Ducky](https://github.com/electriduck) the initial free time to make this thing.
+* The [Omicron variant of SARS-CoV-2](https://en.wikipedia.org/wiki/SARS-CoV-2_Omicron_variant), for giving [Ducky](https://github.com/electriduck) the initial free time to make this thing.
 
 ## 👀 See Also
 
 * **[📄 Code of Conduct](CODE_OF_CONDUCT.MD)** &mdash; Contributor Covenant CoC
 * **[📄 Contributing](CONTRIBUTING.MD)**
+* **[🔗 Docs](https://docs.sodalite.rocks)**
 * **[📄 License](LICENSE)** &mdash; MIT, &copy; 2022 Sodalite contributors
 
 ---
