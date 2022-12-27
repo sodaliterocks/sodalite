@@ -50,7 +50,6 @@ add-files: [
 
   # /usr/libexec
   ["../../lib/sodaliterocks.hacks/src/plugins/gcc-shim.sh", "/usr/libexec/sodalite-hacks/plugins/gcc-shim.sh"],
-  ["../../lib/sodaliterocks.hacks/src/plugins/winbtn.sh", "/usr/libexec/sodalite-hacks/plugins/winbtn.sh"],
 
   # /usr/share
   ["../sysroot/cores/pantheon/usr/share/touchegg/touchegg.conf", "/usr/share/touchegg/touchegg.conf"],
