@@ -118,21 +118,21 @@ This will usually take 10-15 minutes. Remember when I told you to grab a cuppa? 
   - `sodalite-custom.yaml` is a good place to employ your own changes instead of modifying any of the other treefiles.
 * `<working-dir>` _(optional)_ Directory for build output (defaults to `./build`)
 
-### Additional Notes
+#### Additional Notes
 
-#### NTFS/FAT partitions
+##### NTFS/FAT partitions
 
 Build failures are inevitable on drives formatted as NTFS, FAT, or anything other filesystems that do not support Unix-like permissions, as `build.sh` sets permissions on various objects.
 
-##### WSL2
+###### WSL2
 
 On WSL2, do not build to any `/mnt/<drive-letter>` directories as these will be formatted as NTFS or FAT. Instead, run the build somewhere else on the Linux distro itself (like `$HOME` or `/usr/local/src`).
 
-#### Not using `build.sh`
+##### Not using `build.sh`
 
 Most rpm-ostree distros can be built just be simply doing `rpm-ostree compose`, but `build.sh` provided with Sodalite does some extra steps which are required for the post-build script (which **will** fail without these being ran). It is therefore not recommended to do it this way: any issues building the distro this way will be closed and marked as invalid.
 
-#### Without `--unified-core` deprecation warning
+##### Without `--unified-core` deprecation warning
 
 During the build you will face this warning:
 
