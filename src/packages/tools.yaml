@@ -1,8 +1,10 @@
 packages:
  - buildah
+ - dbus-x11
  - dialog
  - distrobox
  - git-core
+ - gstreamer1-plugins-good-gtk
  - lm_sensors
  - meson
  - podman
