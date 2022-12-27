@@ -45,6 +45,7 @@ To allow for several versions to co-exist and be developed in tandem with each o
   - `desktop`: Standard Pantheon desktop.
   - `desktop-gnome`: Alternate GNOME desktop.
   - `experimental-pantheon-nightly`: Experimental Pantheon desktop with nightly Pantheon packages.
+  - `<base>`: Legacy version of `desktop`. **Do not use.**
 
 **As mentioned above, most uses will want `sodalite/stable/x86_64/desktop`.**
 
