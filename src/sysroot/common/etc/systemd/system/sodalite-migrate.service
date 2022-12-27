@@ -1,11 +1,11 @@
 [Unit]
-Description=Update AppCenter Flatpak repository
+Description=Migrate to Sodalite
 Wants=network-online.target
 After=syslog.target network.target network-online.target
 
 [Service]
 Type=simple
-ExecStart=/usr/bin/sodalite-hacks flatpak --setup-appcenter
+ExecStart=/usr/bin/sodalite-hacks migrate --all
 Restart=on-failure
 RestartSec=10
 KillMode=process
