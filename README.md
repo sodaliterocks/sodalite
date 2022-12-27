@@ -65,6 +65,19 @@ To allow for several versions to co-exist and be developed in tandem with each o
 
 **As mentioned above, most uses will want `sodalite/stable/x86_64/desktop`.**
 
+#### Available Branches
+
+Possible combinations built on the OSTree remote (`ostree.sodalite.rocks`) are as follows:
+
+|Name|Version(s)|Arch.(s)|Edition(s)|
+|-|-|-|-|
+|`sodalite`|`stable`|`x86_64`|`desktop`<br />`experimental-pantheon-nightly`<br />`base`|
+|`sodalite`|`f36`|`x86_64`|`desktop`<br />`base`|
+|`sodalite`|`next`|`x86_64`|`desktop`<br />`base`|
+|`sodalite`|`devel`|`x86_64`|`desktop`<br />`desktop-gnome`|
+
+_For example, `sodalite/stable/x86_64/desktop` exists on the build server and can be pulled, but `sodalite/f36/x86_64/experimental-pantheon-nightly` does not._
+
 ### Versioning
 
 Versioning is as follows, where `<base>-<year>.<release>[.<update>][+<commit>]`:
@@ -81,19 +94,6 @@ Versioning is as follows, where `<base>-<year>.<release>[.<update>][+<commit>]`:
     - Rebasing to the `devel` version (see <a href="#branches">Branches</a> above).
     - Building Sodalite yourself with a commit that has not been tagged.
     - A mistake, usually occuring from a tag that hasn't been pushed (oops!).
-
-#### Available Branches
-
-Possible combinations built on the OSTree remote (`ostree.sodalite.rocks`) are as follows:
-
-|Name|Version(s)|Arch.(s)|Edition(s)|
-|-|-|-|-|
-|`sodalite`|`stable`|`x86_64`|`desktop`<br />`experimental-pantheon-nightly`<br />`base`|
-|`sodalite`|`f36`|`x86_64`|`desktop`<br />`base`|
-|`sodalite`|`next`|`x86_64`|`desktop`<br />`base`|
-|`sodalite`|`devel`|`x86_64`|`desktop`<br />`desktop-gnome`|
-
-_For example, `sodalite/stable/x86_64/desktop` exists on the build server and can be pulled, but `sodalite/f36/x86_64/experimental-pantheon-nightly` does not._
 
 ---
 
