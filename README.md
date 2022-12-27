@@ -4,7 +4,9 @@
 	Sodalite
 </h1>
 
-**Sodalite** is a ...
+**Sodalite** is an immutable desktop OS built with [rpm-ostree](https://coreos.github.io/rpm-ostree/) &mdash; similar to [Fedora Silverblue](https://silverblue.fedoraproject.org/) &mdash; making use of the [Pantheon desktop](https://elementary.io/docs/learning-the-basics), sticking closely to the ethos and workflow perpetrated by [elementary](https://elementary.io/open-source). A work-in-progress but entirely usable as a production desktop.
+
+This is mostly a developer-orientated README; you're probably better off heading to [Sodalite Docs](https://docs.sodalite.rocks) if you're a user, or you can head down to **Quickstart** to get going.
 
 ## 🎉 Quickstart
 
@@ -78,7 +80,7 @@ The `./lib/workstation-ostree-config_f*` submodules &mdash; serving as a basis f
 
 #### LFS
 
-There is an LFS submodule located at `./lfs`. It's important to note this is not hosted on GitHub, but [Zio Git](https://git.zio.sh) &mdash; a server we control &mdash; as GitHub's LFS allowances are tight ([only 1GiB bandwidth and storage](https://docs.github.com/en/repositories/working-with-files/managing-large-files/about-storage-and-bandwidth-usage)).
+An LFS submodule is located at `./lfs`. It's important to note this is not hosted on GitHub, but [Zio Git](https://git.zio.sh) &mdash; a server we control &mdash; as GitHub's LFS allowances are tight ([only 1GiB bandwidth and storage](https://docs.github.com/en/repositories/working-with-files/managing-large-files/about-storage-and-bandwidth-usage)).
 
 Any issues regarding the LFS should be submitted to [sodaliterocks/sodalite on GitHub](https://github.com/sodaliterocks/sodalite). Currently, as Zio Git does not allow for arbitrary sign-ups, PRs cannot be directly submitted.
 
@@ -108,7 +110,7 @@ This will usually take 10-15 minutes. Remember when I told you to grab a cuppa? 
 
 #### Cleaning Up
 
-Build contents is located at `./build/` (or whatever you set `<working-dir>` to), which can be deleted to start afresh. Specifically this holds:
+Build contents is located at `./build/` (or whatever you set `<working-dir>` to), which can be deleted to start afresh. Specifically this holds the following (which can be individually deleted instead):
 
  - `./build/repo/` &mdash; OSTree repository for Sodalite
  - `./build/cache/` &mdash; Cache for Fedora packages
@@ -117,7 +119,7 @@ Unless stopped manually, `build.sh` will clean itself up whenever it exits (on b
 
  - `./src/sysroot/common/usr/lib/sodalite-buildinfo`
  - `/var/tmp/rpm-ostree.*/`
-   - This can get large quickly; watch out!
+   - This can get large quickly; watch out if you're not letting `build.sh` exit.
 
 ### 4. Using
 
@@ -141,6 +143,10 @@ Unless stopped manually, `build.sh` will clean itself up whenever it exits (on b
 * **[📄 Contributing](CONTRIBUTING.MD)**
 * **[🔗 Docs](https://docs.sodalite.rocks)**
 * **[📄 License](LICENSE)** &mdash; MIT, &copy; 2022 Sodalite contributors
+
+### Related
+
+* **[🔗 Fedora Docs ➔ Fedora Silverblue User Guide](https://docs.fedoraproject.org/en-US/fedora-silverblue/)**
 
 ---
 
