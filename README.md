@@ -156,7 +156,12 @@ Unless stopped manually, `build.sh` will clean itself up whenever it exits (on b
 ---
 
 <p align="center">
-This README was entirely overhauled on 28-Dec-2022, and removed a lot of fluff that was no longer needed, but if you're looking for the previous version see <a href="https://github.com/sodaliterocks/sodalite/blob/d482f66c7dfe300f02d0cc045bbe22a0720e6858/README.md">README.md@d482f66</a>.
+  This README was entirely overhauled on 28-Dec-2022, and removed a lot of fluff that was no longer needed, but if you're looking for the previous version see <a href="https://github.com/sodaliterocks/sodalite/blob/d482f66c7dfe300f02d0cc045bbe22a0720e6858/README.md">README.md@d482f66</a>.
+</p>
+
+<p align="center">
+  <a href="README.md">🇬🇧</a>
+  <a href="docs/README.de.md">🇩🇪</a>
 </p>
 
 ---
