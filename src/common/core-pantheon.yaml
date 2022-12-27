@@ -49,7 +49,7 @@ add-files: [
   ["../sysroot/cores/pantheon/usr/lib64/switchboard/personal/security-privacy-plug-helper", "/usr/lib64/switchboard/personal/security-privacy-plug-helper"],
 
   # /usr/libexec
-  ["../../lib/sodaliterocks.hacks/src/plugins/gcc-shim.sh", "/usr/libexec/sodalite-hacks/plugins/gcc-shim.sh"],
+  ["../../lib/sodaliterocks.hacks/src/plugins/gcc-shim.sh", "/usr/libexec/rocks.sodalite.hacks/plugins/gcc-shim.sh"],
 
   # /usr/share
   ["../sysroot/cores/pantheon/usr/share/touchegg/touchegg.conf", "/usr/share/touchegg/touchegg.conf"],
