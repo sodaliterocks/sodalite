@@ -30,7 +30,36 @@ _(todo)_
 
 ### Branches
 
-_(todo)_
+To allow for several versions to co-exist and be developed in tandem with each other, Sodalite &mdash; like any other rpm-ostree distro &mdash; carries a ref to distinguish itself. Where `<name>/<version>/<arch>/<edition>`, the format and possible values are as follows:
+
+* `<name>`: **Name** of the branch; always `sodalite`.
+* `<version>`: **Version** of the branch. Possible values:
+  - `stable`:  Rolling-release version based on the current stable release of Fedora Linux (currently 36 &mdash; [37 has been abandoned](https://github.com/sodaliterocks/sodalite/issues/44)).
+  - `f<version>`: "Long-term" versions based on specific versions of Fedora Linux, which require manual intervention to rebase to a newer version when said version reaches end-of-life. Possible values for `<version>`:
+    - `36`: Fedora Linux 36. Reaches end-of-life on 16th May 2023 (2023-05-16).
+  - `next`: Rolling-release version based on the next upcoming version of Fedora Linux (currently 38) &mdash; **highly unstable currently!**
+* `<arch>`: **Architecture** of the branch. Possible values:
+  - `x86_64`: For 64-bit CPUs (`x86_64`, `amd64`, or `x64`).
+  - ~~`x86`: [What year is it!?](https://c.tenor.com/9OcQhlCBNG0AAAAd/what-year-is-it-jumanji.gif)~~
+* `<edition>`: **Edition** (or variant) of the branch: Possible values:
+  - `desktop`: Standard Pantheon desktop.
+  - `desktop-gnome`: Alternate GNOME desktop.
+  - `experimental-pantheon-nightly`: Experimental Pantheon desktop with nightly Pantheon packages.
+
+**As mentioned above, most uses will want `sodalite/stable/x86_64/desktop`.**
+
+#### Available Branches
+
+Possible combinations built on the OSTree remote (`ostree.sodalite.rocks`) are as follows:
+
+|Name|Version(s)|Arch.(s)|Edition(s)|
+|-|-|-|-|
+|`sodalite`|`stable`|`x86_64`|`desktop`<br />`experimental-pantheon-nightly`<br />`base`|
+|`sodalite`|`f36`|`x86_64`|`desktop`<br />`base`|
+|`sodalite`|`next`|`x86_64`|`desktop`<br />`base`|
+|`sodalite`|`devel`|`x86_64`|`desktop`<br />`desktop-gnome`|
+
+_For example, `sodalite/stable/x86_64/desktop` exists on the build server and can be pulled, but `sodalite/f36/x86_64/experimental-pantheon-nightly` does not._
 
 ---
 
