@@ -10,11 +10,11 @@ if [[ ! -n "$app" ]]; then
     exit 255
 fi
 
-if flatpak info $1 > /dev/null 2>&1; then
-    flatpak run "$app" $app_args
+if flatpak info --system $1 > /dev/null 2>&1; then
+    flatpak run --system "$app" $app_args
 else
     if [[ $(get_answer "'$app' not installed. Look for it?") == "y" ]]; then
-        flatpak install "$app"
+        flatpak install --system "$app"
     else
         exit
     fi
