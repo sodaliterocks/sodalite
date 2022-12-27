@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=User Daemon
+Comment=Perform various user session tasks for Sodalite
+Exec=rocks.sodalite.user-daemon
+Icon=application-default-icon
+Terminal=false
+Type=Application
+Categories=Utility;

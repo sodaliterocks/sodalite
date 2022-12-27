@@ -1,0 +1,73 @@
+include: [
+  "./core.yaml",
+  "../packages/pantheon.yaml",
+  "../packages/pantheon-apps.yaml",
+  "../packages/pantheon-extras.yaml"
+]
+
+repos:
+ - copr_decathorpe_elementary-staging
+ - copr_stsdc_monitor
+ 
+add-files: [
+  # /etc
+  ["../sysroot/cores/pantheon/etc/dconf/db/local.d/01-elementary-theme", "/etc/dconf/db/local.d/10-elementary-theme"],
+  ["../../lib/elementary.default-settings/cups/default-testpage.pdf", "/etc/cups/default-testpage.pdf"],
+  ["../../lib/elementary.default-settings/gtk/settings.ini", "/etc/gtk/settings.ini"],
+  ["../sysroot/cores/pantheon/etc/lightdm/lightdm-gtk-greeter.conf", "/etc/lightdm/lightdm-gtk-greeter.conf"],
+
+  # /etc/skel
+  ["../../lib/elementary.default-settings/skel/flatpak/repo/appcenter.trustedkeys.gpg", "/usr/share/gnupg/appcenter.gpg"],
+  ["../../lib/elementary.default-settings/skel/plank/dock1/launchers/gala-multitaskingview.dockitem", "/etc/skel/.config/plank/dock1/launchers/gala-multitaskingview.dockitem"],
+  ["../../lib/elementary.default-settings/skel/.inputrc", "/etc/skel/.inputrc"],
+  ["../../lib/elementary.default-settings/sudoers.d/pwfeedback", "/etc/sudoers.d/pwfeedback"],
+  ["../sysroot/cores/pantheon/etc/skel/dot.config/plank/dock1/launchers/firefox.dockitem", "/etc/skel/.config/plank/dock1/launchers/firefox.dockitem"],
+  ["../sysroot/cores/pantheon/etc/skel/dot.config/plank/dock1/launchers/io.elementary.files.dockitem", "/etc/skel/.config/plank/dock1/launchers/io.elementary.files.dockitem"],
+  ["../sysroot/cores/pantheon/etc/skel/dot.config/plank/dock1/launchers/io.elementary.terminal.dockitem", "/etc/skel/.config/plank/dock1/launchers/io.elementary.terminal.dockitem"],
+  ["../sysroot/cores/pantheon/etc/skel/dot.config/plank/dock1/launchers/io.elementary.code.dockitem", "/etc/skel/.config/plank/dock1/launchers/io.elementary.code.dockitem"],
+  ["../sysroot/cores/pantheon/etc/skel/dot.config/plank/dock1/launchers/org.gnome.Software.dockitem", "/etc/skel/.config/plank/dock1/launchers/org.gnome.Software.dockitem"],
+
+  # /etc/xdg
+  ["../../lfs/binaries/debian/indicator-application-patched/0.1/etc/xdg/autostart/indicator-application.desktop", "/etc/xdg/autostart/indicator-application.desktop"],
+  ["../sysroot/cores/pantheon/etc/xdg/autostart/gnome-software-service.desktop", "/etc/xdg/autostart/gnome-software-service.desktop"],
+  ["../sysroot/cores/pantheon/etc/xdg/autostart/plank-wrapper.desktop", "/etc/xdg/autostart/plank-wrapper.desktop"],
+
+  # /usr/bin
+  ["../sysroot/cores/pantheon/usr/bin/gnome-control-center", "/usr/bin/gnome-control-center"],
+  ["../sysroot/cores/pantheon/usr/bin/gnome-software-wrapper", "/usr/bin/gnome-software-wrapper"],
+  ["../sysroot/cores/pantheon/usr/bin/plank-wrapper", "/usr/bin/plank-wrapper"],
+
+  # /usr/lib
+  ["../../lfs/binaries/debian/com.github.mvbonin.switchboard-plug-indicators/0.1~amd64/usr/lib/x86_64-linux-gnu/switchboard/hardware/libindicators.so", "/usr/lib64/switchboard/personal/libindicators.so"],
+  ["../../lfs/binaries/debian/com.github.mvbonin.wingpanel-community-indicators/2.0.9~amd64/usr/lib/x86_64-linux-gnu/wingpanel/libayatana.so", "/usr/lib64/wingpanel/libayatana.so"],
+  ["../../lfs/binaries/debian/indicator-application-patched/0.1/usr/lib/indicators3/7/libapplication.so", "/usr/lib/indicators3/7/libapplication.so"],
+  ["../../lfs/binaries/debian/indicator-application-patched/0.1/usr/lib/systemd/user/indicator-application.service", "/usr/lib/systemd/user/indicator-application.service"],
+  ["../sysroot/cores/pantheon/usr/lib/sodalite-core", "/usr/lib/sodalite-core"],
+
+  # /usr/lib64
+  ["../../lfs/binaries/debian/indicator-application-patched/0.1/usr/lib/x86_64-linux-gnu/indicator-application/indicator-application-service", "/usr/lib64/indicator-application/indicator-application-service"],
+  ["../sysroot/cores/pantheon/usr/lib64/switchboard/personal/security-privacy-plug-helper", "/usr/lib64/switchboard/personal/security-privacy-plug-helper"],
+
+  # /usr/libexec
+  ["../../lib/sodaliterocks.hacks/src/plugins/gcc-shim.sh", "/usr/libexec/rocks.sodalite.hacks/plugins/gcc-shim.sh"],
+
+  # /usr/share
+  ["../sysroot/cores/pantheon/usr/share/touchegg/touchegg.conf", "/usr/share/touchegg/touchegg.conf"],
+
+  # /usr/share/applications
+  ["../sysroot/cores/pantheon/usr/share/applications/firewall-config.desktop", "/usr/share/applications/firewall-config.desktop"],
+  ["../sysroot/cores/pantheon/usr/share/applications/org.freedesktop.IBus.Setup.desktop", "/usr/share/applications/org.freedesktop.IBus.Setup.desktop"],
+  ["../sysroot/cores/pantheon/usr/share/applications/nm-connection-editor.desktop", "/usr/share/applications/nm-connection-editor.desktop"],
+  ["../sysroot/cores/pantheon/usr/share/applications/org.gnome.DiskUtility.desktop", "/usr/share/applications/org.gnome.DiskUtility.desktop"],
+  ["../sysroot/cores/pantheon/usr/share/applications/org.gnome.Software.desktop", "/usr/share/applications/org.gnome.Software.desktop"],
+
+  # /usr/share/icons
+  ["../../lib/elementary.icons/apps/128/system-software-install.svg", "/usr/share/icons/elementary/apps/128/system-software-install.svg"],
+  ["../../lib/elementary.icons/apps/16/system-software-install.svg", "/usr/share/icons/elementary/apps/16/system-software-install.svg"],
+  ["../../lib/elementary.icons/apps/24/system-software-install.svg", "/usr/share/icons/elementary/apps/24/system-software-install.svg"],
+  ["../../lib/elementary.icons/apps/32/system-software-install.svg", "/usr/share/icons/elementary/apps/32/system-software-install.svg"],
+  ["../../lib/elementary.icons/apps/48/system-software-install.svg", "/usr/share/icons/elementary/apps/48/system-software-install.svg"],
+  ["../../lib/elementary.icons/apps/64/system-software-install.svg", "/usr/share/icons/elementary/apps/64/system-software-install.svg"],
+  ["../../lib/elementary.icons/apps/symbolic/system-software-install-symbolic.svg", "/usr/share/icons/elementary/apps/symbolic/system-software-install-symbolic.svg"],
+  ["../sysroot/cores/pantheon/usr/share/icons/default/index.theme", "/usr/share/icons/default/index.theme"]
+]

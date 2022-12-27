@@ -11,6 +11,7 @@ packages:
  - kernel-devel
  - lvm2
  - rpm-ostree
+ - xdg-user-dirs-gtk
 packages-x86_64:
  - efibootmgr
  - grub2-efi-ia32
