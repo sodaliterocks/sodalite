@@ -64,6 +64,7 @@ _(todo)_
   - Initial builds will take up ~4GiB, with subsequent builds adding to this.
 * Unlimited Internet
   - The build process caches **a lot** of Fedora packages (around 2.5GiB), so think carefully about doing this on mobile broadband or any other service that imposes a small data allowance on you.
+* An rpm-ostree-based distro, such as such as [Fedora Silverblue](https://silverblue.fedoraproject.org/) &mdash; on either a virtual machine, another physical machine, or your current install (careful!) &mdash; to test builds on.
 * A cuppa _(optional)_ &mdash; this can take a while
 
 ### 2. Getting
@@ -117,6 +118,32 @@ This will usually take 10-15 minutes. Remember when I told you to grab a cuppa? 
   - `sodalite-custom.yaml` is a good place to employ your own changes instead of modifying any of the other treefiles.
 * `<working-dir>` _(optional)_ Directory for build output (defaults to `./build`)
 
+### Additional Notes
+
+#### NTFS/FAT partitions
+
+Build failures are inevitable on drives formatted as NTFS, FAT, or anything other filesystems that do not support Unix-like permissions, as `build.sh` sets permissions on various objects.
+
+##### WSL2
+
+On WSL2, do not build to any `/mnt/<drive-letter>` directories as these will be formatted as NTFS or FAT. Instead, run the build somewhere else on the Linux distro itself (like `$HOME` or `/usr/local/src`).
+
+#### Not using `build.sh`
+
+Most rpm-ostree distros can be built just be simply doing `rpm-ostree compose`, but `build.sh` provided with Sodalite does some extra steps which are required for the post-build script (which **will** fail without these being ran). It is therefore not recommended to do it this way: any issues building the distro this way will be closed and marked as invalid.
+
+#### Without `--unified-core` deprecation warning
+
+During the build you will face this warning:
+
+```sh
+NOTICE: Running rpm-ostree compose tree without --unified-core is deprecated.
+ Please add --unified-core to the command line and ensure your content
+ works with it.  For more information, see https://github.com/coreos/rpm-ostree/issues/729
+```
+
+You can safely ignore this: Sodalite builds without `--unified-core` due to historical reasons. Adding `--unified-core` to the compose command in `build.sh` has not been tested for some time and may cause problems.
+
 #### Cleaning Up
 
 Build contents is located at `./build/` (or whatever you set `<working-dir>` to), which can be deleted to start afresh. Specifically this holds the following files/directories (of which can be individually deleted instead):
@@ -132,7 +159,7 @@ Unless stopped manually, `build.sh` will clean itself up whenever it exits (on b
 
 ### 4. Using
 
-...
+_(todo)_
 
 ## 🤝 Acknowledgements
 
