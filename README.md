@@ -22,7 +22,26 @@ Know what you're in for? Here goes:
 
 ### Updating
 
-_(todo)_
+Performing a system update can be done by either:
+
+* Running `sudo rpm-ostree upgrade` in a shell.
+* Opening **Software**, selecting **Updates** from the headerbar, and pressing **Update All**.
+  - As Software runs in the background and periodically checks for updates, you may also receive a notification of a new update; clicking on this opens the appropriate page.
+  - An update for the OS may take a while to appear in Software (which will appear as "Operating System Updates"), so the above method is preferred.
+
+Reboot after either method has finished. You can verify the version installed by opening **System Settings** and navigating to **System ➔ Operating System**: the version proceeds the word "Sodalite"
+
+If something breaks, you can rollback by running `sudo rpm-ostree rollback` at a terminal. Remember to also [create a new issue](https://github.com/sodaliterocks/sodalite/issues/new) if appropriate!
+
+#### Update Schedule
+
+Updates are built on the build server commencing **4:00 GMT** every **Wednesday** and **Saturday**.
+
+#### `f<version>` Versions
+
+If you chose to use a `f<version>` "long-term" branch (see <a href="#branches">Branches</a> below), you will need to rebase whenever the base Fedora Linux version reaches end-of-life. This can be done with `sudo rpm-ostree rebase sodalite:sodalite/f<version>/<arch>/<edition>`, where `<version>` is the version you're wanting to rebase to and other values are your current values.
+
+It's vital you carry out this process as updates stop the day the base version reaches end-of-life and you will be left without updates to vital system components (however, Flatpak apps will continue to update). See [Fedora Docs Fedora ➔ Linux Release Life Cycle](https://docs.fedoraproject.org/en-US/releases/lifecycle/) for more.
 
 ### Versioning
 
@@ -37,7 +56,8 @@ To allow for several versions to co-exist and be developed in tandem with each o
   - `stable`:  Rolling-release version based on the current stable release of Fedora Linux (currently 36 &mdash; [37 has been abandoned](https://github.com/sodaliterocks/sodalite/issues/44)).
   - `f<version>`: "Long-term" versions based on specific versions of Fedora Linux, which require manual intervention to rebase to a newer version when said version reaches end-of-life. Possible values for `<version>`:
     - `36`: Fedora Linux 36. Reaches end-of-life on 16th May 2023 (2023-05-16).
-  - `next`: Rolling-release version based on the next upcoming version of Fedora Linux (currently 38) &mdash; **highly unstable currently!**
+  - `next`: Rolling-release version based on the next upcoming version of Fedora Linux (currently 38).
+  - `devel`: Current development code (on `main`). **Do not use on production systems.**
 * `<arch>`: **Architecture** of the branch. Possible values:
   - `x86_64`: For 64-bit CPUs (`x86_64`, `amd64`, or `x64`).
   - ~~`x86`: [What year is it!?](https://c.tenor.com/9OcQhlCBNG0AAAAd/what-year-is-it-jumanji.gif)~~
