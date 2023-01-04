@@ -1,4 +1,4 @@
-ref: sodalite/stable/${basearch}/experimental-pantheon-nightly
+ref: sodalite/f37-experimental/${basearch}/experimental-pantheon-nightly
 include:
   - ../common/core-pantheon.yaml
 
