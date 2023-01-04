@@ -1,5 +1,7 @@
 packages:
+ - com.github.stsdc.monitor
  - firewall-config # Replacement for Security Switchboard plug
+ - gnome-font-viewer
  - gnome-software # Replacement for AppCenter
  - lightdm-gtk-greeter # Pantheon Greeter is pretty broken
  - NetworkManager-openconnect
