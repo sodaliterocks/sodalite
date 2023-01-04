@@ -388,7 +388,7 @@ for flatpak_app_alias in ${flatpak_app_aliases[@]}; do
     alias_path="/usr/bin/$alias"
 
     if [[ ! -f "$alias_path" ]]; then
-        echo -e "#\x21/usr/bin/env bash" > "$alias_path"
+        echo -e "#\x21/usr/bin/env sh" > "$alias_path"
         echo -e "rocks.sodalite.flatpak-helper $app \$@" >> "$alias_path"
         chmod +x "$alias_path"
     fi
