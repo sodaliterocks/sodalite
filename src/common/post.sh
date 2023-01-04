@@ -348,6 +348,8 @@ done
 # WALLPAPER #
 #############
 
+wallpaper=""
+
 case $version_id in
     35) wallpaper="karsten-wurth-7BjhtdogU3A-unsplash" ;;
     36) wallpaper="max-okhrimenko-R-CoXmMrWFk-unsplash" ;;
