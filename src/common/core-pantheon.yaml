@@ -8,6 +8,7 @@ include: [
 repos:
  - copr_decathorpe_elementary-staging
  - copr_stsdc_monitor
+ - terra
  
 add-files: [
   # /etc
