@@ -41,9 +41,9 @@ packages:
  - switchboard-plug-notifications
  - switchboard-plug-onlineaccounts
  - switchboard-plug-pantheon-shell
- - switchboard-plug-parental-controls # Untested
+ - switchboard-plug-parental-controls
  - switchboard-plug-printers
- - switchboard-plug-power # Limited functionality
+ - switchboard-plug-power
  - switchboard-plug-security-privacy
  - switchboard-plug-sharing
  - switchboard-plug-sound
