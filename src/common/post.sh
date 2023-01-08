@@ -306,7 +306,7 @@ if [[ $core == "pantheon" ]]; then
         "/usr/share/pixmaps/faces/"
     )
 
-    if [[ $core == "pantheon" ]] && (( $version_id > 36 )); then
+    if [ $version_id -gt 36 ]; then
         # Indicators are broken on f37+
         to_remove+=(
             "/etc/xdg/autostart/indicator-application.desktop"
