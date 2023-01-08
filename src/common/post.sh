@@ -366,7 +366,7 @@ wallpaper=""
 case $version_id in
     35) wallpaper="karsten-wurth-7BjhtdogU3A-unsplash" ;;
     36) wallpaper="max-okhrimenko-R-CoXmMrWFk-unsplash" ;;
-    37) wallpaper="jeremy-gerritsen-_iviuukstI4-unsplash"
+    37) wallpaper="jeremy-gerritsen-_iviuukstI4-unsplash" ;;
     38) wallpaper="zara-walker-_pC5hT6aXfs-unsplash" ;;
     39) wallpaper="jack-b-vcNPMwS08UI-unsplash" ;;
 esac
