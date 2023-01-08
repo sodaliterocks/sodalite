@@ -1,4 +1,4 @@
-ref: sodalite/f37-experimental/${basearch}/desktop-gnome
+ref: sodalite/f37/${basearch}/desktop-gnome
 include:
   - ../common/core-gnome.yaml
 
