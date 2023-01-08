@@ -9,5 +9,5 @@ packages:
  - elementary-photos
  #- elementary-screenshot-tool
  - elementary-sideload
- - elementary-tasks
+ #- elementary-tasks
  #- elementary-videos

@@ -60,7 +60,6 @@ To allow for several versions to co-exist and be developed in tandem with each o
 * `<edition>`: **Edition** (or variant) of the branch: Possible values:
   - `desktop`: Standard Pantheon desktop.
   - `desktop-gnome`: Alternate GNOME desktop.
-  - `experimental-pantheon-nightly`: Experimental Pantheon desktop with nightly Pantheon packages.
   - `base`: Legacy version of `desktop`. **Do not use.**
 
 **As mentioned above, most users will want `sodalite/stable/x86_64/desktop`.**
@@ -71,9 +70,9 @@ Possible combinations built on the OSTree remote (`ostree.sodalite.rocks`) are a
 
 |Name|Version(s)|Arch.(s)|Edition(s)|
 |-|-|-|-|
-|`sodalite`|`stable`|`x86_64`|`desktop`<br />`experimental-pantheon-nightly`<br />`base`|
-|`sodalite`|`f36`|`x86_64`|`desktop`<br />`base`|
-|`sodalite`|`next`|`x86_64`|`desktop`<br />`experimental-pantheon-nightly`<br />`base`|
+|`sodalite`|`stable`|`x86_64`|`desktop`|
+|`sodalite`|`f36`|`x86_64`|`desktop`|
+|`sodalite`|`next`|`x86_64`|`desktop`|
 |`sodalite`|`devel`|`x86_64`|`desktop`<br />`desktop-gnome`|
 
 _For example, `sodalite/stable/x86_64/desktop` exists on the build server and can be pulled, but `sodalite/f36/x86_64/experimental-pantheon-nightly` does not._
