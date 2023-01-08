@@ -14,12 +14,16 @@ mutate-os-release: "${releasever}"
 repos:
  - fedora
  - fedora-updates
+ - terra
 
 add-files: [
   # /etc
   ["../sysroot/common/etc/issue", "/etc/issue"],
   ["../sysroot/common/etc/tlp.d/50-vm-writeback.conf", "/etc/tlp.d/50-vm-writeback.conf"],
   ["../sysroot/common/etc/upstream-release/lsb-release", "/etc/upstream-release/lsb-release"],
+
+  # /etc/fonts
+  ["../sysroot/common/etc/fonts/conf.d/63-inter.conf", "/etc/fonts/conf.d/63-inter.conf"],
 
   # /etc/skel
   ["../sysroot/common/etc/skel/dot.bashrc", "/etc/skel/.bashrc"],
@@ -78,6 +82,30 @@ add-files: [
   ["../../lfs/wallpapers/william-daigneault-7c8z4KEvgds-unsplash.jpg", "/usr/share/backgrounds/default/william-daigneault-7c8z4KEvgds-unsplash.jpg"],
   ["../../lfs/wallpapers/zara-walker-_pC5hT6aXfs-unsplash.jpg", "/usr/share/backgrounds/default/zara-walker-_pC5hT6aXfs-unsplash.jpg"],
   
+  # /usr/share/fontconfig
+  ["../sysroot/common/usr/share/fontconfig/conf.avail/63-inter.conf", "/usr/share/fontconfig/conf.avail/63-inter.conf"],
+
+  # /usr/share/fonts
+  ["../../lfs/fonts/inter/3.19/Inter-Black.otf", "/usr/share/fonts/inter/Inter-Black.otf"],
+  ["../../lfs/fonts/inter/3.19/Inter-BlackItalic.otf", "/usr/share/fonts/inter/Inter-BlackItalic.otf"],
+  ["../../lfs/fonts/inter/3.19/Inter-Bold.otf", "/usr/share/fonts/inter/Inter-Bold.otf"],
+  ["../../lfs/fonts/inter/3.19/Inter-BoldItalic.otf", "/usr/share/fonts/inter/Inter-BoldItalic.otf"],
+  ["../../lfs/fonts/inter/3.19/Inter-ExtraBold.otf", "/usr/share/fonts/inter/Inter-ExtraBold.otf"],
+  ["../../lfs/fonts/inter/3.19/Inter-ExtraBoldItalic.otf", "/usr/share/fonts/inter/Inter-ExtraBoldItalic.otf"],
+  ["../../lfs/fonts/inter/3.19/Inter-ExtraLight.otf", "/usr/share/fonts/inter/Inter-ExtraLight.otf"],
+  ["../../lfs/fonts/inter/3.19/Inter-ExtraLightItalic.otf", "/usr/share/fonts/inter/Inter-ExtraLightItalic.otf"],
+  ["../../lfs/fonts/inter/3.19/Inter-Italic.otf", "/usr/share/fonts/inter/Inter-Italic.otf"],
+  ["../../lfs/fonts/inter/3.19/Inter-Light.otf", "/usr/share/fonts/inter/Inter-Light.otf"],
+  ["../../lfs/fonts/inter/3.19/Inter-LightItalic.otf", "/usr/share/fonts/inter/Inter-LightItalic.otf"],
+  ["../../lfs/fonts/inter/3.19/Inter-Medium.otf", "/usr/share/fonts/inter/Inter-Medium.otf"],
+  ["../../lfs/fonts/inter/3.19/Inter-MediumItalic.otf", "/usr/share/fonts/inter/Inter-MediumItalic.otf"],
+  ["../../lfs/fonts/inter/3.19/Inter-Regular.otf", "/usr/share/fonts/inter/Inter-Regular.otf"],
+  ["../../lfs/fonts/inter/3.19/Inter-SemiBold.otf", "/usr/share/fonts/inter/Inter-SemiBold.otf"],
+  ["../../lfs/fonts/inter/3.19/Inter-SemiBoldItalic.otf", "/usr/share/fonts/inter/Inter-SemiBoldItalic.otf"],
+  ["../../lfs/fonts/inter/3.19/Inter-Thin.otf", "/usr/share/fonts/inter/Inter-Thin.otf"],
+  ["../../lfs/fonts/inter/3.19/Inter-ThinItalic.otf", "/usr/share/fonts/inter/Inter-ThinItalic.otf"],
+  ["../../lfs/fonts/inter/3.19/Inter-V.ttf", "/usr/share/fonts/inter/Inter-V.ttf"],
+
   # /usr/share/gnome-background-properties
   ["../sysroot/common/usr/share/gnome-background-properties/adrien-olichon.xml", "/usr/share/gnome-background-properties/adrien-olichon.xml"],
   ["../sysroot/common/usr/share/gnome-background-properties/austin-neill.xml", "/usr/share/gnome-background-properties/austin-neill.xml"],
