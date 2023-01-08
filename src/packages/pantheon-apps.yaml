@@ -1,15 +1,13 @@
 packages:
- - com.github.stsdc.monitor
  #- elementary-calculator
  #- elementary-calendar
  #- elementary-camera
  #- elementary-capnet-assist
  - elementary-code
- - elementary-mail
+ #- elementary-mail
  - elementary-music
  - elementary-photos
  #- elementary-screenshot-tool
  - elementary-sideload
- - elementary-tasks
+ #- elementary-tasks
  #- elementary-videos
- - gnome-font-viewer
