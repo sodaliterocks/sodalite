@@ -1,4 +1,4 @@
-ref: sodalite/devel/${basearch}/desktop
+ref: sodalite/next/${basearch}/desktop
 include:
   - ../common/core-pantheon.yaml
 

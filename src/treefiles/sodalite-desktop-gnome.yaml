@@ -1,4 +1,4 @@
-ref: sodalite/devel/${basearch}/desktop-gnome
+ref: sodalite/next/${basearch}/desktop-gnome
 include:
   - ../common/core-gnome.yaml
 

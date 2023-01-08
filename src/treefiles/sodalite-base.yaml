@@ -1,4 +1,4 @@
-ref: sodalite/devel/${basearch}/base
+ref: sodalite/next/${basearch}/base
 include:
   - ./sodalite-desktop.yaml
 
