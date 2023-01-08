@@ -14,7 +14,7 @@ mutate-os-release: "${releasever}"
 repos:
  - fedora
  - fedora-updates
- #- terra # f37+ only
+ - terra # f37+ only
 
 
 add-files: [
