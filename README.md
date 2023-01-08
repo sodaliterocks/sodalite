@@ -250,7 +250,7 @@ _(todo)_
 * **[📄 Code of Conduct](CODE_OF_CONDUCT.md)** &mdash; Contributor Covenant CoC
 * **[📄 Contributing](CONTRIBUTING.md)**
 * **[🔗 Docs](https://docs.sodalite.rocks)**
-* **[📄 License](LICENSE)** &mdash; MIT, &copy; 2022 Sodalite contributors
+* **[📄 License](LICENSE)** &mdash; MIT, &copy; 2023 Sodalite contributors
 
 ### Related
 
