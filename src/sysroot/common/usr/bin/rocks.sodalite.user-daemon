@@ -41,7 +41,7 @@ function update_gconf() {
 
     if [[ $(get_core) == "pantheon" ]]; then
         system_locale="$(localectl status | grep "System Locale:" | cut -d "=" -f2)"
-        gsettings set org.gnome.system.locale region '$system_locale'
+        gsettings set org.gnome.system.locale region "$system_locale"
     fi
 
     if [[ $current_wallpaper != "" ]] && [[ ! -f $current_wallpaper ]]; then
