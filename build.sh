@@ -140,14 +140,20 @@ if [[ -d $tests_dir ]]; then
             export -f ost
 
             result=$(. "$test_file" 2>&1)
-
-            if [[ $result != "true" ]]; then
-                test_message_prefix="Fail"
-                test_message_color="31"
+            
+            if [[ $? -ne 0 ]]; then
+                test_message_prefix="Error"
+                test_message_color="33"
                 ((test_failed_count++))
             else
-                test_message_prefix="Pass"
-                test_message_color="32"
+                if [[ $result != "true" ]]; then
+                    test_message_prefix="Fail"
+                    test_message_color="31"
+                    ((test_failed_count++))
+                else
+                    test_message_prefix="Pass"
+                    test_message_color="32"
+                fi
             fi
 
             echo -e "   ⤷ \033[0;${test_message_color}m${test_message_prefix}: $(basename "$test_file" | cut -d. -f1)\033[0m"
