@@ -1,5 +1,4 @@
 packages:
- - com.github.stsdc.monitor
  #- elementary-calculator
  #- elementary-calendar
  #- elementary-camera
@@ -12,4 +11,3 @@ packages:
  - elementary-sideload
  - elementary-tasks
  #- elementary-videos
- - gnome-font-viewer
