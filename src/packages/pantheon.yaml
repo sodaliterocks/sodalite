@@ -35,8 +35,8 @@ packages:
  - switchboard-plug-datetime
  - switchboard-plug-display
  - switchboard-plug-keyboard
- #- switchboard-plug-locale # Buggy on Fedora (relies on apt)
- - switchboard-plug-mouse-touchpad
+ #- switchboard-plug-locale # Buggy on Fedora (relies on apt)- commented out
+ - switchboard-plug-mouse-touchpad 
  - switchboard-plug-networking
  - switchboard-plug-notifications
  - switchboard-plug-onlineaccounts
@@ -48,7 +48,7 @@ packages:
  - switchboard-plug-sharing
  - switchboard-plug-sound
  - switchboard-plug-tweaks
- #- switchboard-plug-useraccounts # Untested (potentially dangerous?)
+ #- switchboard-plug-useraccounts # Untested (potentially dangerous?) - commented out
  - touchegg
  - wingpanel
  - wingpanel-applications-menu
