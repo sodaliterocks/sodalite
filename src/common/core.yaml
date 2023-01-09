@@ -12,8 +12,6 @@ automatic-version-suffix: "."
 mutate-os-release: "${releasever}"
 
 repos:
- - fedora-36 # SEE: https://github.com/sodaliterocks/sodalite/issues/44
- - fedora-36-updates
  - fedora
  - fedora-updates
  - terra # f37+ only
