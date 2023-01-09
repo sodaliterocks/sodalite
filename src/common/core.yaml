@@ -16,7 +16,7 @@ repos:
  - fedora-36-updates
  - fedora
  - fedora-updates
- #- terra # f37+ only
+ - terra # f37+ only
 
 add-files: [
   # /etc
