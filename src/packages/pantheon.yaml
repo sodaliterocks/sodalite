@@ -35,20 +35,20 @@ packages:
  - switchboard-plug-datetime
  - switchboard-plug-display
  - switchboard-plug-keyboard
- - switchboard-plug-locale # Buggy on Fedora (relies on apt)
- - switchboard-plug-mouse-touchpad
+ #- switchboard-plug-locale # Buggy on Fedora (relies on apt)- commented out
+ - switchboard-plug-mouse-touchpad 
  - switchboard-plug-networking
  - switchboard-plug-notifications
  - switchboard-plug-onlineaccounts
  - switchboard-plug-pantheon-shell
- - switchboard-plug-parental-controls # Untested
+ - switchboard-plug-parental-controls
  - switchboard-plug-printers
- - switchboard-plug-power # Limited functionality
+ - switchboard-plug-power
  - switchboard-plug-security-privacy
  - switchboard-plug-sharing
  - switchboard-plug-sound
  - switchboard-plug-tweaks
- - switchboard-plug-useraccounts # Untested (potentially dangerous?)
+ #- switchboard-plug-useraccounts # Untested (potentially dangerous?) - commented out
  - touchegg
  - wingpanel
  - wingpanel-applications-menu
