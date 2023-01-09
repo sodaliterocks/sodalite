@@ -1,11 +1,11 @@
 [terra]
-name=Terra $releasever
-baseurl=https://repos.fyralabs.com/terra$releasever
+name=Terra 37
+baseurl=https://repos.fyralabs.com/terra37
 type=rpm
 skip_if_unavailable=True
 gpgcheck=1
 repo_gpgcheck=0
-gpgkey=https://repos.fyralabs.com/terra$releasever/key.asc
+gpgkey=https://repos.fyralabs.com/terra37/key.asc
 enabled=1
 enabled_metadata=1
 metadata_expire=4h
