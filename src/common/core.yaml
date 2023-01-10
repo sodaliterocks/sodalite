@@ -6,8 +6,8 @@ include: [
   "../packages/tools.yaml",
 ]
 
-releasever: "37" # Fedora version
-automatic-version-prefix: "${releasever}-23.0"
+releasever: "37"
+automatic-version-prefix: "${releasever}-23.1"
 automatic-version-suffix: "."
 mutate-os-release: "${releasever}"
 
