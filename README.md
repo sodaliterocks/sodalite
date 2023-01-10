@@ -1,4 +1,4 @@
-![Screenshot of Sodalite](https://git.zio.sh/sodaliterocks/lfs/media/branch/main/screenshots/screenshot.png?u=5)
+![Screenshot of Sodalite](https://git.zio.sh/sodaliterocks/lfs/media/branch/main/graphics/screenshot/screenshot.png?u=7)
 
 <h1 align="center">
     Sodalite

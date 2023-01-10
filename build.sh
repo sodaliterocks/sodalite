@@ -8,14 +8,20 @@ buildinfo_file="$base_dir/src/sysroot/common/usr/lib/sodalite-buildinfo"
 tests_dir="$base_dir/tests"
 start_time=$(date +%s)
 
+function emj() {
+    emoji="$1"
+    emoji_length=${#emoji}
+    echo "$emoji$(eval "for i in {1..$emoji_length}; do echo -n " "; done")"
+}
+
 function die() {
-    echo -e "🛑 \033[1;31mError: $@\033[0m"
+    echo -e "$(emj "🛑")\033[1;31mError: $@\033[0m"
     cleanup
     exit 255
 }
 
 function cleanup() {
-    echo "🗑️ Cleaning up..."
+    echo "$(emj "🗑️")Cleaning up..."
 
     rm -f $buildinfo_file
     rm -rf  /var/tmp/rpm-ostree.*
@@ -63,7 +69,7 @@ fi
 [[ $variant == "gnome" ]] && variant="desktop-gnome"
 [[ $variant == "pantheon" ]] && variant="desktop"
 
-echo "🪛 Setting up..."
+echo "$(emj "🪛")Setting up..."
 [[ $variant == *.yaml ]] && variant="$(echo $variant | sed s/.yaml//)"
 [[ $variant == sodalite* ]] && variant="$(echo $variant | sed s/sodalite-//)"
 [[ -z $variant ]] && variant="custom"
@@ -94,7 +100,7 @@ mkdir -p $ostree_repo_dir
 chown -R root:root "$working_dir"
 
 if [ ! "$(ls -A $ostree_repo_dir)" ]; then
-   echo "🆕 Initializing OSTree repository..."
+   echo "$(emj "🆕")Initializing OSTree repository..."
    ost init --mode=archive
 fi
 
@@ -110,7 +116,7 @@ buildinfo_content="BUILD_DATE=\"$(date +"%Y-%m-%d %T %z")\"
 
 echo -e $buildinfo_content > $buildinfo_file
 
-echo "⚡ Building tree..."
+echo "$(emj "⚡")Building tree..."
 echo "================================================================================"
 
 rpm-ostree compose tree \
@@ -128,7 +134,7 @@ test_failed_count=0
 
 if [[ -d $tests_dir ]]; then
     if (( $(ls -A "$tests_dir" | wc -l) > 0 )); then
-        echo "🧪 Testing tree..."
+        echo "$(emj "🧪")Testing tree..."
 
         all_commits="$(ost log $ref | grep "commit " | sed "s/commit //")"
         commit="$(echo "$all_commits" | head -1)"
@@ -140,7 +146,7 @@ if [[ -d $tests_dir ]]; then
             export -f ost
 
             result=$(. "$test_file" 2>&1)
-            
+
             if [[ $? -ne 0 ]]; then
                 test_message_prefix="Error"
                 test_message_color="33"
@@ -176,11 +182,11 @@ if (( $test_failed_count > 0 )); then
         ost reset $ref $commit_prev
     fi
 else
-    echo "✏️ Generating summary..."
+    echo "$(emj "✏️")Generating summary..."
     ost summary --update
 fi
 
 cleanup
 
 end_time=$(( $(date +%s) - $start_time ))
-echo "✅ Success (took $(print_time $end_time))"
+echo "$(emj "✅")Success (took $(print_time $end_time))"
