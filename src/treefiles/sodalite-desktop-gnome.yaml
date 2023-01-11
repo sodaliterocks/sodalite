@@ -1,6 +1,6 @@
 ref: sodalite/devel/${basearch}/desktop-gnome
 include:
-  - ../common/core-gnome.yaml
+  - ../cores/gnome.yaml
 
 rojig:
   name: rocks.sodalite.os.desktop-gnome

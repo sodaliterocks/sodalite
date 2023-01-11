@@ -6,7 +6,7 @@
 
 ref: sodalite/devel/${basearch}/custom
 include:
-  - ../common/core-pantheon.yaml
+  - ../cores/pantheon.yaml
 
 rojig:
   name: rocks.sodalite.os.custom

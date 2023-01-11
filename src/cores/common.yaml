@@ -128,10 +128,10 @@ add-files: [
 boot-location: modules
 check-groups:
   type: file
-  filename: group
+  filename: ../shared/group
 check-passwd:
   type: file
-  filename: passwd
+  filename: ../shared/passwd
 default_target: graphical.target
 documentation: true
 etc-group-members:
@@ -140,6 +140,6 @@ ignore-removed-users:
   - root
 ignore-removed-groups:
   - root
-postprocess-script: post.sh
+postprocess-script: ../shared/post.sh
 selinux: true
 tmp-is-dir: true

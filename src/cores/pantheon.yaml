@@ -1,5 +1,5 @@
 include: [
-  "./core.yaml",
+  "./common.yaml",
   "../packages/pantheon.yaml",
   "../packages/pantheon-apps.yaml",
   "../packages/pantheon-extras.yaml"

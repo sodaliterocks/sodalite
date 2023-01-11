@@ -86,7 +86,7 @@ ostree_cache_dir="$working_dir/cache"
 ostree_repo_dir="$working_dir/repo"
 build_meta_dir="$working_dir/meta"
 highscore_file="$build_meta_dir/highscore"
-lockfile="$base_dir/src/common/overrides.yaml"
+lockfile="$base_dir/src/shared/overrides.yaml"
 treefile="$base_dir/src/treefiles/sodalite-$variant.yaml"
 
 if [[ ! -f $treefile ]]; then
