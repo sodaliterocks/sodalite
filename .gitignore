@@ -8,3 +8,4 @@ src/sysroot/common/usr/lib/sodalite-buildinfo
 .directory
 .Trash-*
 .nfs*
+*.orig
