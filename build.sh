@@ -44,7 +44,13 @@ function print_time() {
     [[ $m == 1 ]] && m_string="minute"
     [[ $s == 1 ]] && s_string="second"
 
-    printf "%d $h_string %d $m_string %d $s_string\n" $h $m $s
+    output=""
+
+    [[ $h != "0" ]] && output+="$h $h_string"
+    [[ $m != "0" ]] && output+=" $m $m_string"
+    [[ $s != "0" ]] && output+=" $s $s_string"
+
+    echo $output
 }
 
 function ost() {
@@ -57,6 +63,7 @@ function ost() {
 
     ostree $command --repo="$ostree_repo_dir" $options
 }
+
 
 if ! [[ $(id -u) = 0 ]]; then
     die "Permission denied (are you root?)"
@@ -77,6 +84,8 @@ echo "$(emj "🪛")Setting up..."
 
 ostree_cache_dir="$working_dir/cache"
 ostree_repo_dir="$working_dir/repo"
+build_meta_dir="$working_dir/meta"
+highscore_file="$build_meta_dir/highscore"
 lockfile="$base_dir/src/common/overrides.yaml"
 treefile="$base_dir/src/treefiles/sodalite-$variant.yaml"
 
@@ -97,6 +106,7 @@ fi
 
 mkdir -p $ostree_cache_dir
 mkdir -p $ostree_repo_dir
+mkdir -p $build_meta_dir
 chown -R root:root "$working_dir"
 
 if [ ! "$(ls -A $ostree_repo_dir)" ]; then
@@ -119,10 +129,15 @@ echo -e $buildinfo_content > $buildinfo_file
 echo "$(emj "⚡")Building tree..."
 echo "================================================================================"
 
-rpm-ostree compose tree \
-    --cachedir="$ostree_cache_dir" \
-    --repo="$ostree_repo_dir" \
-    `[[ -s $lockfile ]] && echo "--ex-lockfile="$lockfile""` $treefile
+if [[ $SODALITE_BUILD_DRY_BUILD_SLEEP == "" ]]; then
+    rpm-ostree compose tree \
+        --cachedir="$ostree_cache_dir" \
+        --repo="$ostree_repo_dir" \
+        `[[ -s $lockfile ]] && echo "--ex-lockfile="$lockfile""` $treefile
+else
+    echo "Doing things..."
+    sleep $SODALITE_BUILD_DRY_BUILD_SLEEP
+fi
 
 [[ $? != 0 ]] && build_failed="true"
 
@@ -186,7 +201,22 @@ else
     ost summary --update
 fi
 
+end_time=$(( $(date +%s) - $start_time ))
+highscore="false"
+prev_highscore=""
+
+if [[ ! -f "$highscore_file" ]]; then
+    touch "$highscore_file"
+    echo "$end_time" > "$highscore_file"
+else
+    prev_highscore="$(cat "$highscore_file")"
+    if (( $end_time < $prev_highscore )); then
+        highscore="true"
+        echo "$end_time" > "$highscore_file"
+    fi
+fi
+
 cleanup
 
-end_time=$(( $(date +%s) - $start_time ))
-echo "$(emj "✅")Success (took $(print_time $end_time))"
+echo "$(emj "✅")Success ($(print_time $end_time))"
+[[ $highscore == "true" ]] && echo "🏆 You're Winner (previous: $(print_time $prev_highscore))!"
