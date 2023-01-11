@@ -1,13 +1,13 @@
 include: [
-  "../../lib/workstation-ostree-config_f38/fedora-common-ostree-pkgs.yaml",
+  "../../lib/workstation-ostree-config_f37/fedora-common-ostree-pkgs.yaml",
   "../packages/essential.yaml",
   "../packages/flatpak.yaml",
   "../packages/fonts.yaml",
   "../packages/tools.yaml",
 ]
 
-releasever: "38" # Fedora version
-automatic-version-prefix: "${releasever}-23.0"
+releasever: "37"
+automatic-version-prefix: "${releasever}-23.1"
 automatic-version-suffix: "."
 mutate-os-release: "${releasever}"
 
