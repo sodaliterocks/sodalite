@@ -31,6 +31,7 @@ add-files: [
 
   # /etc/systemd
   ["../sysroot/common/etc/systemd/system/generate-oemconf.service", "/etc/systemd/system/generate-oemconf.service"],
+  ["../sysroot/common/etc/systemd/system/sodalite-auto-update.service", "/etc/systemd/system/sodalite-auto-update.service"],
   ["../sysroot/common/etc/systemd/system/sodalite-migrate.service", "/etc/systemd/system/sodalite-migrate.service"],
 
   # /etc/xdg
