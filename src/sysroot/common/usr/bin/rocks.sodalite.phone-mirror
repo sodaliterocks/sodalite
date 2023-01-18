@@ -49,10 +49,29 @@ function get_device_name() {
     model="$(adb_getprop $serial ro.product.model)"
     name=""
 
+    # TODO: Is there seriously no better way we can do this?
     case "$model" in
         "A063") name="Nothing Phone(1)" ;;
         "AC2001"|"AC2003") name="OnePlus Nord" ;;
         "DN2103") name="OnePlus Nord 2 5G" ;;
+        "GF5KQ") name="Google Pixel 6 Pro" ;;
+        "GR1YH") name="Google Pixel 6" ;;
+        "GX7AS"|"GB62Z"|"G1AZG") name="Google Pixel 6a" ;;
+        "Quest_2") name="Meta Quest 2" ;;
+        "SM-F700"*|"SM-F707"*|"SCV47"|"SCG04") name="Samsung Galaxy Z Flip" ;;
+        "SM-F711B"|"SCG12"|"SC-54B") name="Samsung Galaxy Z Flip 3" ;;
+        "SM-F721"*|"SCG17"|"SC-54C"|"SM-721C") name="Samsung Galaxy Z Flip 4" ;;
+        "SM-F900"*|"SCV44") name="Samsung Galaxy Fold" ;;
+        "SM-F916B"|"SCG05") name="Samsung Galaxy Z Fold 2" ;;
+        "SM-F926B"|"SCG11"|"SC-55B") name="Samsung Galaxy Z Fold 3" ;;
+        "SM-F936"*|"SCG16"|"SC-55C") name="Samsung Galaxy Z Fold 4" ;;
+        "SM-G990"*) name="Samsung Galaxy S21 FE" ;;
+        "SM-G991"*|"SCG09"|"SC-51B") name="Samsung Galaxy S21" ;;
+        "SM-G996"*|"SCG10") name="Samsung Galaxy S21+" ;;
+        "SM-G998"*|"SC-52B") name="Samsung Galaxy S21 Ultra" ;;
+        "SM-S901"*|"SCG13"|"SC-51C") name="Samsung Galaxy S22" ;;
+        "SM-S906"*) name="Samsung Galaxy S22+" ;;
+        "SM-S908"*|"SCG14"|"SC-52C") name="Samsung Galaxy S22 Ultra" ;;
         *)
             case "$manufacturer" in
                 "oplus") manufacturer="OnePlus" ;;
@@ -70,7 +89,8 @@ function get_scrcpy_args() {
     args=""
 
     case "$model" in
-        *) args="--hid-keyboard --stay-awake --turn-screen-off --window-height=700" ;;
+        "Quest_2") args="--crop 1730:974:1934:450 --max-fps 30" ;;
+        *) args="--hid-keyboard --stay-awake --turn-screen-off" ;;
     esac
 
     echo $args

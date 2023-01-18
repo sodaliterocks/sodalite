@@ -53,6 +53,7 @@ add-files: [
   ["../sysroot/common/usr/lib/sodalite-buildinfo", "/usr/lib/sodalite-buildinfo"],
 
   # /usr/libexec
+  ["../../lib/sodaliterocks.hacks/src/plugins/auto-update.sh", "/usr/libexec/rocks.sodalite.hacks/plugins/auto-update.sh"],
   ["../../lib/sodaliterocks.hacks/src/plugins/cleanup.sh", "/usr/libexec/rocks.sodalite.hacks/plugins/cleanup.sh"],
   ["../../lib/sodaliterocks.hacks/src/plugins/flatpak.sh", "/usr/libexec/rocks.sodalite.hacks/plugins/flatpak.sh"],
   ["../../lib/sodaliterocks.hacks/src/plugins/migrate.sh", "/usr/libexec/rocks.sodalite.hacks/plugins/migrate.sh"],
