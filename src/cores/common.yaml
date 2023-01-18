@@ -15,6 +15,7 @@ repos:
  - fedora
  - fedora-updates
  - terra # f37+ only
+ - copr.zeno.scrcpy
 
 add-files: [
   # /etc
@@ -44,6 +45,7 @@ add-files: [
   ["../sysroot/common/usr/bin/detach", "/usr/bin/detach"],
   ["../sysroot/common/usr/bin/rocks.sodalite.flatpak-helper", "/usr/bin/rocks.sodalite.flatpak-helper"],
   ["../sysroot/common/usr/bin/rocks.sodalite.http-server", "/usr/bin/rocks.sodalite.http-server"],
+  ["../sysroot/common/usr/bin/rocks.sodalite.phone-mirror", "/usr/bin/rocks.sodalite.phone-mirror"],
   ["../sysroot/common/usr/bin/rocks.sodalite.user-daemon", "/usr/bin/rocks.sodalite.user-daemon"],
   ["../sysroot/common/usr/bin/soda", "/usr/bin/soda"],
 
@@ -68,6 +70,7 @@ add-files: [
   ["../../lib/sodaliterocks.firefox/setup.sh", "/usr/src/rocks.sodalite.firefox/setup.sh"],
 
   # /usr/share
+  ["../sysroot/common/usr/share/applications/rocks.sodalite.phone-mirror.desktop", "/usr/share/applications/rocks.sodalite.phone-mirror.desktop"],
   ["../sysroot/common/usr/share/glib-2.0/schemas/00_sodalite.gschema.override", "/usr/share/glib-2.0/schemas/00_sodalite.gschema.override"],
 
   # /usr/share/backgrounds

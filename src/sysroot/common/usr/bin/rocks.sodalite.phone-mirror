@@ -1,0 +1,149 @@
+#!/usr/bin/env bash
+
+. /usr/libexec/rocks.sodalite.hacks/utils.sh
+
+function adb_getprop() {
+    serial="$1"
+    prop="$2"
+
+    adb -s $serial shell getprop $prop
+}
+
+function generate_device_picker() {
+    devices="$1"
+
+    for device in "${devices[@]}"; do
+        device_serial=$(echo "$device" | cut -d':' -f2)
+        device_status=$(echo "$device" | cut -d':' -f3)
+
+        device_model="$(adb_getprop $device_serial ro.product.model)"
+        device_name="$(get_device_name $device_serial)"
+
+        device_status_icon=""
+
+        case $device_status in
+            0) device_status_icon="🟢" ;;
+            *) device_status_icon="🔴" ;;
+        esac
+
+        echo "$device_status_icon"
+        echo "$device_serial"
+        echo "$device_name"
+        echo "$device_model"
+
+    done | zenity --list \
+        --title="Phone" \
+        --text="Which device would you like to connect to?" \
+        --height=200 \
+        --width=400 \
+        --column="" \
+        --column="Serial" \
+        --column="Name" \
+        --column="Model" \
+        --print-column="2"
+}
+
+function get_device_name() {
+    serial="$1"
+    manufacturer="$(adb_getprop $serial ro.product.system.manufacturer)"
+    model="$(adb_getprop $serial ro.product.model)"
+    name=""
+
+    case "$model" in
+        "A063") name="Nothing Phone(1)" ;;
+        "AC2001"|"AC2003") name="OnePlus Nord" ;;
+        "DN2103") name="OnePlus Nord 2 5G" ;;
+        *)
+            case "$manufacturer" in
+                "oplus") manufacturer="OnePlus" ;;
+            esac
+
+            name="$manufacturer $model"
+            ;;
+    esac
+
+    echo $name
+}
+
+function get_scrcpy_args() {
+    model="$1"
+    args=""
+
+    case "$model" in
+        *) args="--hid-keyboard --stay-awake --turn-screen-off --window-height=700" ;;
+    esac
+
+    echo $args
+}
+
+function warn_unsupported_device() {
+    glob_pattern=$1
+    pretty_name="$2"
+
+    if [[ $(lsusb) == $glob_pattern ]]; then
+        zenity --warning \
+            --text "$pretty_name detected, but is unsupported" \
+            --title "Phone"
+    fi
+}
+
+check_prog "adb"
+check_prog "scrcpy"
+
+declare -a devices
+chosen_device=""
+device_count=0
+
+warn_unsupported_device *Apple*iPhone* "Apple iPhone"
+
+while read line; do
+    device_serial=$(echo $line | cut -d' ' -f1)
+
+    if [[ "$device_serial" != "" ]]; then
+        if [[ $line == *"device "* ]]; then
+            device_status=0
+        else
+            device_status=1
+        fi
+
+        device_count=$((device_count+1))
+        devices+=("$device_count:$device_serial:$device_status")
+    fi
+done < <(adb devices -l | tail -n +2)
+
+if [[ $device_count == 0 ]]; then
+    zenity --error \
+        --text "No compatible device found. Is it plugged in?" \
+        --title "Phone"
+else
+    if [[ $device_count == 1 ]]; then
+        chosen_device="$(echo ${devices[0]} | cut -d':' -f2)"
+    else
+        while true
+        do
+            if [[ $chosen_device == "" ]]; then
+                chosen_device=$(generate_device_picker $devices)
+                [[ $? -eq 1 ]] && exit 0
+            else
+                break
+            fi
+        done
+    fi
+
+    if [[ "${devices[@]}" =~ "$chosen_device:0" ]]; then
+        window_title="$(get_device_name $chosen_device)"
+        scrcpy --serial $chosen_device \
+            --window-title="$window_title" \
+            `echo $(get_scrcpy_args $(adb_getprop $chosen_device ro.product.model))`
+
+        if [[ $? != 0 ]]; then
+            zenity --error \
+                --text "Something went wrong connecting to device '$chosen_device'" \
+                --title "Phone"
+        fi
+    else
+        zenity --error \
+         --text "Unable to connect to device '$chosen_device' \n\n • Is USB debugging enabled?\n • Is USB file transfer turned on?\n • Have you authorized this PC?" \
+         --title "Phone"
+    fi
+fi
