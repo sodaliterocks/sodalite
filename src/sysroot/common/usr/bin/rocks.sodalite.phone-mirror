@@ -57,6 +57,7 @@ function get_device_name() {
         "GF5KQ") name="Google Pixel 6 Pro" ;;
         "GR1YH") name="Google Pixel 6" ;;
         "GX7AS"|"GB62Z"|"G1AZG") name="Google Pixel 6a" ;;
+        "NE2210") name="OnePlus 10 Pro" ;;
         "Quest_2") name="Meta Quest 2" ;;
         "SM-F700"*|"SM-F707"*|"SCV47"|"SCG04") name="Samsung Galaxy Z Flip" ;;
         "SM-F711B"|"SCG12"|"SC-54B") name="Samsung Galaxy Z Flip 3" ;;
