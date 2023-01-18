@@ -110,60 +110,64 @@ function warn_unsupported_device() {
 check_prog "adb"
 check_prog "scrcpy"
 
-declare -a devices
-chosen_device=""
-device_count=0
-
-warn_unsupported_device *Apple*iPhone* "Apple iPhone"
-
-while read line; do
-    device_serial=$(echo $line | cut -d' ' -f1)
-
-    if [[ "$device_serial" != "" ]]; then
-        if [[ $line == *"device "* ]]; then
-            device_status=0
-        else
-            device_status=1
-        fi
-
-        device_count=$((device_count+1))
-        devices+=("$device_count:$device_serial:$device_status")
-    fi
-done < <(adb devices -l | tail -n +2)
-
-if [[ $device_count == 0 ]]; then
-    zenity --error \
-        --text "No compatible device found. Is it plugged in?" \
-        --title "Phone"
+if [[ "$@" != "" ]]; then
+    scrcpy `echo $@`
 else
-    if [[ $device_count == 1 ]]; then
-        chosen_device="$(echo ${devices[0]} | cut -d':' -f2)"
-    else
-        while true
-        do
-            if [[ $chosen_device == "" ]]; then
-                chosen_device=$(generate_device_picker $devices)
-                [[ $? -eq 1 ]] && exit 0
+    declare -a devices
+    chosen_device=""
+    device_count=0
+
+    warn_unsupported_device *Apple*iPhone* "Apple iPhone"
+
+    while read line; do
+        device_serial=$(echo $line | cut -d' ' -f1)
+
+        if [[ "$device_serial" != "" ]]; then
+            if [[ $line == *"device "* ]]; then
+                device_status=0
             else
-                break
+                device_status=1
             fi
-        done
-    fi
 
-    if [[ "${devices[@]}" =~ "$chosen_device:0" ]]; then
-        window_title="$(get_device_name $chosen_device)"
-        scrcpy --serial $chosen_device \
-            --window-title="$window_title" \
-            `echo $(get_scrcpy_args $(adb_getprop $chosen_device ro.product.model))`
-
-        if [[ $? != 0 ]]; then
-            zenity --error \
-                --text "Something went wrong connecting to device '$chosen_device'" \
-                --title "Phone"
+            device_count=$((device_count+1))
+            devices+=("$device_count:$device_serial:$device_status")
         fi
-    else
+    done < <(adb devices -l | tail -n +2)
+
+    if [[ $device_count == 0 ]]; then
         zenity --error \
-         --text "Unable to connect to device '$chosen_device' \n\n • Is USB debugging enabled?\n • Is USB file transfer turned on?\n • Have you authorized this PC?" \
-         --title "Phone"
+            --text "No compatible device found. Is it plugged in?" \
+            --title "Phone"
+    else
+        if [[ $device_count == 1 ]]; then
+            chosen_device="$(echo ${devices[0]} | cut -d':' -f2)"
+        else
+            while true
+            do
+                if [[ $chosen_device == "" ]]; then
+                    chosen_device=$(generate_device_picker $devices)
+                    [[ $? -eq 1 ]] && exit 0
+                else
+                    break
+                fi
+            done
+        fi
+
+        if [[ "${devices[@]}" =~ "$chosen_device:0" ]]; then
+            window_title="$(get_device_name $chosen_device)"
+            scrcpy --serial $chosen_device \
+                --window-title="$window_title" \
+                `echo $(get_scrcpy_args $(adb_getprop $chosen_device ro.product.model))`
+
+            if [[ $? != 0 ]]; then
+                zenity --error \
+                    --text "Something went wrong connecting to device '$chosen_device'" \
+                    --title "Phone"
+            fi
+        else
+            zenity --error \
+             --text "Unable to connect to device '$chosen_device' \n\n • Is USB debugging enabled?\n • Is USB file transfer turned on?\n • Have you authorized this PC?" \
+             --title "Phone"
+        fi
     fi
 fi
