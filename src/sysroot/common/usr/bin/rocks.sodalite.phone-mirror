@@ -86,12 +86,15 @@ function get_device_name() {
 
 function get_scrcpy_args() {
     model="$1"
+    extra_args="$2"
     args=""
 
     case "$model" in
         "Quest_2") args="--crop 1730:974:1934:450 --max-fps 30" ;;
         *) args="--hid-keyboard --stay-awake --turn-screen-off" ;;
     esac
+
+    [[ $extra_args != "" ]] && args="$args $extra_args"
 
     echo $args
 }
@@ -110,12 +113,15 @@ function warn_unsupported_device() {
 check_prog "adb"
 check_prog "scrcpy"
 
-if [[ "$@" != "" ]]; then
-    scrcpy `echo $@`
+if [[ "$@" == "-- "* ]]; then
+    scrcpy `echo $@ | sed "s/-- //"`
 else
     declare -a devices
     chosen_device=""
     device_count=0
+    extra_args=""
+
+    [[ "$@" != "" ]] && extra_args="$@"
 
     warn_unsupported_device *Apple*iPhone* "Apple iPhone"
 
@@ -157,7 +163,7 @@ else
             window_title="$(get_device_name $chosen_device)"
             scrcpy --serial $chosen_device \
                 --window-title="$window_title" \
-                `echo $(get_scrcpy_args $(adb_getprop $chosen_device ro.product.model))`
+                `echo $(get_scrcpy_args $(adb_getprop $chosen_device ro.product.model) $extra_args)`
 
             if [[ $? != 0 ]]; then
                 zenity --error \
