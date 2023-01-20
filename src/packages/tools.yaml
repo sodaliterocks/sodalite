@@ -3,6 +3,7 @@ packages:
  - buildah
  - dbus-x11
  - distrobox
+ - ffmpeg
  - git-core
  - gstreamer1-plugins-good-gtk
  - lm_sensors
