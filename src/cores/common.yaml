@@ -16,6 +16,8 @@ repos:
  - fedora-updates
  - terra # f37+ only
  - copr.zeno.scrcpy
+ - rpmfusion.free
+ - rpmfusion.free.updates
 
 add-files: [
   # /etc
