@@ -8,14 +8,20 @@ buildinfo_file="$base_dir/src/sysroot/common/usr/lib/sodalite-buildinfo"
 tests_dir="$base_dir/tests"
 start_time=$(date +%s)
 
+function emj() {
+    emoji="$1"
+    emoji_length=${#emoji}
+    echo "$emoji$(eval "for i in {1..$emoji_length}; do echo -n " "; done")"
+}
+
 function die() {
-    echo -e "🛑 \033[1;31mError: $@\033[0m"
+    echo -e "$(emj "🛑")\033[1;31mError: $@\033[0m"
     cleanup
     exit 255
 }
 
 function cleanup() {
-    echo "🗑️ Cleaning up..."
+    echo "$(emj "🗑️")Cleaning up..."
 
     rm -f $buildinfo_file
     rm -rf  /var/tmp/rpm-ostree.*
@@ -38,7 +44,13 @@ function print_time() {
     [[ $m == 1 ]] && m_string="minute"
     [[ $s == 1 ]] && s_string="second"
 
-    printf "%d $h_string %d $m_string %d $s_string\n" $h $m $s
+    output=""
+
+    [[ $h != "0" ]] && output+="$h $h_string"
+    [[ $m != "0" ]] && output+=" $m $m_string"
+    [[ $s != "0" ]] && output+=" $s $s_string"
+
+    echo $output
 }
 
 function ost() {
@@ -52,6 +64,7 @@ function ost() {
     ostree $command --repo="$ostree_repo_dir" $options
 }
 
+
 if ! [[ $(id -u) = 0 ]]; then
     die "Permission denied (are you root?)"
 fi
@@ -63,7 +76,7 @@ fi
 [[ $variant == "gnome" ]] && variant="desktop-gnome"
 [[ $variant == "pantheon" ]] && variant="desktop"
 
-echo "🪛 Setting up..."
+echo "$(emj "🪛")Setting up..."
 [[ $variant == *.yaml ]] && variant="$(echo $variant | sed s/.yaml//)"
 [[ $variant == sodalite* ]] && variant="$(echo $variant | sed s/sodalite-//)"
 [[ -z $variant ]] && variant="custom"
@@ -71,7 +84,9 @@ echo "🪛 Setting up..."
 
 ostree_cache_dir="$working_dir/cache"
 ostree_repo_dir="$working_dir/repo"
-lockfile="$base_dir/src/common/overrides.yaml"
+build_meta_dir="$working_dir/meta"
+highscore_file="$build_meta_dir/highscore"
+lockfile="$base_dir/src/shared/overrides.yaml"
 treefile="$base_dir/src/treefiles/sodalite-$variant.yaml"
 
 if [[ ! -f $treefile ]]; then
@@ -91,10 +106,11 @@ fi
 
 mkdir -p $ostree_cache_dir
 mkdir -p $ostree_repo_dir
+mkdir -p $build_meta_dir
 chown -R root:root "$working_dir"
 
 if [ ! "$(ls -A $ostree_repo_dir)" ]; then
-   echo "🆕 Initializing OSTree repository..."
+   echo "$(emj "🆕")Initializing OSTree repository..."
    ost init --mode=archive
 fi
 
@@ -110,13 +126,18 @@ buildinfo_content="BUILD_DATE=\"$(date +"%Y-%m-%d %T %z")\"
 
 echo -e $buildinfo_content > $buildinfo_file
 
-echo "⚡ Building tree..."
+echo "$(emj "⚡")Building tree..."
 echo "================================================================================"
 
-rpm-ostree compose tree \
-    --cachedir="$ostree_cache_dir" \
-    --repo="$ostree_repo_dir" \
-    `[[ -s $lockfile ]] && echo "--ex-lockfile="$lockfile""` $treefile
+if [[ $SODALITE_BUILD_DRY_BUILD_SLEEP == "" ]]; then
+    rpm-ostree compose tree \
+        --cachedir="$ostree_cache_dir" \
+        --repo="$ostree_repo_dir" \
+        `[[ -s $lockfile ]] && echo "--ex-lockfile="$lockfile""` $treefile
+else
+    echo "Doing things..."
+    sleep $SODALITE_BUILD_DRY_BUILD_SLEEP
+fi
 
 [[ $? != 0 ]] && build_failed="true"
 
@@ -128,7 +149,7 @@ test_failed_count=0
 
 if [[ -d $tests_dir ]]; then
     if (( $(ls -A "$tests_dir" | wc -l) > 0 )); then
-        echo "🧪 Testing tree..."
+        echo "$(emj "🧪")Testing tree..."
 
         all_commits="$(ost log $ref | grep "commit " | sed "s/commit //")"
         commit="$(echo "$all_commits" | head -1)"
@@ -140,7 +161,7 @@ if [[ -d $tests_dir ]]; then
             export -f ost
 
             result=$(. "$test_file" 2>&1)
-            
+
             if [[ $? -ne 0 ]]; then
                 test_message_prefix="Error"
                 test_message_color="33"
@@ -176,11 +197,26 @@ if (( $test_failed_count > 0 )); then
         ost reset $ref $commit_prev
     fi
 else
-    echo "✏️ Generating summary..."
+    echo "$(emj "✏️")Generating summary..."
     ost summary --update
+fi
+
+end_time=$(( $(date +%s) - $start_time ))
+highscore="false"
+prev_highscore=""
+
+if [[ ! -f "$highscore_file" ]]; then
+    touch "$highscore_file"
+    echo "$end_time" > "$highscore_file"
+else
+    prev_highscore="$(cat "$highscore_file")"
+    if (( $end_time < $prev_highscore )); then
+        highscore="true"
+        echo "$end_time" > "$highscore_file"
+    fi
 fi
 
 cleanup
 
-end_time=$(( $(date +%s) - $start_time ))
-echo "✅ Success (took $(print_time $end_time))"
+echo "$(emj "✅")Success ($(print_time $end_time))"
+[[ $highscore == "true" ]] && echo "🏆 You're Winner (previous: $(print_time $prev_highscore))!"
