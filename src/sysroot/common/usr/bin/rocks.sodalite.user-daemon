@@ -44,7 +44,7 @@ function update_gconf() {
         gsettings set org.gnome.system.locale region "$system_locale"
     fi
 
-    if [[ ! -f $current_wallpaper ]]; then
+    if [[ ! -f "$current_wallpaper" ]]; then
         gsettings reset org.gnome.desktop.background picture-uri
     fi
 }
