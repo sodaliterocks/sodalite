@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=Phone
+GenericName=Phone
+Comment=Display and control your Android device
+Exec=rocks.sodalite.phone-mirror
+Icon=phone
+Terminal=false
+Type=Application
+Categories=Utility;RemoteAccess;
+StartupNotify=false
+X-Desktop-File-Install-Version=0.26

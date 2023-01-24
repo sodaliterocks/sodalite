@@ -347,6 +347,12 @@ if [[ $core == "pantheon" ]]; then
     fi
 fi
 
+if [[ -f "/usr/share/applications/rocks.sodalite.phone-mirror.desktop" ]]; then
+    to_remove+=(
+        "/usr/share/applications/scrcpy.desktop"
+    )
+fi
+
 to_remove+=(
     "/usr/share/backgrounds/f36"
     "/usr/share/backgrounds/f37"
