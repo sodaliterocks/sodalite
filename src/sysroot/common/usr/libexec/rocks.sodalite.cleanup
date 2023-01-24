@@ -1,0 +1,118 @@
+#!/usr/bin/env bash
+
+# emj(): https://github.com/sodaliterocks/sodalite/blob/0d2991795f131da688849a9984670169996d0061/build.sh#L11-L15
+function emj() {
+    emoji="$1"
+    emoji_length=${#emoji}
+    echo "$emoji$(eval "for i in {1..$emoji_length}; do echo -n " "; done")"
+}
+
+# get_answer(): https://github.com/sodaliterocks/hacks/blob/6cbfa0476e98c34d27d73ed3b4191a726ab37be8/src/utils.sh#L36-L54
+function get_answer() {
+    question=$@
+
+    if [[ ! -n $question ]]; then
+        question="Continue?"
+    fi
+
+    while true; do
+        read -p "$question [Y/n]: " answer
+        if [[ $answer = "" ]]; then
+            answer="Y"
+        fi
+        case $answer in
+            [Yy]* ) echo "y"; return ;;
+            [Nn]* ) echo "n"; return ;;
+            * ) ;;
+        esac
+    done
+}
+
+if [[ -f "/usr/lib/sodalite-release" && ! -d "$(dirname "$(realpath -s "$0")")/../../../../../.git" ]]; then
+	echo -e "This tool is for clearing up after Sodalite if you've rebased to another image"
+    echo -e "(hey, no hard feelings). However, you are using Sodalite, so this tool serves"
+    echo -e "no purpose."
+    echo -e ""
+    echo -e "\033[0;37mEnjoy your day. Exiting...\033[0m"
+    exit 255
+else
+    if ! [[ $(id -u) = 0 ]]; then
+        echo -e "$(emj "⛔")\033[1;31mPermission denied (are you root?)\033[0m"
+        exit 255
+    fi
+
+    if [[ $(get_answer "This tool will cleanup leftover files from Sodalite. Continue?") == "y" ]]; then
+        dry_run="false"
+        failed="false"
+
+        if [[ "$(dirname "$(realpath -s "$0")")" != "/usr/local/bin" ]]; then
+            dry_run="true"
+            echo -e "$(emj "⚠️")\033[1;33mDry run. Will not execute dangerous commands.\033[0m"
+        fi
+
+        if [[ $(command -v "flatpak") ]]; then
+            unattended_installed_apps_file="/var/lib/sodalite/unattended-installed-apps"
+            if [[ -f "$unattended_installed_apps_file" ]]; then
+                echo -e "$(emj "📦")\033[0;37mUninstalling Sodalite Flatpak apps...\033[0m"
+
+                while read line; do
+                    app_action="$(echo $line | cut -d":" -f1)"
+                    app_id="$(echo $line | cut -d":" -f4)"
+                    uninstall="true"
+
+                    if [[ $app_action == "+" ]]; then
+                        [[ $uninstall == "true" && $app_id == "org.gnome."* && -f "/usr/bin/gnome-shell" ]] && uninstall="false"
+                        [[ $uninstall == "true" && $app_id == "io.elementary."* && -f "/usr/bin/io.elementary.wingpafnel" ]] && uninstall="false"
+                    fi
+
+                    if [[ $uninstall == "true" ]]; then
+                        echo -e "   ⤷ $app_id"
+                            if [[ $dry_run == "false" ]]; then
+                                flatpak uninstall --assumeyes --force-remove --noninteractive io.elementary.calculator
+                                [[ ! $? -eq 0 ]] && failed="true"
+                            fi
+                    fi
+                done < "${unattended_installed_apps_file}"
+            fi
+
+            echo -e "$(emj "📦")\033[0;37mUninstalling unused Flatpak apps...\033[0m"
+            if [[ $dry_run == "false" ]]; then
+                flatpak uninstall --assumeyes --force-remove --noninteractive --unused
+                [[ ! $? -eq 0 ]] && failed="true"
+            fi
+        fi
+
+        echo -e "$(emj "🗑️")\033[0;37mRemoving Sodalite settings...\033[0m"
+        if [[ $dry_run == "false" ]]; then
+            rm -rf /var/lib/sodalite
+            [[ ! $? -eq 0 ]] && failed="true"
+        fi
+
+        echo -e "$(emj "🗑️")\033[0;37mRemoving oem.conf...\033[0m"
+        if [[ $dry_run == "false" ]]; then
+            rm -f /etc/oem.conf /etc/oem-logo.png
+            [[ ! $? -eq 0 ]] && failed="true"
+        fi
+
+        echo -e "$(emj "♻️")\033[0;37mCleaning up rpm-ostree rollback deployments..."
+        if [[ $dry_run == "false" ]]; then
+            rpm-ostree cleanup --rollback
+            [[ ! $? -eq 0 ]] && failed="true"
+        fi
+
+        if [[ $failed == "true" ]]; then
+            echo -e "$(emj "⛔")\033[1;31mSomething went wrong. Try executing again.\033[0m"
+	    else
+	        if [[ ! $(command -v "shred") ]]; then
+                echo -e "$(emj "⛔")\033[1;31mCannot delete self. Remove:\033[0m"
+                echo -e "\033[0;31m * /usr/local/bin/rocks.sodalite.cleanup"
+                echo -e " * /usr/local/bin/sodalite-cleanup\033[0m"
+                exit 255
+            else
+	            echo -e "$(emj "👋")\033[1;32mSelf-destructing. Goodbye.\033[0m"
+	            [[ -f "/usr/local/bin/rocks.sodalite.cleanup" && $dry_run == "false" ]] && shred -fu "/usr/local/bin/rocks.sodalite.cleanup"
+	            [[ -f "/usr/local/bin/rocks.sodalite.cleanup" && $dry_run == "false" ]] && shred -fu "/usr/local/bin/sodalite-cleanup"
+	        fi
+	    fi
+    fi
+fi

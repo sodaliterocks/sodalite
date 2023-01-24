@@ -1,0 +1,58 @@
+[rpmfusion.free]
+enabled=1
+gpgcheck=0
+gpgkey=https://rpmfusion.org/keys?action=AttachFile&do=view&target=RPM-GPG-KEY-rpmfusion-free-fedora-2020
+metadata_expire=14d
+metalink=https://mirrors.rpmfusion.org/metalink?repo=free-fedora-$releasever&arch=$basearch
+name=RPM Fusion (Fedora $releasever): Free
+repo_gpgcheck=0
+type=rpm-md
+
+[rpmfusion.free.debuginfo]
+enabled=0
+gpgcheck=0
+gpgkey=https://rpmfusion.org/keys?action=AttachFile&do=view&target=RPM-GPG-KEY-rpmfusion-free-fedora-2020
+metadata_expire=7d
+metalink=https://mirrors.rpmfusion.org/metalink?repo=free-fedora-debug-$releasever&arch=$basearch
+name=RPM Fusion (Fedora $releasever): Free (Debug)
+repo_gpgcheck=0
+type=rpm-md
+
+[rpmfusion.free.source]
+enabled=0
+gpgcheck=0
+gpgkey=https://rpmfusion.org/keys?action=AttachFile&do=view&target=RPM-GPG-KEY-rpmfusion-free-fedora-2020
+metadata_expire=7d
+metalink=https://mirrors.rpmfusion.org/metalink?repo=free-fedora-source-$releasever&arch=$basearch
+name=RPM Fusion (Fedora $releasever): Free (Source)
+repo_gpgcheck=0
+type=rpm-md
+
+[rpmfusion.free.updates]
+enabled=1
+enabled_metadata=1
+gpgcheck=0
+gpgkey=https://rpmfusion.org/keys?action=AttachFile&do=view&target=RPM-GPG-KEY-rpmfusion-free-fedora-2020
+metalink=https://mirrors.rpmfusion.org/metalink?repo=free-fedora-updates-released-$releasever&arch=$basearch
+name=RPM Fusion (Fedora $releasever): Free (Updates)
+repo_gpgcheck=0
+type=rpm-md
+
+[rpmfusion.free.updates-debuginfo]
+enabled=0
+gpgcheck=0
+gpgkey=https://rpmfusion.org/keys?action=AttachFile&do=view&target=RPM-GPG-KEY-rpmfusion-free-fedora-2020
+name=RPM Fusion (Fedora $releasever): Free (Updates Debug)
+metalink=https://mirrors.rpmfusion.org/metalink?repo=free-fedora-updates-released-debug-$releasever&arch=$basearch
+repo_gpgcheck=0
+type=rpm-md
+
+[rpmfusion.free.updates-source]
+enabled=0
+gpgcheck=0
+gpgkey=https://rpmfusion.org/keys?action=AttachFile&do=view&target=RPM-GPG-KEY-rpmfusion-free-fedora-2020
+metalink=https://mirrors.rpmfusion.org/metalink?repo=free-fedora-updates-released-source-$releasever&arch=$basearch
+name=RPM Fusion (Fedora $releasever): Free (Updates Source)
+repo_gpgcheck=0
+type=rpm-md
+

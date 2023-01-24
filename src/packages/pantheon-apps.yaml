@@ -4,10 +4,10 @@ packages:
  #- elementary-camera
  #- elementary-capnet-assist
  - elementary-code
- #- elementary-mail
+ #- elementary-mail # missing from Terra
  - elementary-music
  - elementary-photos
  #- elementary-screenshot-tool
  - elementary-sideload
- #- elementary-tasks
+ #- elementary-tasks # missing from Terra
  #- elementary-videos
