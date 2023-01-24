@@ -1,4 +1,4 @@
-[copr_decathorpe_elementary-nightly]
+[copr.decathorpe.elementary-nightly]
 name=Copr: decathorpe/elementary-nightly
 baseurl=https://download.copr.fedorainfracloud.org/results/decathorpe/elementary-nightly/fedora-$releasever-$basearch/
 type=rpm-md

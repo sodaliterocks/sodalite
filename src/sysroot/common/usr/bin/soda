@@ -3,5 +3,5 @@
 if [[ $@ != "" ]]; then
     sudo $@
 else
-    echo "Drink up!"
+    echo "🥤 Drink up!"
 fi
