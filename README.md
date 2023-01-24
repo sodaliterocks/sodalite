@@ -1,4 +1,4 @@
-![Screenshot of Sodalite](https://git.zio.sh/sodaliterocks/lfs/media/branch/main/screenshots/screenshot.png?u=5)
+![Screenshot of Sodalite](https://git.zio.sh/sodaliterocks/lfs/media/branch/main/graphics/screenshot/screenshot.png?u=7)
 
 <h1 align="center">
     Sodalite
@@ -49,9 +49,10 @@ To allow for several versions to co-exist and be developed in tandem with each o
 
 * `<name>`: **Name** of the branch; always `sodalite`.
 * `<version>`: **Version** of the branch. Possible values:
-  - `stable`:  Rolling-release version based on the current stable release of Fedora Linux (currently 36 &mdash; [37 has been abandoned](https://github.com/sodaliterocks/sodalite/issues/44)).
+  - `stable`:  Rolling-release version based on the current stable release of Fedora Linux (currently 36 &mdash; see [#56](https://github.com/sodaliterocks/sodalite/issues/56)).
   - `f<version>`: "Long-term" versions based on specific versions of Fedora Linux, which require manual intervention to rebase to a newer version when said version reaches end-of-life. Possible values for `<version>`:
     - `36`: Fedora Linux 36. Reaches end-of-life on 16th May 2023 (2023-05-16).
+    - `37`: Fedora Linux 37. Reaches end-of-life on 14th Nov 2023 (2023-11-14).
   - `next`: Rolling-release version based on the next upcoming version of Fedora Linux (currently 38).
   - `devel`: Current development code (on `main`). **Do not use on production systems.**
 * `<arch>`: **Architecture** of the branch. Possible values:
@@ -72,10 +73,11 @@ Possible combinations built on the OSTree remote (`ostree.sodalite.rocks`) are a
 |-|-|-|-|
 |`sodalite`|`stable`|`x86_64`|`desktop`|
 |`sodalite`|`f36`|`x86_64`|`desktop`|
+|`sodalite`|`f37`|`x86_64`|`desktop`|
 |`sodalite`|`next`|`x86_64`|`desktop`|
 |`sodalite`|`devel`|`x86_64`|`desktop`<br />`desktop-gnome`|
 
-_For example, `sodalite/stable/x86_64/desktop` exists on the build server and can be pulled, but `sodalite/f36/x86_64/experimental-pantheon-nightly` does not._
+_For example, `sodalite/stable/x86_64/desktop` exists on the build server and can be pulled, but `sodalite/f37/x86_64/desktop-gnome` does not._
 
 ### Versioning
 
@@ -176,7 +178,6 @@ This will usually take 10-15 minutes. Remember when I told you to grab a cuppa? 
   - This is any of the `sodalite-<edition>.yaml` files listed in `./src/treefiles/`. Either use `sodalite-<edition>` or just `<edition>` as the argument. Currently, there is:
     - `desktop`: Standard Pantheon desktop.
     - `desktop-gnome`: Alternate GNOME desktop, intended for possible future versions.
-    - `experimental-pantheon-nightly`: Experimental Pantheon desktop with nightly Pantheon packages.
 	- `base`: Old legacy version sourcing `desktop`, purely there for compatibility and will be removed soon.
     - `custom`: See below point.
   - `sodalite-custom.yaml` is a good place to employ your own changes instead of modifying any of the other treefiles.

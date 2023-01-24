@@ -1,11 +1,11 @@
 [Unit]
-Description=Migrate to Sodalite
+Description=Update rpm-ostree automatically
 Wants=network-online.target
 After=syslog.target network.target network-online.target
 
 [Service]
 Type=simple
-ExecStart=/usr/bin/rocks.sodalite.hacks migrate --all
+ExecStart=/usr/bin/rocks.sodalite.hacks auto-update
 Restart=on-failure
 RestartSec=10
 KillMode=process
