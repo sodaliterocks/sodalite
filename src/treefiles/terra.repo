@@ -1,6 +1,6 @@
 [terra]
-name=Terra 37
-baseurl=https://repos.fyralabs.com/terra37
+name=Terra ($releasever)
+baseurl=https://repos.fyralabs.com/terra$releasever
 type=rpm
 skip_if_unavailable=True
 gpgcheck=1

@@ -7,8 +7,3 @@
 ref: sodalite/next/${basearch}/custom
 include:
   - ../cores/pantheon.yaml
-
-rojig:
-  name: rocks.sodalite.os.custom
-  summary: "Sodalite (Custom)"
-  license: MIT
