@@ -1,5 +1,5 @@
 [terra]
-name=Terra $releasever
+name=Terra ($releasever)
 baseurl=https://repos.fyralabs.com/terra$releasever
 type=rpm
 skip_if_unavailable=True
