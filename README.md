@@ -238,7 +238,9 @@ _(todo)_
 
 ### Teams & Organizations
 
-* The [elementary team](https://elementary.io/team), for building lovely stuff.
+* [elementary](https://elementary.io/team), for building lovely stuff.
+* [Fyra Labs](https://fyralabs.com), for maintaining [Terra](https://terra.fyralabs.com/)
+  * The official Fedora repos ran into issues (see [#44](https://github.com/sodaliterocks/sodalite/issues/44)) with Pantheon packages for f37+, potentially dooming Sodalite after f36 reached EoL: Terra solved this.
 * The contributors to [workstation-ostree-config](https://pagure.io/workstation-ostree-config), for a solid ground to work from.
 
 ### Miscellaneous

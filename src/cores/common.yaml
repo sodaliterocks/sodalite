@@ -7,13 +7,13 @@ include: [
 ]
 
 releasever: "37"
-automatic-version-prefix: "${releasever}-23.2"
+automatic-version-prefix: "${releasever}-23.3"
 automatic-version-suffix: "."
 mutate-os-release: "${releasever}"
 
 repos:
  - fedora
- - fedora-updates
+ - fedora.updates
  - terra # f37+ only
  - copr.zeno.scrcpy
  - rpmfusion.free
@@ -132,7 +132,10 @@ add-files: [
   ["../sysroot/common/usr/share/gnome-background-properties/zara-walker.xml", "/usr/share/gnome-background-properties/zara-walker.xml"],
 
   # /usr/share/icons
-  ["../../lfs/graphics/logo/logo.png", "/usr/share/icons/hicolor/256x256/apps/fedora-logo-icon.png"]
+  ["../../lfs/graphics/logo/logo.png", "/usr/share/icons/hicolor/256x256/apps/fedora-logo-icon.png"],
+
+  # /usr/share/plymouth
+  ["../../lfs/graphics/logo/logo_splash.png", "/usr/share/plymouth/themes/spinner/watermark.png"]
 ]
 
 boot-location: modules
