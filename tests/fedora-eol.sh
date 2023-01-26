@@ -29,7 +29,7 @@ case $fedora_release in
 esac
 
 if [[ $eol == "true" ]]; then
-    echo "Fedora $fedora_release is EoL"
+    echo "Fedora Linux $fedora_release is EoL"
 else
     echo "true"
 fi
