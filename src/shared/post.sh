@@ -287,6 +287,9 @@ if [[ $core == "pantheon" ]]; then
         "/etc/xdg/autostart/light-locker.desktop"
         # plank
         "/etc/xdg/autostart/plank.desktop"
+        # switchboard-plug-locale
+        "/usr/lib64/switchboard/personal/liblocale-plug.so"
+        "/usr/share/doc/switchboard-plug-locale/"
         # ufw
         "/etc/ufw/"
         "/usr/lib/python3.10/site-packages/ufw/"
@@ -318,11 +321,8 @@ if [[ $core == "pantheon" ]]; then
         )
     fi
 
-    if [[ $variant != "experimental-pantheon-nightly" ]]; then
-        # These Pantheon packages are considered broken, so we'll only keep them
-        # for this variant
+    if [[ -f "/usr/sbin/lightdm-gtk-greeter" ]]; then
         to_remove+=(
-            # elementary-greeter
             "/etc/lightdm/io.elementary.greeter.conf"
             "/etc/lightdm/lightdm.conf.d/40-io.elementary.greeter.conf"
             "/usr/bin/io.elementary.greeter-compositor"
@@ -332,17 +332,6 @@ if [[ $core == "pantheon" ]]; then
             "/usr/share/locale/*/LC_MESSAGES/io.elementary.greeter.mo"
             "/usr/share/metainfo/io.elementary.greeter.appdata.xml"
             "/usr/share/xgreeters/io.elementary.greeter.desktop"
-            # switchboard-plug-locale
-            "/usr/lib64/switchboard/personal/liblocale-plug.so"
-            "/usr/share/doc/switchboard-plug-locale/"
-        )
-    else
-        # If we're on this variant, remove the lightdm-gtk-greeter files so it
-        # doesn't interfere with elementary-greeter
-        to_remove+=(
-            # lightdm-gtk-greeter
-            "/etc/lightdm/lightdm-gtk-greeter.conf"
-            "/usr/share/lightdm/lightdm.conf.d/60-lightdm-gtk-greeter.conf"
         )
     fi
 fi
