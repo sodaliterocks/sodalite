@@ -5,7 +5,7 @@ primary-color='#3689E6'
 
 [org.gnome.desktop.interface]
 font-antialiasing='grayscale'
-font-hinting='slight'
+font-hinting='none'
 font-name='Inter 9'
 monospace-font-name='Roboto Mono 10'
 
