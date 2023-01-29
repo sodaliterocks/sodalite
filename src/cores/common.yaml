@@ -23,7 +23,6 @@ add-files: [
   # /etc
   ["../sysroot/common/etc/issue", "/etc/issue"],
   ["../sysroot/common/etc/tlp.d/50-vm-writeback.conf", "/etc/tlp.d/50-vm-writeback.conf"],
-  ["../sysroot/common/etc/upstream-release/lsb-release", "/etc/upstream-release/lsb-release"],
 
   # /etc/fonts
   ["../sysroot/common/etc/fonts/conf.d/63-inter.conf", "/etc/fonts/conf.d/63-inter.conf"],

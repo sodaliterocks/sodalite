@@ -102,9 +102,16 @@ if [[ ! -z $variant ]]; then
 fi
 
 if [[ ! -z $version_id ]]; then
-    set_property /etc/upstream-release/lsb-release "ID" "fedora"
-    set_property /etc/upstream-release/lsb-release "PRETTY_NAME" "Fedora Linux $version_id"
-    set_property /etc/upstream-release/lsb-release "VERSION_ID" "$version_id"
+    touch /usr/lib/upstream-os-release
+
+    set_property /usr/lib/upstream-os-release "ID" "fedora"
+    set_property /usr/lib/upstream-os-release "PRETTY_NAME" "Fedora Linux $version_id"
+    set_property /usr/lib/upstream-os-release "VERSION_ID" "$version_id"
+
+    if [[ $version_id == "36" ]]; then
+        mkdir -p /etc/upstream-release
+        ln -s /usr/lib/upstream-os-release /etc/upstream-release/lsb-release
+    fi
 fi
 
 pretty_name="Sodalite $version_pretty"
