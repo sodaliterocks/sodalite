@@ -102,9 +102,16 @@ if [[ ! -z $variant ]]; then
 fi
 
 if [[ ! -z $version_id ]]; then
-    set_property /etc/upstream-release/lsb-release "ID" "fedora"
-    set_property /etc/upstream-release/lsb-release "PRETTY_NAME" "Fedora Linux $version_id"
-    set_property /etc/upstream-release/lsb-release "VERSION_ID" "$version_id"
+    touch /usr/lib/upstream-os-release
+
+    set_property /usr/lib/upstream-os-release "ID" "fedora"
+    set_property /usr/lib/upstream-os-release "PRETTY_NAME" "Fedora Linux $version_id"
+    set_property /usr/lib/upstream-os-release "VERSION_ID" "$version_id"
+
+    if [[ $version_id == "36" ]]; then
+        mkdir -p /etc/upstream-release
+        ln -s /usr/lib/upstream-os-release /etc/upstream-release/lsb-release
+    fi
 fi
 
 pretty_name="Sodalite $version_pretty"
@@ -115,6 +122,7 @@ set_property /usr/lib/os-release "DOCUMENTATION_URL" "https:\/\/sodalite.rocks\/
 set_property /usr/lib/os-release "HOME_URL" "https:\/\/sodalite.rocks"
 set_property /usr/lib/os-release "ID" "sodalite"
 set_property /usr/lib/os-release "ID_LIKE" "fedora"
+set_property /usr/lib/os-release "LOGO" "distributor-logo"
 set_property /usr/lib/os-release "NAME" "Sodalite"
 set_property /usr/lib/os-release "PRETTY_NAME" "$pretty_name"
 set_property /usr/lib/os-release "SUPPORT_URL" "https:\/\/sodalite.rocks\/support"
@@ -345,6 +353,7 @@ fi
 to_remove+=(
     "/usr/share/backgrounds/f36"
     "/usr/share/backgrounds/f37"
+    "/usr/share/backgrounds/f38"
     "/usr/share/backgrounds/fedora-workstation"
 )
 
@@ -410,7 +419,6 @@ ln -s /usr/bin/rocks.sodalite.hacks /usr/bin/sodalite-hacks
 ln -s /usr/bin/firefox /usr/bin/rocks.sodalite.firefox
 
 /usr/src/rocks.sodalite.firefox/setup.sh
-rm -rf /usr/src/rocks.sodalite.firefox
 rm -f /usr/lib64/firefox/browser/omni.ja_backup
 
 glib-compile-schemas /usr/share/glib-2.0/schemas
@@ -440,5 +448,13 @@ if [[ $core == "pantheon" ]]; then
   systemctl enable touchegg
 fi
 
+if [[ -f "/usr/src/rocks.sodalite.lfs/graphics/os-boot-splash-logo/os-boot-splash-logo_${version_id}.png" ]]; then
+    cp -f "/usr/src/rocks.sodalite.lfs/graphics/os-boot-splash-logo/os-boot-splash-logo_${version_id}.png" "/usr/share/plymouth/themes/spinner/watermark.png"
+else
+    cp -f "/usr/src/rocks.sodalite.lfs/graphics/os-boot-splash-logo/os-boot-splash-logo_nover.png" "/usr/share/plymouth/themes/spinner/watermark.png"
+fi
+
 systemctl enable sodalite-migrate
+
+rm -rf /usr/src/rocks.sodalite.*
 

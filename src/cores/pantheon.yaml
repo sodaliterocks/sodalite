@@ -65,6 +65,13 @@ add-files: [
   ["../sysroot/cores/pantheon/usr/share/applications/org.gnome.Software.desktop", "/usr/share/applications/org.gnome.Software.desktop"],
 
   # /usr/share/icons
+  ["../../lfs/icons/export/places/16/distributor-logo.svg", "/usr/share/icons/elementary/places/16/distributor-logo.svg"],
+  ["../../lfs/icons/export/places/24/distributor-logo.svg", "/usr/share/icons/elementary/places/24/distributor-logo.svg"],
+  ["../../lfs/icons/export/places/32/distributor-logo.svg", "/usr/share/icons/elementary/places/32/distributor-logo.svg"],
+  ["../../lfs/icons/export/places/48/distributor-logo.svg", "/usr/share/icons/elementary/places/48/distributor-logo.svg"],
+  ["../../lfs/icons/export/places/64/distributor-logo.svg", "/usr/share/icons/elementary/places/64/distributor-logo.svg"],
+  ["../../lfs/icons/export/places/128/distributor-logo.svg", "/usr/share/icons/elementary/places/128/distributor-logo.svg"],
+  ["../../lfs/icons/export/places/symbolic/distributor-logo-symbolic.svg", "/usr/share/icons/elementary/places/symbolic/distributor-logo-symbolic.svg"],
   ["../../lib/elementary.icons/apps/128/system-software-install.svg", "/usr/share/icons/elementary/apps/128/system-software-install.svg"],
   ["../../lib/elementary.icons/apps/16/system-software-install.svg", "/usr/share/icons/elementary/apps/16/system-software-install.svg"],
   ["../../lib/elementary.icons/apps/24/system-software-install.svg", "/usr/share/icons/elementary/apps/24/system-software-install.svg"],
