@@ -137,13 +137,16 @@ echo "==========================================================================
 
 if [[ $SODALITE_BUILD_DRY_BUILD_SLEEP == "" ]]; then
     compose_args=""
+    compose_cmd="rpm-ostree compose tree"
 
     compose_args+="--repo=\"$ostree_repo_dir\""
     [[ $ostree_cache_dir != "" ]] && compose_args+=" --cachedir=\"$ostree_cache_dir\""
     [[ -s $lockfile ]] && compose_args+=" --ex-lockfile=\"$lockfile\""
     [[ $unified == "true" ]] && compose_args+=" --unified-core"
 
-    eval "rpm-ostree compose tree $compose_args $treefile"
+    compose_cmd="$compose_cmd $compose_args $treefile"
+
+    eval "$compose_cmd"
 else
     echo "Doing things..."
     sleep $SODALITE_BUILD_DRY_BUILD_SLEEP
