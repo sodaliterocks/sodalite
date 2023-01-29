@@ -127,7 +127,7 @@ buildinfo_content="BUILD_DATE=\"$(date +"%Y-%m-%d %T %z")\"
 \nGIT_COMMIT=$git_commit
 \nGIT_TAG=$git_tag
 \nOS_REF=\"$ref\"
-\nOS_UNIFIED=\"$unified\"
+\nOS_UNIFIED=$unified
 \nOS_VARIANT=\"$variant\""
 
 echo -e $buildinfo_content > $buildinfo_file
