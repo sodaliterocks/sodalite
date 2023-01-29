@@ -68,12 +68,6 @@ add-files: [
   ["../../lib/sodaliterocks.hacks/src/utils.sh", "/usr/libexec/rocks.sodalite.hacks/utils.sh"],
   ["../sysroot/common/usr/libexec/rocks.sodalite.cleanup", "/usr/libexec/rocks.sodalite.cleanup"],
 
-  # /usr/lib64/firefox-sodalite
-  ["../../lib/sodaliterocks.firefox/config/browser/defaults/preferences/firefox.js", "/usr/src/rocks.sodalite.firefox/config/browser/defaults/preferences/firefox.js"],
-  ["../../lib/sodaliterocks.firefox/config/distribution/distribution.ini", "/usr/src/rocks.sodalite.firefox/config/distribution/distribution.ini"],
-  ["../../lib/sodaliterocks.firefox/omni/chrome/browser/content/browser/default-bookmarks.html", "/usr/src/rocks.sodalite.firefox/omni/chrome/browser/content/browser/default-bookmarks.html"],
-  ["../../lib/sodaliterocks.firefox/setup.sh", "/usr/src/rocks.sodalite.firefox/setup.sh"],
-
   # /usr/share
   ["../sysroot/common/usr/share/applications/rocks.sodalite.phone-mirror.desktop", "/usr/share/applications/rocks.sodalite.phone-mirror.desktop"],
   ["../sysroot/common/usr/share/glib-2.0/schemas/00_sodalite.gschema.override", "/usr/share/glib-2.0/schemas/00_sodalite.gschema.override"],
@@ -131,10 +125,17 @@ add-files: [
   ["../sysroot/common/usr/share/gnome-background-properties/zara-walker.xml", "/usr/share/gnome-background-properties/zara-walker.xml"],
 
   # /usr/share/icons
-  ["../../lfs/graphics/logo/logo.png", "/usr/share/icons/hicolor/256x256/apps/fedora-logo-icon.png"],
+  #["../../lfs/graphics/logo/logo.png", "/usr/share/icons/hicolor/256x256/apps/fedora-logo-icon.png"],
 
-  # /usr/share/plymouth
-  ["../../lfs/graphics/logo/logo_splash.png", "/usr/share/plymouth/themes/spinner/watermark.png"]
+  # /usr/src
+  ["../../lfs/graphics/os-boot-splash-logo/os-boot-splash-logo_36.png", "/usr/src/rocks.sodalite.lfs/graphics/os-boot-splash-logo/os-boot-splash-logo_36.png"],
+  ["../../lfs/graphics/os-boot-splash-logo/os-boot-splash-logo_36.png", "/usr/src/rocks.sodalite.lfs/graphics/os-boot-splash-logo/os-boot-splash-logo_37.png"],
+  ["../../lfs/graphics/os-boot-splash-logo/os-boot-splash-logo_36.png", "/usr/src/rocks.sodalite.lfs/graphics/os-boot-splash-logo/os-boot-splash-logo_38.png"],
+  ["../../lfs/graphics/os-boot-splash-logo/os-boot-splash-logo_36.png", "/usr/src/rocks.sodalite.lfs/graphics/os-boot-splash-logo/os-boot-splash-logo_nover.png"],
+  ["../../lib/sodaliterocks.firefox/config/browser/defaults/preferences/firefox.js", "/usr/src/rocks.sodalite.firefox/config/browser/defaults/preferences/firefox.js"],
+  ["../../lib/sodaliterocks.firefox/config/distribution/distribution.ini", "/usr/src/rocks.sodalite.firefox/config/distribution/distribution.ini"],
+  ["../../lib/sodaliterocks.firefox/omni/chrome/browser/content/browser/default-bookmarks.html", "/usr/src/rocks.sodalite.firefox/omni/chrome/browser/content/browser/default-bookmarks.html"],
+  ["../../lib/sodaliterocks.firefox/setup.sh", "/usr/src/rocks.sodalite.firefox/setup.sh"],
 ]
 
 boot-location: modules
