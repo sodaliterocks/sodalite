@@ -1,1 +1,7 @@
+packages:
+ - golang-github-linuxdeepin-go-x11-client 
+ - deepin-gir-generator
+exclude-packages:
+ - gnome-tour
+ #- ufw
 
