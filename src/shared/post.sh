@@ -105,8 +105,8 @@ if [[ ! -z $version_id ]]; then
     touch /usr/lib/upstream-os-release
 
     set_property /usr/lib/upstream-os-release "ID" "fedora"
-    set_property /usr/lib/upstream-os-release "PRETTY_NAME" "Fedora Linux $version_id"
     set_property /usr/lib/upstream-os-release "VERSION_ID" "$version_id"
+    set_property /usr/lib/upstream-os-release "PRETTY_NAME" "Fedora Linux $version_id"
 
     if [[ $version_id == "36" ]]; then
         mkdir -p /etc/upstream-release
