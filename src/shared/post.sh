@@ -448,12 +448,6 @@ if [[ $core == "pantheon" ]]; then
   systemctl enable touchegg
 fi
 
-if [[ -f "/usr/src/rocks.sodalite.lfs/graphics/os-boot-splash-logo/os-boot-splash-logo_${version_id}.png" ]]; then
-    cp -f "/usr/src/rocks.sodalite.lfs/graphics/os-boot-splash-logo/os-boot-splash-logo_${version_id}.png" "/usr/share/plymouth/themes/spinner/watermark.png"
-else
-    cp -f "/usr/src/rocks.sodalite.lfs/graphics/os-boot-splash-logo/os-boot-splash-logo_nover.png" "/usr/share/plymouth/themes/spinner/watermark.png"
-fi
-
 systemctl enable sodalite-migrate
 
 rm -rf /usr/src/rocks.sodalite.*
