@@ -1,6 +1,55 @@
 packages:
  - golang-github-linuxdeepin-go-x11-client 
  - deepin-gir-generator
+ - golang-deepin-go-lib
+ - golang-github-linuxdeepin-dbus-factory
+ - deepin-api
+ - dtkcommon #(new in F35)
+ - dtkcore
+ - dtkwm #(not updated in long term)
+ - dtkgui
+ - dtkwidget
+ - docparser
+ - gio-qt
+ - deepin-desktop-base
+ - deepin-desktop-schemas
+ - deepin-icon-theme
+ - deepin-qt-dbus-factory
+ - deepin-polkit-agent
+ - deepin-qt5integration
+ - deepin-menu #(upstream halted)
+ - deepin-network-utils
+ - startdde
+ - deepin-daemon
+ - deepin-control-center
+ - deepin-dock
+ - deepin-launcher
+ - deepin-session-ui
+ - udisks2-qt5
+ - disomaster
+ - deepin-file-manager
+ - deepin-calculator
+ - deepin-editor
+ - deepin-image-editor
+ - deepin-image-viewer
+ - deepin-topbar
+ - deepin-system-monitor
+ - deepin-account-faces
+ - deepin-gettext-tools #(not updated in long term)
+ - deepin-gtk-theme #(not updated in long term)
+ - deepin-sound-theme
+ - deepin-shortcut-viewer
+ - deepin-screensaver
+ - deepin-calendar
+ - deepin-draw
+ - deepin-kwin
+ - deepin-wayland #(new in F35)
+ - deepin-qt5platform-plugins
+ - deepin-screenshot
+ - deepin-terminal
+ - deepin-pw-check #(new in F35)
+ - deepin-session-shell
+ - deepin-wallpapers
 exclude-packages:
  - gnome-tour
  #- ufw
