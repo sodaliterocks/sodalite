@@ -94,6 +94,11 @@ if [[ ! -f $treefile ]]; then
 fi
 
 ref="$(echo "$(cat "$treefile")" | grep "ref:" | sed "s/ref: //" | sed "s/\${basearch}/$(uname -m)/")"
+unified="false"
+
+if [[ $variant == *"-unified" ]]; then
+    unified="true"
+fi
 
 if [[ $(command -v "git") ]]; then
     if [[ -d "$base_dir/.git" ]]; then
@@ -121,8 +126,9 @@ buildinfo_content="BUILD_DATE=\"$(date +"%Y-%m-%d %T %z")\"
 \nBUILD_TOOL=\"rpm-ostree $(echo "$(rpm-ostree --version)" | grep "Version:" | sed "s/ Version: //" | tr -d "'")+$(echo "$(rpm-ostree --version)" | grep "Git:" | sed "s/ Git: //")\"
 \nGIT_COMMIT=$git_commit
 \nGIT_TAG=$git_tag
-\nREF=\"$ref\"
-\nVARIANT=\"$variant\""
+\nOS_REF=\"$ref\"
+\nOS_UNIFIED=\"$unified\"
+\nOS_VARIANT=\"$variant\""
 
 echo -e $buildinfo_content > $buildinfo_file
 
@@ -130,10 +136,14 @@ echo "$(emj "⚡")Building tree..."
 echo "================================================================================"
 
 if [[ $SODALITE_BUILD_DRY_BUILD_SLEEP == "" ]]; then
-    rpm-ostree compose tree \
-        --cachedir="$ostree_cache_dir" \
-        --repo="$ostree_repo_dir" \
-        `[[ -s $lockfile ]] && echo "--ex-lockfile="$lockfile""` $treefile
+    compose_args=""
+
+    compose_args+="--repo=\"$ostree_repo_dir\""
+    [[ $ostree_cache_dir != "" ]] && compose_args+=" --cachedir=\"$ostree_cache_dir\""
+    [[ -s $lockfile ]] && compose_args+=" --ex-lockfile=\"$lockfile\""
+    [[ $unified == "true" ]] && compose_args+=" --unified-core"
+
+    eval "rpm-ostree compose tree $compose_args $treefile"
 else
     echo "Doing things..."
     sleep $SODALITE_BUILD_DRY_BUILD_SLEEP
