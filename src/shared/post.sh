@@ -440,13 +440,13 @@ if [[ $core == "gnome" ]]; then
 fi
 
 if [[ $core == "pantheon" ]]; then
-  mv /usr/bin/gnome-software /usr/bin/gnome-software-bin
-  mv /usr/bin/gnome-software-wrapper /usr/bin/gnome-software
+   mv /usr/bin/gnome-software /usr/bin/gnome-software-bin
+   mv /usr/bin/gnome-software-wrapper /usr/bin/gnome-software
 
-  systemctl disable gdm
-  systemctl enable generate-oemconf
-  systemctl enable lightdm
-  systemctl enable touchegg
+   systemctl disable gdm
+   systemctl enable generate-oemconf
+   systemctl enable lightdm
+   systemctl enable touchegg
 fi
 
 systemctl enable sodalite-migrate
