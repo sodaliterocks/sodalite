@@ -61,6 +61,7 @@ fi
 
 if [[ -n $variant ]]; then
     case "$variant" in
+        "desktop-deepin") variant_pretty="Deepin" ;;
         "desktop-gnome") variant_pretty="GNOME" ;;
         *) variant_pretty="$variant" ;;
     esac
