@@ -102,9 +102,16 @@ if [[ ! -z $variant ]]; then
 fi
 
 if [[ ! -z $version_id ]]; then
-    set_property /etc/upstream-release/lsb-release "ID" "fedora"
-    set_property /etc/upstream-release/lsb-release "PRETTY_NAME" "Fedora Linux $version_id"
-    set_property /etc/upstream-release/lsb-release "VERSION_ID" "$version_id"
+    touch /usr/lib/upstream-os-release
+
+    set_property /usr/lib/upstream-os-release "ID" "fedora"
+    set_property /usr/lib/upstream-os-release "VERSION_ID" "$version_id"
+    set_property /usr/lib/upstream-os-release "PRETTY_NAME" "Fedora Linux $version_id"
+
+    if [[ $version_id == "36" ]]; then
+        mkdir -p /etc/upstream-release
+        ln -s /usr/lib/upstream-os-release /etc/upstream-release/lsb-release
+    fi
 fi
 
 pretty_name="Sodalite $version_pretty"
@@ -115,6 +122,7 @@ set_property /usr/lib/os-release "DOCUMENTATION_URL" "https:\/\/sodalite.rocks\/
 set_property /usr/lib/os-release "HOME_URL" "https:\/\/sodalite.rocks"
 set_property /usr/lib/os-release "ID" "sodalite"
 set_property /usr/lib/os-release "ID_LIKE" "fedora"
+set_property /usr/lib/os-release "LOGO" "distributor-logo"
 set_property /usr/lib/os-release "NAME" "Sodalite"
 set_property /usr/lib/os-release "PRETTY_NAME" "$pretty_name"
 set_property /usr/lib/os-release "SUPPORT_URL" "https:\/\/sodalite.rocks\/support"
@@ -287,6 +295,9 @@ if [[ $core == "pantheon" ]]; then
         "/etc/xdg/autostart/light-locker.desktop"
         # plank
         "/etc/xdg/autostart/plank.desktop"
+        # switchboard-plug-locale
+        "/usr/lib64/switchboard/personal/liblocale-plug.so"
+        "/usr/share/doc/switchboard-plug-locale/"
         # ufw
         "/etc/ufw/"
         "/usr/lib/python3.10/site-packages/ufw/"
@@ -318,11 +329,8 @@ if [[ $core == "pantheon" ]]; then
         )
     fi
 
-    if [[ $variant != "experimental-pantheon-nightly" ]]; then
-        # These Pantheon packages are considered broken, so we'll only keep them
-        # for this variant
+    if [[ -f "/usr/sbin/lightdm-gtk-greeter" ]]; then
         to_remove+=(
-            # elementary-greeter
             "/etc/lightdm/io.elementary.greeter.conf"
             "/etc/lightdm/lightdm.conf.d/40-io.elementary.greeter.conf"
             "/usr/bin/io.elementary.greeter-compositor"
@@ -332,17 +340,6 @@ if [[ $core == "pantheon" ]]; then
             "/usr/share/locale/*/LC_MESSAGES/io.elementary.greeter.mo"
             "/usr/share/metainfo/io.elementary.greeter.appdata.xml"
             "/usr/share/xgreeters/io.elementary.greeter.desktop"
-            # switchboard-plug-locale
-            "/usr/lib64/switchboard/personal/liblocale-plug.so"
-            "/usr/share/doc/switchboard-plug-locale/"
-        )
-    else
-        # If we're on this variant, remove the lightdm-gtk-greeter files so it
-        # doesn't interfere with elementary-greeter
-        to_remove+=(
-            # lightdm-gtk-greeter
-            "/etc/lightdm/lightdm-gtk-greeter.conf"
-            "/usr/share/lightdm/lightdm.conf.d/60-lightdm-gtk-greeter.conf"
         )
     fi
 fi
@@ -356,6 +353,7 @@ fi
 to_remove+=(
     "/usr/share/backgrounds/f36"
     "/usr/share/backgrounds/f37"
+    "/usr/share/backgrounds/f38"
     "/usr/share/backgrounds/fedora-workstation"
 )
 
@@ -421,7 +419,6 @@ ln -s /usr/bin/rocks.sodalite.hacks /usr/bin/sodalite-hacks
 ln -s /usr/bin/firefox /usr/bin/rocks.sodalite.firefox
 
 /usr/src/rocks.sodalite.firefox/setup.sh
-rm -rf /usr/src/rocks.sodalite.firefox
 rm -f /usr/lib64/firefox/browser/omni.ja_backup
 
 glib-compile-schemas /usr/share/glib-2.0/schemas
@@ -452,4 +449,6 @@ if [[ $core == "pantheon" ]]; then
 fi
 
 systemctl enable sodalite-migrate
+
+rm -rf /usr/src/rocks.sodalite.*
 

@@ -12,22 +12,22 @@ This is mostly a developer-orientated README; you're probably better off heading
 
 Know what you're in for? Here goes:
 
-1. Install an rpm-ostree-based version of Fedora, such as [Fedora Silverblue](https://silverblue.fedoraproject.org/), or use an already-existing install.
+1. Install an rpm-ostree-based version of Fedora, such as [Fedora Silverblue](https://silverblue.fedoraproject.org/), or use an already-existing install
 2. Fire up a terminal and issue these commands:
    - `sudo ostree remote add --if-not-exists sodalite https://ostree.sodalite.rocks --no-gpg-verify`
    - `sudo ostree pull sodalite:sodalite/stable/x86_64/desktop`
    - `sudo rpm-ostree rebase sodalite:sodalite/stable/x86_64/desktop`
-3. Stick the kettle on and make yourself a cuppa. It'll take a while.
+3. Stick the kettle on and make yourself a cuppa. It'll take a while
 4. Reboot when prompted. Use it, enjoy it, make something cool with it, (try to) break it &mdash; [submit a ticket if you do](https://github.com/sodaliterocks/sodalite/issues/new)!
 
 ### Updating
 
 Performing a system update can be done by either:
 
-* Running `sudo rpm-ostree upgrade` in a shell.
-* Opening **Software**, selecting **Updates** from the headerbar, and pressing **Update All**.
-  - As Software runs in the background and periodically checks for updates, you may also receive a notification of a new update; clicking on this opens the appropriate page.
-  - An update for the OS may take a while to appear in Software (which will appear as "Operating System Updates"), so the above method is preferred.
+* Running `sudo rpm-ostree upgrade` in a shell
+* Opening **Software**, selecting **Updates** from the headerbar, and pressing **Update All**
+  - As Software runs in the background and periodically checks for updates, you may also receive a notification of a new update; clicking on this opens the appropriate page
+  - An update for the OS may take a while to appear in Software (which will appear as "Operating System Updates"), so the above method is preferred
 
 Reboot after either method has finished. You can verify the version installed by opening **System Settings** and navigating to **System ➔ Operating System**: the version proceeds the word "Sodalite"
 
@@ -47,21 +47,21 @@ It's vital you carry out this process as updates stop the day the base version r
 
 To allow for several versions to co-exist and be developed in tandem with each other, Sodalite &mdash; like any other rpm-ostree distro &mdash; carries a ref to distinguish itself. Where `<name>/<version>/<arch>/<edition>`, the format and possible values are as follows:
 
-* `<name>`: **Name** of the branch; always `sodalite`.
+* `<name>`: **Name** of the branch; always `sodalite`
 * `<version>`: **Version** of the branch. Possible values:
-  - `stable`:  Rolling-release version based on the current stable release of Fedora Linux (currently 36 &mdash; see [#56](https://github.com/sodaliterocks/sodalite/issues/56)).
+  - `stable`:  Rolling-release version based on the current stable release of Fedora Linux (currently 37)
   - `f<version>`: "Long-term" versions based on specific versions of Fedora Linux, which require manual intervention to rebase to a newer version when said version reaches end-of-life. Possible values for `<version>`:
-    - `36`: Fedora Linux 36. Reaches end-of-life on 16th May 2023 (2023-05-16).
-    - `37`: Fedora Linux 37. Reaches end-of-life on 14th Nov 2023 (2023-11-14).
-  - `next`: Rolling-release version based on the next upcoming version of Fedora Linux (currently 38).
-  - `devel`: Current development code (on `main`). **Do not use on production systems.**
+    - `36`: Fedora Linux 36. Reaches end-of-life on 16th May 2023 (2023-05-16)
+    - `37`: Fedora Linux 37. Reaches end-of-life on 14th Nov 2023 (2023-11-14)
+  - `next`: Rolling-release version based on the next upcoming version of Fedora Linux (currently 38)
+  - `devel`: Current development code (on `main`). **Do not use on production systems!**
 * `<arch>`: **Architecture** of the branch. Possible values:
-  - `x86_64`: For 64-bit CPUs (`x86_64`, `amd64`, or `x64`).
+  - `x86_64`: For 64-bit CPUs (`x86_64`, `amd64`, or `x64`)
   - ~~`x86`: [What year is it!?](https://c.tenor.com/9OcQhlCBNG0AAAAd/what-year-is-it-jumanji.gif)~~
 * `<edition>`: **Edition** (or variant) of the branch: Possible values:
-  - `desktop`: Standard Pantheon desktop.
-  - `desktop-gnome`: Alternate GNOME desktop.
-  - `base`: Legacy version of `desktop`. **Do not use.**
+  - `desktop`: Standard Pantheon desktop
+  - `desktop-gnome`: Alternate GNOME desktop
+  - `base`: Legacy version of `desktop`. **Do not use!**
 
 **As mentioned above, most users will want `sodalite/stable/x86_64/desktop`.**
 
@@ -83,18 +83,18 @@ _For example, `sodalite/stable/x86_64/desktop` exists on the build server and ca
 
 Versioning is as follows, where `<base>-<year>.<release>[.<update>][+<commit>]`:
 
-* `<base>`: Base version of **Fedora Linux**.
-* `<year>`: Year of release using just two digits (i.e. 2023 becomes `23`).
-* `<release>` Incremental release version; for additions, changes, and removals. Resets when a new year occurs, but **does not** reset on a new base version of Fedora Linux.
-  - An example progression would be: `39-23.0` ➔ `39-23.1` ➔ `40-23.2`  ➔ `40-23.3` ➔ `40-24.0`.
-* `<update>` _(optional)_: Incremental update version that occurs when the server rebuilds the exact same release version to update packages.
-  - An example progression would be: `39-23.0` ➔ `39-23.0.1` ➔ `39-23.0.2` ➔ `39-23.1` ➔ `39-23.1.1`.
-  - As builds are not created if no changes are present, this may drift out-of-sync between branches.
-* `<commit>` _(optional)_: Git commit (short version) for non-production versions.
+* `<base>`: Base version of **Fedora Linux**
+* `<year>`: Year of release using just two digits (i.e. 2023 becomes `23`)
+* `<release>` Incremental release version; for additions, changes, and removals. Resets when a new year occurs, but **does not** reset on a new base version of Fedora Linux
+  - An example progression would be: `39-23.0` ➔ `39-23.1` ➔ `40-23.2`  ➔ `40-23.3` ➔ `40-24.0`
+* `<update>` _(optional)_: Incremental update version that occurs when the server rebuilds the exact same release version to update packages
+  - An example progression would be: `39-23.0` ➔ `39-23.0.1` ➔ `39-23.0.2` ➔ `39-23.1` ➔ `39-23.1.1`
+  - As builds are not created if no changes are present, this may drift out-of-sync between branches
+* `<commit>` _(optional)_: Git commit (short version) for non-production versions
   - This will only appear from:
-    - Rebasing to the `devel` version (see <a href="#branches">Branches</a> above).
-    - Building Sodalite yourself with a commit that has not been tagged.
-    - A mistake, usually occuring from a tag that hasn't been pushed (oops!).
+    - Rebasing to the `devel` version (see <a href="#branches">Branches</a> above)
+    - Building Sodalite yourself with a commit that has not been tagged
+    - A mistake, usually occuring from a tag that hasn't been pushed (oops!)
 
 ---
 
@@ -116,21 +116,21 @@ _(todo)_
 
 * [Fedora Linux](https://getfedora.org/) (or other Fedora-based/compatible distros)
 * [rpm-ostree](https://coreos.github.io/rpm-ostree/)
-  - On most Fedora-based distros, this can be installed with `dnf install rpm-ostree`.
+  - On most Fedora-based distros, this can be installed with `dnf install rpm-ostree`
 * Bash
 * [Git LFS](https://git-lfs.com/)
   - As well as including pretty wallpapers, the LFS also includes vital binaries that Sodalite needs to work properly, so don't miss installing this!
-  - Unsure if you have LFS support? Tpe `git lfs`: a help output prints if installed.
+  - Unsure if you have LFS support? Tpe `git lfs`: a help output prints if installed
 
 #### Environment
 * Permission to `sudo`
   - `rpm-ostree` needs superuser access to work: there's no way around this.
 * &gt;10GiB disk space
-  - The repository itself (including submodules) takes up ~300MiB.
-  - Initial builds will take up ~4GiB, with subsequent builds adding to this.
+  - The repository itself (including submodules) takes up ~300MiB
+  - Initial builds will take up ~4GiB, with subsequent builds adding to this
 * Unlimited Internet
-  - The build process caches **a lot** of Fedora packages (around 2.5GiB), so think carefully about doing this on mobile broadband or any other service that imposes a small data allowance on you.
-* An rpm-ostree-based distro, such as such as [Fedora Silverblue](https://silverblue.fedoraproject.org/) &mdash; on either a virtual machine, another physical machine, or your current install (careful!) &mdash; to test builds on.
+  - The build process caches **a lot** of Fedora packages (around 2.5GiB), so think carefully about doing this on mobile broadband or any other service that imposes a small data allowance on you
+* An rpm-ostree-based distro, such as such as [Fedora Silverblue](https://silverblue.fedoraproject.org/) &mdash; on either a virtual machine, another physical machine, or your current install (careful!) &mdash; to test builds on
 * A cuppa _(optional)_ &mdash; this can take a while
 
 ### 2. Getting
@@ -176,11 +176,11 @@ This will usually take 10-15 minutes. Remember when I told you to grab a cuppa? 
 
 * `<edition>` _(optional)_ Edition/variant of Sodalite (defaults to `custom`)
   - This is any of the `sodalite-<edition>.yaml` files listed in `./src/treefiles/`. Either use `sodalite-<edition>` or just `<edition>` as the argument. Currently, there is:
-    - `desktop`: Standard Pantheon desktop.
-    - `desktop-gnome`: Alternate GNOME desktop, intended for possible future versions.
-	- `base`: Old legacy version sourcing `desktop`, purely there for compatibility and will be removed soon.
-    - `custom`: See below point.
-  - `sodalite-custom.yaml` is a good place to employ your own changes instead of modifying any of the other treefiles.
+    - `desktop`: Standard Pantheon desktop
+    - `desktop-gnome`: Alternate GNOME desktop, intended for possible future versions
+	- `base`: Old legacy version sourcing `desktop`, purely there for compatibility and will be removed soon
+    - `custom`: See below point
+  - `sodalite-custom.yaml` is a good place to employ your own changes instead of modifying any of the other treefiles
 * `<working-dir>` _(optional)_ Directory for build output (defaults to `./build`)
 
 #### Additional Notes
@@ -220,7 +220,7 @@ Unless stopped manually, `build.sh` will clean itself up whenever it exits (on b
 
 * `./src/sysroot/common/usr/lib/sodalite-buildinfo`
 * `/var/tmp/rpm-ostree.*/`
-  - This can get large quickly; watch out if you're not letting `build.sh` exit.
+  - This can get large quickly; watch out if you're not letting `build.sh` exit
 
 ### 4. Using
 
@@ -230,23 +230,23 @@ _(todo)_
 
 ### Individuals
 
-* [Fabio "decathorpe" Valentini](https://decathorpe.com/), for providing the extra packages for elementary on Fedora via the [elementary-staging Copr repository](https://copr.fedorainfracloud.org/coprs/decathorpe/elementary-staging/).
-* [Jorge O. Castro](https://github.com/castrojo), for including Sodalite in [awesome-immutable](https://github.com/castrojo/awesome-immutable).
-* [Timothée Ravier](https://tim.siosm.fr), for their extensive guidance to the community concerning Fedora Silverblue.
-* ["Topfi"](https://github.com/ACertainTopfi), for their various contributions.
-* The amazing photographers/artists of the included wallpapers &mdash; [Adrien Olichon](https://unsplash.com/@adrienolichon), [Austin Neill](https://unsplash.com/@arstyy), [Cody Fitzgerald](https://unsplash.com/@cfitz), [Dustin Humes](https://unsplash.com/@dustinhumes_photography), [Jack B.](https://unsplash.com/@nervum), [Jeremy Gerritsen](https://unsplash.com/@jeremygerritsen), [Karsten Würth](https://unsplash.com/@karsten_wuerth), [Max Okhrimenko](https://unsplash.com/@maxokhrimenko), [Nathan Dumlao](https://unsplash.com/@nate_dumlao), [Ryan Stone](https://unsplash.com/@rstone_design), [Smaran Alva](https://unsplash.com/@smal), [Willian Daigneault](https://unsplash.com/@williamdaigneault), and [Zara Walker](https://unsplash.com/@mojoblogs).
+* [Fabio "decathorpe" Valentini](https://decathorpe.com/), for providing the extra packages for elementary on Fedora via the [elementary-staging Copr repository](https://copr.fedorainfracloud.org/coprs/decathorpe/elementary-staging/)
+* [Jorge O. Castro](https://github.com/castrojo), for including Sodalite in [awesome-immutable](https://github.com/castrojo/awesome-immutable)
+* [Timothée Ravier](https://tim.siosm.fr), for their extensive guidance to the community concerning Fedora Silverblue
+* ["Topfi"](https://github.com/ACertainTopfi), for their various contributions
+* The amazing photographers/artists of the included wallpapers &mdash; [Adrien Olichon](https://unsplash.com/@adrienolichon), [Austin Neill](https://unsplash.com/@arstyy), [Cody Fitzgerald](https://unsplash.com/@cfitz), [Dustin Humes](https://unsplash.com/@dustinhumes_photography), [Jack B.](https://unsplash.com/@nervum), [Jeremy Gerritsen](https://unsplash.com/@jeremygerritsen), [Karsten Würth](https://unsplash.com/@karsten_wuerth), [Max Okhrimenko](https://unsplash.com/@maxokhrimenko), [Nathan Dumlao](https://unsplash.com/@nate_dumlao), [Ryan Stone](https://unsplash.com/@rstone_design), [Smaran Alva](https://unsplash.com/@smal), [Willian Daigneault](https://unsplash.com/@williamdaigneault), and [Zara Walker](https://unsplash.com/@mojoblogs)
 
 ### Teams & Organizations
 
-* [elementary](https://elementary.io/team), for building lovely stuff.
+* [elementary](https://elementary.io/team), for building lovely stuff
 * [Fyra Labs](https://fyralabs.com), for maintaining [Terra](https://terra.fyralabs.com/)
-  * The official Fedora repos ran into issues (see [#44](https://github.com/sodaliterocks/sodalite/issues/44)) with Pantheon packages for f37+, potentially dooming Sodalite after f36 reached EoL: Terra solved this.
-* The contributors to [workstation-ostree-config](https://pagure.io/workstation-ostree-config), for a solid ground to work from.
+  * The official Fedora repos ran into issues (see [#44](https://github.com/sodaliterocks/sodalite/issues/44)) with Pantheon packages for f37+, potentially dooming Sodalite after f36 reached EoL: Terra solved this
+* The contributors to [workstation-ostree-config](https://pagure.io/workstation-ostree-config), for a solid ground to work from
 
 ### Miscellaneous
 
 * The [Sodalite mineral](https://en.wikipedia.org/wiki/Sodalite), for the name. [It's a mineral, not a rock, Jesus](https://www.youtube.com/watch?v=r1yYJBzf1VQ)!
-* The [Omicron variant of SARS-CoV-2](https://en.wikipedia.org/wiki/SARS-CoV-2_Omicron_variant), for giving [Ducky](https://github.com/electriduck) the initial free time to make this thing.
+* The [Omicron variant of SARS-CoV-2](https://en.wikipedia.org/wiki/SARS-CoV-2_Omicron_variant), for giving [Ducky](https://github.com/electriduck) the initial free time to make this thing
 
 ## 👀 See Also
 
