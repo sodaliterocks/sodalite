@@ -457,7 +457,7 @@ if [[ $chosen_locale != "" ]]; then
              --title "Locale Selector"
     else
         zenity --info \
-            --text "Locale set to '$chosen_locale'" \
+            --text "Locale set to '$chosen_locale'.\nLogout and login to see changes." \
             --title "Locale Selector"
     fi
 fi
