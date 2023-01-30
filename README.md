@@ -61,7 +61,6 @@ To allow for several versions to co-exist and be developed in tandem with each o
 * `<edition>`: **Edition** (or variant) of the branch: Possible values:
   - `desktop`: Standard Pantheon desktop
   - `desktop-gnome`: Alternate GNOME desktop
-  - `base`: Legacy version of `desktop`. **Do not use!**
 
 **As mentioned above, most users will want `sodalite/stable/x86_64/desktop`.**
 
@@ -179,7 +178,6 @@ This will usually take 10-15 minutes. Remember when I told you to grab a cuppa? 
     - `desktop`: Standard Pantheon desktop
     - `desktop-deepin`: Alternate Deepin desktop, intended for possible future versions
     - `desktop-gnome`: Alternate GNOME desktop, intended for possible future versions
-	- `base`: Old legacy version sourcing `desktop`, purely there for compatibility and will be removed soon
     - `custom`: See below point
   - `sodalite-custom.yaml` is a good place to employ your own changes instead of modifying any of the other treefiles
 * `<working-dir>` _(optional)_ Directory for build output (defaults to `./build`)
