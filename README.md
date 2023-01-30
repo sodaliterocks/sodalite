@@ -35,7 +35,7 @@ If something breaks, you can rollback by running `sudo rpm-ostree rollback` at a
 
 #### Update Schedule
 
-Updates are built on the build server commencing **4:00 GMT** every **Wednesday** and **Saturday**.
+Updates are built on the build server commencing **4:00 GMT/±0** **(20:00 PT/-8)** every **Wednesday** and **Saturday**.
 
 #### `f<version>` Versions
 
