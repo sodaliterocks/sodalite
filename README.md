@@ -177,6 +177,7 @@ This will usually take 10-15 minutes. Remember when I told you to grab a cuppa? 
 * `<edition>` _(optional)_ Edition/variant of Sodalite (defaults to `custom`)
   - This is any of the `sodalite-<edition>.yaml` files listed in `./src/treefiles/`. Either use `sodalite-<edition>` or just `<edition>` as the argument. Currently, there is:
     - `desktop`: Standard Pantheon desktop
+    - `desktop-deepin`: Alternate Deepin desktop, intended for possible future versions
     - `desktop-gnome`: Alternate GNOME desktop, intended for possible future versions
 	- `base`: Old legacy version sourcing `desktop`, purely there for compatibility and will be removed soon
     - `custom`: See below point
