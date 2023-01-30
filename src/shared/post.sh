@@ -55,12 +55,13 @@ fi
 if [[ $(cat $buildinfo_file) != "" ]]; then
     [[ -z $(get_property $buildinfo_file "GIT_TAG") ]] && \
         version_tag="$(get_property $buildinfo_file "GIT_COMMIT")"
-    [[ ! -z $(get_property $buildinfo_file "VARIANT") ]] && \
-        variant="$(get_property $buildinfo_file "VARIANT")"
+    [[ ! -z $(get_property $buildinfo_file "OS_VARIANT") ]] && \
+        variant="$(get_property $buildinfo_file "OS_VARIANT")"
 fi
 
 if [[ -n $variant ]]; then
     case "$variant" in
+        "desktop-deepin") variant_pretty="Deepin" ;;
         "desktop-gnome") variant_pretty="GNOME" ;;
         *) variant_pretty="$variant" ;;
     esac
@@ -102,9 +103,16 @@ if [[ ! -z $variant ]]; then
 fi
 
 if [[ ! -z $version_id ]]; then
-    set_property /etc/upstream-release/lsb-release "ID" "fedora"
-    set_property /etc/upstream-release/lsb-release "PRETTY_NAME" "Fedora Linux $version_id"
-    set_property /etc/upstream-release/lsb-release "VERSION_ID" "$version_id"
+    touch /usr/lib/upstream-os-release
+
+    set_property /usr/lib/upstream-os-release "ID" "fedora"
+    set_property /usr/lib/upstream-os-release "VERSION_ID" "$version_id"
+    set_property /usr/lib/upstream-os-release "PRETTY_NAME" "Fedora Linux $version_id"
+
+    if [[ $version_id == "36" ]]; then
+        mkdir -p /etc/upstream-release
+        ln -s /usr/lib/upstream-os-release /etc/upstream-release/lsb-release
+    fi
 fi
 
 pretty_name="Sodalite $version_pretty"
@@ -115,6 +123,7 @@ set_property /usr/lib/os-release "DOCUMENTATION_URL" "https:\/\/sodalite.rocks\/
 set_property /usr/lib/os-release "HOME_URL" "https:\/\/sodalite.rocks"
 set_property /usr/lib/os-release "ID" "sodalite"
 set_property /usr/lib/os-release "ID_LIKE" "fedora"
+set_property /usr/lib/os-release "LOGO" "distributor-logo"
 set_property /usr/lib/os-release "NAME" "Sodalite"
 set_property /usr/lib/os-release "PRETTY_NAME" "$pretty_name"
 set_property /usr/lib/os-release "SUPPORT_URL" "https:\/\/sodalite.rocks\/support"
@@ -345,6 +354,7 @@ fi
 to_remove+=(
     "/usr/share/backgrounds/f36"
     "/usr/share/backgrounds/f37"
+    "/usr/share/backgrounds/f38"
     "/usr/share/backgrounds/fedora-workstation"
 )
 
@@ -410,7 +420,6 @@ ln -s /usr/bin/rocks.sodalite.hacks /usr/bin/sodalite-hacks
 ln -s /usr/bin/firefox /usr/bin/rocks.sodalite.firefox
 
 /usr/src/rocks.sodalite.firefox/setup.sh
-rm -rf /usr/src/rocks.sodalite.firefox
 rm -f /usr/lib64/firefox/browser/omni.ja_backup
 
 glib-compile-schemas /usr/share/glib-2.0/schemas
@@ -431,14 +440,16 @@ if [[ $core == "gnome" ]]; then
 fi
 
 if [[ $core == "pantheon" ]]; then
-  mv /usr/bin/gnome-software /usr/bin/gnome-software-bin
-  mv /usr/bin/gnome-software-wrapper /usr/bin/gnome-software
+   mv /usr/bin/gnome-software /usr/bin/gnome-software-bin
+   mv /usr/bin/gnome-software-wrapper /usr/bin/gnome-software
 
-  systemctl disable gdm
-  systemctl enable generate-oemconf
-  systemctl enable lightdm
-  systemctl enable touchegg
+   systemctl disable gdm
+   systemctl enable generate-oemconf
+   systemctl enable lightdm
+   systemctl enable touchegg
 fi
 
 systemctl enable sodalite-migrate
+
+rm -rf /usr/src/rocks.sodalite.*
 

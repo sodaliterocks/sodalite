@@ -35,7 +35,7 @@ If something breaks, you can rollback by running `sudo rpm-ostree rollback` at a
 
 #### Update Schedule
 
-Updates are built on the build server commencing **4:00 GMT** every **Wednesday** and **Saturday**.
+Updates are built on the build server commencing **4:00 GMT/±0** **(20:00 PT/-8)** every **Wednesday** and **Saturday**.
 
 #### `f<version>` Versions
 
@@ -49,7 +49,7 @@ To allow for several versions to co-exist and be developed in tandem with each o
 
 * `<name>`: **Name** of the branch; always `sodalite`
 * `<version>`: **Version** of the branch. Possible values:
-  - `stable`:  Rolling-release version based on the current stable release of Fedora Linux (currently 36 &mdash; see [#56](https://github.com/sodaliterocks/sodalite/issues/56))
+  - `stable`:  Rolling-release version based on the current stable release of Fedora Linux (currently 37)
   - `f<version>`: "Long-term" versions based on specific versions of Fedora Linux, which require manual intervention to rebase to a newer version when said version reaches end-of-life. Possible values for `<version>`:
     - `36`: Fedora Linux 36. Reaches end-of-life on 16th May 2023 (2023-05-16)
     - `37`: Fedora Linux 37. Reaches end-of-life on 14th Nov 2023 (2023-11-14)
@@ -61,7 +61,6 @@ To allow for several versions to co-exist and be developed in tandem with each o
 * `<edition>`: **Edition** (or variant) of the branch: Possible values:
   - `desktop`: Standard Pantheon desktop
   - `desktop-gnome`: Alternate GNOME desktop
-  - `base`: Legacy version of `desktop`. **Do not use!**
 
 **As mentioned above, most users will want `sodalite/stable/x86_64/desktop`.**
 
@@ -177,8 +176,8 @@ This will usually take 10-15 minutes. Remember when I told you to grab a cuppa? 
 * `<edition>` _(optional)_ Edition/variant of Sodalite (defaults to `custom`)
   - This is any of the `sodalite-<edition>.yaml` files listed in `./src/treefiles/`. Either use `sodalite-<edition>` or just `<edition>` as the argument. Currently, there is:
     - `desktop`: Standard Pantheon desktop
+    - `desktop-deepin`: Alternate Deepin desktop, intended for possible future versions
     - `desktop-gnome`: Alternate GNOME desktop, intended for possible future versions
-	- `base`: Old legacy version sourcing `desktop`, purely there for compatibility and will be removed soon
     - `custom`: See below point
   - `sodalite-custom.yaml` is a good place to employ your own changes instead of modifying any of the other treefiles
 * `<working-dir>` _(optional)_ Directory for build output (defaults to `./build`)

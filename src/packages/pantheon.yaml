@@ -5,6 +5,7 @@ packages:
  - elementary-greeter
  - elementary-icon-theme
  - elementary-notifications
+ - elementary-onboarding
  - elementary-print
  - elementary-settings-daemon
  - elementary-shortcut-overlay
