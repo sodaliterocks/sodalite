@@ -3,7 +3,6 @@ packages:
  - firewall-config
  - gnome-font-viewer
  - gnome-software # Replacement for AppCenter
- #- lightdm-gtk-greeter # f36 only
  - NetworkManager-openconnect
  - NetworkManager-openconnect-gnome
  - NetworkManager-openvpn
