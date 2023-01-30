@@ -13,7 +13,7 @@ add-files: [
   # /etc
   ["../sysroot/cores/pantheon/etc/dconf/db/local.d/01-elementary-theme", "/etc/dconf/db/local.d/10-elementary-theme"],
   ["../../lib/elementary.default-settings/cups/default-testpage.pdf", "/etc/cups/default-testpage.pdf"],
-  ["../../lib/elementary.default-settings/gtk/settings.ini", "/etc/gtk/settings.ini"],
+  ["../sysroot/cores/pantheon/etc/gtk-3.0/settings.ini", "/etc/gtk-3.0/settings.ini"],
   ["../sysroot/cores/pantheon/etc/lightdm/lightdm-gtk-greeter.conf", "/etc/lightdm/lightdm-gtk-greeter.conf"],
 
   # /etc/skel
