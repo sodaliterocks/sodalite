@@ -7,7 +7,7 @@ include: [
 ]
 
 releasever: "36"
-automatic-version-prefix: "${releasever}-23.4"
+automatic-version-prefix: "${releasever}-23.5"
 automatic-version-suffix: "."
 mutate-os-release: "${releasever}"
 
