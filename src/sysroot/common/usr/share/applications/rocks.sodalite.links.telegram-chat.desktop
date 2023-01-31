@@ -1,0 +1,16 @@
+[Desktop Entry]
+Name=Sodalite on Telegram
+Comment=@sodalitechat on Telegram
+Exec=rocks.sodalite.links telegram-chat
+Icon=distributor-logo
+Keywords=sodalite;chat;telegram
+Actions=HideApp;
+Terminal=false
+Type=Application
+StartupNotify=true
+Categories=Other;
+
+[Desktop Action HideApp]
+Name=Hide Entry
+Exec=rocks.sodalite.hacks hide-app --desktop-file rocks.sodalite.links.telegram-chat --confirm-before-hiding
+
