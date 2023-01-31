@@ -49,6 +49,7 @@ add-files: [
   ["../sysroot/common/usr/bin/detach", "/usr/bin/detach"],
   ["../sysroot/common/usr/bin/rocks.sodalite.flatpak-helper", "/usr/bin/rocks.sodalite.flatpak-helper"],
   ["../sysroot/common/usr/bin/rocks.sodalite.http-server", "/usr/bin/rocks.sodalite.http-server"],
+  ["../sysroot/common/usr/bin/rocks.sodalite.links", "/usr/bin/rocks.sodalite.links"],
   ["../sysroot/common/usr/bin/rocks.sodalite.phone-mirror", "/usr/bin/rocks.sodalite.phone-mirror"],
   ["../sysroot/common/usr/bin/rocks.sodalite.user-daemon", "/usr/bin/rocks.sodalite.user-daemon"],
   ["../sysroot/common/usr/bin/soda", "/usr/bin/soda"],
@@ -60,6 +61,7 @@ add-files: [
   ["../../lib/sodaliterocks.hacks/src/plugins/auto-update.sh", "/usr/libexec/rocks.sodalite.hacks/plugins/auto-update.sh"],
   ["../../lib/sodaliterocks.hacks/src/plugins/cleanup.sh", "/usr/libexec/rocks.sodalite.hacks/plugins/cleanup.sh"],
   ["../../lib/sodaliterocks.hacks/src/plugins/flatpak.sh", "/usr/libexec/rocks.sodalite.hacks/plugins/flatpak.sh"],
+  ["../../lib/sodaliterocks.hacks/src/plugins/hide-app.sh", "/usr/libexec/rocks.sodalite.hacks/plugins/hide-app.sh"],
   ["../../lib/sodaliterocks.hacks/src/plugins/migrate.sh", "/usr/libexec/rocks.sodalite.hacks/plugins/migrate.sh"],
   ["../../lib/sodaliterocks.hacks/src/plugins/nvidia.sh", "/usr/libexec/rocks.sodalite.hacks/plugins/nvidia.sh"],
   ["../../lib/sodaliterocks.hacks/src/plugins/oemconf.sh", "/usr/libexec/rocks.sodalite.hacks/plugins/oemconf.sh"],
@@ -69,8 +71,11 @@ add-files: [
   ["../sysroot/common/usr/libexec/rocks.sodalite.cleanup", "/usr/libexec/rocks.sodalite.cleanup"],
 
   # /usr/share
-  ["../sysroot/common/usr/share/applications/rocks.sodalite.phone-mirror.desktop", "/usr/share/applications/rocks.sodalite.phone-mirror.desktop"],
   ["../sysroot/common/usr/share/glib-2.0/schemas/00_sodalite.gschema.override", "/usr/share/glib-2.0/schemas/00_sodalite.gschema.override"],
+
+  # /usr/share/applications
+  ["../sysroot/common/usr/share/applications/rocks.sodalite.phone-mirror.desktop", "/usr/share/applications/rocks.sodalite.phone-mirror.desktop"],
+  ["../sysroot/common/usr/share/applications/rocks.sodalite.links.telegram-chat.desktop", "/usr/share/applications/rocks.sodalite.links.telegram-chat.desktop"],
 
   # /usr/share/backgrounds
   ["../../lfs/wallpapers/adrien-olichon-gXqgs6Smvw-unsplash.jpg", "/usr/share/backgrounds/default/adrien-olichon-gXqgs6Smvw-unsplash.jpg"],

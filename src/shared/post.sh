@@ -55,12 +55,13 @@ fi
 if [[ $(cat $buildinfo_file) != "" ]]; then
     [[ -z $(get_property $buildinfo_file "GIT_TAG") ]] && \
         version_tag="$(get_property $buildinfo_file "GIT_COMMIT")"
-    [[ ! -z $(get_property $buildinfo_file "VARIANT") ]] && \
-        variant="$(get_property $buildinfo_file "VARIANT")"
+    [[ ! -z $(get_property $buildinfo_file "OS_VARIANT") ]] && \
+        variant="$(get_property $buildinfo_file "OS_VARIANT")"
 fi
 
 if [[ -n $variant ]]; then
     case "$variant" in
+        "desktop-deepin") variant_pretty="Deepin" ;;
         "desktop-gnome") variant_pretty="GNOME" ;;
         *) variant_pretty="$variant" ;;
     esac
@@ -439,13 +440,13 @@ if [[ $core == "gnome" ]]; then
 fi
 
 if [[ $core == "pantheon" ]]; then
-  mv /usr/bin/gnome-software /usr/bin/gnome-software-bin
-  mv /usr/bin/gnome-software-wrapper /usr/bin/gnome-software
+   mv /usr/bin/gnome-software /usr/bin/gnome-software-bin
+   mv /usr/bin/gnome-software-wrapper /usr/bin/gnome-software
 
-  systemctl disable gdm
-  systemctl enable generate-oemconf
-  systemctl enable lightdm
-  systemctl enable touchegg
+   systemctl disable gdm
+   systemctl enable generate-oemconf
+   systemctl enable lightdm
+   systemctl enable touchegg
 fi
 
 systemctl enable sodalite-migrate
