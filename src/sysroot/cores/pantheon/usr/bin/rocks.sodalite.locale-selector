@@ -411,8 +411,8 @@ function generate_locale_picker() {
         echo "$(echo $locale | cut -d '.' -f 2 | cut -d '@' -f 1)"
         echo "$(get_variant_from_locale $locale)"
     done < <(localectl list-locales) | zenity --list \
-        --title "Locale Selection" \
-        --text "Select a locale to use..." \
+        --title "Locale Selector" \
+        --text "Select a locale for the user '$PKEXEC_USER':" \
         --height=400 \
         --width=650 \
         --column "Locale" \
