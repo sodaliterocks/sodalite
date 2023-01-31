@@ -12,6 +12,7 @@ function get_language_from_locale() {
     locale_language="$(echo $locale | cut -d'_' -f 1 | cut -d'.' -f 1)"
 
     case "$locale_language" in
+        "C") echo "POSIX" ;;
         "aa") echo "Afar" ;;
         "af") echo "Afrikaans" ;;
         "agr") echo "Aguaruna" ;;
