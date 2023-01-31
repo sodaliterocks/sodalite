@@ -3,10 +3,15 @@
 
 variant="$1"
 working_dir="$2"
+
 base_dir="$(dirname "$(realpath -s "$0")")"
 buildinfo_file="$base_dir/src/sysroot/common/usr/lib/sodalite-buildinfo"
 tests_dir="$base_dir/tests"
+
+git_commit="nogit"
+git_tag=""
 start_time=$(date +%s)
+unified="false"
 
 function emj() {
     emoji="$1"
@@ -77,23 +82,11 @@ fi
 [[ $variant == "pantheon" ]] && variant="desktop"
 
 echo "$(emj "🪛")Setting up..."
+
 [[ $variant == *.yaml ]] && variant="$(echo $variant | sed s/.yaml//)"
 [[ $variant == sodalite* ]] && variant="$(echo $variant | sed s/sodalite-//)"
 [[ -z $variant ]] && variant="custom"
 [[ -z "$working_dir" ]] && working_dir="$base_dir/build"
-
-ostree_cache_dir="$working_dir/cache"
-ostree_repo_dir="$working_dir/repo"
-build_meta_dir="$working_dir/meta"
-highscore_file="$build_meta_dir/highscore"
-lockfile="$base_dir/src/shared/overrides.yaml"
-treefile="$base_dir/src/treefiles/sodalite-$variant.yaml"
-
-if [[ ! -f $treefile ]]; then
-    die "sodalite-$variant does not exist"
-fi
-
-ref="$(echo "$(cat "$treefile")" | grep "ref:" | sed "s/ref: //" | sed "s/\${basearch}/$(uname -m)/")"
 
 if [[ $(command -v "git") ]]; then
     if [[ -d "$base_dir/.git" ]]; then
@@ -104,13 +97,24 @@ if [[ $(command -v "git") ]]; then
     fi
 fi
 
+build_meta_dir="$working_dir/meta/$git_commit"
+ostree_cache_dir="$working_dir/cache"
+ostree_repo_dir="$working_dir/repo"
+lockfile="$base_dir/src/shared/overrides.yaml"
+treefile="$base_dir/src/treefiles/sodalite-$variant.yaml"
+
 mkdir -p $ostree_cache_dir
 mkdir -p $ostree_repo_dir
 mkdir -p $build_meta_dir
 chown -R root:root "$working_dir"
 
+[[ ! -f $treefile ]] && die "sodalite-$variant does not exist"
+[[ $variant == *"-unified" ]] && unified="true"
+
+ref="$(echo "$(cat "$treefile")" | grep "ref:" | sed "s/ref: //" | sed "s/\${basearch}/$(uname -m)/")"
+
 if [ ! "$(ls -A $ostree_repo_dir)" ]; then
-   echo "$(emj "🆕")Initializing OSTree repository..."
+   echo "$(emj "🆕")Initializing repository..."
    ost init --mode=archive
 fi
 
@@ -121,8 +125,9 @@ buildinfo_content="BUILD_DATE=\"$(date +"%Y-%m-%d %T %z")\"
 \nBUILD_TOOL=\"rpm-ostree $(echo "$(rpm-ostree --version)" | grep "Version:" | sed "s/ Version: //" | tr -d "'")+$(echo "$(rpm-ostree --version)" | grep "Git:" | sed "s/ Git: //")\"
 \nGIT_COMMIT=$git_commit
 \nGIT_TAG=$git_tag
-\nREF=\"$ref\"
-\nVARIANT=\"$variant\""
+\nOS_REF=\"$ref\"
+\nOS_UNIFIED=$unified
+\nOS_VARIANT=\"$variant\""
 
 echo -e $buildinfo_content > $buildinfo_file
 
@@ -130,10 +135,17 @@ echo "$(emj "⚡")Building tree..."
 echo "================================================================================"
 
 if [[ $SODALITE_BUILD_DRY_BUILD_SLEEP == "" ]]; then
-    rpm-ostree compose tree \
-        --cachedir="$ostree_cache_dir" \
-        --repo="$ostree_repo_dir" \
-        `[[ -s $lockfile ]] && echo "--ex-lockfile="$lockfile""` $treefile
+    compose_args=""
+    compose_cmd="rpm-ostree compose tree"
+
+    compose_args+="--repo=\"$ostree_repo_dir\""
+    [[ $ostree_cache_dir != "" ]] && compose_args+=" --cachedir=\"$ostree_cache_dir\""
+    [[ -s $lockfile ]] && compose_args+=" --ex-lockfile=\"$lockfile\""
+    [[ $unified == "true" ]] && compose_args+=" --unified-core"
+
+    compose_cmd="$compose_cmd $compose_args $treefile"
+
+    eval "$compose_cmd"
 else
     echo "Doing things..."
     sleep $SODALITE_BUILD_DRY_BUILD_SLEEP
@@ -203,6 +215,7 @@ fi
 
 end_time=$(( $(date +%s) - $start_time ))
 highscore="false"
+highscore_file="$build_meta_dir/highscore"
 prev_highscore=""
 
 if [[ ! -f "$highscore_file" ]]; then

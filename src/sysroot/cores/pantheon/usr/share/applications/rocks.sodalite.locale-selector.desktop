@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=Locale Selector
+Comment=Configure locale for the current user
+Icon=preferences-desktop-locale
+Exec=rocks.sodalite.locale-selector
+Terminal=false
+StartupNotify=true
+Type=Application
+Categories=GNOME;GTK;System;
+Keywords=Language;Locale;Preferences;
+NotShowIn=GNOME;
