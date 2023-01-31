@@ -13,7 +13,7 @@ add-files: [
   # /etc
   ["../sysroot/cores/pantheon/etc/dconf/db/local.d/01-elementary-theme", "/etc/dconf/db/local.d/10-elementary-theme"],
   ["../../lib/elementary.default-settings/cups/default-testpage.pdf", "/etc/cups/default-testpage.pdf"],
-  ["../../lib/elementary.default-settings/gtk/settings.ini", "/etc/gtk/settings.ini"],
+  ["../sysroot/cores/pantheon/etc/gtk-3.0/settings.ini", "/etc/gtk-3.0/settings.ini"],
   ["../sysroot/cores/pantheon/etc/lightdm/lightdm-gtk-greeter.conf", "/etc/lightdm/lightdm-gtk-greeter.conf"],
 
   # /etc/skel
@@ -36,6 +36,7 @@ add-files: [
   ["../sysroot/cores/pantheon/usr/bin/gnome-control-center", "/usr/bin/gnome-control-center"],
   ["../sysroot/cores/pantheon/usr/bin/gnome-software-wrapper", "/usr/bin/gnome-software-wrapper"],
   ["../sysroot/cores/pantheon/usr/bin/plank-wrapper", "/usr/bin/plank-wrapper"],
+  ["../sysroot/cores/pantheon/usr/bin/rocks.sodalite.locale-selector", "/usr/bin/rocks.sodalite.locale-selector"],
 
   # /usr/lib
   ["../../lfs/binaries/debian/com.github.mvbonin.switchboard-plug-indicators/0.1~amd64/usr/lib/x86_64-linux-gnu/switchboard/hardware/libindicators.so", "/usr/lib64/switchboard/personal/libindicators.so"],
@@ -63,6 +64,7 @@ add-files: [
   ["../sysroot/cores/pantheon/usr/share/applications/nm-connection-editor.desktop", "/usr/share/applications/nm-connection-editor.desktop"],
   ["../sysroot/cores/pantheon/usr/share/applications/org.gnome.DiskUtility.desktop", "/usr/share/applications/org.gnome.DiskUtility.desktop"],
   ["../sysroot/cores/pantheon/usr/share/applications/org.gnome.Software.desktop", "/usr/share/applications/org.gnome.Software.desktop"],
+  ["../sysroot/cores/pantheon/usr/share/applications/rocks.sodalite.locale-selector.desktop", "/usr/share/applications/rocks.sodalite.locale-selector.desktop"],
 
   # /usr/share/icons
   ["../../lfs/icons/export/places/16/distributor-logo.svg", "/usr/share/icons/elementary/places/16/distributor-logo.svg"],

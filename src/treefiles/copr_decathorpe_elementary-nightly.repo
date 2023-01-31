@@ -1,6 +1,6 @@
 [copr.decathorpe.elementary-nightly]
 name=Copr: decathorpe/elementary-nightly
-baseurl=https://download.copr.fedorainfracloud.org/results/decathorpe/elementary-nightly/fedora-36-$basearch/
+baseurl=https://download.copr.fedorainfracloud.org/results/decathorpe/elementary-nightly/fedora-$releasever-$basearch/
 type=rpm-md
 skip_if_unavailable=True
 gpgcheck=1

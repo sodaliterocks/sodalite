@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+. /usr/libexec/rocks.sodalite.hacks/utils.sh
+
+url=""
+url_fallback=""
+
+telegram_username="sodalitechat"
+
+case "$1" in
+    "github")
+        url="https://github.com/sodaliterocks"
+        ;;
+    "telegram-chat")
+        url="tg://resolve?domain=$telegram_username"
+        url_fallback="https://t.me/$telegram_username"
+        ;;
+esac
+
+if [[ $url != "" ]]; then
+    xdg-open "$url" &>/dev/null
+    [[ $? != 0 ]] && xdg-open "$url_fallback"
+    exit 0
+else
+    die "No link for '$1'"
+fi

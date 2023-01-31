@@ -40,8 +40,10 @@ function update_gconf() {
     current_wallpaper="$(parse_file_uri $(gsettings get org.gnome.desktop.background picture-uri))"
 
     if [[ $(get_core) == "pantheon" ]]; then
-        system_locale="$(localectl status | grep "System Locale:" | cut -d "=" -f2)"
-        gsettings set org.gnome.system.locale region "$system_locale"
+        if [[ "$(gsettings get org.gnome.system.locale region)" == "" ]]; then
+            system_locale="$(localectl status | grep "System Locale:" | cut -d "=" -f2)"
+            gsettings set org.gnome.system.locale region "$system_locale"
+        fi
     fi
 
     if [[ ! -f "$current_wallpaper" ]]; then
