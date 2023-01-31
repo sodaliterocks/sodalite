@@ -1,0 +1,464 @@
+#!/usr/bin/env bash
+
+. /usr/libexec/rocks.sodalite.hacks/utils.sh
+
+if [[ $(id -u) != 0 ]]; then
+    pkexec env DISPLAY=$DISPLAY PKEXEC_USER=$(whoami) XAUTHORITY=$XAUTHORITY $(realpath -s "$0") $@ # TODO: Move into hacks utils
+    exit $?
+fi
+
+function get_language_from_locale() {
+    locale="$1"
+    locale_language="$(echo $locale | cut -d'_' -f 1 | cut -d'.' -f 1)"
+
+    case "$locale_language" in
+        "C") echo "POSIX" ;;
+        "aa") echo "Afar" ;;
+        "af") echo "Afrikaans" ;;
+        "agr") echo "Aguaruna" ;;
+        "ak") echo "Akan" ;;
+        "am") echo "Amharic" ;;
+        "an") echo "Aragonese" ;;
+        "anp") echo "Angika" ;;
+        "ar") echo "Arabic" ;;
+        "as") echo "Assamese" ;;
+        "ast") echo "Asturian" ;;
+        "ayc") echo "Southern Aymara" ;;
+        "az") echo "Azerbaijani" ;;
+        "be") echo "Belarusian" ;;
+        "bem") echo "Bemba (Zambia)" ;;
+        "ber") echo "Berber" ;;
+        "bhb") echo "Bhili" ;;
+        "bho") echo "Bhojpuri" ;;
+        "bg") echo "Bulgarian" ;;
+        "bi") echo "Bislama" ;;
+        "bn") echo "Bengali" ;;
+        "bo") echo "Tibetan" ;;
+        "br") echo "Breton" ;;
+        "brx") echo "Bodo (India)" ;;
+        "bs") echo "Bosnian" ;;
+        "byn") echo "Bilin" ;;
+        "ca") echo "Catalan" ;;
+        "ce") echo "Chechen" ;;
+        "chr") echo "Cherokee" ;;
+        "ckb") echo "Central Kurdish" ;;
+        "cmn") echo "Mandarin Chinese" ;;
+        "crh") echo "Crimean Tatar" ;;
+        "cs") echo "Czech" ;;
+        "csb") echo "Kashubian" ;;
+        "cv") echo "Chuvash" ;;
+        "cy") echo "Welsh" ;;
+        "da") echo "Danish" ;;
+        "de") echo "German" ;;
+        "doi") echo "Dogri" ;;
+        "dsb") echo "Lower Sorbian" ;;
+        "dv") echo "Divehi" ;;
+        "dz") echo "Dzongkha" ;;
+        "el") echo "Greek" ;;
+        "en") echo "English" ;;
+        "eo") echo "Esperanto" ;;
+        "es") echo "Spanish" ;;
+        "et") echo "Estonian" ;;
+        "eu") echo "Basque" ;;
+        "fa") echo "Persian" ;;
+        "ff") echo "Fulah" ;;
+        "fi") echo "Finnish" ;;
+        "fil") echo "Filipino" ;;
+        "fo") echo "Faroese" ;;
+        "fr") echo "French" ;;
+        "fur") echo "Friulian" ;;
+        "fy") echo "Western Frisian" ;;
+        "ga") echo "Irish" ;;
+        "gd") echo "Gaelic" ;;
+        "gez") echo "Geez" ;;
+        "gl") echo "Galician" ;;
+        "gu") echo "Gujarati" ;;
+        "gv") echo "Manx" ;;
+        "ha") echo "Hausa" ;;
+        "hak") echo "Hakka Chinese" ;;
+        "he") echo "Hebrew" ;;
+        "hi") echo "Hindi" ;;
+        "hif") echo "Fiji Hindi" ;;
+        "hne") echo "Chhattisgarhi" ;;
+        "hr") echo "Croatian" ;;
+        "hsb") echo "Upper Sorbian" ;;
+        "ht") echo "Haitian" ;;
+        "hu") echo "Hungarian" ;;
+        "hy") echo "Armenian" ;;
+        "ia") echo "Interlingua" ;;
+        "id") echo "Indonesian" ;;
+        "ig") echo "Igbo" ;;
+        "ik") echo "Inupiaq" ;;
+        "is") echo "Icelandic" ;;
+        "it") echo "Itlian" ;;
+        "iu") echo "Inuktitut" ;;
+        "ja") echo "Japanese" ;;
+        "ka") echo "Georgian" ;;
+        "kab") echo "Kabyle" ;;
+        "kk") echo "Kazakh" ;;
+        "kl") echo "Kalaallisut" ;;
+        "km") echo "Central Khmer" ;;
+        "kn") echo "Kannada" ;;
+        "ko") echo "Korean" ;;
+        "kok") echo "Konkani" ;;
+        "ks") echo "Kashmiri" ;;
+        "ku") echo "Kurdish" ;;
+        "kw") echo "Cornish" ;;
+        "ky") echo "Kirghiz" ;;
+        "lb") echo "Luxembourgish" ;;
+        "lg") echo "Ganda" ;;
+        "li") echo "Limburgan" ;;
+        "lij") echo "Ligurian" ;;
+        "ln") echo "Lingala" ;;
+        "lo") echo "Lao" ;;
+        "lt") echo "Lithuanian" ;;
+        "lv") echo "Latvian" ;;
+        "lzh") echo "Literary Chinese" ;;
+        "mag") echo "Magahi" ;;
+        "mai") echo "Maithili" ;;
+        "mfe") echo "Morisyen" ;;
+        "mg") echo "Malagasy" ;;
+        "mhr") echo "Eastern Mari" ;;
+        "mi") echo "Maori" ;;
+        "miq") echo "Mískito" ;;
+        "mjw") echo "Karbi" ;;
+        "mk") echo "Macedonian" ;;
+        "ml") echo "Malayalam" ;;
+        "mn") echo "Mongolian" ;;
+        "mni") echo "Manipuri" ;;
+        "mnw") echo "Mon" ;;
+        "mr") echo "Marathi" ;;
+        "ms") echo "Malay" ;;
+        "mt") echo "Maltese" ;;
+        "my") echo "Burmese" ;;
+        "nan") echo "Min Nan Chinese" ;;
+        "nb") echo "Norwegian Bokmål" ;;
+        "nds") echo "Low German" ;;
+        "ne") echo "Nepali" ;;
+        "nhn") echo "Central Nahuatl" ;;
+        "niu") echo "Niuean" ;;
+        "nl") echo "Dutch" ;;
+        "nn") echo "Norwegian Nynorsk" ;;
+        "nr") echo "South Ndebele" ;;
+        "nso") echo "Northern Sotho" ;;
+        "oc") echo "Occitan" ;;
+        "om") echo "Oromo" ;;
+        "or") echo "Oriya" ;;
+        "os") echo "Ossetian" ;;
+        "pa") echo "Punjabi" ;;
+        "pap") echo "Papiamento" ;;
+        "pl") echo "Polish" ;;
+        "ps") echo "Pashto" ;;
+        "pt") echo "Portuguese" ;;
+        "quz") echo "Cusco Quechu" ;;
+        "raj") echo "Rajasthani" ;;
+        "rif") echo "Tarifit" ;;
+        "ro") echo "Romanian" ;;
+        "ru") echo "Russian" ;;
+        "rw") echo "Kinyarwanda" ;;
+        "sa") echo "Sanskrit" ;;
+        "sah") echo "Yakut" ;;
+        "sat") echo "Santali" ;;
+        "sc") echo "Sardinian" ;;
+        "sd") echo "Sindhi" ;;
+        "se") echo "Northern Sami" ;;
+        "sgs") echo "Samogitian" ;;
+        "shn") echo "Shan" ;;
+        "shs") echo "Shuswap" ;;
+        "si") echo "Sinhala" ;;
+        "sid") echo "Sidamo" ;;
+        "sk") echo "Slovak" ;;
+        "sl") echo "Slovenian" ;;
+        "sm") echo "Samoan" ;;
+        "so") echo "Somali" ;;
+        "sq") echo "Albanian" ;;
+        "sr") echo "Serbian" ;;
+        "ss") echo "Swati" ;;
+        "st") echo "Southern Sotho" ;;
+        "sv") echo "Swedish" ;;
+        "sw") echo "Swahili" ;;
+        "syr") echo "Syriac" ;;
+        "szl") echo "Silesian" ;;
+        "ta") echo "Tamil" ;;
+        "tcy") echo "Tulu" ;;
+        "te") echo "Telugu" ;;
+        "tg") echo "Tajik" ;;
+        "th") echo "Thai" ;;
+        "the") echo "Chitwania Tharu" ;;
+        "ti") echo "Tigrinya" ;;
+        "tig") echo "Tigre" ;;
+        "tk") echo "Turkmen" ;;
+        "tl") echo "Tagalog" ;;
+        "tn") echo "Tswana" ;;
+        "to") echo "Tonga" ;;
+        "tpi") echo "Tok Pisin" ;;
+        "tr") echo "Turkish" ;;
+        "ts") echo "Tsonga" ;;
+        "tt") echo "Tatar" ;;
+        "ug") echo "Uighur" ;;
+        "uk") echo "Ukrainian" ;;
+        "unm") echo "Unami" ;;
+        "ur") echo "Urdu" ;;
+        "uz") echo "Uzbek" ;;
+        "ve") echo "Venda" ;;
+        "vi") echo "Vietnamese" ;;
+        "wa") echo "Walloon" ;;
+        "wae") echo "Walser" ;;
+        "wal") echo "Wolaitta" ;;
+        "wo") echo "Wolof" ;;
+        "xh") echo "Xhosa" ;;
+        "yi") echo "Yiddish" ;;
+        "yo") echo "Yoruba" ;;
+        "yue") echo "Yue Chinese" ;;
+        "yuw") echo "Yau" ;;
+        "zh") echo "Chinese" ;;
+        "zu") echo "Zulu" ;;
+        *) echo "($locale_language?)" ;;
+    esac
+}
+
+function get_region_from_locale() {
+    locale="$1"
+    locale_region=""
+
+    [[ $locale == *"_"* ]] && locale_region="$(echo $locale | cut -d'_' -f 2 | cut -d '.' -f 1)"
+
+    if [[ $locale_region != "" ]]; then
+        case $locale_region in
+            "AD") echo "Andorra" ;;
+            "AE") echo "United Arab Emirates" ;;
+            "AF") echo "Afghanistan" ;;
+            "AG") echo "Antigua and Barbuda" ;;
+            "AL") echo "Albania" ;;
+            "AM") echo "Aremnia" ;;
+            "AR") echo "Argentinia" ;;
+            "AT") echo "Austria" ;;
+            "AU") echo "Australia" ;;
+            "AW") echo "Aruba" ;;
+            "AZ") echo "Azerbaijan" ;;
+            "BA") echo "Bosnia and Herzegovina" ;;
+            "BD") echo "Bangldesh" ;;
+            "BE") echo "Belgium" ;;
+            "BG") echo "Bulgaria" ;;
+            "BH") echo "Bahrain" ;;
+            "BO") echo "Bolivia" ;;
+            "BR") echo "Brazil" ;;
+            "BT") echo "Bhutan" ;;
+            "BW") echo "Botswana" ;;
+            "BY") echo "Belarus" ;;
+            "CA") echo "Canada" ;;
+            "CD") echo "Congo" ;;
+            "CH") echo "Switzerland" ;;
+            "CL") echo "Chile" ;;
+            "CN") echo "China" ;;
+            "CO") echo "Colombia" ;;
+            "CR") echo "Costa Rica" ;;
+            "CU") echo "Cuba" ;;
+            "CW") echo "Curaçao" ;;
+            "CY") echo "Cyprus" ;;
+            "CZ") echo "Czechia" ;;
+            "DE") echo "Germany" ;;
+            "DJ") echo "Djibouti" ;;
+            "DK") echo "Denmark" ;;
+            "DO") echo "Dominican Republic" ;;
+            "DZ") echo "Algeria" ;;
+            "EC") echo "Ecuador" ;;
+            "EE") echo "Esotnia" ;;
+            "EG") echo "Eygpt" ;;
+            "ER") echo "Eritrea" ;;
+            "ES") echo "Spain" ;;
+            "ET") echo "Ethiopia" ;;
+            "FI") echo "Finland" ;;
+            "FJ") echo "Fiji" ;;
+            "FO") echo "Faroe Islands" ;;
+            "FR") echo "France" ;;
+            "GB") echo "United Kingdom" ;;
+            "GE") echo "Georgia" ;;
+            "GH") echo "Ghana" ;;
+            "GL") echo "Greeland" ;;
+            "GR") echo "Greece" ;;
+            "GT") echo "Guatemala" ;;
+            "HK") echo "Hong Kong" ;;
+            "HN") echo "Honduras" ;;
+            "HR") echo "Croatia" ;;
+            "HT") echo "Haiti" ;;
+            "HU") echo "Hungary" ;;
+            "ID") echo "Indonesia" ;;
+            "IE") echo "Ireland" ;;
+            "IL") echo "Israel" ;;
+            "IN") echo "India" ;;
+            "IQ") echo "Iraq" ;;
+            "IR") echo "Iran" ;;
+            "IS") echo "Iceland" ;;
+            "IT") echo "Italy" ;;
+            "JO") echo "Jordan" ;;
+            "JP") echo "Japan" ;;
+            "KE") echo "Kenya" ;;
+            "KG") echo "Kyrgyzstan" ;;
+            "KH") echo "Cambodia" ;;
+            "KR") echo "Korea" ;;
+            "KW") echo "Kuwait" ;;
+            "KZ") echo "Kazakhstan" ;;
+            "LA") echo "Lao People's Democratic Republic" ;;
+            "LB") echo "Lebanon" ;;
+            "LI") echo "Liechtenstein" ;;
+            "LK") echo "Sri Lanka" ;;
+            "LT") echo "Lithuania" ;;
+            "LU") echo "Luxembourg" ;;
+            "LV") echo "Latvia" ;;
+            "LY") echo "Libya" ;;
+            "MA") echo "Morocco" ;;
+            "ME") echo "Montenegro" ;;
+            "MG") echo "Madagascar" ;;
+            "MK") echo "North Macedonia" ;;
+            "MM") echo "Myanmar" ;;
+            "MN") echo "Mongolia" ;;
+            "MT") echo "Malta" ;;
+            "MU") echo "Mauritius" ;;
+            "MV") echo "Maldives" ;;
+            "MX") echo "Mexico" ;;
+            "MY") echo "Malaysia" ;;
+            "NG") echo "Nigeria" ;;
+            "NI") echo "Nicaragua" ;;
+            "NL") echo "Netherlands" ;;
+            "NO") echo "Norway" ;;
+            "NP") echo "Nepal" ;;
+            "NU") echo "Niue" ;;
+            "NZ") echo "New Zealand" ;;
+            "OM") echo "Oman" ;;
+            "PA") echo "Panama" ;;
+            "PE") echo "Peru" ;;
+            "PG") echo "Papua New Guinea" ;;
+            "PH") echo "Philippines" ;;
+            "PK") echo "Pakistan" ;;
+            "PL") echo "Poland" ;;
+            "PR") echo "Puerto Rico" ;;
+            "PT") echo "Portugal" ;;
+            "PY") echo "Paraguay" ;;
+            "QA") echo "Qatar" ;;
+            "RO") echo "Romania" ;;
+            "RS") echo "Serbia" ;;
+            "RU") echo "Russian Federation" ;;
+            "RW") echo "Rwanada" ;;
+            "SA") echo "Saudi Arabia" ;;
+            "SC") echo "Seychelles" ;;
+            "SD") echo "Sudan" ;;
+            "SE") echo "Sweden" ;;
+            "SG") echo "Singapore" ;;
+            "SI") echo "Slovenia" ;;
+            "SK") echo "Slovakia" ;;
+            "SN") echo "Senegal" ;;
+            "SO") echo "Somalia" ;;
+            "SS") echo "South Sudan" ;;
+            "SV") echo "El Salvador" ;;
+            "SY") echo "Syrian Arab Republic" ;;
+            "TH") echo "Thailand" ;;
+            "TJ") echo "Tajikistan" ;;
+            "TM") echo "Turkmenistan" ;;
+            "TN") echo "Tunisia" ;;
+            "TO") echo "Tonga" ;;
+            "TR") echo "Türkiye" ;;
+            "TW") echo "Taiwan" ;;
+            "TZ") echo "Tanzania" ;;
+            "UA") echo "Ukraine" ;;
+            "UG") echo "Uganda" ;;
+            "US") echo "United States of America" ;;
+            "UY") echo "Uruguay" ;;
+            "UZ") echo "Uzbekistan" ;;
+            "VE") echo "Venezuela" ;;
+            "VN") echo "Viet Nam" ;;
+            "VU") echo "Vanuata" ;;
+            "WS") echo "Samoa" ;;
+            "YE") echo "Yemen" ;;
+            "ZA") echo "South Africa" ;;
+            "ZM") echo "Zambia" ;;
+            "ZW") echo "Zimbabwe" ;;
+            *) echo "($locale_region?)" ;;
+        esac
+    else
+        echo " "
+    fi
+}
+
+function get_variant_from_locale() {
+    locale="$1"
+    locale_variant=""
+
+    [[ $locale == *"@"* ]] && locale_variant="$(echo $locale | cut -d '@' -f 2)"
+
+    if [[ $locale_variant != "" ]]; then
+        case $locale_variant in
+            "abegede") echo "ግዕዝ" ;;
+            "cyrillic") echo "Cyrillic" ;;
+            "devanagari") echo "Devanāgarī" ;;
+            "iqtelif") echo "İQTElif" ;;
+            "latin") echo "Latin" ;;
+            "saaho") echo "Saaho" ;;
+            "valencia") echo "Valencià" ;;
+            *) echo "($locale_variant?)" ;;
+        esac
+    else
+        echo ""
+    fi
+}
+
+function generate_locale_picker() {
+    declare -a locales
+
+    while read locale; do
+        echo $locale
+        echo "$(get_language_from_locale $locale)"
+        echo "$(get_region_from_locale $locale)"
+        echo "$(echo $locale | cut -d '.' -f 2 | cut -d '@' -f 1)"
+        echo "$(get_variant_from_locale $locale)"
+    done < <(localectl list-locales) | zenity --list \
+        --title "Locale Selector" \
+        --text "Select a locale for the user '$PKEXEC_USER':" \
+        --height=400 \
+        --width=650 \
+        --column "Locale" \
+        --column "Language" \
+        --column "Region" \
+        --column "Codeset" \
+        --column "Variant"
+}
+
+chosen_locale=""
+
+if [[ $1 == "" ]]; then
+    while true
+    do
+        if [[ $chosen_locale == "" ]]; then
+            chosen_locale=$(generate_locale_picker)
+            [[ $? -eq 1 ]] && exit 0
+        else
+            break
+        fi
+    done
+else
+    chosen_locale="$1"
+fi
+
+if [[ $chosen_locale != "" ]]; then
+    failed="false"
+    user="$PKEXEC_USER"
+    user_file="/var/lib/AccountsService/users/$user"
+
+    if [[ -f $user_file ]]; then
+        set_property "$user_file" Language "$chosen_locale"
+        [[ $? != 0 ]] && failed="true"
+    fi
+
+    sudo --u $user gsettings set org.gnome.system.locale region "$chosen_locale"
+    [[ $? != 0 ]] && failed="true"
+
+    if [[ $faled == "true" ]]; then
+        zenity --error \
+             --text "Unable to set locale to '$chosen_locale'" \
+             --title "Locale Selector"
+    else
+        zenity --info \
+            --text "Locale set to '$chosen_locale'.\nLogout and login to see changes." \
+            --title "Locale Selector"
+    fi
+fi
