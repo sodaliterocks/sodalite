@@ -1,7 +1,7 @@
 [Desktop Entry]
 Name=Sodalite on Telegram
-Comment=Browse and manage apps
-Exec=xdg-open https://t.me/sodalitechat
+Comment=@sodalitechat on Telegram
+Exec=rocks.sodalite.links telegram-chat
 Icon=distributor-logo
 Keywords=sodalite;chat;telegram
 Actions=HideApp;
@@ -12,5 +12,5 @@ Categories=Other;
 
 [Desktop Action HideApp]
 Name=Hide Entry
-Exec=rocks.sodalite.hide-app --desktop-file rocks.sodalite.links.telegram-chat --confirm-before-hiding
+Exec=rocks.sodalite.hacks hide-app --desktop-file rocks.sodalite.links.telegram-chat --confirm-before-hiding
 
