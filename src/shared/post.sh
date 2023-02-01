@@ -447,6 +447,7 @@ if [[ $core == "pantheon" ]]; then
    systemctl enable generate-oemconf
    systemctl enable lightdm
    systemctl enable touchegg
+   systemctl --global enable io.elementary.files.xdg-desktop-portal
 fi
 
 systemctl enable sodalite-migrate

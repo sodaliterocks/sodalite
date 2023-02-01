@@ -47,9 +47,9 @@ add-files: [
 
   # /usr/lib64
   ["../../lfs/binaries/debian/indicator-application-patched/0.1/usr/lib/x86_64-linux-gnu/indicator-application/indicator-application-service", "/usr/lib64/indicator-application/indicator-application-service"],
-  ["../../lfs/binaries/misc/switchboard-plug-useraccounts/2.4.2-1.fc36~x86_64/usr/lib64/libgnome-desktop-3.so.19", "/usr/lib64/libgnome-desktop-3.so.19"],
-  ["../../lfs/binaries/misc/switchboard-plug-useraccounts/2.4.2-1.fc36~x86_64/usr/lib64/switchboard/system/libuseraccounts.so", "/usr/lib64/switchboard/system/libuseraccounts.so"],
-  ["../../lfs/binaries/misc/switchboard-plug-useraccounts/2.4.2-1.fc36~x86_64/usr/lib64/switchboard/system/pantheon-useraccounts/guest-session-toggle", "/usr/lib64/switchboard/system/pantheon-useraccounts/guest-session-toggle"],
+  ["../../lfs/binaries/fedora/switchboard-plug-useraccounts/2.4.2-1.fc36~x86_64/usr/lib64/libgnome-desktop-3.so.19", "/usr/lib64/libgnome-desktop-3.so.19"],
+  ["../../lfs/binaries/fedora/switchboard-plug-useraccounts/2.4.2-1.fc36~x86_64/usr/lib64/switchboard/system/libuseraccounts.so", "/usr/lib64/switchboard/system/libuseraccounts.so"],
+  ["../../lfs/binaries/fedora/switchboard-plug-useraccounts/2.4.2-1.fc36~x86_64/usr/lib64/switchboard/system/pantheon-useraccounts/guest-session-toggle", "/usr/lib64/switchboard/system/pantheon-useraccounts/guest-session-toggle"],
   ["../sysroot/cores/pantheon/usr/lib64/switchboard/personal/security-privacy-plug-helper", "/usr/lib64/switchboard/personal/security-privacy-plug-helper"],
 
   # /usr/libexec
@@ -83,5 +83,5 @@ add-files: [
   ["../../lib/elementary.icons/apps/symbolic/system-software-install-symbolic.svg", "/usr/share/icons/elementary/apps/symbolic/system-software-install-symbolic.svg"],
   
   # /usr/share/polkit-1
-  ["../../lfs/binaries/misc/switchboard-plug-useraccounts/2.4.2-1.fc36~x86_64/usr/share/polkit-1/actions/io.elementary.switchboard.useraccounts.policy", "/usr/share/polkit-1/actions/io.elementary.switchboard.useraccounts.policy"]
+  ["../../lfs/binaries/fedora/switchboard-plug-useraccounts/2.4.2-1.fc36~x86_64/usr/share/polkit-1/actions/io.elementary.switchboard.useraccounts.policy", "/usr/share/polkit-1/actions/io.elementary.switchboard.useraccounts.policy"]
 ]
