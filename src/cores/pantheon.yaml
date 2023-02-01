@@ -54,6 +54,7 @@ add-files: [
 
   # /usr/libexec
   ["../../lib/sodaliterocks.hacks/src/plugins/gcc-shim.sh", "/usr/libexec/rocks.sodalite.hacks/plugins/gcc-shim.sh"],
+  ["../../lib/sodaliterocks.hacks/src/plugins/web.sh", "/usr/libexec/rocks.sodalite.hacks/plugins/web.sh"],
 
   # /usr/share
   ["../sysroot/cores/pantheon/usr/share/touchegg/touchegg.conf", "/usr/share/touchegg/touchegg.conf"],
