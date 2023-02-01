@@ -60,7 +60,6 @@ add-files: [
   # /usr/libexec
   ["../../lib/sodaliterocks.hacks/src/plugins/auto-update.sh", "/usr/libexec/rocks.sodalite.hacks/plugins/auto-update.sh"],
   ["../../lib/sodaliterocks.hacks/src/plugins/cleanup.sh", "/usr/libexec/rocks.sodalite.hacks/plugins/cleanup.sh"],
-  ["../../lib/sodaliterocks.hacks/src/plugins/flatpak.sh", "/usr/libexec/rocks.sodalite.hacks/plugins/flatpak.sh"],
   ["../../lib/sodaliterocks.hacks/src/plugins/hide-app.sh", "/usr/libexec/rocks.sodalite.hacks/plugins/hide-app.sh"],
   ["../../lib/sodaliterocks.hacks/src/plugins/migrate.sh", "/usr/libexec/rocks.sodalite.hacks/plugins/migrate.sh"],
   ["../../lib/sodaliterocks.hacks/src/plugins/nvidia.sh", "/usr/libexec/rocks.sodalite.hacks/plugins/nvidia.sh"],
