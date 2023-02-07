@@ -52,14 +52,18 @@ base_id="$(get_id "$base_name")"
 id="$(get_id "$name")"
 variant="$(get_variant "$variant_id")"
 
-if [[ $(get_property /etc/os-release VERSION) =~ (([0-9]{1,2}).([0-9]{1,3})-([0-9]{5})(\.([0-9]{1,})){0,1}) ]]; then
+if [[ $(get_property /etc/os-release VERSION) =~ (([0-9]{1,2}).([0-9]{1,3})(rc[0-9]{1,3}){0,1}-([0-9]{5})(\.([0-9]{1,})){0,1}) ]]; then
     version_v_major="${BASH_REMATCH[2]}"
     version_v_minor="${BASH_REMATCH[3]}"
 
-    if [[ ${BASH_REMATCH[6]} == "0" ]]; then
-        version_v_build="${BASH_REMATCH[4]}"
+    if [[ ${BASH_REMATCH[4]} != "" ]]; then
+        version_v_minor+="${BASH_REMATCH[4]}"
+    fi
+
+    if [[ ${BASH_REMATCH[7]} == "0" ]]; then
+        version_v_build="${BASH_REMATCH[5]}"
     else
-        version_v_build="${BASH_REMATCH[4]}.${BASH_REMATCH[6]}"
+        version_v_build="${BASH_REMATCH[5]}.${BASH_REMATCH[7]}"
     fi
 
     if [[ $_git_hash != "" ]]; then
@@ -72,7 +76,7 @@ if [[ $version_v_major != "" ]]; then
     version_id="$version_v_major.$version_v_minor"
 
     if [[ $_git_tag != "" ]]; then
-        # Production Release
+        # Releases (current/next/long)
 
         [[ $version_v_minor != "0" ]] && version+=".$version_v_minor"
         version_codename="$(get_codename $version_id)"
@@ -83,7 +87,7 @@ if [[ $version_v_major != "" ]]; then
             pretty_version="$version $variant"
         fi
     else
-        # Devel Release
+        # Development (devel)
 
         version+=".$version_v_minor"
         [[ $version_v_build != "" ]] && version+="-$version_v_build"
@@ -155,3 +159,5 @@ ln -s /usr/lib/system-release-cpe /etc/system-release-cpe
 
 _os_version="$version"
 _os_version_id="$version_id"
+
+cat /usr/lib/os-release
