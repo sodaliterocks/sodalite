@@ -94,6 +94,9 @@ if [[ $(command -v "git") ]]; then
 
         git_commit=$(git -C $base_dir rev-parse --short HEAD)
         git_tag=$(git -C $base_dir describe --exact-match --tags $(git -C $base_dir log -n1 --pretty='%h') 2>/dev/null)
+
+        echo "$(emj "🗑️")Cleaning up Git repository..."
+        git pull --prune --tags
     fi
 fi
 
@@ -114,7 +117,7 @@ chown -R root:root "$working_dir"
 ref="$(echo "$(cat "$treefile")" | grep "ref:" | sed "s/ref: //" | sed "s/\${basearch}/$(uname -m)/")"
 
 if [ ! "$(ls -A $ostree_repo_dir)" ]; then
-   echo "$(emj "🆕")Initializing repository..."
+   echo "$(emj "🆕")Initializing OSTree repository..."
    ost init --mode=archive
 fi
 
