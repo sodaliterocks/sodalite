@@ -26,6 +26,12 @@ function del_property() {
     fi
 }
 
+function emj() {
+    emoji="$1"
+    emoji_length=${#emoji}
+    echo "$emoji$(eval "for i in {1..$emoji_length}; do echo -n " "; done")"
+}
+
 function get_property() {
     file=$1
     property=$2
@@ -60,10 +66,10 @@ _core_file="/usr/lib/sodalite-core"
 _post_scripts_dir="/usr/libexec/sodalite-post"
 
 _git_hash=""
-_git_tag="4.0"
+_git_tag=""
+_os_base_version=""
 _os_core=""
 _os_version=""
-_os_version_base=""
 _os_version_id=""
 
 # Setup
@@ -71,32 +77,40 @@ _os_version_id=""
 declare -a ran_scripts
 
 [[ -f "$_core_file" ]] && _os_core="$(cat "$_core_file")"
-[[ $(cat /usr/lib/fedora-release) =~ ([0-9]{2}) ]] && _os_version_base="${BASH_REMATCH[1]}"
+[[ $(cat /usr/lib/fedora-release) =~ ([0-9]{2}) ]] && _os_base_version="${BASH_REMATCH[1]}"
 
+check_variable "_git_hash" "0000000"
+check_variable "_os_base_version"
 check_variable "_os_core" "pantheon"
-check_variable "_os_version_base"
 
 if [[ "$(echo ${ran_scripts[@]} | grep "10-version")" != "" ]]; then
-    check_variable "_os_version_base"
+    check_variable "_os_version"
     check_variable "_os_version_id"
 fi
 
+set -euo pipefail
+
 # Runner
 
-set -xeuo pipefail
+echo "--------------------------------------------------------------------------------"
 
-for post_script in $_post_scripts_dir/*.sh; do 
+for post_script in $_post_scripts_dir/*.sh; do
+    post_script_name="$(basename "$post_script" | sed s/.sh//)"
+
+    echo -e "$(emj "⚙️")Running script: $post_script_name"
     chmod +x "$post_script"
     . "$post_script"
 
     if [[ $? != "0" ]]; then
         exit $?
     else
-        ran_scripts+=("$(basename "$post_script" | sed s/.sh//)")
+        ran_scripts+=("$post_script_name")
     fi
 done
 
 rm -rf $_post_scripts_dir
+
+echo "--------------------------------------------------------------------------------"
 
 # Legacy
 
@@ -122,24 +136,7 @@ if [[ -n $variant ]]; then
     esac
 fi
 
-###################
-# OSTREE MUTATING #
-###################
-
-cpe="cpe:\/o:sodaliterocks:sodalite" # cpe:/<part>:<vendor>:<product>:<version>:<update>:<edition>:<language>
-
-
-
-rm /etc/os-release
-rm /etc/system-release
-rm /etc/system-release-cpe
-
-ln -s /usr/lib/os-release /etc/os-release
-ln -s /usr/lib/sodalite-release /etc/sodalite-release
-ln -s /usr/lib/system-release /etc/system-release
-ln -s /usr/lib/system-release-cpe /etc/system-release-cpe
-
-version_id="$_os_version_base"
+version_id="$_os_base_version"
 
 #########
 # HACKS #

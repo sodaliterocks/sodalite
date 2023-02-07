@@ -2,16 +2,9 @@
 
 wallpaper=""
 
-#case $_os_version_base in
-#    35) wallpaper="karsten-wurth-7BjhtdogU3A-unsplash" ;;
-#    36) wallpaper="max-okhrimenko-R-CoXmMrWFk-unsplash" ;;
-#    37) wallpaper="jeremy-gerritsen-_iviuukstI4-unsplash" ;;
-#    38) wallpaper="zara-walker-_pC5hT6aXfs-unsplash" ;;
-#    39) wallpaper="jack-b-vcNPMwS08UI-unsplash" ;;
-#esac
-
 case $_os_version_id in
-    4) wallpaper="zara-walker-_pC5hT6aXfs-unsplash" ;;
+    "4.0") wallpaper="jeremy-gerritsen-_iviuukstI4-unsplash" ;;
+    "5.0") wallpaper="zara-walker-_pC5hT6aXfs-unsplash" ;;
 esac
 
 if [[ -f "/usr/share/backgrounds/default/$wallpaper.jpg" ]]; then
