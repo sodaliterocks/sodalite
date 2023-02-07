@@ -7,7 +7,7 @@ include: [
 ]
 
 releasever: "37"
-automatic-version-prefix: "${releasever}-23.5"
+automatic-version-prefix: "4.0-<date:%y%j>"
 automatic-version-suffix: "."
 mutate-os-release: "${releasever}"
 
@@ -68,6 +68,13 @@ add-files: [
   ["../../lib/sodaliterocks.hacks/src/plugins/vscode.sh", "/usr/libexec/rocks.sodalite.hacks/plugins/vscode.sh"],
   ["../../lib/sodaliterocks.hacks/src/utils.sh", "/usr/libexec/rocks.sodalite.hacks/utils.sh"],
   ["../sysroot/common/usr/libexec/rocks.sodalite.cleanup", "/usr/libexec/rocks.sodalite.cleanup"],
+
+  # /usr/libexec/sodalite-post
+  ["../scripts/10-version.sh", "/usr/libexec/sodalite-post/10-version.sh"],
+  #["../scripts/50-file-removals.sh", "/usr/libexec/sodalite-post/50-file-removals.sh"],
+  ["../scripts/70-firefox.sh", "/usr/libexec/sodalite-post/70-firefox.sh"],
+  ["../scripts/70-wallpaper.sh", "/usr/libexec/sodalite-post/70-wallpaper.sh"],
+  #["../scripts/ostree.sh", "/usr/libexec/sodalite-post/ostree.sh"],
 
   # /usr/share
   ["../sysroot/common/usr/share/glib-2.0/schemas/00_sodalite.gschema.override", "/usr/share/glib-2.0/schemas/00_sodalite.gschema.override"],

@@ -1,7 +1,19 @@
 #!/usr/bin/env bash
 
-buildinfo_file="/usr/lib/sodalite-buildinfo"
-core_file="/usr/lib/sodalite-core"
+# Utilities
+
+function check_variable() {
+    variable="$1"
+    fallback_value="$2"
+
+    if [[ $(echo "$(eval echo "\$${variable}")") == "" ]]; then
+        if [[ $fallback_value != "" ]]; then
+            eval "${variable}"='${fallback_value}'
+        else
+            exit 1
+        fi
+    fi
+}
 
 function del_property() {
     file=$1
@@ -41,16 +53,59 @@ function set_property() {
     fi
 }
 
+# Variables
+
+_buildinfo_file="/usr/lib/sodalite-buildinfo"
+_core_file="/usr/lib/sodalite-core"
+_post_scripts_dir="/usr/libexec/sodalite-post"
+
+_git_hash=""
+_git_tag="4.0"
+_os_core=""
+_os_version=""
+_os_version_base=""
+_os_version_id=""
+
+# Setup
+
+declare -a ran_scripts
+
+[[ -f "$_core_file" ]] && _os_core="$(cat "$_core_file")"
+[[ $(cat /usr/lib/fedora-release) =~ ([0-9]{2}) ]] && _os_version_base="${BASH_REMATCH[1]}"
+
+check_variable "_os_core" "pantheon"
+check_variable "_os_version_base"
+
+if [[ "$(echo ${ran_scripts[@]} | grep "10-version")" != "" ]]; then
+    check_variable "_os_version_base"
+    check_variable "_os_version_id"
+fi
+
+# Runner
+
 set -xeuo pipefail
 
-core=""
+for post_script in $_post_scripts_dir/*.sh; do 
+    chmod +x "$post_script"
+    . "$post_script"
+
+    if [[ $? != "0" ]]; then
+        exit $?
+    else
+        ran_scripts+=("$(basename "$post_script" | sed s/.sh//)")
+    fi
+done
+
+rm -rf $_post_scripts_dir
+
+# Legacy
+
+buildinfo_file="/usr/lib/sodalite-buildinfo"
+
+core="$_os_core"
 variant=""
 variant_pretty=""
 version_tag=""
-
-if [[ -f $core_file ]]; then
-    core="$(cat $core_file)"
-fi
 
 if [[ $(cat $buildinfo_file) != "" ]]; then
     [[ -z $(get_property $buildinfo_file "GIT_TAG") ]] && \
@@ -73,76 +128,7 @@ fi
 
 cpe="cpe:\/o:sodaliterocks:sodalite" # cpe:/<part>:<vendor>:<product>:<version>:<update>:<edition>:<language>
 
-if [[ $(get_property /etc/os-release VERSION) =~ (([0-9]{1,3})-([0-9]{2}.[0-9]{1,})(.([0-9]{1,}){0,1}).+) ]]; then
-    version="${BASH_REMATCH[2]}-${BASH_REMATCH[3]}"
-    version_id="${BASH_REMATCH[2]}"
 
-    [[ ${BASH_REMATCH[5]} > 0 ]] && version+=".${BASH_REMATCH[5]}"
-    [[ ! -z $version_tag ]] && version+="+$version_tag"
-
-    if [[ ! -z $variant ]] && [[ $variant != "desktop"* ]]; then
-        version_pretty="$version ($variant_pretty)"
-    else
-        version_pretty="$version"
-    fi
-
-    cpe+=":$version_id:$(echo $version | cut -f2- -d"-")"
-else
-    version=$(get_property /etc/os-release VERSION)
-    version_id=$(get_property /etc/os-release VERSION_ID)
-    version_pretty="$version"
-
-    cpe+=":$version_id:-"
-fi
-
-if [[ ! -z $variant ]]; then
-    set_property /usr/lib/os-release "VARIANT" "$variant_pretty"
-    set_property /usr/lib/os-release "VARIANT_ID" $variant
-
-    cpe+=":$variant"
-fi
-
-if [[ ! -z $version_id ]]; then
-    touch /usr/lib/upstream-os-release
-
-    set_property /usr/lib/upstream-os-release "ID" "fedora"
-    set_property /usr/lib/upstream-os-release "VERSION_ID" "$version_id"
-    set_property /usr/lib/upstream-os-release "PRETTY_NAME" "Fedora Linux $version_id"
-
-    if [[ $version_id == "36" ]]; then
-        mkdir -p /etc/upstream-release
-        ln -s /usr/lib/upstream-os-release /etc/upstream-release/lsb-release
-    fi
-fi
-
-pretty_name="Sodalite $version_pretty"
-
-set_property /usr/lib/os-release "BUG_REPORT_URL" "https:\/\/sodalite.rocks\/bug-report"
-set_property /usr/lib/os-release "CPE_NAME" "$cpe"
-set_property /usr/lib/os-release "DOCUMENTATION_URL" "https:\/\/sodalite.rocks\/docs"
-set_property /usr/lib/os-release "HOME_URL" "https:\/\/sodalite.rocks"
-set_property /usr/lib/os-release "ID" "sodalite"
-set_property /usr/lib/os-release "ID_LIKE" "fedora"
-set_property /usr/lib/os-release "LOGO" "distributor-logo"
-set_property /usr/lib/os-release "NAME" "Sodalite"
-set_property /usr/lib/os-release "PRETTY_NAME" "$pretty_name"
-set_property /usr/lib/os-release "SUPPORT_URL" "https:\/\/sodalite.rocks\/support"
-set_property /usr/lib/os-release "VERSION" "$version_pretty"
-set_property /usr/lib/os-release "VERSION_ID" "$version_id"
-
-del_property /usr/lib/os-release "ANSI_COLOR"
-del_property /usr/lib/os-release "PRIVACY_POLICY_URL"
-del_property /usr/lib/os-release "REDHAT_BUGZILLA_PRODUCT"
-del_property /usr/lib/os-release "REDHAT_BUGZILLA_PRODUCT_VERSION"
-del_property /usr/lib/os-release "REDHAT_SUPPORT_PRODUCT"
-del_property /usr/lib/os-release "REDHAT_SUPPORT_PRODUCT_VERSION"
-del_property /usr/lib/os-release "VERSION_CODENAME"
-
-sed -i "/^$/d" /usr/lib/os-release
-
-echo "$pretty_name" > /usr/lib/sodalite-release
-echo "$pretty_name" > /usr/lib/system-release
-echo $(echo "$cpe" | sed "s@\\\\@@g") > /usr/lib/system-release-cpe
 
 rm /etc/os-release
 rm /etc/system-release
@@ -152,6 +138,8 @@ ln -s /usr/lib/os-release /etc/os-release
 ln -s /usr/lib/sodalite-release /etc/sodalite-release
 ln -s /usr/lib/system-release /etc/system-release
 ln -s /usr/lib/system-release-cpe /etc/system-release-cpe
+
+version_id="$_os_version_base"
 
 #########
 # HACKS #
@@ -362,25 +350,6 @@ for file in ${to_remove[@]}; do
     rm -rf $file
 done
 
-#############
-# WALLPAPER #
-#############
-
-wallpaper=""
-
-case $version_id in
-    35) wallpaper="karsten-wurth-7BjhtdogU3A-unsplash" ;;
-    36) wallpaper="max-okhrimenko-R-CoXmMrWFk-unsplash" ;;
-    37) wallpaper="jeremy-gerritsen-_iviuukstI4-unsplash" ;;
-    38) wallpaper="zara-walker-_pC5hT6aXfs-unsplash" ;;
-    39) wallpaper="jack-b-vcNPMwS08UI-unsplash" ;;
-esac
-
-if [[ -f "/usr/share/backgrounds/default/$wallpaper.jpg" ]]; then
-    set_property /usr/share/glib-2.0/schemas/00_sodalite.gschema.override picture-uri "'file:\/\/\/usr\/share\/backgrounds\/default\/$wallpaper.jpg'"
-    [[ $core == "pantheon" ]] && ln -s /usr/share/backgrounds/default/$wallpaper.jpg /usr/share/backgrounds/elementaryos-default
-fi
-
 ###################
 # FLATPAK ALIASES #
 ###################
@@ -418,9 +387,6 @@ done
 
 ln -s /usr/bin/rocks.sodalite.hacks /usr/bin/sodalite-hacks
 ln -s /usr/bin/firefox /usr/bin/rocks.sodalite.firefox
-
-/usr/src/rocks.sodalite.firefox/setup.sh
-rm -f /usr/lib64/firefox/browser/omni.ja_backup
 
 glib-compile-schemas /usr/share/glib-2.0/schemas
 dconf update
