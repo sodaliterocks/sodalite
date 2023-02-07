@@ -71,10 +71,14 @@ add-files: [
 
   # /usr/libexec/sodalite-post
   ["../scripts/10-version.sh", "/usr/libexec/sodalite-post/10-version.sh"],
-  #["../scripts/50-file-removals.sh", "/usr/libexec/sodalite-post/50-file-removals.sh"],
+  ["../scripts/30-hacks.sh", "/usr/libexec/sodalite-post/30-hacks.sh"],
+  ["../scripts/50-file-removals.sh", "/usr/libexec/sodalite-post/50-file-removals.sh"],
   ["../scripts/70-firefox.sh", "/usr/libexec/sodalite-post/70-firefox.sh"],
+  ["../scripts/70-flatpak-aliases.sh", "/usr/libexec/sodalite-post/70-flatpak-aliases.sh"],
+  ["../scripts/70-gnome-extensions.sh", "/usr/libexec/sodalite-post/70-gnome-extensions.sh"],
   ["../scripts/70-wallpaper.sh", "/usr/libexec/sodalite-post/70-wallpaper.sh"],
-  #["../scripts/ostree.sh", "/usr/libexec/sodalite-post/ostree.sh"],
+  ["../scripts/80-extras.sh", "/usr/libexec/sodalite-post/80-extras.sh"],
+  ["../scripts/90-cleanup.sh", "/usr/libexec/sodalite-post/90-cleanup.sh"],
 
   # /usr/share
   ["../sysroot/common/usr/share/glib-2.0/schemas/00_sodalite.gschema.override", "/usr/share/glib-2.0/schemas/00_sodalite.gschema.override"],

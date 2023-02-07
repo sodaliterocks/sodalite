@@ -7,6 +7,8 @@ id=""
 name="Sodalite"
 pretty_name=""
 pretty_version=""
+variant=""
+variant_id="$_os_variant"
 version=""
 version_v_major=""
 version_v_minor=""
@@ -29,8 +31,26 @@ function get_id() {
     echo $(echo ${name,,} | sed "s/ /-/")
 }
 
+function get_variant() {
+    decoded_variant=""
+
+    if [[ $1 == "desktop-"* ]]; then
+        decoded_variant="$(echo $1 | sed "s/desktop-//")"
+
+        case "$decoded_variant" in
+            "gnome") decoded_variant="GNOME" ;;
+            *) decoded_variant="${decoded_variant^}" ;;
+        esac
+    else
+        decoded_variant="${1^}"
+    fi
+
+    echo $decoded_variant
+}
+
 base_id="$(get_id "$base_name")"
 id="$(get_id "$name")"
+variant="$(get_variant "$variant_id")"
 
 if [[ $(get_property /etc/os-release VERSION) =~ (([0-9]{1,2}).([0-9]{1,3})-([0-9]{5})(\.([0-9]{1,})){0,1}) ]]; then
     version_v_major="${BASH_REMATCH[2]}"
@@ -57,9 +77,13 @@ if [[ $version_v_major != "" ]]; then
         [[ $version_v_minor != "0" ]] && version+=".$version_v_minor"
         version_codename="$(get_codename $version_id)"
 
-        pretty_version="$version “$version_codename”"
+        if [[ $variant_id == "desktop" ]]; then
+            pretty_version="$version “$version_codename”"
+        else
+            pretty_version="$version $variant"
+        fi
     else
-        # Early Release
+        # Devel Release
 
         version+=".$version_v_minor"
         [[ $version_v_build != "" ]] && version+="-$version_v_build"
@@ -85,7 +109,7 @@ if [[ ! -z $base_version ]]; then
     fi
 fi
 
-cpe="cpe:\/o:sodaliterocks:$id:$version_id:$version_v_build+$version_v_hash"
+cpe="cpe:\/o:sodaliterocks:$id:$version_id:$version_v_build+$version_v_hash:$variant_id"
 pretty_name="$name $pretty_version"
 url_prefix="https:\/\/sodalite.rocks"
 
@@ -108,6 +132,8 @@ set_property /usr/lib/os-release "NAME" "$name"
 set_property /usr/lib/os-release "LOGO" "distributor-logo"
 set_property /usr/lib/os-release "PRETTY_NAME" "$pretty_name"
 set_property /usr/lib/os-release "SUPPORT_URL" "$url_prefix\/support"
+set_property /usr/lib/os-release "VARIANT" "$variant"
+set_property /usr/lib/os-release "VARIANT_ID" "$variant_id"
 set_property /usr/lib/os-release "VERSION" "$pretty_version"
 set_property /usr/lib/os-release "VERSION_CODENAME" "$version_codename"
 set_property /usr/lib/os-release "VERSION_ID" "$base_version"
