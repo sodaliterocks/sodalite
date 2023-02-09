@@ -78,7 +78,7 @@ if [[ ! $(command -v "rpm-ostree") ]]; then
     die "rpm-ostree not installed"
 fi
 
-[[ $variant == "gnome" ]] && variant="desktop-gnome"
+[[ $variant == "budgie" ]] && variant="desktop-budgie"
 [[ $variant == "pantheon" ]] && variant="desktop"
 
 echo "$(emj "🪛")Setting up..."

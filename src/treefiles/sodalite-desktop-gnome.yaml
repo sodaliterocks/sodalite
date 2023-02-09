@@ -1,3 +1,0 @@
-ref: sodalite/devel/${basearch}/desktop-gnome
-include:
-  - ../cores/gnome.yaml

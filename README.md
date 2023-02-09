@@ -60,7 +60,7 @@ To allow for several versions to co-exist and be developed in tandem with each o
   - ~~`x86`: [What year is it!?](https://c.tenor.com/9OcQhlCBNG0AAAAd/what-year-is-it-jumanji.gif)~~
 * `<edition>`: **Edition** (or variant) of the branch: Possible values:
   - `desktop`: Standard Pantheon desktop
-  - `desktop-gnome`: Alternate GNOME desktop
+  - `desktop-budgie`: Alternate Budgie desktop
 
 **As mentioned above, most users will want `sodalite/stable/x86_64/desktop`.**
 
@@ -74,9 +74,9 @@ Possible combinations built on the OSTree remote (`ostree.sodalite.rocks`) are a
 |`sodalite`|`f36`|`x86_64`|`desktop`|
 |`sodalite`|`f37`|`x86_64`|`desktop`|
 |`sodalite`|`next`|`x86_64`|`desktop`|
-|`sodalite`|`devel`|`x86_64`|`desktop`<br />`desktop-gnome`|
+|`sodalite`|`devel`|`x86_64`|`desktop`<br />`desktop-budgie`|
 
-_For example, `sodalite/stable/x86_64/desktop` exists on the build server and can be pulled, but `sodalite/f37/x86_64/desktop-gnome` does not._
+_For example, `sodalite/stable/x86_64/desktop` exists on the build server and can be pulled, but `sodalite/f37/x86_64/desktop-budgie` does not._
 
 ### Versioning
 
@@ -177,7 +177,7 @@ This will usually take 10-15 minutes. Remember when I told you to grab a cuppa? 
   - This is any of the `sodalite-<edition>.yaml` files listed in `./src/treefiles/`. Either use `sodalite-<edition>` or just `<edition>` as the argument. Currently, there is:
     - `desktop`: Standard Pantheon desktop
     - `desktop-deepin`: Alternate Deepin desktop, intended for possible future versions
-    - `desktop-gnome`: Alternate GNOME desktop, intended for possible future versions
+    - `desktop-budgie`: Alternate GNOME desktop, intended for possible future versions
     - `custom`: See below point
   - `sodalite-custom.yaml` is a good place to employ your own changes instead of modifying any of the other treefiles
 * `<working-dir>` _(optional)_ Directory for build output (defaults to `./build`)
