@@ -177,7 +177,7 @@ This will usually take 10-15 minutes. Remember when I told you to grab a cuppa? 
   - This is any of the `sodalite-<edition>.yaml` files listed in `./src/treefiles/`. Either use `sodalite-<edition>` or just `<edition>` as the argument. Currently, there is:
     - `desktop`: Standard Pantheon desktop
     - `desktop-deepin`: Alternate Deepin desktop, intended for possible future versions
-    - `desktop-budgie`: Alternate GNOME desktop, intended for possible future versions
+    - `desktop-budgie`: Alternate Budgie desktop, intended for possible future versions
     - `custom`: See below point
   - `sodalite-custom.yaml` is a good place to employ your own changes instead of modifying any of the other treefiles
 * `<working-dir>` _(optional)_ Directory for build output (defaults to `./build`)
