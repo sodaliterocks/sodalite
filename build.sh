@@ -28,8 +28,8 @@ function die() {
 function cleanup() {
     echo "$(emj "🗑️")Cleaning up..."
 
-    rm -f $buildinfo_file
-    rm -rf  /var/tmp/rpm-ostree.*
+    rm -f "$buildinfo_file"
+    rm -rf /var/tmp/rpm-ostree.*
 
     if [[ $SUDO_USER != "" ]]; then
         chown -R $SUDO_USER:$SUDO_USER "$working_dir"
