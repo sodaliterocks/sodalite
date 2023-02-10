@@ -78,6 +78,7 @@ if [[ ! $(command -v "rpm-ostree") ]]; then
     die "rpm-ostree not installed"
 fi
 
+[[ $variant == "deepin" ]] && variant="desktop-deepin"
 [[ $variant == "gnome" ]] && variant="desktop-gnome"
 [[ $variant == "pantheon" ]] && variant="desktop"
 
