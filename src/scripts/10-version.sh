@@ -9,6 +9,7 @@ pretty_name=""
 pretty_version=""
 variant=""
 variant_id="$_os_variant"
+vendor="$_vendor"
 version=""
 version_v_major=""
 version_v_minor=""
@@ -18,9 +19,13 @@ version_codename=""
 version_id=""
 
 function get_codename() {
+    # Codename inspiration:
+    # * https://en.wikipedia.org/wiki/Ancient_history
+
     case "$1" in
         "4.0"*) echo "Nubia" ;;
         "5.0"*) echo "Qatna" ;;
+        "6.0"*) echo "Iberia" ;;
     esac
 }
 
@@ -109,9 +114,8 @@ if [[ ! -z $base_version ]]; then
     fi
 fi
 
-cpe="cpe:\/o:sodaliterocks:$id:$version_id:$version_v_build+$version_v_hash:$variant_id"
+cpe="cpe:\/o:$vendor:$id:$version_id:$version_v_build+$version_v_hash:$variant_id"
 pretty_name="$name $pretty_version"
-url_prefix="https:\/\/sodalite.rocks"
 
 del_property /usr/lib/os-release "ANSI_COLOR"
 del_property /usr/lib/os-release "DEFAULT_HOSTNAME"
@@ -122,21 +126,30 @@ del_property /usr/lib/os-release "REDHAT_SUPPORT_PRODUCT"
 del_property /usr/lib/os-release "REDHAT_SUPPORT_PRODUCT_VERSION"
 del_property /usr/lib/os-release "VERSION_CODENAME"
 
-set_property /usr/lib/os-release "BUG_REPORT_URL" "$url_prefix\/bug-report"
 set_property /usr/lib/os-release "CPE_NAME" "$cpe"
-set_property /usr/lib/os-release "DOCUMENTATION_URL" "$url_prefix\/docs"
-set_property /usr/lib/os-release "HOME_URL" "$url_prefix"
 set_property /usr/lib/os-release "ID" "$id"
 set_property /usr/lib/os-release "ID_LIKE" "$base_id"
 set_property /usr/lib/os-release "NAME" "$name"
 set_property /usr/lib/os-release "LOGO" "distributor-logo"
 set_property /usr/lib/os-release "PRETTY_NAME" "$pretty_name"
-set_property /usr/lib/os-release "SUPPORT_URL" "$url_prefix\/support"
 set_property /usr/lib/os-release "VARIANT" "$variant"
 set_property /usr/lib/os-release "VARIANT_ID" "$variant_id"
 set_property /usr/lib/os-release "VERSION" "$pretty_version"
 set_property /usr/lib/os-release "VERSION_CODENAME" "$version_codename"
 set_property /usr/lib/os-release "VERSION_ID" "$base_version"
+
+if [[ $vendor == "sodaliterocks" ]]; then
+    url_prefix="https:\/\/sodalite.rocks"
+    set_property /usr/lib/os-release "BUG_REPORT_URL" "$url_prefix\/bug-report"
+    set_property /usr/lib/os-release "DOCUMENTATION_URL" "$url_prefix\/docs"
+    set_property /usr/lib/os-release "HOME_URL" "$url_prefix"
+    set_property /usr/lib/os-release "SUPPORT_URL" "$url_prefix\/support"
+else
+    del_property /usr/lib/os-release "BUG_REPORT_URL"
+    del_property /usr/lib/os-release "DOCUMENTATION_URL"
+    del_property /usr/lib/os-release "HOME_URL"
+    del_property /usr/lib/os-release "SUPPORT_URL"
+fi
 
 sed -i "/^$/d" /usr/lib/os-release
 
