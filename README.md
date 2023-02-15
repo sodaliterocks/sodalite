@@ -77,6 +77,10 @@ Possible combinations built on the OSTree remote (`ostree.sodalite.rocks`) are a
 
 _For example, `sodalite/current/x86_64/desktop` exists on the build server and can be pulled, but `sodalite/5/x86_64/desktop-gnome` does not._
 
+### Versioning
+
+_(Todo)_
+
 ---
 
 <p align="center">
