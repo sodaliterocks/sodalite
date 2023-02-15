@@ -82,7 +82,7 @@ if [[ $version_v_major != "" ]]; then
         version_codename="$(get_codename $version_id)"
 
         if [[ $variant_id == "desktop" ]]; then
-            pretty_version="$version “$version_codename”"
+            pretty_version="$version $version_codename"
         else
             pretty_version="$version $variant"
         fi
