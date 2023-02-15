@@ -8,7 +8,7 @@ base_dir="$(dirname "$(realpath -s "$0")")"
 buildinfo_file="$base_dir/src/sysroot/common/usr/lib/sodalite-buildinfo"
 tests_dir="$base_dir/tests"
 
-git_commit="nogit"
+git_commit=""
 git_tag=""
 start_time=$(date +%s)
 unified="false"
@@ -28,8 +28,8 @@ function die() {
 function cleanup() {
     echo "$(emj "🗑️")Cleaning up..."
 
-    rm -f $buildinfo_file
-    rm -rf  /var/tmp/rpm-ostree.*
+    rm -f "$buildinfo_file"
+    rm -rf /var/tmp/rpm-ostree.*
 
     if [[ $SUDO_USER != "" ]]; then
         chown -R $SUDO_USER:$SUDO_USER "$working_dir"
@@ -78,6 +78,7 @@ if [[ ! $(command -v "rpm-ostree") ]]; then
     die "rpm-ostree not installed"
 fi
 
+[[ $variant == "deepin" ]] && variant="desktop-deepin"
 [[ $variant == "gnome" ]] && variant="desktop-gnome"
 [[ $variant == "pantheon" ]] && variant="desktop"
 
@@ -93,7 +94,10 @@ if [[ $(command -v "git") ]]; then
         git config --global --add safe.directory $base_dir
 
         git_commit=$(git -C $base_dir rev-parse --short HEAD)
-        git_tag=$(git -C $base_dir describe --exact-match --tags $(git -C $base_dir log -n1 --pretty='%h') 2>/dev/null)
+
+        if [[ "$(git -C $base_dir status --porcelain --untracked-files=no)" == "" ]]; then
+            git_tag=$(git -C $base_dir describe --exact-match --tags $(git -C $base_dir log -n1 --pretty='%h') 2>/dev/null)
+        fi
 
         echo "$(emj "🗑️")Cleaning up Git repository..."
         git pull --prune --tags
