@@ -60,11 +60,7 @@ if [[ $(get_property /etc/os-release VERSION) =~ (([0-9]{1,2}).([0-9]{1,3})(rc[0
         version_v_minor+="${BASH_REMATCH[4]}"
     fi
 
-    if [[ ${BASH_REMATCH[7]} == "0" ]]; then
-        version_v_build="${BASH_REMATCH[5]}"
-    else
-        version_v_build="${BASH_REMATCH[5]}.${BASH_REMATCH[7]}"
-    fi
+    version_v_build="${BASH_REMATCH[5]}.${BASH_REMATCH[7]}"
 
     if [[ $_git_hash != "" ]]; then
         version_v_hash="$_git_hash"
