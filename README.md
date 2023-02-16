@@ -15,8 +15,8 @@ Know what you're in for? Here goes:
 1. Install an rpm-ostree-based version of Fedora, such as [Fedora Silverblue](https://silverblue.fedoraproject.org/), or use an already-existing install
 2. Fire up a terminal and issue these commands:
    - `sudo ostree remote add --if-not-exists sodalite https://ostree.sodalite.rocks --no-gpg-verify`
-   - `sudo ostree pull sodalite:sodalite/stable/x86_64/desktop`
-   - `sudo rpm-ostree rebase sodalite:sodalite/stable/x86_64/desktop`
+   - `sudo ostree pull sodalite:sodalite/current/x86_64/desktop`
+   - `sudo rpm-ostree rebase sodalite:sodalite/current/x86_64/desktop`
 3. Stick the kettle on and make yourself a cuppa. It'll take a while
 4. Reboot when prompted. Use it, enjoy it, make something cool with it, (try to) break it &mdash; [submit a ticket if you do](https://github.com/sodaliterocks/sodalite/issues/new)!
 
@@ -37,11 +37,11 @@ If something breaks, you can rollback by running `sudo rpm-ostree rollback` at a
 
 Updates are built on the build server commencing **4:00 GMT/±0** **(20:00 PT/-8)** every **Wednesday** and **Saturday**.
 
-#### `f<version>` Versions
+#### "Long-term" Branches
 
-If you chose to use a `f<version>` "long-term" branch (see <a href="#branches">Branches</a> below), you will need to rebase whenever the base Fedora Linux version reaches end-of-life. This can be done with `sudo rpm-ostree rebase sodalite:sodalite/f<version>/<arch>/<edition>`, where `<version>` is the version you're wanting to rebase to and other values are your current values.
+If you chose to use a "long-term" branch (see <a href="#branches">Branches</a> below), you will need to rebase whenever the Sodalite version reaches end-of-life. This can be done with `sudo rpm-ostree rebase sodalite:sodalite/<version>/<arch>/<edition>`, where `<version>` is the version you're wanting to rebase to and other values are your current values.
 
-It's vital you carry out this process as updates stop the day the base version reaches end-of-life and you will be left without updates to vital system components (however, Flatpak apps will continue to update). See [Fedora Docs Fedora ➔ Linux Release Life Cycle](https://docs.fedoraproject.org/en-US/releases/lifecycle/) for more.
+It's vital you carry out this process as updates stop the day the base version reaches end-of-life (at the same time as the base Fedora Linux version) and you will be left without updates to vital system components.
 
 ### Branches
 
@@ -49,20 +49,20 @@ To allow for several versions to co-exist and be developed in tandem with each o
 
 * `<name>`: **Name** of the branch; always `sodalite`
 * `<version>`: **Version** of the branch. Possible values:
-  - `stable`:  Rolling-release version based on the current stable release of Fedora Linux (currently 37)
-  - `f<version>`: "Long-term" versions based on specific versions of Fedora Linux, which require manual intervention to rebase to a newer version when said version reaches end-of-life. Possible values for `<version>`:
-    - `36`: Fedora Linux 36. Reaches end-of-life on 16th May 2023 (2023-05-16)
-    - `37`: Fedora Linux 37. Reaches end-of-life on 14th Nov 2023 (2023-11-14)
-  - `next`: Rolling-release version based on the next upcoming version of Fedora Linux (currently 38)
+  - `current`: Current stable release of Sodalite (currently 4, based on Fedora Linux 37)
+  - `long-<version>`: "Long-term" releases to stay with a specific version of Sodalite
+    - `4`: Sodalite 4, based on Fedora Linux 37. Reaches end-of-life on 16th May 2023 (2023-05-16)
+  - `next`: Upcoming and release candidates of Sodalite. **Potentially unstable!**
   - `devel`: Current development code (on `main`). **Do not use on production systems!**
 * `<arch>`: **Architecture** of the branch. Possible values:
   - `x86_64`: For 64-bit CPUs (`x86_64`, `amd64`, or `x64`)
   - ~~`x86`: [What year is it!?](https://c.tenor.com/9OcQhlCBNG0AAAAd/what-year-is-it-jumanji.gif)~~
 * `<edition>`: **Edition** (or variant) of the branch: Possible values:
   - `desktop`: Standard Pantheon desktop
+  - `desktop-deepin`: Alternate Deepin desktop
   - `desktop-gnome`: Alternate GNOME desktop
-
-**As mentioned above, most users will want `sodalite/stable/x86_64/desktop`.**
+  
+**As mentioned above, most users will want `sodalite/current/x86_64/desktop`.**
 
 #### Available Branches
 
@@ -70,30 +70,16 @@ Possible combinations built on the OSTree remote (`ostree.sodalite.rocks`) are a
 
 |Name|Version(s)|Arch.(s)|Edition(s)|
 |-|-|-|-|
-|`sodalite`|`stable`|`x86_64`|`desktop`|
-|`sodalite`|`f36`|`x86_64`|`desktop`|
-|`sodalite`|`f37`|`x86_64`|`desktop`|
+|`sodalite`|`current`|`x86_64`|`desktop`|
+|`sodalite`|`long-4`|`x86_64`|`desktop`|
 |`sodalite`|`next`|`x86_64`|`desktop`|
-|`sodalite`|`devel`|`x86_64`|`desktop`<br />`desktop-gnome`|
+|`sodalite`|`devel`|`x86_64`|`desktop`<br />`desktop-deepin`<br />`desktop-gnome`|
 
-_For example, `sodalite/stable/x86_64/desktop` exists on the build server and can be pulled, but `sodalite/f37/x86_64/desktop-gnome` does not._
+_For example, `sodalite/current/x86_64/desktop` exists on the build server and can be pulled, but `sodalite/5/x86_64/desktop-gnome` does not._
 
 ### Versioning
 
-Versioning is as follows, where `<base>-<year>.<release>[.<update>][+<commit>]`:
-
-* `<base>`: Base version of **Fedora Linux**
-* `<year>`: Year of release using just two digits (i.e. 2023 becomes `23`)
-* `<release>` Incremental release version; for additions, changes, and removals. Resets when a new year occurs, but **does not** reset on a new base version of Fedora Linux
-  - An example progression would be: `39-23.0` ➔ `39-23.1` ➔ `40-23.2`  ➔ `40-23.3` ➔ `40-24.0`
-* `<update>` _(optional)_: Incremental update version that occurs when the server rebuilds the exact same release version to update packages
-  - An example progression would be: `39-23.0` ➔ `39-23.0.1` ➔ `39-23.0.2` ➔ `39-23.1` ➔ `39-23.1.1`
-  - As builds are not created if no changes are present, this may drift out-of-sync between branches
-* `<commit>` _(optional)_: Git commit (short version) for non-production versions
-  - This will only appear from:
-    - Rebasing to the `devel` version (see <a href="#branches">Branches</a> above)
-    - Building Sodalite yourself with a commit that has not been tagged
-    - A mistake, usually occuring from a tag that hasn't been pushed (oops!)
+_(Todo)_
 
 ---
 
@@ -259,10 +245,6 @@ _(todo)_
 * **[🔗 Fedora Docs ➔ Fedora Silverblue User Guide](https://docs.fedoraproject.org/en-US/fedora-silverblue/)**
 
 ---
-
-<p align="center">
-  This README was entirely overhauled on 27-Dec-2022, and removed a lot of fluff that was no longer needed, but if you're looking for the previous version see <a href="https://github.com/sodaliterocks/sodalite/blob/d482f66c7dfe300f02d0cc045bbe22a0720e6858/README.md">README.md@d482f66</a>.
-</p>
 
 <p align="center">
   <a href="README.md">🇬🇧</a>
