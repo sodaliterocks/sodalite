@@ -14,7 +14,6 @@ git_commit=""
 git_tag=""
 unified="false"
 vendor=""
-vendor_source=""
 
 function emj() {
     emoji="$1"
@@ -111,8 +110,11 @@ if [[ $(command -v "git") ]]; then
         git_origin_url="$(git config --get remote.origin.url)"
 
         if [[ "$(git -C $base_dir status --porcelain --untracked-files=no)" == "" ]]; then
-            git_tag=$(git -C $base_dir describe --exact-match --tags $(git -C $base_dir log -n1 --pretty='%h') 2>/dev/null)
+            git_tag="$(git -C $base_dir describe --exact-match --tags $(git -C $base_dir log -n1 --pretty='%h') 2>/dev/null)"
+            die "herp"
         fi
+        
+        die "derp"
 
         if [[ "$git_origin_url" != "" ]]; then
             if [[ "$git_origin_url" =~ ([a-zA-Z0-9.-_]+\@[a-zA-Z0-9.-_]+:([a-zA-Z0-9.-_]+)\/([a-zA-Z0-9.-_]+).git) ]]; then
@@ -120,12 +122,11 @@ if [[ $(command -v "git") ]]; then
             elif [[ "$git_origin_url" =~ (https:\/\/github.com\/([a-zA-Z0-9.-_]+)\/([a-zA-Z0-9.-_]+).git) ]]; then
                 vendor="${BASH_REMATCH[2]}"
             fi
-
-            vendor_source="$git_origin_url"
         fi
 
         echo "$(emj "🗑️")Cleaning up Git repository..."
-        nudo git pull --prune --tags
+        nudo git fetch --prune
+        nudo git fetch --prune-tags
     fi
 fi
 
@@ -161,8 +162,7 @@ buildinfo_content="AWESOME=\"Yes.\"
 \nOS_REF=\"$ref\"
 \nOS_UNIFIED=$unified
 \nOS_VARIANT=\"$variant\"
-\nVENDOR=\"$vendor\"
-\nVENDOR_SOURCE=\"$vendor_source\""
+\nVENDOR=\"$vendor\""
 
 echo -e $buildinfo_content > $buildinfo_file
 
