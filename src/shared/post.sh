@@ -74,6 +74,7 @@ _os_core=""
 _os_version=""
 _os_version_id=""
 _os_variant=""
+_vendor=""
 
 # Setup
 
@@ -91,12 +92,16 @@ if [[ $(cat $_buildinfo_file) != "" ]]; then
 
     [[ ! -z $(get_property $_buildinfo_file "OS_VARIANT") ]] && \
         _os_variant="$(get_property $_buildinfo_file "OS_VARIANT")"
+
+    [[ ! -z $(get_property $_buildinfo_file "VENDOR") ]] && \
+        _vendor="$(get_property $_buildinfo_file "VENDOR")"
 fi
 
 check_variable "_git_hash" "0000000"
 check_variable "_os_base_version"
 check_variable "_os_core" "pantheon"
 check_variable "_os_variant"
+check_variable "_vendor" "self"
 
 set -euo pipefail
 

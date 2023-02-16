@@ -4,14 +4,16 @@
 variant="$1"
 working_dir="$2"
 
+start_time=$(date +%s)
+
 base_dir="$(dirname "$(realpath -s "$0")")"
 buildinfo_file="$base_dir/src/sysroot/common/usr/lib/sodalite-buildinfo"
 tests_dir="$base_dir/tests"
 
 git_commit=""
 git_tag=""
-start_time=$(date +%s)
 unified="false"
+vendor=""
 
 function emj() {
     emoji="$1"
@@ -34,6 +36,17 @@ function cleanup() {
     if [[ $SUDO_USER != "" ]]; then
         chown -R $SUDO_USER:$SUDO_USER "$working_dir"
     fi
+}
+
+function nudo() { # "Normal User DO"
+    cmd="$@"
+    eval_cmd="$cmd"
+
+    if [[ $SUDO_USER != "" ]]; then
+        eval_cmd="sudo -E -u $SUDO_USER $eval_cmd"
+    fi
+
+    eval "$eval_cmd"
 }
 
 function print_time() {
@@ -94,13 +107,23 @@ if [[ $(command -v "git") ]]; then
         git config --global --add safe.directory $base_dir
 
         git_commit=$(git -C $base_dir rev-parse --short HEAD)
+        git_origin_url="$(git config --get remote.origin.url)"
 
         if [[ "$(git -C $base_dir status --porcelain --untracked-files=no)" == "" ]]; then
-            git_tag=$(git -C $base_dir describe --exact-match --tags $(git -C $base_dir log -n1 --pretty='%h') 2>/dev/null)
+            git_tag="$(git -C $base_dir describe --exact-match --tags $(git -C $base_dir log -n1 --pretty='%h') 2>/dev/null)"
+        fi
+
+        if [[ "$git_origin_url" != "" ]]; then
+            if [[ "$git_origin_url" =~ ([a-zA-Z0-9.-_]+\@[a-zA-Z0-9.-_]+:([a-zA-Z0-9.-_]+)\/([a-zA-Z0-9.-_]+).git) ]]; then
+                vendor="${BASH_REMATCH[2]}"
+            elif [[ "$git_origin_url" =~ (https:\/\/github.com\/([a-zA-Z0-9.-_]+)\/([a-zA-Z0-9.-_]+).git) ]]; then
+                vendor="${BASH_REMATCH[2]}"
+            fi
         fi
 
         echo "$(emj "🗑️")Cleaning up Git repository..."
-        git pull --prune --tags
+        nudo git fetch --prune
+        nudo git fetch --prune-tags
     fi
 fi
 
@@ -125,7 +148,8 @@ if [ ! "$(ls -A $ostree_repo_dir)" ]; then
    ost init --mode=archive
 fi
 
-buildinfo_content="BUILD_DATE=\"$(date +"%Y-%m-%d %T %z")\"
+buildinfo_content="AWESOME=\"Yes.\"
+\nBUILD_DATE=\"$(date +"%Y-%m-%d %T %z")\"
 \nBUILD_HOST_KERNEL=\"$(uname -srp)\"
 \nBUILD_HOST_NAME=\"$(hostname -f)\"
 \nBUILD_HOST_OS=\"$(cat /usr/lib/os-release | grep "PRETTY_NAME" | sed "s/PRETTY_NAME=//" | tr -d '"')\"
@@ -134,7 +158,8 @@ buildinfo_content="BUILD_DATE=\"$(date +"%Y-%m-%d %T %z")\"
 \nGIT_TAG=$git_tag
 \nOS_REF=\"$ref\"
 \nOS_UNIFIED=$unified
-\nOS_VARIANT=\"$variant\""
+\nOS_VARIANT=\"$variant\"
+\nVENDOR=\"$vendor\""
 
 echo -e $buildinfo_content > $buildinfo_file
 
