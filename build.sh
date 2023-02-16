@@ -111,10 +111,7 @@ if [[ $(command -v "git") ]]; then
 
         if [[ "$(git -C $base_dir status --porcelain --untracked-files=no)" == "" ]]; then
             git_tag="$(git -C $base_dir describe --exact-match --tags $(git -C $base_dir log -n1 --pretty='%h') 2>/dev/null)"
-            die "herp"
         fi
-        
-        die "derp"
 
         if [[ "$git_origin_url" != "" ]]; then
             if [[ "$git_origin_url" =~ ([a-zA-Z0-9.-_]+\@[a-zA-Z0-9.-_]+:([a-zA-Z0-9.-_]+)\/([a-zA-Z0-9.-_]+).git) ]]; then
