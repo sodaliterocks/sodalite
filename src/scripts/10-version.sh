@@ -141,11 +141,6 @@ if [[ ! -z $base_version ]]; then
     set_property /usr/lib/upstream-os-release "ID" "$base_id"
     set_property /usr/lib/upstream-os-release "VERSION_ID" "$base_version"
     set_property /usr/lib/upstream-os-release "PRETTY_NAME" "$base_name $base_version"
-
-    if [[ $base_version == "36" ]]; then
-        mkdir -p /etc/upstream-release
-        ln -s /usr/lib/upstream-os-release /etc/upstream-release/lsb-release
-    fi
 fi
 
 cpe="cpe:\/o:$vendor:$id:$version_id:$version_v_build+$version_v_hash$([[ $channel_id != "" ]] && echo "/$channel_id"):$variant_id"

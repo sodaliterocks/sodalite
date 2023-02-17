@@ -23,9 +23,3 @@ for x in /usr/sbin/glibc_post_upgrade.*; do
         ln -srf /usr/bin/true ${x}
     fi
 done
-
-if [[ $_os_core == "pantheon" ]]; then
-    # Some hacks for libayatana to work properly. Might stop working one day.
-    ln -s /usr/lib64/libwingpanel.so.3 /usr/lib64/libwingpanel-2.0.so.0
-    sed -i 's/lib\/x86_64-linux-gnu/lib64/g' /etc/xdg/autostart/indicator-application.desktop
-fi
