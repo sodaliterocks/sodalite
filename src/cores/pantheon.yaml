@@ -28,7 +28,6 @@ add-files: [
   ["../sysroot/cores/pantheon/etc/skel/dot.config/plank/dock1/launchers/org.gnome.Software.dockitem", "/etc/skel/.config/plank/dock1/launchers/org.gnome.Software.dockitem"],
 
   # /etc/xdg
-  ["../../lfs/binaries/debian/indicator-application-patched/0.1/etc/xdg/autostart/indicator-application.desktop", "/etc/xdg/autostart/indicator-application.desktop"],
   ["../sysroot/cores/pantheon/etc/xdg/autostart/gnome-software-service.desktop", "/etc/xdg/autostart/gnome-software-service.desktop"],
   ["../sysroot/cores/pantheon/etc/xdg/autostart/plank-wrapper.desktop", "/etc/xdg/autostart/plank-wrapper.desktop"],
 
@@ -39,14 +38,9 @@ add-files: [
   ["../sysroot/cores/pantheon/usr/bin/rocks.sodalite.locale-selector", "/usr/bin/rocks.sodalite.locale-selector"],
 
   # /usr/lib
-  ["../../lfs/binaries/debian/com.github.mvbonin.switchboard-plug-indicators/0.1~amd64/usr/lib/x86_64-linux-gnu/switchboard/hardware/libindicators.so", "/usr/lib64/switchboard/personal/libindicators.so"],
-  ["../../lfs/binaries/debian/com.github.mvbonin.wingpanel-community-indicators/2.0.9~amd64/usr/lib/x86_64-linux-gnu/wingpanel/libayatana.so", "/usr/lib64/wingpanel/libayatana.so"],
-  ["../../lfs/binaries/debian/indicator-application-patched/0.1/usr/lib/indicators3/7/libapplication.so", "/usr/lib/indicators3/7/libapplication.so"],
-  ["../../lfs/binaries/debian/indicator-application-patched/0.1/usr/lib/systemd/user/indicator-application.service", "/usr/lib/systemd/user/indicator-application.service"],
   ["../sysroot/cores/pantheon/usr/lib/sodalite-core", "/usr/lib/sodalite-core"],
 
   # /usr/lib64
-  ["../../lfs/binaries/debian/indicator-application-patched/0.1/usr/lib/x86_64-linux-gnu/indicator-application/indicator-application-service", "/usr/lib64/indicator-application/indicator-application-service"],
   ["../../lfs/binaries/fedora/switchboard-plug-useraccounts/2.4.2-1.fc36~x86_64/usr/lib64/libgnome-desktop-3.so.19", "/usr/lib64/libgnome-desktop-3.so.19"],
   ["../../lfs/binaries/fedora/switchboard-plug-useraccounts/2.4.2-1.fc36~x86_64/usr/lib64/switchboard/system/libuseraccounts.so", "/usr/lib64/switchboard/system/libuseraccounts.so"],
   ["../../lfs/binaries/fedora/switchboard-plug-useraccounts/2.4.2-1.fc36~x86_64/usr/lib64/switchboard/system/pantheon-useraccounts/guest-session-toggle", "/usr/lib64/switchboard/system/pantheon-useraccounts/guest-session-toggle"],

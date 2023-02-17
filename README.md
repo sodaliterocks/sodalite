@@ -48,9 +48,9 @@ It's vital you carry out this process as updates stop the day the base version r
 To allow for several versions to co-exist and be developed in tandem with each other, Sodalite &mdash; like any other rpm-ostree distro &mdash; carries a ref to distinguish itself. Where `<name>/<version>/<arch>/<edition>`, the format and possible values are as follows:
 
 * `<name>`: **Name** of the branch; always `sodalite`
-* `<version>`: **Version** of the branch. Possible values:
+* `<channel>`: **Channel** of the branch. Possible values:
   - `current`: Current stable release of Sodalite (currently 4, based on Fedora Linux 37)
-  - `<version>`: "Long-term" releases to stay with a specific version of Sodalite
+  - `long-<version>`: "Long-term" releases to stay with a specific version of Sodalite
     - `4`: Sodalite 4, based on Fedora Linux 37. Reaches end-of-life on 16th May 2023 (2023-05-16)
   - `next`: Upcoming and release candidates of Sodalite. **Potentially unstable!**
   - `devel`: Current development code (on `main`). **Do not use on production systems!**
@@ -71,7 +71,7 @@ Possible combinations built on the OSTree remote (`ostree.sodalite.rocks`) are a
 |Name|Version(s)|Arch.(s)|Edition(s)|
 |-|-|-|-|
 |`sodalite`|`current`|`x86_64`|`desktop`|
-|`sodalite`|`4`|`x86_64`|`desktop`|
+|`sodalite`|`long-4`|`x86_64`|`desktop`|
 |`sodalite`|`next`|`x86_64`|`desktop`|
 |`sodalite`|`devel`|`x86_64`|`desktop`<br />`desktop-deepin`<br />`desktop-gnome`|
 

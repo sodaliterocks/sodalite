@@ -3,6 +3,8 @@
 base_id=""
 base_name="Fedora Linux"
 base_version="$_os_base_version"
+channel=""
+channel_id=""
 id=""
 name="Sodalite"
 pretty_name=""
@@ -24,8 +26,7 @@ function get_codename() {
 
     case "$1" in
         "4.0"*) echo "Nubia" ;;
-        "5.0"*) echo "Qatna" ;;
-        "6.0"*) echo "Iberia" ;;
+        "5.0"*) echo "Iberia" ;;
     esac
 }
 
@@ -75,9 +76,26 @@ fi
 if [[ $version_v_major != "" ]]; then
     version="$version_v_major"
     version_id="$version_v_major.$version_v_minor"
+    channel_id="${BASH_REMATCH[1]}"
+
+    if [[ $_os_ref =~ sodalite\/([^;]*)\/([^;]*)\/([^;]*) ]]; then
+        channel_id="${BASH_REMATCH[1]}"
+
+        [[ $channel_id == "stable" ]] && channel_id="current"
+
+        if [[ $channel_id != "" ]]; then
+            case $channel_id in
+                "current") channel="Current" ;;
+                "next") channel="Next" ;;
+                "long-"*|"f"*) channel="Long" ;;
+                "devel") channel="Devel" ;;
+                *) channel="$channel_id" ;;
+            esac
+        fi
+    fi
 
     if [[ $_git_tag != "" ]]; then
-        # Releases (current/next/long)
+        # Tagged (Releases)
 
         [[ $version_v_minor != "0" ]] && version+=".$version_v_minor"
         version_codename="$(get_codename $version_id)"
@@ -87,17 +105,31 @@ if [[ $version_v_major != "" ]]; then
         else
             pretty_version="$version $variant"
         fi
+
+        if [[ $channel_id == "current" ]]; then
+            channel=""
+        fi
     else
-        # Development (devel)
+        # Un-tagged (Devel)
 
         version+=".$version_v_minor"
         [[ $version_v_build != "" ]] && version+="-$version_v_build"
         [[ $version_v_hash != "" ]] && version+="+$version_v_hash"
 
+        if [[ $channel_id == "devel" ]]; then
+            channel=""
+        else
+            channel="$channel_id"
+        fi
+
         pretty_version="$version"
 
         mkdir -p /etc/apt/sources.list.d/
         echo "daily" > /etc/apt/sources.list.d/elementary.list
+    fi
+
+    if [[ $channel != "" ]]; then
+        pretty_version="$pretty_version ($channel)"
     fi
 fi
 
@@ -107,14 +139,9 @@ if [[ ! -z $base_version ]]; then
     set_property /usr/lib/upstream-os-release "ID" "$base_id"
     set_property /usr/lib/upstream-os-release "VERSION_ID" "$base_version"
     set_property /usr/lib/upstream-os-release "PRETTY_NAME" "$base_name $base_version"
-
-    if [[ $base_version == "36" ]]; then
-        mkdir -p /etc/upstream-release
-        ln -s /usr/lib/upstream-os-release /etc/upstream-release/lsb-release
-    fi
 fi
 
-cpe="cpe:\/o:$vendor:$id:$version_id:$version_v_build+$version_v_hash:$variant_id"
+cpe="cpe:\/o:$vendor:$id:$version_id:$version_v_build+$version_v_hash$([[ $channel_id != "" ]] && echo "\/$channel_id"):$variant_id"
 pretty_name="$name $pretty_version"
 
 del_property /usr/lib/os-release "ANSI_COLOR"
