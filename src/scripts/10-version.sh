@@ -143,7 +143,7 @@ if [[ ! -z $base_version ]]; then
     set_property /usr/lib/upstream-os-release "PRETTY_NAME" "$base_name $base_version"
 fi
 
-cpe="cpe:\/o:$vendor:$id:$version_id:$version_v_build+$version_v_hash$([[ $channel_id != "" ]] && echo "/$channel_id"):$variant_id"
+cpe="cpe:\/o:$vendor:$id:$version_id:$version_v_build+$version_v_hash$([[ $channel_id != "" ]] && echo "\/$channel_id"):$variant_id"
 pretty_name="$name $pretty_version"
 
 del_property /usr/lib/os-release "ANSI_COLOR"
