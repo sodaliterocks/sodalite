@@ -3,6 +3,8 @@
 base_id=""
 base_name="Fedora Linux"
 base_version="$_os_base_version"
+channel=""
+channel_id=""
 id=""
 name="Sodalite"
 pretty_name=""
@@ -76,6 +78,21 @@ fi
 if [[ $version_v_major != "" ]]; then
     version="$version_v_major"
     version_id="$version_v_major.$version_v_minor"
+    channel_id="${BASH_REMATCH[1]}"
+
+    if [[ $_os_ref =~ sodalite\/([^;]*)\/([^;]*)\/([^;]*) ]]; then
+        channel_id="${BASH_REMATCH[1]}"
+
+        if [[ $channel_id != "" ]]; then
+            case $channel_id in
+                "current"|"stable") channel="Current" ;;
+                "next") channel="Next" ;;
+                "long-"*) channel="Long" ;;
+                "devel") channel="Devel" ;;
+                *) channel="$channel_id" ;;
+            esac
+        fi
+    fi
 
     if [[ $_git_tag != "" ]]; then
         # Releases (current/next/long)
@@ -88,6 +105,10 @@ if [[ $version_v_major != "" ]]; then
         else
             pretty_version="$version $variant"
         fi
+
+        if [[ $channel_id == "current" ]]; then
+            channel=""
+        fi
     else
         # Development (devel)
 
@@ -95,10 +116,20 @@ if [[ $version_v_major != "" ]]; then
         [[ $version_v_build != "" ]] && version+="-$version_v_build"
         [[ $version_v_hash != "" ]] && version+="+$version_v_hash"
 
+        if [[ $channel_id == "devel" ]]; then
+            channel=""
+        else
+            channel="$channel_id"
+        fi
+
         pretty_version="$version"
 
         mkdir -p /etc/apt/sources.list.d/
         echo "daily" > /etc/apt/sources.list.d/elementary.list
+    fi
+
+    if [[ $channel != "" ]]; then
+        pretty_version="$pretty_version ($channel)"
     fi
 fi
 
@@ -112,23 +143,6 @@ if [[ ! -z $base_version ]]; then
     if [[ $base_version == "36" ]]; then
         mkdir -p /etc/upstream-release
         ln -s /usr/lib/upstream-os-release /etc/upstream-release/lsb-release
-    fi
-fi
-
-if [[ $_os_ref =~ sodalite\/([^;]*)\/([^;]*)\/([^;]*) ]]; then
-    channel_id="${BASH_REMATCH[1]}"
-    channel=""
-
-    case "$channel_id" in
-        "current"|"stable") channel="" ;;
-        "next") channel="Next" ;;
-        "long-"*) channel="Long" ;;
-        "devel") channel="Devel" ;;
-        *) channel="$channel_id" ;;
-    esac
-
-    if [[ $channel != "" ]]; then
-        pretty_version="$pretty_version ($channel)"
     fi
 fi
 
