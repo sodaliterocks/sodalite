@@ -114,6 +114,23 @@ if [[ ! -z $base_version ]]; then
     fi
 fi
 
+if [[ $_os_ref =~ sodalite\/([^;]*)\/([^;]*)\/([^;]*) ]]; then
+    channel_id="${BASH_REMATCH[1]}"
+    channel=""
+
+    case "$channel_id" in
+        "current"|"stable") channel="" ;;
+        "next") channel="Next" ;;
+        "long-"*) channel="Long" ;;
+        "devel") channel="Devel" ;;
+        *) channel="$channel_id" ;;
+    esac
+
+    if [[ $channel != "" ]]; then
+        pretty_version="$pretty_version ($channel)"
+    fi
+fi
+
 cpe="cpe:\/o:$vendor:$id:$version_id:$version_v_build+$version_v_hash:$variant_id"
 pretty_name="$name $pretty_version"
 
