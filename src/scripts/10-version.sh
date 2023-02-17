@@ -97,7 +97,7 @@ if [[ $version_v_major != "" ]]; then
     fi
 
     if [[ $_git_tag != "" ]]; then
-        # Releases (current/next/long)
+        # Tagged (Releases)
 
         [[ $version_v_minor != "0" ]] && version+=".$version_v_minor"
         version_codename="$(get_codename $version_id)"
@@ -112,7 +112,7 @@ if [[ $version_v_major != "" ]]; then
             channel=""
         fi
     else
-        # Development (devel)
+        # Un-tagged (Devel)
 
         version+=".$version_v_minor"
         [[ $version_v_build != "" ]] && version+="-$version_v_build"
