@@ -92,7 +92,7 @@ if [[ $(cat $_buildinfo_file) != "" ]]; then
         _git_tag="$(get_property $_buildinfo_file "GIT_TAG")"
 
     [[ ! -z $(get_property $_buildinfo_file "OS_REF") ]] && \
-        _os_variant="$(get_property $_buildinfo_file "OS_REF")"
+        _os_ref="$(get_property $_buildinfo_file "OS_REF")"
 
     [[ ! -z $(get_property $_buildinfo_file "OS_VARIANT") ]] && \
         _os_variant="$(get_property $_buildinfo_file "OS_VARIANT")"
