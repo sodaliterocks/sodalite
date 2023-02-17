@@ -3,12 +3,15 @@
 base_id=""
 base_name="Fedora Linux"
 base_version="$_os_base_version"
+channel=""
+channel_id=""
 id=""
 name="Sodalite"
 pretty_name=""
 pretty_version=""
 variant=""
 variant_id="$_os_variant"
+vendor="$_vendor"
 version=""
 version_v_major=""
 version_v_minor=""
@@ -18,9 +21,14 @@ version_codename=""
 version_id=""
 
 function get_codename() {
+    # Codename inspiration:
+    # * https://en.wikipedia.org/wiki/Ancient_history
+
     case "$1" in
         "4.0"*) echo "Nubia" ;;
+        "4.1"*) echo "Essina" ;;
         "5.0"*) echo "Qatna" ;;
+        "6.0"*) echo "Iberia" ;;
     esac
 }
 
@@ -60,11 +68,7 @@ if [[ $(get_property /etc/os-release VERSION) =~ (([0-9]{1,2}).([0-9]{1,3})(rc[0
         version_v_minor+="${BASH_REMATCH[4]}"
     fi
 
-    if [[ ${BASH_REMATCH[7]} == "0" ]]; then
-        version_v_build="${BASH_REMATCH[5]}"
-    else
-        version_v_build="${BASH_REMATCH[5]}.${BASH_REMATCH[7]}"
-    fi
+    version_v_build="${BASH_REMATCH[5]}.${BASH_REMATCH[7]}"
 
     if [[ $_git_hash != "" ]]; then
         version_v_hash="$_git_hash"
@@ -74,29 +78,60 @@ fi
 if [[ $version_v_major != "" ]]; then
     version="$version_v_major"
     version_id="$version_v_major.$version_v_minor"
+    channel_id="${BASH_REMATCH[1]}"
+
+    if [[ $_os_ref =~ sodalite\/([^;]*)\/([^;]*)\/([^;]*) ]]; then
+        channel_id="${BASH_REMATCH[1]}"
+
+        [[ $channel_id == "stable" ]] && channel_id="current"
+
+        if [[ $channel_id != "" ]]; then
+            case $channel_id in
+                "current") channel="Current" ;;
+                "next") channel="Next" ;;
+                "long-"*|"f"*) channel="Long" ;;
+                "devel") channel="Devel" ;;
+                *) channel="$channel_id" ;;
+            esac
+        fi
+    fi
 
     if [[ $_git_tag != "" ]]; then
-        # Releases (current/next/long)
+        # Tagged (Releases)
 
         [[ $version_v_minor != "0" ]] && version+=".$version_v_minor"
         version_codename="$(get_codename $version_id)"
 
         if [[ $variant_id == "desktop" ]]; then
-            pretty_version="$version “$version_codename”"
+            pretty_version="$version $version_codename"
         else
             pretty_version="$version $variant"
         fi
+
+        if [[ $channel_id == "current" ]]; then
+            channel=""
+        fi
     else
-        # Development (devel)
+        # Un-tagged (Devel)
 
         version+=".$version_v_minor"
         [[ $version_v_build != "" ]] && version+="-$version_v_build"
         [[ $version_v_hash != "" ]] && version+="+$version_v_hash"
 
+        if [[ $channel_id == "devel" ]]; then
+            channel=""
+        else
+            channel="$channel_id"
+        fi
+
         pretty_version="$version"
 
         mkdir -p /etc/apt/sources.list.d/
         echo "daily" > /etc/apt/sources.list.d/elementary.list
+    fi
+
+    if [[ $channel != "" ]]; then
+        pretty_version="$pretty_version ($channel)"
     fi
 fi
 
@@ -106,16 +141,10 @@ if [[ ! -z $base_version ]]; then
     set_property /usr/lib/upstream-os-release "ID" "$base_id"
     set_property /usr/lib/upstream-os-release "VERSION_ID" "$base_version"
     set_property /usr/lib/upstream-os-release "PRETTY_NAME" "$base_name $base_version"
-
-    if [[ $base_version == "36" ]]; then
-        mkdir -p /etc/upstream-release
-        ln -s /usr/lib/upstream-os-release /etc/upstream-release/lsb-release
-    fi
 fi
 
-cpe="cpe:\/o:sodaliterocks:$id:$version_id:$version_v_build+$version_v_hash:$variant_id"
+cpe="cpe:\/o:$vendor:$id:$version_id:$version_v_build+$version_v_hash$([[ $channel_id != "" ]] && echo "/$channel_id"):$variant_id"
 pretty_name="$name $pretty_version"
-url_prefix="https:\/\/sodalite.rocks"
 
 del_property /usr/lib/os-release "ANSI_COLOR"
 del_property /usr/lib/os-release "DEFAULT_HOSTNAME"
@@ -126,21 +155,30 @@ del_property /usr/lib/os-release "REDHAT_SUPPORT_PRODUCT"
 del_property /usr/lib/os-release "REDHAT_SUPPORT_PRODUCT_VERSION"
 del_property /usr/lib/os-release "VERSION_CODENAME"
 
-set_property /usr/lib/os-release "BUG_REPORT_URL" "$url_prefix\/bug-report"
 set_property /usr/lib/os-release "CPE_NAME" "$cpe"
-set_property /usr/lib/os-release "DOCUMENTATION_URL" "$url_prefix\/docs"
-set_property /usr/lib/os-release "HOME_URL" "$url_prefix"
 set_property /usr/lib/os-release "ID" "$id"
 set_property /usr/lib/os-release "ID_LIKE" "$base_id"
 set_property /usr/lib/os-release "NAME" "$name"
 set_property /usr/lib/os-release "LOGO" "distributor-logo"
 set_property /usr/lib/os-release "PRETTY_NAME" "$pretty_name"
-set_property /usr/lib/os-release "SUPPORT_URL" "$url_prefix\/support"
 set_property /usr/lib/os-release "VARIANT" "$variant"
 set_property /usr/lib/os-release "VARIANT_ID" "$variant_id"
 set_property /usr/lib/os-release "VERSION" "$pretty_version"
 set_property /usr/lib/os-release "VERSION_CODENAME" "$version_codename"
 set_property /usr/lib/os-release "VERSION_ID" "$base_version"
+
+if [[ $vendor == "sodaliterocks" ]]; then
+    url_prefix="https:\/\/sodalite.rocks"
+    set_property /usr/lib/os-release "BUG_REPORT_URL" "$url_prefix\/bug-report"
+    set_property /usr/lib/os-release "DOCUMENTATION_URL" "$url_prefix\/docs"
+    set_property /usr/lib/os-release "HOME_URL" "$url_prefix"
+    set_property /usr/lib/os-release "SUPPORT_URL" "$url_prefix\/support"
+else
+    del_property /usr/lib/os-release "BUG_REPORT_URL"
+    del_property /usr/lib/os-release "DOCUMENTATION_URL"
+    del_property /usr/lib/os-release "HOME_URL"
+    del_property /usr/lib/os-release "SUPPORT_URL"
+fi
 
 sed -i "/^$/d" /usr/lib/os-release
 
