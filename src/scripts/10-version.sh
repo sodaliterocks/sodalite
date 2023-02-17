@@ -24,6 +24,7 @@ function get_codename() {
 
     case "$1" in
         "4.0"*) echo "Nubia" ;;
+        "4.1"*) echo "Essina" ;;
         "5.0"*) echo "Qatna" ;;
         "6.0"*) echo "Iberia" ;;
     esac
