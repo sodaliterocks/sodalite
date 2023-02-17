@@ -83,11 +83,13 @@ if [[ $version_v_major != "" ]]; then
     if [[ $_os_ref =~ sodalite\/([^;]*)\/([^;]*)\/([^;]*) ]]; then
         channel_id="${BASH_REMATCH[1]}"
 
+        [[ $channel_id == "stable" ]] && channel_id="current"
+
         if [[ $channel_id != "" ]]; then
             case $channel_id in
-                "current"|"stable") channel="Current" ;;
+                "current") channel="Current" ;;
                 "next") channel="Next" ;;
-                "long-"*) channel="Long" ;;
+                "long-"*|"f"*) channel="Long" ;;
                 "devel") channel="Devel" ;;
                 *) channel="$channel_id" ;;
             esac
