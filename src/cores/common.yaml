@@ -70,7 +70,7 @@ add-files: [
   ["../sysroot/common/usr/libexec/rocks.sodalite.cleanup", "/usr/libexec/rocks.sodalite.cleanup"],
 
   # /usr/libexec/sodalite-post
-  ["../scripts/00-echo-buildinfo.sh", "/usr/libexec/sodalite-post/00-buildinfo.sh"],
+  ["../scripts/00-print-buildinfo.sh", "/usr/libexec/sodalite-post/00-print-buildinfo.sh"],
   ["../scripts/10-version.sh", "/usr/libexec/sodalite-post/10-version.sh"],
   ["../scripts/30-hacks.sh", "/usr/libexec/sodalite-post/30-hacks.sh"],
   ["../scripts/50-file-removals.sh", "/usr/libexec/sodalite-post/50-file-removals.sh"],
