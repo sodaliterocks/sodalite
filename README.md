@@ -49,9 +49,9 @@ To allow for several versions to co-exist and be developed in tandem with each o
 
 * `<name>`: **Name** of the branch; always `sodalite`
 * `<channel>`: **Channel** of the branch. Possible values:
-  - `current`: Current stable release (currently 4, based on Fedora Linux 37)
+  - `current`: Current stable release (currently 4, based on [Fedora Linux 37](https://docs.fedoraproject.org/en-US/releases/f37/))
   - `long-<version>`: "Long-term" releases to stay with a specific version
-    - `4`: 4.x, based on Fedora Linux 37. Reaches end-of-life on 14-Nov-2023 (2023-11-14)
+    - `4`: 4.x, based on [Fedora Linux 37](https://docs.fedoraproject.org/en-US/releases/f37/). Reaches end-of-life on 14-Nov-2023 (2023-11-14)
   - `next`: Upcoming release candidates. **Potentially broken!**
   - `devel`: Current development code (on `main`). **Do not use on production systems!**
 * `<arch>`: **Architecture** of the branch. Possible values:
