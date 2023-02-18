@@ -49,10 +49,10 @@ To allow for several versions to co-exist and be developed in tandem with each o
 
 * `<name>`: **Name** of the branch; always `sodalite`
 * `<channel>`: **Channel** of the branch. Possible values:
-  - `current`: Current stable release of Sodalite (currently 4, based on Fedora Linux 37)
-  - `long-<version>`: "Long-term" releases to stay with a specific version of Sodalite
-    - `4`: Sodalite 4, based on Fedora Linux 37. Reaches end-of-life on 16th May 2023 (2023-05-16)
-  - `next`: Upcoming and release candidates of Sodalite. **Potentially unstable!**
+  - `current`: Current stable release (currently 4, based on Fedora Linux 37)
+  - `long-<version>`: "Long-term" releases to stay with a specific version
+    - `4`: 4.x, based on Fedora Linux 37. Reaches end-of-life on 14-Nov-2023 (2023-11-14)
+  - `next`: Upcoming release candidates. **Potentially broken!**
   - `devel`: Current development code (on `main`). **Do not use on production systems!**
 * `<arch>`: **Architecture** of the branch. Possible values:
   - `x86_64`: For 64-bit CPUs (`x86_64`, `amd64`, or `x64`)
@@ -61,7 +61,7 @@ To allow for several versions to co-exist and be developed in tandem with each o
   - `desktop`: Standard Pantheon desktop
   - `desktop-deepin`: Alternate Deepin desktop
   - `desktop-gnome`: Alternate GNOME desktop
-  
+
 **As mentioned above, most users will want `sodalite/current/x86_64/desktop`.**
 
 #### Available Branches
@@ -75,7 +75,7 @@ Possible combinations built on the OSTree remote (`ostree.sodalite.rocks`) are a
 |`sodalite`|`next`|`x86_64`|`desktop`|
 |`sodalite`|`devel`|`x86_64`|`desktop`<br />`desktop-deepin`<br />`desktop-gnome`|
 
-_For example, `sodalite/current/x86_64/desktop` exists on the build server and can be pulled, but `sodalite/5/x86_64/desktop-gnome` does not._
+_For example, `sodalite/current/x86_64/desktop` exists on the build server and can be pulled, but `sodalite/long-5/x86_64/desktop-gnome` does not._
 
 ### Versioning
 
