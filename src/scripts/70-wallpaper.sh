@@ -4,6 +4,7 @@ wallpaper=""
 
 case $_os_version_id in
     "4.0"*) wallpaper="jeremy-gerritsen-_iviuukstI4-unsplash" ;;
+    "4.1"*) wallpaper="dustin-humes-OrO_HSqlZMY-unsplash" ;;
     "5.0"*) wallpaper="zara-walker-_pC5hT6aXfs-unsplash" ;;
 esac
 
