@@ -52,6 +52,7 @@ add-files: [
   ["../sysroot/common/usr/bin/rocks.sodalite.links", "/usr/bin/rocks.sodalite.links"],
   ["../sysroot/common/usr/bin/rocks.sodalite.phone-mirror", "/usr/bin/rocks.sodalite.phone-mirror"],
   ["../sysroot/common/usr/bin/rocks.sodalite.user-daemon", "/usr/bin/rocks.sodalite.user-daemon"],
+  ["../sysroot/common/usr/bin/nudo", "/usr/bin/nudo"],
   ["../sysroot/common/usr/bin/soda", "/usr/bin/soda"],
 
   # /usr/lib
