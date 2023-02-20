@@ -59,7 +59,7 @@ To allow for several versions to co-exist and be developed in tandem with each o
   - ~~`x86`: [What year is it!?](https://c.tenor.com/9OcQhlCBNG0AAAAd/what-year-is-it-jumanji.gif)~~
 * `<edition>`: **Edition** (or variant) of the branch: Possible values:
   - `desktop`: Standard Pantheon desktop
-  - `desktop-budge`: Alternate Budgie desktop
+  - `desktop-budgie`: Alternate Budgie desktop
   - `desktop-deepin`: Alternate Deepin desktop
   - `desktop-gnome`: Alternate GNOME desktop
 
