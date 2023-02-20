@@ -1,6 +1,6 @@
 include: [
   "./common.yaml",
-  "../packages/gnome.yaml"
+  "../packages/budgie.yaml"
 ]
 
 add-files: [
