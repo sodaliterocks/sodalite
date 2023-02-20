@@ -78,7 +78,8 @@ add-files: [
   ["../scripts/70-flatpak-aliases.sh", "/usr/libexec/sodalite-post/70-flatpak-aliases.sh"],
   ["../scripts/70-gnome-extensions.sh", "/usr/libexec/sodalite-post/70-gnome-extensions.sh"],
   ["../scripts/70-wallpaper.sh", "/usr/libexec/sodalite-post/70-wallpaper.sh"],
-  ["../scripts/80-extras.sh", "/usr/libexec/sodalite-post/80-extras.sh"],
+  ["../scripts/80-tweaks.sh", "/usr/libexec/sodalite-post/80-tweaks.sh"],
+  ["../scripts/80-tweaks-pantheon.sh", "/usr/libexec/sodalite-post/80-tweaks-pantheon.sh"],
   ["../scripts/90-cleanup.sh", "/usr/libexec/sodalite-post/90-cleanup.sh"],
 
   # /usr/share

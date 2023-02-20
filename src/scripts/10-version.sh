@@ -196,5 +196,3 @@ ln -s /usr/lib/system-release-cpe /etc/system-release-cpe
 
 _os_version="$version"
 _os_version_id="$version_id"
-
-cat /usr/lib/os-release
