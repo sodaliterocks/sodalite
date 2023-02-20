@@ -1,0 +1,11 @@
+[copr.zeno.scrcpy]
+name=Copr: zeno/scrcpy
+baseurl=https://download.copr.fedorainfracloud.org/results/zeno/scrcpy/fedora-$releasever-$basearch/
+type=rpm-md
+skip_if_unavailable=True
+gpgcheck=1
+gpgkey=https://download.copr.fedorainfracloud.org/results/zeno/scrcpy/pubkey.gpg
+repo_gpgcheck=0
+enabled=1
+enabled_metadata=1
+

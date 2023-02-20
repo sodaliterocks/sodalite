@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+cmd="$@"
+eval_cmd="$cmd"
+
+if [[ $SUDO_USER != "" ]]; then
+    eval_cmd="sudo -E -u $SUDO_USER $eval_cmd"
+fi
+
+eval "$eval_cmd"

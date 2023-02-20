@@ -8,6 +8,3 @@ indent_style = space
 insert_final_newline = true
 tab_width = 4
 trim_trailing_whitespace = true
-
-[{*.xml,*.xml.in,*.yaml}]
-tab_width = 2

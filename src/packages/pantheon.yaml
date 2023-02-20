@@ -2,9 +2,11 @@ packages:
  #- appcenter # AppCenter does not work with rpm-ostree!
  - contractor
  - elementary-files
+ - elementary-files-portal
  - elementary-greeter
  - elementary-icon-theme
  - elementary-notifications
+ - elementary-onboarding
  - elementary-print
  - elementary-settings-daemon
  - elementary-shortcut-overlay
