@@ -106,7 +106,7 @@ check_variable "_os_base_version"
 check_variable "_os_core" "pantheon"
 check_variable "_os_ref"
 check_variable "_os_variant"
-check_variable "_vendor" "self"
+check_variable "_vendor" "unknown-vendor"
 
 set -euo pipefail
 
