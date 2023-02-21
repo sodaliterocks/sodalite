@@ -379,9 +379,9 @@ function main() {
     [[ "$ci_branch" != "" && "$ci" == "" ]] && die "--ci-branch cannot be used without --ci"
     [[ "$skip_test" != "" && "$ci" != "" ]] && die "--skip-test cannot be used with --ci"
 
-    { [[ "$ci_branch" == "true" ]] || [[ -z "$ci_branch" ]] } && ci_branch="devel"
-    { [[ "$working_dir" == "true" ]] || [[ -z "$working_dir" ]] } && working_dir="$src_dir/build"
-    { [[ "$variant" == "true" ]] || [[ -z "$variant" ]] } && variant="custom"
+    [[ "$ci_branch" == "true" ]] || [[ -z "$ci_branch" ]] && ci_branch="devel"
+    [[ "$working_dir" == "true" ]] || [[ -z "$working_dir" ]] && working_dir="$src_dir/build"
+    [[ "$variant" == "true" ]] || [[ -z "$variant" ]] && variant="custom"
 
     [[ ! -d "$working_dir" ]] && mkdir -p "$working_dir"
 
