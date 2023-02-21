@@ -177,9 +177,9 @@ function trigger_ntfy() {
         title+=") — "
 
         if [[ $exit_code != 0 ]]; then
-            title+="💥 Build Fail"
+            title+="💥 Fail"
         else
-            title+="✅ Build Success"
+            title+="✅ Success"
         fi
 
         [[ -f "$build_log_file" ]] && cp "$build_log_file" "${build_log_file}_copy"
