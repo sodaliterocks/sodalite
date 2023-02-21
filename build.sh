@@ -121,10 +121,13 @@ function ost() {
 }
 
 function print_log_header() {
+    print_separator="$1"
+
     header="✨ $variant • 🖥️ $(hostname -f) • 🕒 $(date --date="@$start_time" "+%Y-%m-%d %H:%M:%S %Z")"
     header_length=$((${#header} + 1))
+
     echo "$header"
-    echo "$(repeat "-" $header_length)"
+    [[ $print_separator != "false" ]] && echo "$(repeat "-" $header_length)"
 }
 
 function print_time() {
@@ -192,6 +195,12 @@ function trigger_ntfy() {
                 -H "Filename: $build_log_filename" \
                 -H "Title: $title" \
                 "$ex_ntfy_endpoint/$ex_ntfy_topic"
+        else
+            curl \
+                -u "$ex_ntfy_username:$ex_ntfy_password" \
+                -H "Title: $title" \
+                -d "$(print_log_header false)" \
+                "$ex_ntfy_endpoint/$ex_ntfy_topic"
         fi
 
         rm "${build_log_file}_copy"
@@ -217,6 +226,13 @@ function build_sodalite() {
     ostree_repo_dir="$working_dir/repo"
 
     ref="$(echo "$(cat "$treefile")" | grep "ref:" | sed "s/ref: //" | sed "s/\${basearch}/$(uname -m)/")"
+
+    if [[ $ref =~ sodalite\/([^;]*)\/([^;]*)\/([^;]*) ]]; then
+        channel="${BASH_REMATCH[1]}"
+        arch="${BASH_REMATCH[2]}"
+    else
+        build_die "Ref is an invalid format (should be 'sodalite/<channel>/<arch>/<variant>'; is '$ref')"
+    fi
 
     mkdir -p $ostree_cache_dir
     mkdir -p $ostree_repo_dir
@@ -271,13 +287,6 @@ function build_sodalite() {
         buildinfo_build_host_name="(Undisclosed)"
         buildinfo_build_host_os="(Undisclosed)"
         buildinfo_build_tool="(Undisclosed)"
-    fi
-
-    if [[ $ref =~ sodalite\/([^;]*)\/([^;]*)\/([^;]*) ]]; then
-        channel="${BASH_REMATCH[1]}"
-        arch="${BASH_REMATCH[2]}"
-    else
-        build_die "Ref is an invalid format (should be 'sodalite/<channel>/<arch>/<variant>'; is '$ref')"
     fi
 
     buildinfo_content="AWESOME=\"Yes\"
@@ -388,11 +397,10 @@ function main() {
     build_log_dir="$working_dir/logs"
     build_log_filename="sodalite_${variant}_$(hostname -s)_${start_time}.out"
     build_log_file="$build_log_dir/$build_log_filename"
-    mkdir -p "$build_log_dir"
-
-    chown -R root:root "$working_dir"
 
     if [[ $ex_log != "" ]]; then
+        mkdir -p "$build_log_dir"
+
         exec 3>&1 4>&2
         trap 'exec 2>&4 1>&3' 0 1 2 3
         exec 1>"$build_log_file" 2>&1
@@ -401,9 +409,13 @@ function main() {
 
         say warning "Logging to file ($build_log_file)" >&3
     else
-        echo "$(print_log_header)" > $build_log_file
-        echo "No output captured (use --ex-log)" >> $build_log_file
+        if [[ -d $build_log_dir ]]; then
+            echo "$(print_log_header)" > $build_log_file
+            echo "No output captured (use --ex-log)" >> $build_log_file
+        fi
     fi
+
+    chown -R root:root "$working_dir"
 
     if [[ ! $(command -v "rpm-ostree") ]]; then
         die "rpm-ostree not installed. Cannot build"
