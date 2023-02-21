@@ -1,5 +1,5 @@
 include: [
-  "../../lib/workstation-ostree-config_f37/fedora-common-ostree-pkgs.yaml",
+  "../../lib/workstation-ostree-config_f38/fedora-common-ostree-pkgs.yaml",
   "../packages/essential.yaml",
   "../packages/flatpak.yaml",
   "../packages/fonts.yaml",
