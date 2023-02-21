@@ -12,9 +12,10 @@ _PLUGIN_OPTIONS=(
     "skip-cleanup;;Skip cleaning up (removing useless files, fixing permissions) on exit"
     "skip-tests;;\tSkip executing tests"
     "unified-core;;Use --unified-core option with rpm-ostree"
+    "ex-container-args;;"
     "ex-container-hostname;;"
     "ex-container-image;;"
-    "ex-log;;"
+    "ex-log;;" # TODO: Do something with the logs in --ci mode?
     "ex-ntfy;;"
     "ex-ntfy-endpoint;;"
     "ex-ntfy-password;;"
@@ -435,6 +436,7 @@ function main() {
                 --hostname \"$container_hostname\" \
                 --name \"$container_name\" \
                 --volume \"$working_dir:/wd/out/\" "
+            [[ $ex_conatiner_args != "" ]] && container_args+="$ex_container_args "
             container_command="touch /.sodalite-containerenv;"
             container_command+="dnf install -y curl git-core git-lfs hostname policycoreutils rpm-ostree selinux-policy selinux-policy-targeted;"
 
