@@ -441,7 +441,7 @@ function main() {
                 --name \"$container_name\" \
                 --volume \"$working_dir:/wd/out/\" "
             container_command="touch /.sodalite-containerenv;"
-            container_command+="dnf install -y git-core git-lfs hostname rpm-ostree selinux-policy selinux-policy-targeted policycoreutils;"
+            container_command+="dnf install -y curl git-core git-lfs hostname policycoreutils rpm-ostree selinux-policy selinux-policy-targeted;"
 
             if [[ $ci == "true" ]]; then
                 #[[ $(git show-ref refs/heads/$ci_branch) == "" ]] && build_die "Branch '$ci_branch' does not exist"
