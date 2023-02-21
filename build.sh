@@ -30,6 +30,8 @@ build_log_file=""
 build_log_filename=""
 build_meta_dir=""
 buildinfo_file=""
+built_commit=""
+built_version=""
 channel=""
 git_commit=""
 git_tag=""
@@ -52,10 +54,14 @@ fi
 # Utilities
 
 function build_die() {
-    say error "$@"
+    exit_code=255
+    message="$@"
+
+    say error "$message"
     cleanup
-    trigger_ntfy 255
-    exit 255
+    trigger_ntfy $exit_code "$message"
+
+    exit $exit_code
 }
 
 function build_emj() {
@@ -114,7 +120,7 @@ function ost() {
     options="${@:2}"
 
     if [[ -z $ostree_repo_dir ]]; then
-        die "\$ostree_repo_dir not set"
+        build_die "\$ostree_repo_dir not set"
     fi
 
     ostree $command --repo="$ostree_repo_dir" $options
@@ -154,6 +160,7 @@ function print_time() {
 
 function trigger_ntfy() {
     exit_code=$1
+    message="$2"
 
     [[ $exit_code == "" ]] && exit_code=0
 
@@ -184,6 +191,8 @@ function trigger_ntfy() {
             title+="✅ Build Success"
         fi
 
+        [[ $built_version != "" ]] && title+=" ($built_version)"
+
         cp "$build_log_file" "${build_log_file}_copy"
 
         say primary "$(build_emj "💬")Sending notification ($ex_ntfy_endpoint/$ex_ntfy_topic)..."
@@ -196,10 +205,16 @@ function trigger_ntfy() {
                 -H "Title: $title" \
                 "$ex_ntfy_endpoint/$ex_ntfy_topic"
         else
+            if [[ $message != "" ]]; then
+                body_message="$(print_log_header true)\n$message"
+            else
+                body_message="$(print_log_header false)"
+            fi
+
             curl \
                 -u "$ex_ntfy_username:$ex_ntfy_password" \
                 -H "Title: $title" \
-                -d "$(print_log_header false)" \
+                -d "$body_message" \
                 "$ex_ntfy_endpoint/$ex_ntfy_topic"
         fi
 
@@ -382,11 +397,11 @@ function test_sodalite() {
 
 function main() {
     src_dir="$(realpath -s "$base_dir/../../..")"
-    [[ ! -d $src_dir ]] && die "Unable to compute source directory"
+    [[ ! -d $src_dir ]] && build_die "Unable to compute source directory"
 
-    [[ "$ci" != "" && "$container" == "" ]] && die "--ci cannot be used without --container"
-    [[ "$ci_branch" != "" && "$ci" == "" ]] && die "--ci-branch cannot be used without --ci"
-    [[ "$skip_test" != "" && "$ci" != "" ]] && die "--skip-test cannot be used with --ci"
+    [[ "$ci" != "" && "$container" == "" ]] && build_die "--ci cannot be used without --container"
+    [[ "$ci_branch" != "" && "$ci" == "" ]] && build_die "--ci-branch cannot be used without --ci"
+    [[ "$skip_test" != "" && "$ci" != "" ]] && build_die "--skip-test cannot be used with --ci"
 
     [[ "$ci_branch" == "true" ]] || [[ -z "$ci_branch" ]] && ci_branch="devel"
     [[ "$working_dir" == "true" ]] || [[ -z "$working_dir" ]] && working_dir="$src_dir/build"
@@ -418,7 +433,7 @@ function main() {
     chown -R root:root "$working_dir"
 
     if [[ ! $(command -v "rpm-ostree") ]]; then
-        die "rpm-ostree not installed. Cannot build"
+        build_die "rpm-ostree not installed. Cannot build"
     fi
 
     if [[ $container == "true" ]]; then # BUG: Podman sets $container (usually to "oci"), so we need to look for "true" instead
@@ -459,14 +474,16 @@ function main() {
             say primary "$(build_emj "📦")Executing container ($container_name)..."
             eval "podman $container_args"
         else
-            die "Podman not installed. Cannot build with --container"
+            build_die "Podman not installed. Cannot build with --container"
         fi
     else
         build_sodalite
         test_sodalite
 
-        end_time=$(( $(date +%s) - $start_time ))
+        built_commit="$(echo ""$(ost log $ref | grep "commit " | sed "s/commit //")"" | head -1)"
+        built_version="$(ost cat $built_commit /usr/lib/os-release | grep "OSTREE_VERSION" | sed "s/OSTREE_VERSION=//" | sed "s/'//g")"
 
+        end_time=$(( $(date +%s) - $start_time ))
         highscore="false"
         highscore_file="$build_meta_dir/highscore"
         prev_highscore=""
@@ -481,6 +498,9 @@ function main() {
                 echo "$end_time" > "$highscore_file"
             fi
         fi
+
+        say info "$(build_emj "ℹ️")Version: $built_version"
+        say info "  Commit: $built_commit"
 
         cleanup
 
