@@ -20,6 +20,7 @@ _PLUGIN_OPTIONS=(
     "ex-ntfy-password;;"
     "ex-ntfy-topic;;"
     "ex-ntfy-username;;"
+    "ex-override-starttime;;"
 )
 _PLUGIN_ROOT="true"
 
@@ -36,12 +37,17 @@ lockfile=""
 ostree_cache_dir=""
 ostree_repo_dir=""
 ref=""
+start_time=""
 src_dir=""
 tests_dir=""
 treefile=""
 vendor=""
 
-start_time=$(date +%s)
+if [[ $ex_override_starttime == "" ]]; then
+    start_time=$(date +%s)
+else
+    start_time=$ex_override_starttime # TODO: Validate?
+fi
 
 # Utilities
 
