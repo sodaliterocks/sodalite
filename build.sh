@@ -394,6 +394,8 @@ function main() {
 
     if [[ $container == "true" ]]; then # BUG: Podman sets $container (usually to "oci"), so we need to look for "true" instead
         if [[ $(command -v "podman") ]]; then
+            container_start_time=$(date +%s)
+        
             container_name="sodalite-build_$(get_random_string 6)"
             container_hostname="$(echo $container_name | sed s/_/-/g)"
             container_image="fedora:37"
@@ -409,6 +411,12 @@ function main() {
             [[ $skip_test != "" ]] && container_build_args+=" --skip-test $skip_test"
             [[ $variant != "" ]] && container_build_args+=" --variant $variant"
             [[ $unified_core != "" ]] && container_build_args+=" --unified-core $unified_core"
+
+            if [[ $ex_override_starttime != "" ]]; then
+                container_build_args+=" --ex-override-starttime $ex_override_starttime"
+            else
+                container_build_args+=" --ex-override-starttime $container_start_time"
+            fi
 
             [[ ! -z "$ex_container_hostname" ]] && container_hostname="$ex_container_hostname"
             [[ ! -z "$ex_container_image" ]] && container_image="$ex_container_image"
