@@ -486,13 +486,9 @@ function main() {
 if [[ $SODALITE_HACKS_INVOKED != "true" ]]; then
     hacks_dir="$(dirname "$(realpath -s "$0")")/lib/sodaliterocks.hacks"
 
-    if [[ -f "$hacks_dir/src/hacks.sh" ]]; then
-        "$hacks_dir"/src/hacks.sh $0 $@
-    else
+    if [[ ! -f "$hacks_dir/src/hacks.sh" ]]; then
         git submodule update --init "$hacks_dir"
-
-        if [[ $? -ne 0 ]]; then
-            build_die "Unable to pull required submodule"
-        fi
     fi
+
+    "$hacks_dir"/src/hacks.sh $0 $@
 fi
