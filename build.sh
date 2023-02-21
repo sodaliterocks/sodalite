@@ -151,29 +151,21 @@ function trigger_ntfy() {
     if [[ $ex_ntfy != "" ]]; then
         [[ "$ex_ntfy_topic" = "" ]] && ex_ntfy_topic="sodalite"
 
-        say primary "$(build_emj "💬")Sending notification ($ex_ntfy_endpoint/$ex_ntfy_topic)..."
+        title="Sodalite ("
 
-        title="Sodalite"
-
-        if [[ -f "$buildinfo_file" ]]; then
-            title+=" ("
-
-            if [[ $(get_property "$buildinfo_file" "OS_CHANNEL") != "" ]]; then
-                title+="$(get_property "$buildinfo_file" "OS_CHANNEL"):"
-            else
-                title+="?:"
-            fi
-
-            if [[ $(get_property "$buildinfo_file" "OS_VARIANT") != "" ]]; then
-                title+="$(get_property "$buildinfo_file" "OS_VARIANT")"
-            else
-                title+="?"
-            fi
-
-            title+=")"
+        if [[ $channel != "" ]]; then
+            title+="$channel:"
         else
-            title+=" (?:?)"
+            title+="?:"
         fi
+
+        if [[ $variant != "" ]]; then
+            title+="$variant"
+        else
+            title+="?"
+        fi
+
+        title+=")"
 
         title+=" — "
 
@@ -184,6 +176,8 @@ function trigger_ntfy() {
         fi
 
         cp "$build_log_file" "${build_log_file}_copy"
+
+        say primary "$(build_emj "💬")Sending notification ($ex_ntfy_endpoint/$ex_ntfy_topic)..."
 
         if [[ -f "$build_log_file" ]]; then
             curl \
@@ -399,7 +393,7 @@ function main() {
 
         print_log_header
 
-        say warning "Logging to file ($build_log_file)..." >&3
+        say warning "Logging to file ($build_log_file)" >&3
     else
         echo "$(print_log_header)" > $build_log_file
         echo "No output captured (use --ex-log)" >> $build_log_file
