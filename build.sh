@@ -24,7 +24,6 @@ _PLUGIN_OPTIONS=(
 )
 _PLUGIN_ROOT="true"
 
-arch=""
 build_log_dir=""
 build_log_file=""
 build_log_filename=""
@@ -32,24 +31,19 @@ build_meta_dir=""
 buildinfo_file=""
 built_commit=""
 built_version=""
-channel=""
 git_commit=""
 git_tag=""
 lockfile=""
 ostree_cache_dir=""
 ostree_repo_dir=""
 ref=""
+ref_arch=""
+ref_channel=""
 start_time=""
 src_dir=""
 tests_dir=""
 treefile=""
 vendor=""
-
-if [[ $ex_override_starttime == "" ]]; then
-    start_time=$(date +%s)
-else
-    start_time=$ex_override_starttime # TODO: Validate?
-fi
 
 # Utilities
 
@@ -59,7 +53,7 @@ function build_die() {
 
     say error "$message"
     cleanup
-    trigger_ntfy $exit_code "$message"
+    trigger_ntfy $exit_code
 
     exit $exit_code
 }
@@ -129,7 +123,7 @@ function ost() {
 function print_log_header() {
     print_separator="$1"
 
-    header="✨ $variant • 🖥️ $(hostname -f) • 🕒 $(date --date="@$start_time" "+%Y-%m-%d %H:%M:%S %Z")"
+    header="📄 $variant • 🖥️ $(hostname -f) • 🕒 $(date --date="@$start_time" "+%Y-%m-%d %H:%M:%S %Z")"
     header_length=$((${#header} + 1))
 
     echo "$header"
@@ -160,7 +154,6 @@ function print_time() {
 
 function trigger_ntfy() {
     exit_code=$1
-    message="$2"
 
     [[ $exit_code == "" ]] && exit_code=0
 
@@ -169,8 +162,8 @@ function trigger_ntfy() {
 
         title="Sodalite ("
 
-        if [[ $channel != "" ]]; then
-            title+="$channel:"
+        if [[ $ref_channel != "" ]]; then
+            title+="$ref_channel:"
         else
             title+="?:"
         fi
@@ -181,9 +174,7 @@ function trigger_ntfy() {
             title+="?"
         fi
 
-        title+=")"
-
-        title+=" — "
+        title+=") — "
 
         if [[ $exit_code != 0 ]]; then
             title+="💥 Build Fail"
@@ -191,9 +182,7 @@ function trigger_ntfy() {
             title+="✅ Build Success"
         fi
 
-        [[ $built_version != "" ]] && title+=" ($built_version)"
-
-        cp "$build_log_file" "${build_log_file}_copy"
+        [[ -f "$build_log_file" ]] && cp "$build_log_file" "${build_log_file}_copy"
 
         say primary "$(build_emj "💬")Sending notification ($ex_ntfy_endpoint/$ex_ntfy_topic)..."
 
@@ -204,21 +193,15 @@ function trigger_ntfy() {
                 -H "Filename: $build_log_filename" \
                 -H "Title: $title" \
                 "$ex_ntfy_endpoint/$ex_ntfy_topic"
-        else
-            if [[ $message != "" ]]; then
-                body_message="$(print_log_header true)\n$message"
-            else
-                body_message="$(print_log_header false)"
-            fi
 
+            rm "${build_log_file}_copy"
+        else
             curl \
                 -u "$ex_ntfy_username:$ex_ntfy_password" \
                 -H "Title: $title" \
-                -d "$body_message" \
+                -d "$(print_log_header false)" \
                 "$ex_ntfy_endpoint/$ex_ntfy_topic"
         fi
-
-        rm "${build_log_file}_copy"
     fi
 }
 
@@ -243,8 +226,8 @@ function build_sodalite() {
     ref="$(echo "$(cat "$treefile")" | grep "ref:" | sed "s/ref: //" | sed "s/\${basearch}/$(uname -m)/")"
 
     if [[ $ref =~ sodalite\/([^;]*)\/([^;]*)\/([^;]*) ]]; then
-        channel="${BASH_REMATCH[1]}"
-        arch="${BASH_REMATCH[2]}"
+        ref_channel="${BASH_REMATCH[1]}"
+        ref_arch="${BASH_REMATCH[2]}"
     else
         build_die "Ref is an invalid format (should be 'sodalite/<channel>/<arch>/<variant>'; is '$ref')"
     fi
@@ -312,8 +295,8 @@ function build_sodalite() {
 \nBUILD_TOOL=\"$buildinfo_build_tool\"
 \nGIT_COMMIT=$git_commit
 \nGIT_TAG=$git_tag
-\nOS_ARCH=\"$arch\"
-\nOS_CHANNEL=\"$channel\"
+\nOS_ARCH=\"$ref_arch\"
+\nOS_CHANNEL=\"$ref_channel\"
 \nOS_REF=\"$ref\"
 \nOS_UNIFIED=$unified
 \nOS_VARIANT=\"$variant\"
@@ -409,40 +392,19 @@ function main() {
 
     [[ ! -d "$working_dir" ]] && mkdir -p "$working_dir"
 
-    build_log_dir="$working_dir/logs"
-    build_log_filename="sodalite_${variant}_$(hostname -s)_${start_time}.out"
-    build_log_file="$build_log_dir/$build_log_filename"
-
-    if [[ $ex_log != "" ]]; then
-        mkdir -p "$build_log_dir"
-
-        exec 3>&1 4>&2
-        trap 'exec 2>&4 1>&3' 0 1 2 3
-        exec 1>"$build_log_file" 2>&1
-
-        print_log_header
-
-        say warning "Logging to file ($build_log_file)" >&3
-    else
-        if [[ -d $build_log_dir ]]; then
-            echo "$(print_log_header)" > $build_log_file
-            echo "No output captured (use --ex-log)" >> $build_log_file
-        fi
-    fi
-
-    chown -R root:root "$working_dir"
-
-    if [[ ! $(command -v "rpm-ostree") ]]; then
-        build_die "rpm-ostree not installed. Cannot build"
-    fi
-
     if [[ $container == "true" ]]; then # BUG: Podman sets $container (usually to "oci"), so we need to look for "true" instead
         if [[ $(command -v "podman") ]]; then
-            container_hostname="$(hostname)"
-            container_name="sodalite_$start_time"
+            container_name="sodalite-build_$(get_random_string 6)"
+            container_hostname="$(echo $container_name | sed s/_/-/g)"
             container_image="fedora:37"
 
             container_build_args="--working-dir /wd/out"
+            [[ $ex_log != "" ]] && container_build_args+=" --ex-log $ex_log"
+            [[ $ex_ntfy != "" ]] && container_build_args+=" --ex-ntfy $ex_ntfy"
+            [[ $ex_ntfy_endpoint != "" ]] && container_build_args+=" --ex-ntfy-endpoint $ex_ntfy_endpoint"
+            [[ $ex_ntfy_password != "" ]] && container_build_args+=" --ex-ntfy-password $ex_ntfy_password"
+            [[ $ex_ntfy_topic != "" ]] && container_build_args+=" --ex-ntfy-topic $ex_ntfy_topic"
+            [[ $ex_ntfy_username != "" ]] && container_build_args+=" --ex-ntfy-username $ex_ntfy_username"
             [[ $skip_cleanup != "" ]] && container_build_args+=" --skip-cleanup $skip_cleanup"
             [[ $skip_test != "" ]] && container_build_args+=" --skip-test $skip_test"
             [[ $variant != "" ]] && container_build_args+=" --variant $variant"
@@ -477,11 +439,41 @@ function main() {
             build_die "Podman not installed. Cannot build with --container"
         fi
     else
+        if [[ $ex_override_starttime == "" ]]; then
+            start_time=$(date +%s)
+        else
+            start_time=$ex_override_starttime # TODO: Validate?
+        fi
+
+        build_log_dir="$working_dir/logs"
+        build_log_filename="sodalite_${variant}_$(hostname -s)_${start_time}.out"
+        build_log_file="$build_log_dir/$build_log_filename"
+
+        if [[ $ex_log != "" ]]; then
+            mkdir -p "$build_log_dir"
+
+            exec 3>&1 4>&2
+            trap 'exec 2>&4 1>&3' 0 1 2 3
+            exec 1>"$build_log_file" 2>&1
+
+            print_log_header
+
+            say warning "Logging to file ($build_log_file)" >&3
+        else
+            if [[ -d $build_log_dir ]]; then
+                echo "$(print_log_header)" > $build_log_file
+                echo "No output captured (use --ex-log)" >> $build_log_file
+            fi
+        fi
+
+        chown -R root:root "$working_dir"
+
+        if [[ ! $(command -v "rpm-ostree") ]]; then
+            build_die "rpm-ostree not installed. Cannot build"
+        fi
+
         build_sodalite
         test_sodalite
-
-        built_commit="$(echo ""$(ost log $ref | grep "commit " | sed "s/commit //")"" | head -1)"
-        built_version="$(ost cat $built_commit /usr/lib/os-release | grep "OSTREE_VERSION" | sed "s/OSTREE_VERSION=//" | sed "s/'//g")"
 
         end_time=$(( $(date +%s) - $start_time ))
         highscore="false"
@@ -499,13 +491,16 @@ function main() {
             fi
         fi
 
-        say info "$(build_emj "ℹ️")Version: $built_version"
-        say info "  Commit: $built_commit"
-
         cleanup
 
         say primary "$(build_emj "✅")Success ($(print_time $end_time))"
         [[ $highscore == "true" ]] && echo "$(build_emj "🏆") You're Winner (previous: $(print_time $prev_highscore))!"
+
+        built_commit="$(echo "$(ost log $ref | grep "commit " | sed "s/commit //")" | head -1)"
+        built_version="$(ost cat $built_commit /usr/lib/os-release | grep "OSTREE_VERSION=" | sed "s/VERSION_ID=//" | sed "s/'//")"
+
+        say info "$(build_emj "ℹ️")Version: ($built_version)"
+        say info "  Commit: ($built_commit)"
 
         trigger_ntfy
     fi
