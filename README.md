@@ -153,8 +153,10 @@ Unless the world collectively favours GitLab, or anything else, Sodalite will st
 ### 3. Building
 
 ```sh
-sudo ./build.sh [<edition>] [<working-dir>]
+sudo ./build.sh [-v <edition>] [-w <working-dir>]
 ```
+
+_See `build.sh --help` for more options._
 
 This will usually take 10-15 minutes. Remember when I told you to grab a cuppa? Or maybe a cold one?
 
