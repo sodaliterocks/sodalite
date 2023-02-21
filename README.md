@@ -196,7 +196,7 @@ NOTICE: Running rpm-ostree compose tree without --unified-core is deprecated.
  works with it.  For more information, see https://github.com/coreos/rpm-ostree/issues/729
 ```
 
-You can safely ignore this: Sodalite builds without `--unified-core` due to historical reasons. Adding `--unified-core` to the compose command in `build.sh` has not been tested for some time and may cause problems.
+You can safely ignore this: Sodalite builds without `--unified-core` due to historical reasons. To test building with the option, append `--unified-core` to `build.sh`'s options.
 
 #### Cleaning Up
 
