@@ -4,7 +4,7 @@ base_id=""
 base_name="Fedora Linux"
 base_version="$_os_base_version"
 channel=""
-channel_id=""
+channel_id="$_os_channel"
 id=""
 name="Sodalite"
 pretty_name=""
@@ -77,22 +77,17 @@ fi
 if [[ $version_v_major != "" ]]; then
     version="$version_v_major"
     version_id="$version_v_major.$version_v_minor"
-    channel_id="${BASH_REMATCH[1]}"
 
-    if [[ $_os_ref =~ sodalite\/([^;]*)\/([^;]*)\/([^;]*) ]]; then
-        channel_id="${BASH_REMATCH[1]}"
+    [[ $channel_id == "stable" ]] && channel_id="current"
 
-        [[ $channel_id == "stable" ]] && channel_id="current"
-
-        if [[ $channel_id != "" ]]; then
-            case $channel_id in
-                "current") channel="Current" ;;
-                "next") channel="Next" ;;
-                "long-"*|"f"*) channel="Long" ;;
-                "devel") channel="Devel" ;;
-                *) channel="$channel_id" ;;
-            esac
-        fi
+    if [[ $channel_id != "" ]]; then
+        case $channel_id in
+            "current") channel="Current" ;;
+            "next") channel="Next" ;;
+            "long-"*|"f"*) channel="Long" ;;
+            "devel") channel="Devel" ;;
+            *) channel="$channel_id" ;;
+        esac
     fi
 
     if [[ $_git_tag != "" ]]; then

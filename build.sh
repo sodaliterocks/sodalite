@@ -12,14 +12,26 @@ _PLUGIN_OPTIONS=(
     "skip-cleanup;;Skip cleaning up (removing useless files, fixing permissions) on exit"
     "skip-tests;;\tSkip executing tests"
     "unified-core;;Use --unified-core option with rpm-ostree"
+    "ex-container-hostname;;"
+    "ex-container-image;;"
+    "ex-log;;"
+    "ex-ntfy;;"
+    "ex-ntfy-endpoint;;"
+    "ex-ntfy-password;;"
+    "ex-ntfy-topic;;"
+    "ex-ntfy-username;;"
 )
 _PLUGIN_ROOT="true"
 
+arch=""
+build_log_dir=""
+build_log_file=""
+build_log_filename=""
 build_meta_dir=""
 buildinfo_file=""
+channel=""
 git_commit=""
 git_tag=""
-failed="false"
 lockfile=""
 ostree_cache_dir=""
 ostree_repo_dir=""
@@ -36,6 +48,7 @@ start_time=$(date +%s)
 function build_die() {
     say error "$@"
     cleanup
+    trigger_ntfy 255
     exit 255
 }
 
@@ -101,6 +114,13 @@ function ost() {
     ostree $command --repo="$ostree_repo_dir" $options
 }
 
+function print_log_header() {
+    header="✨ $variant • 🖥️ $(hostname -f) • 🕒 $(date --date="@$start_time" "+%Y-%m-%d %H:%M:%S %Z")"
+    header_length=$((${#header} + 1))
+    echo "$header"
+    echo "$(repeat "-" $header_length)"
+}
+
 function print_time() {
     ((h=${1}/3600))
     ((m=(${1}%3600)/60))
@@ -121,6 +141,61 @@ function print_time() {
     [[ $s != "0" ]] && output+=" $s $s_string"
 
     echo $output
+}
+
+function trigger_ntfy() {
+    exit_code=$1
+
+    [[ $exit_code == "" ]] && exit_code=0
+
+    if [[ $ex_ntfy != "" ]]; then
+        [[ "$ex_ntfy_topic" = "" ]] && ex_ntfy_topic="sodalite"
+
+        say primary "$(build_emj "💬")Sending notification ($ex_ntfy_endpoint/$ex_ntfy_topic)..."
+
+        title="Sodalite"
+
+        if [[ -f "$buildinfo_file" ]]; then
+            title+=" ("
+
+            if [[ $(get_property "$buildinfo_file" "OS_CHANNEL") != "" ]]; then
+                title+="$(get_property "$buildinfo_file" "OS_CHANNEL"):"
+            else
+                title+="?:"
+            fi
+
+            if [[ $(get_property "$buildinfo_file" "OS_VARIANT") != "" ]]; then
+                title+="$(get_property "$buildinfo_file" "OS_VARIANT")"
+            else
+                title+="?"
+            fi
+
+            title+=")"
+        else
+            title+=" (?:?)"
+        fi
+
+        title+=" — "
+
+        if [[ $exit_code != 0 ]]; then
+            title+="💥 Build Fail"
+        else
+            title+="✅ Build Success"
+        fi
+
+        cp "$build_log_file" "${build_log_file}_copy"
+
+        if [[ -f "$build_log_file" ]]; then
+            curl \
+                -u "$ex_ntfy_username:$ex_ntfy_password" \
+                -T "${build_log_file}_copy" \
+                -H "Filename: $build_log_filename" \
+                -H "Title: $title" \
+                "$ex_ntfy_endpoint/$ex_ntfy_topic"
+        fi
+
+        rm "${build_log_file}_copy"
+    fi
 }
 
 # Main Functions
@@ -188,7 +263,7 @@ function build_sodalite() {
 
     buildinfo_build_host_kernel="$(uname -srp)"
     buildinfo_build_host_name="$(hostname -f)"
-    buildinfo_build_host_os="$(cat /usr/lib/os-release | grep "PRETTY_NAME" | sed "s/PRETTY_NAME=//" | tr -d '"')"
+    buildinfo_build_host_os="$(get_property /usr/lib/os-release "PRETTY_NAME")"
     buildinfo_build_tool="rpm-ostree $(echo "$(rpm-ostree --version)" | grep "Version:" | sed "s/ Version: //" | tr -d "'")+$(echo "$(rpm-ostree --version)" | grep "Git:" | sed "s/ Git: //")"
 
     if [[ $buildinfo_anon == "true" ]]; then
@@ -196,6 +271,13 @@ function build_sodalite() {
         buildinfo_build_host_name="(Undisclosed)"
         buildinfo_build_host_os="(Undisclosed)"
         buildinfo_build_tool="(Undisclosed)"
+    fi
+
+    if [[ $ref =~ sodalite\/([^;]*)\/([^;]*)\/([^;]*) ]]; then
+        channel="${BASH_REMATCH[1]}"
+        arch="${BASH_REMATCH[2]}"
+    else
+        build_die "Ref is an invalid format (should be 'sodalite/<channel>/<arch>/<variant>'; is '$ref')"
     fi
 
     buildinfo_content="AWESOME=\"Yes\"
@@ -206,6 +288,8 @@ function build_sodalite() {
 \nBUILD_TOOL=\"$buildinfo_build_tool\"
 \nGIT_COMMIT=$git_commit
 \nGIT_TAG=$git_tag
+\nOS_ARCH=\"$arch\"
+\nOS_CHANNEL=\"$channel\"
 \nOS_REF=\"$ref\"
 \nOS_UNIFIED=$unified
 \nOS_VARIANT=\"$variant\"
@@ -223,7 +307,7 @@ function build_sodalite() {
 
     eval "rpm-ostree compose tree $compose_args $treefile"
 
-    [[ $? != 0 ]] && failed="true"
+    [[ $? != 0 ]] && build_die "Failed to build tree"
 }
 
 function test_sodalite() {
@@ -272,8 +356,7 @@ function test_sodalite() {
     fi
 
     if (( $test_failed_count > 0 )); then
-        say error "Failed to satisfy tests ($test_failed_count failed). Removing commit '$commit'..."
-        failed="true"
+        build_die "Failed to satisfy tests ($test_failed_count failed). Removing commit '$commit'..."
 
         if [[ -z $commit_prev ]]; then
             ost refs --delete $ref
@@ -289,12 +372,8 @@ function test_sodalite() {
 # Entrypoint
 
 function main() {
-    if [[ ! $(command -v "rpm-ostree") ]]; then
-        die "rpm-ostree not installed. Cannot build"
-    fi
-
     src_dir="$(realpath -s "$base_dir/../../..")"
-    [[ ! -d $src_dir ]] && build_die "Unable to compute source directory"
+    [[ ! -d $src_dir ]] && die "Unable to compute source directory"
 
     [[ "$ci" != "" && "$container" == "" ]] && die "--ci cannot be used without --container"
     [[ "$ci_branch" != "" && "$ci" == "" ]] && die "--ci-branch cannot be used without --ci"
@@ -305,12 +384,35 @@ function main() {
     { [[ "$variant" == "true" ]] || [[ -z "$variant" ]] } && variant="custom"
 
     [[ ! -d "$working_dir" ]] && mkdir -p "$working_dir"
+
+    build_log_dir="$working_dir/logs"
+    build_log_filename="sodalite_${variant}_$(hostname -s)_${start_time}.out"
+    build_log_file="$build_log_dir/$build_log_filename"
+    mkdir -p "$build_log_dir"
+
     chown -R root:root "$working_dir"
+
+    if [[ $ex_log != "" ]]; then
+        exec 3>&1 4>&2
+        trap 'exec 2>&4 1>&3' 0 1 2 3
+        exec 1>"$build_log_file" 2>&1
+
+        print_log_header
+
+        say warning "Logging to file ($build_log_file)..." >&3
+    else
+        echo "$(print_log_header)" > $build_log_file
+        echo "No output captured (use --ex-log)" >> $build_log_file
+    fi
+
+    if [[ ! $(command -v "rpm-ostree") ]]; then
+        die "rpm-ostree not installed. Cannot build"
+    fi
 
     if [[ $container == "true" ]]; then # BUG: Podman sets $container (usually to "oci"), so we need to look for "true" instead
         if [[ $(command -v "podman") ]]; then
             container_hostname="$(hostname)"
-            container_name="sodalite_$(date +%s)"
+            container_name="sodalite_$start_time"
             container_image="fedora:37"
 
             container_build_args="--working-dir /wd/out"
@@ -319,8 +421,8 @@ function main() {
             [[ $variant != "" ]] && container_build_args+=" --variant $variant"
             [[ $unified_core != "" ]] && container_build_args+=" --unified-core $unified_core"
 
-            [[ ! -z "$SODALITE_BUILD_CONTAINER_HOSTNAME" ]] && container_hostname="$SODALITE_BUILD_CONTAINER_HOSTNAME"
-            [[ ! -z "$SODALITE_BUILD_CONTAINER_IMAGE" ]] && container_image="$SODALITE_BUILD_CONTAINER_IMAGE"
+            [[ ! -z "$ex_container_hostname" ]] && container_hostname="$ex_container_hostname"
+            [[ ! -z "$ex_container_image" ]] && container_image="$ex_container_image"
 
             container_args="run --rm --privileged \
                 --hostname \"$container_hostname\" \
@@ -349,35 +451,31 @@ function main() {
         fi
     else
         build_sodalite
-        if [[ $failed == "false" && "$skip_tests" == "" ]]; then
-            test_sodalite
+        test_sodalite
+
+        end_time=$(( $(date +%s) - $start_time ))
+
+        highscore="false"
+        highscore_file="$build_meta_dir/highscore"
+        prev_highscore=""
+
+        if [[ ! -f "$highscore_file" ]]; then
+            touch "$highscore_file"
+            echo "$end_time" > "$highscore_file"
+        else
+            prev_highscore="$(cat "$highscore_file")"
+            if (( $end_time < $prev_highscore )); then
+                highscore="true"
+                echo "$end_time" > "$highscore_file"
+            fi
         fi
 
         cleanup
-        end_time=$(( $(date +%s) - $start_time ))
 
-        if [[ $failed == "false" ]]; then
-            highscore="false"
-            highscore_file="$build_meta_dir/highscore"
-            prev_highscore=""
+        say primary "$(build_emj "✅")Success ($(print_time $end_time))"
+        [[ $highscore == "true" ]] && echo "$(build_emj "🏆") You're Winner (previous: $(print_time $prev_highscore))!"
 
-            if [[ ! -f "$highscore_file" ]]; then
-                touch "$highscore_file"
-                echo "$end_time" > "$highscore_file"
-            else
-                prev_highscore="$(cat "$highscore_file")"
-                if (( $end_time < $prev_highscore )); then
-                    highscore="true"
-                    echo "$end_time" > "$highscore_file"
-                fi
-            fi
-
-            say primary "$(build_emj "✅")Success ($(print_time $end_time))"
-            [[ $highscore == "true" ]] && echo "$(build_emj "🏆") You're Winner (previous: $(print_time $prev_highscore))!"
-        else
-            say "\033[1;31m$(build_emj "💥")Fail ($(print_time $end_time))"
-            exit 255
-        fi
+        trigger_ntfy
     fi
 
     exit 0

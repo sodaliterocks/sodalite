@@ -69,6 +69,7 @@ _post_scripts_dir="/usr/libexec/sodalite-post"
 
 _git_hash=""
 _git_tag=""
+_os_arch=""
 _os_base_version=""
 _os_core=""
 _os_ref=""
@@ -91,6 +92,12 @@ if [[ $(cat $_buildinfo_file) != "" ]]; then
     [[ ! -z $(get_property $_buildinfo_file "GIT_TAG") ]] && \
         _git_tag="$(get_property $_buildinfo_file "GIT_TAG")"
 
+    [[ ! -z $(get_property $_buildinfo_file "OS_ARCH") ]] && \
+        _os_arch="$(get_property $_buildinfo_file "OS_ARCH")"
+
+    [[ ! -z $(get_property $_buildinfo_file "OS_CHANNEL") ]] && \
+        _os_channel="$(get_property $_buildinfo_file "OS_CHANNEL")"
+
     [[ ! -z $(get_property $_buildinfo_file "OS_REF") ]] && \
         _os_ref="$(get_property $_buildinfo_file "OS_REF")"
 
@@ -102,7 +109,9 @@ if [[ $(cat $_buildinfo_file) != "" ]]; then
 fi
 
 check_variable "_git_hash" "0000000"
+check_variable "_os_arch"
 check_variable "_os_base_version"
+check_variable "_os_channel"
 check_variable "_os_core" "pantheon"
 check_variable "_os_ref"
 check_variable "_os_variant"
