@@ -126,18 +126,6 @@ if [[ $_os_core == "pantheon" ]]; then
         "/usr/share/pixmaps/faces/"
     )
 
-    if [ $_os_base_version -gt 36 ]; then
-        # Indicators are broken on f37+
-        to_remove+=(
-            "/etc/xdg/autostart/indicator-application.desktop"
-            "/usr/lib64/switchboard/personal/libindicators.so"
-            "/usr/lib64/wingpanel/libayatana.so"
-            "/usr/lib/indicators3/7/libapplication.so"
-            "/usr/lib/systemd/user/indicator-application.service"
-            "/usr/lib64/indicator-application/indicator-application-service"
-        )
-    fi
-
     if [[ -f "/usr/sbin/lightdm-gtk-greeter" ]]; then
         to_remove+=(
             "/etc/lightdm/io.elementary.greeter.conf"
