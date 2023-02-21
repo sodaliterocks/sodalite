@@ -153,7 +153,7 @@ Unless the world collectively favours GitLab, or anything else, Sodalite will st
 ### 3. Building
 
 ```sh
-sudo ./build.sh [-v <edition>] [-w <working-dir>]
+sudo ./build.sh [-t <edition>] [-w <working-dir>]
 ```
 
 _See `build.sh --help` for more options._

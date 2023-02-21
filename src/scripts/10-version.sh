@@ -189,5 +189,7 @@ ln -s /usr/lib/sodalite-release /usr/lib/system-release
 ln -s /usr/lib/system-release /etc/system-release
 ln -s /usr/lib/system-release-cpe /etc/system-release-cpe
 
+echo "$(echo "$cpe" | sed "s/\\\//g")"  > /usr/lib/system-release-cpe
+
 _os_version="$version"
 _os_version_id="$version_id"

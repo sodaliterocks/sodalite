@@ -3,7 +3,7 @@
 _PLUGIN_TITLE="Sodalite Builder"
 _PLUGIN_DESCRIPTION=""
 _PLUGIN_OPTIONS=(
-    "variant;v;\tVariant of Sodalite (from ./src/treefiles/sodalite-*.yaml)"
+    "tree;t;\tTreefile (from ./src/treefiles/sodalite-*.yaml)"
     "container;c;Build tree inside Podman container"
     "working-dir;w;Directory to output build artifacts to"
     "buildinfo-anon;;Do not print sensitive information into buildinfo file"
@@ -39,6 +39,7 @@ ostree_repo_dir=""
 ref=""
 ref_arch=""
 ref_channel=""
+ref_variant=""
 start_time=""
 src_dir=""
 tests_dir=""
@@ -54,6 +55,8 @@ function build_die() {
     say error "$message"
     cleanup
     trigger_ntfy $exit_code
+
+    [[ $ex_log != "" ]] && say error "$message" >&3
 
     exit $exit_code
 }
@@ -81,21 +84,21 @@ function cleanup() {
     fi
 }
 
-function get_variant_file() {
-    passed_variant="$variant"
-    computed_variant=""
+function get_treefile() {
+    passed_tree="$tree"
+    computed_tree=""
     treefile_dir="$src_dir/src/treefiles"
 
-    if [[ -f "$treefile_dir/sodalite-desktop-$passed_variant.yaml" ]]; then
-        computed_variant="desktop-$passed_variant"
+    if [[ -f "$treefile_dir/sodalite-desktop-$passed_tree.yaml" ]]; then
+        computed_variant="desktop-$passed_tree"
     else
-        [[ $passed_variant == *.yaml ]] && passed_variant="$(echo $passed_variant | sed s/.yaml//)"
-        [[ $passed_variant == sodalite* ]] && passed_variant="$(echo $passed_variant | sed s/sodalite-//)"
+        [[ $passed_tree == *.yaml ]] && passed_tree="$(echo $passed_tree | sed s/.yaml//)"
+        [[ $passed_tree == sodalite* ]] && passed_tree="$(echo $passed_tree | sed s/sodalite-//)"
 
-        computed_variant="$passed_variant"
+        computed_tree="$passed_tree"
     fi
 
-    echo "$treefile_dir/sodalite-$computed_variant.yaml"
+    echo "$treefile_dir/sodalite-$computed_tree.yaml"
 }
 
 function nudo() { # "Normal User DO"
@@ -123,7 +126,7 @@ function ost() {
 function print_log_header() {
     print_separator="$1"
 
-    header="📄 $variant • 🖥️ $(hostname -f) • 🕒 $(date --date="@$start_time" "+%Y-%m-%d %H:%M:%S %Z")"
+    header="🕒 $(date --date="@$start_time" "+%Y-%m-%d %H:%M:%S %Z") • 📄 $tree • 🖥️ $(hostname -f)"
     header_length=$((${#header} + 1))
 
     echo "$header"
@@ -168,8 +171,8 @@ function trigger_ntfy() {
             title+="?:"
         fi
 
-        if [[ $variant != "" ]]; then
-            title+="$variant"
+        if [[ $ref_variant != "" ]]; then
+            title+="$ref_variant"
         else
             title+="?"
         fi
@@ -179,7 +182,13 @@ function trigger_ntfy() {
         if [[ $exit_code != 0 ]]; then
             title+="💥 Fail"
         else
-            title+="✅ Success"
+            title+="✅ "
+
+            if [[ $built_version != "" ]]; then
+                title+=" $built_version"
+            else
+                title+=" Success"
+            fi
         fi
 
         [[ -f "$build_log_file" ]] && cp "$build_log_file" "${build_log_file}_copy"
@@ -210,10 +219,10 @@ function trigger_ntfy() {
 function build_sodalite() {
     say primary "$(build_emj "🪛")Setting up..."
 
-    if [[ ! -f "$(get_variant_file)" ]]; then
-        build_die "'sodalite-$variant.yaml' does not exist"
+    if [[ ! -f "$(get_treefile)" ]]; then
+        build_die "'sodalite-$tree.yaml' does not exist"
     else
-        treefile="$(get_variant_file)"
+        treefile="$(get_treefile)"
     fi
 
     [[ $unified != "true" ]] && unified="false"
@@ -228,6 +237,7 @@ function build_sodalite() {
     if [[ $ref =~ sodalite\/([^;]*)\/([^;]*)\/([^;]*) ]]; then
         ref_channel="${BASH_REMATCH[1]}"
         ref_arch="${BASH_REMATCH[2]}"
+        ref_variant="${BASH_REMATCH[3]}"
     else
         build_die "Ref is an invalid format (should be 'sodalite/<channel>/<arch>/<variant>'; is '$ref')"
     fi
@@ -299,7 +309,7 @@ function build_sodalite() {
 \nOS_CHANNEL=\"$ref_channel\"
 \nOS_REF=\"$ref\"
 \nOS_UNIFIED=$unified
-\nOS_VARIANT=\"$variant\"
+\nOS_VARIANT=\"$ref_variant\"
 \nVENDOR=\"$vendor\""
 
     echo -e $buildinfo_content > $buildinfo_file
@@ -387,15 +397,15 @@ function main() {
     [[ "$skip_test" != "" && "$ci" != "" ]] && build_die "--skip-test cannot be used with --ci"
 
     [[ "$ci_branch" == "true" ]] || [[ -z "$ci_branch" ]] && ci_branch="devel"
+    [[ "$tree" == "true" ]] || [[ -z "$tree" ]] && tree="custom"
     [[ "$working_dir" == "true" ]] || [[ -z "$working_dir" ]] && working_dir="$src_dir/build"
-    [[ "$variant" == "true" ]] || [[ -z "$variant" ]] && variant="custom"
 
     [[ ! -d "$working_dir" ]] && mkdir -p "$working_dir"
 
     if [[ $container == "true" ]]; then # BUG: Podman sets $container (usually to "oci"), so we need to look for "true" instead
         if [[ $(command -v "podman") ]]; then
             container_start_time=$(date +%s)
-        
+
             container_name="sodalite-build_$(get_random_string 6)"
             container_hostname="$(echo $container_name | sed s/_/-/g)"
             container_image="fedora:37"
@@ -409,7 +419,7 @@ function main() {
             [[ $ex_ntfy_username != "" ]] && container_build_args+=" --ex-ntfy-username $ex_ntfy_username"
             [[ $skip_cleanup != "" ]] && container_build_args+=" --skip-cleanup $skip_cleanup"
             [[ $skip_test != "" ]] && container_build_args+=" --skip-test $skip_test"
-            [[ $variant != "" ]] && container_build_args+=" --variant $variant"
+            [[ $tree != "" ]] && container_build_args+=" --tree $tree"
             [[ $unified_core != "" ]] && container_build_args+=" --unified-core $unified_core"
 
             if [[ $ex_override_starttime != "" ]]; then
@@ -454,7 +464,7 @@ function main() {
         fi
 
         build_log_dir="$working_dir/logs"
-        build_log_filename="sodalite_${variant}_$(hostname -s)_${start_time}.out"
+        build_log_filename="sodalite_${start_time}_${tree}_$(hostname -s).out"
         build_log_file="$build_log_dir/$build_log_filename"
 
         if [[ $ex_log != "" ]]; then
@@ -501,14 +511,21 @@ function main() {
 
         cleanup
 
-        say primary "$(build_emj "✅")Success ($(print_time $end_time))"
-        [[ $highscore == "true" ]] && echo "$(build_emj "🏆") You're Winner (previous: $(print_time $prev_highscore))!"
+        echo "$(repeat "-" 80)"
 
         built_commit="$(echo "$(ost log $ref | grep "commit " | sed "s/commit //")" | head -1)"
-        built_version="$(ost cat $built_commit /usr/lib/os-release | grep "OSTREE_VERSION=" | sed "s/VERSION_ID=//" | sed "s/'//")"
+        built_version="$(ost cat $built_commit /usr/lib/os-release | grep "OSTREE_VERSION=" | sed "s/OSTREE_VERSION=//" | sed "s/'//g")"
 
-        say info "$(build_emj "ℹ️")Version: ($built_version)"
-        say info "  Commit: ($built_commit)"
+        say "$(build_emj "ℹ️")\033[1;35mName: \033[0;0m$(ost cat $built_commit /usr/lib/os-release | grep "PRETTY_NAME=" | sed "s/PRETTY_NAME=//" | sed "s/\"//g")"
+        say "   \033[1;35mBase: \033[0;0m$(ost cat $built_commit /usr/lib/upstream-os-release | grep "PRETTY_NAME=" | sed "s/PRETTY_NAME=//" | sed "s/\"//g")"
+        say "   \033[1;35mCPE: \033[0;0m$(ost cat $built_commit /usr/lib/system-release-cpe)"
+        say "   \033[1;35mVersion: \033[0;0m$built_version"
+        say "   \033[1;35mCommit: \033[0;0m$built_commit"
+
+        echo "$(repeat "-" 80)"
+
+        say primary "$(build_emj "✅")Success ($(print_time $end_time))"
+        [[ $highscore == "true" ]] && echo "$(build_emj "🏆") You're Winner (previous: $(print_time $prev_highscore))!"
 
         trigger_ntfy
     fi
