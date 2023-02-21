@@ -447,7 +447,7 @@ function main() {
             say primary "$(build_emj "📦")Executing container ($container_name)..."
             eval "podman $container_args"
         else
-            die "$(hostname) Podman not installed. Cannot build with --container"
+            die "Podman not installed. Cannot build with --container"
         fi
     else
         build_sodalite
