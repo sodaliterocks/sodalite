@@ -6,7 +6,7 @@
 
 **Sodalite** is an immutable desktop OS built with [rpm-ostree](https://coreos.github.io/rpm-ostree/) and on-top of [Fedora](https://getfedora.org/) &mdash; similar to [Fedora Silverblue](https://silverblue.fedoraproject.org/) &mdash; making use of the [Pantheon desktop](https://elementary.io/docs/learning-the-basics), sticking closely to the ethos and workflow perpetrated by [elementary](https://elementary.io/open-source). A work-in-progress but entirely usable as a production desktop.
 
-This is mostly a developer-orientated README; you're probably better off heading to [Sodalite Docs](https://docs.sodalite.rocks) if you're a user, or you can head down to <b><a href="#-quickstart">🎉 Quickstart</a></b> to get going.
+<!--This is mostly a developer-orientated README; you're probably better off heading to [Sodalite Docs](https://docs.sodalite.rocks) if you're a user, or you can head down to <b><a href="#-quickstart">🎉 Quickstart</a></b> to get going.-->
 
 ## 🎉 Quickstart
 
@@ -48,20 +48,21 @@ It's vital you carry out this process as updates stop the day the base version r
 To allow for several versions to co-exist and be developed in tandem with each other, Sodalite &mdash; like any other rpm-ostree distro &mdash; carries a ref to distinguish itself. Where `<name>/<version>/<arch>/<edition>`, the format and possible values are as follows:
 
 * `<name>`: **Name** of the branch; always `sodalite`
-* `<version>`: **Version** of the branch. Possible values:
-  - `current`: Current stable release of Sodalite (currently 4, based on Fedora Linux 37)
-  - `<version>`: "Long-term" releases to stay with a specific version of Sodalite
-    - `4`: Sodalite 4, based on Fedora Linux 37. Reaches end-of-life on 16th May 2023 (2023-05-16)
-  - `next`: Upcoming and release candidates of Sodalite. **Potentially unstable!**
+* `<channel>`: **Channel** of the branch. Possible values:
+  - `current`: Current stable release (currently 4, based on [Fedora Linux 37](https://docs.fedoraproject.org/en-US/releases/f37/))
+  - `long-<version>`: "Long-term" releases to stay with a specific version
+    - `4`: 4.x, based on [Fedora Linux 37](https://docs.fedoraproject.org/en-US/releases/f37/). Reaches end-of-life on 14-Nov-2023 (2023-11-14)
+  - `next`: Upcoming release candidates. **Potentially broken!**
   - `devel`: Current development code (on `main`). **Do not use on production systems!**
 * `<arch>`: **Architecture** of the branch. Possible values:
   - `x86_64`: For 64-bit CPUs (`x86_64`, `amd64`, or `x64`)
   - ~~`x86`: [What year is it!?](https://c.tenor.com/9OcQhlCBNG0AAAAd/what-year-is-it-jumanji.gif)~~
 * `<edition>`: **Edition** (or variant) of the branch: Possible values:
   - `desktop`: Standard Pantheon desktop
+  - `desktop-budgie`: Alternate Budgie desktop
   - `desktop-deepin`: Alternate Deepin desktop
   - `desktop-gnome`: Alternate GNOME desktop
-  
+
 **As mentioned above, most users will want `sodalite/current/x86_64/desktop`.**
 
 #### Available Branches
@@ -71,11 +72,11 @@ Possible combinations built on the OSTree remote (`ostree.sodalite.rocks`) are a
 |Name|Version(s)|Arch.(s)|Edition(s)|
 |-|-|-|-|
 |`sodalite`|`current`|`x86_64`|`desktop`|
-|`sodalite`|`4`|`x86_64`|`desktop`|
+|`sodalite`|`long-4`|`x86_64`|`desktop`|
 |`sodalite`|`next`|`x86_64`|`desktop`|
 |`sodalite`|`devel`|`x86_64`|`desktop`<br />`desktop-deepin`<br />`desktop-gnome`|
 
-_For example, `sodalite/current/x86_64/desktop` exists on the build server and can be pulled, but `sodalite/5/x86_64/desktop-gnome` does not._
+_For example, `sodalite/current/x86_64/desktop` exists on the build server and can be pulled, but `sodalite/long-5/x86_64/desktop-gnome` does not._
 
 ### Versioning
 
@@ -83,9 +84,9 @@ _(Todo)_
 
 ---
 
-<p align="center">
+<!--<p align="center">
     <s><b>See <a href="https://docs.sodalite.rocks)">Sodalite Docs</a> for more information</b></s> <i>(Docs are still a work-in-progress)</i> &mdash; the README beyond this is intended mostly for developers.
-</p>
+</p>-->
 
 <!--
 ## ✨ Status
@@ -152,8 +153,10 @@ Unless the world collectively favours GitLab, or anything else, Sodalite will st
 ### 3. Building
 
 ```sh
-sudo ./build.sh [<edition>] [<working-dir>]
+sudo ./build.sh [-t <edition>] [-w <working-dir>]
 ```
+
+_See `build.sh --help` for more options._
 
 This will usually take 10-15 minutes. Remember when I told you to grab a cuppa? Or maybe a cold one?
 
@@ -162,6 +165,7 @@ This will usually take 10-15 minutes. Remember when I told you to grab a cuppa? 
 * `<edition>` _(optional)_ Edition/variant of Sodalite (defaults to `custom`)
   - This is any of the `sodalite-<edition>.yaml` files listed in `./src/treefiles/`. Either use `sodalite-<edition>` or just `<edition>` as the argument. Currently, there is:
     - `desktop`: Standard Pantheon desktop
+    - `desktop-budgie`: Alternate Budgie desktop, intended for possible future versions
     - `desktop-deepin`: Alternate Deepin desktop, intended for possible future versions
     - `desktop-gnome`: Alternate GNOME desktop, intended for possible future versions
     - `custom`: See below point
@@ -192,7 +196,7 @@ NOTICE: Running rpm-ostree compose tree without --unified-core is deprecated.
  works with it.  For more information, see https://github.com/coreos/rpm-ostree/issues/729
 ```
 
-You can safely ignore this: Sodalite builds without `--unified-core` due to historical reasons. Adding `--unified-core` to the compose command in `build.sh` has not been tested for some time and may cause problems.
+You can safely ignore this: Sodalite builds without `--unified-core` due to historical reasons. To test building with the option, append `--unified-core` to `build.sh`'s options.
 
 #### Cleaning Up
 

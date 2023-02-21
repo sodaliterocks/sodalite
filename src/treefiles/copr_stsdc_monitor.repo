@@ -1,6 +1,6 @@
 [copr.stsdc.monitor]
 name=Copr: stsdc/monitor
-baseurl=https://download.copr.fedorainfracloud.org/results/stsdc/monitor/fedora-35-$basearch/
+baseurl=https://download.copr.fedorainfracloud.org/results/stsdc/monitor/fedora-36-$basearch/
 type=rpm-md
 skip_if_unavailable=True
 gpgcheck=1

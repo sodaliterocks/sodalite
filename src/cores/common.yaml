@@ -7,14 +7,14 @@ include: [
 ]
 
 releasever: "37"
-automatic-version-prefix: "4.0-<date:%y%j>"
+automatic-version-prefix: "4.1-<date:%y%j>"
 automatic-version-suffix: "."
 mutate-os-release: "${releasever}"
 
 repos:
  - fedora
  - fedora.updates
- - terra # f37+ only
+ - terra
  - copr.zeno.scrcpy
  - rpmfusion.free
  - rpmfusion.free.updates
@@ -52,6 +52,7 @@ add-files: [
   ["../sysroot/common/usr/bin/rocks.sodalite.links", "/usr/bin/rocks.sodalite.links"],
   ["../sysroot/common/usr/bin/rocks.sodalite.phone-mirror", "/usr/bin/rocks.sodalite.phone-mirror"],
   ["../sysroot/common/usr/bin/rocks.sodalite.user-daemon", "/usr/bin/rocks.sodalite.user-daemon"],
+  ["../sysroot/common/usr/bin/nudo", "/usr/bin/nudo"],
   ["../sysroot/common/usr/bin/soda", "/usr/bin/soda"],
 
   # /usr/lib
@@ -70,7 +71,7 @@ add-files: [
   ["../sysroot/common/usr/libexec/rocks.sodalite.cleanup", "/usr/libexec/rocks.sodalite.cleanup"],
 
   # /usr/libexec/sodalite-post
-  ["../scripts/00-echo-buildinfo.sh", "/usr/libexec/sodalite-post/00-buildinfo.sh"],
+  ["../scripts/00-print-buildinfo.sh", "/usr/libexec/sodalite-post/00-print-buildinfo.sh"],
   ["../scripts/10-version.sh", "/usr/libexec/sodalite-post/10-version.sh"],
   ["../scripts/30-hacks.sh", "/usr/libexec/sodalite-post/30-hacks.sh"],
   ["../scripts/50-file-removals.sh", "/usr/libexec/sodalite-post/50-file-removals.sh"],
@@ -78,7 +79,8 @@ add-files: [
   ["../scripts/70-flatpak-aliases.sh", "/usr/libexec/sodalite-post/70-flatpak-aliases.sh"],
   ["../scripts/70-gnome-extensions.sh", "/usr/libexec/sodalite-post/70-gnome-extensions.sh"],
   ["../scripts/70-wallpaper.sh", "/usr/libexec/sodalite-post/70-wallpaper.sh"],
-  ["../scripts/80-extras.sh", "/usr/libexec/sodalite-post/80-extras.sh"],
+  ["../scripts/80-tweaks.sh", "/usr/libexec/sodalite-post/80-tweaks.sh"],
+  ["../scripts/80-tweaks-pantheon.sh", "/usr/libexec/sodalite-post/80-tweaks-pantheon.sh"],
   ["../scripts/90-cleanup.sh", "/usr/libexec/sodalite-post/90-cleanup.sh"],
 
   # /usr/share

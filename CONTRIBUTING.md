@@ -33,8 +33,8 @@ All code submitted into this repository will be [licensed as MIT](https://github
 	        * _Include this because it's better than that_ becomes `include-this`.
 * `release/*`: **Production branches**
     * Contains the branches:
-        * `release/stable`: **Ref for `sodalite/stable/<arch>/<variant>`**
-        * `release/f<base>`: **Ref for `sodalite/f<base>/<arch>/<variant>`**
+        * `release/current`: **Ref for `sodalite/current/<arch>/<variant>`**
+        * `release/long/<version>`: **Ref for `sodalite/long-<version>/<arch>/<variant>`**
         * `release/next`: **Ref for `sodalite/next/<arch>/<variant>`**
     * Working code that is built on [the OSTree server](https://ostree.sodalite.rocks).
     * `main` in merged (or cherry-picked) into here, being careful not to adjust the `ref` or `releasever` properties in treefiles for other versions.
