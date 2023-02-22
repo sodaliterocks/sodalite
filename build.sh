@@ -7,15 +7,13 @@ _PLUGIN_OPTIONS=(
     "container;c;Build tree inside Podman container"
     "working-dir;w;Directory to output build artifacts to"
     "buildinfo-anon;;Do not print sensitive information into buildinfo file"
-    "ci;;\t\tUse remote Git repository when building with --container"
-    "ci-branch;;\tBranch to use when building with --ci"
     "skip-cleanup;;Skip cleaning up (removing useless files, fixing permissions) on exit"
     "skip-tests;;\tSkip executing tests"
     "unified-core;;Use --unified-core option with rpm-ostree"
     "ex-container-args;;"
     "ex-container-hostname;;"
     "ex-container-image;;"
-    "ex-log;;" # TODO: Do something with the logs in --ci mode?
+    "ex-log;;"
     "ex-ntfy;;"
     "ex-ntfy-endpoint;;"
     "ex-ntfy-password;;"
@@ -393,11 +391,6 @@ function main() {
     src_dir="$(realpath -s "$base_dir/../../..")"
     [[ ! -d $src_dir ]] && build_die "Unable to compute source directory"
 
-    [[ "$ci" != "" && "$container" == "" ]] && build_die "--ci cannot be used without --container"
-    [[ "$ci_branch" != "" && "$ci" == "" ]] && build_die "--ci-branch cannot be used without --ci"
-    [[ "$skip_test" != "" && "$ci" != "" ]] && build_die "--skip-test cannot be used with --ci"
-
-    [[ "$ci_branch" == "true" ]] || [[ -z "$ci_branch" ]] && ci_branch="devel"
     [[ "$tree" == "true" ]] || [[ -z "$tree" ]] && tree="custom"
     [[ "$working_dir" == "true" ]] || [[ -z "$working_dir" ]] && working_dir="$src_dir/build"
 
@@ -440,12 +433,7 @@ function main() {
             container_command="touch /.sodalite-containerenv;"
             container_command+="dnf install -y curl git-core git-lfs hostname policycoreutils rpm-ostree selinux-policy selinux-policy-targeted;"
 
-            if [[ $ci == "true" ]]; then
-                #[[ $(git show-ref refs/heads/$ci_branch) == "" ]] && build_die "Branch '$ci_branch' does not exist"
-                container_command+="git clone --recurse-submodules -b $ci_branch https://github.com/sodaliterocks/sodalite.git /wd/src;"
-            else
-                container_args+="--volume \"$src_dir:/wd/src\" "
-            fi
+            container_args+="--volume \"$src_dir:/wd/src\" "
 
             container_command+="cd /wd/src; /wd/src/build.sh $container_build_args;"
             container_args+="$container_image /bin/bash -c \"$container_command\""
