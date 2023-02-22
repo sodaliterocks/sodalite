@@ -419,6 +419,7 @@ function main() {
             [[ $skip_test != "" ]] && container_build_args+=" --skip-test $skip_test"
             [[ $tree != "" ]] && container_build_args+=" --tree $tree"
             [[ $unified_core != "" ]] && container_build_args+=" --unified-core $unified_core"
+            [[ $vendor != "" ]] && container_build_args+=" --vendor $vendor"
 
             if [[ $ex_override_starttime != "" ]]; then
                 container_build_args+=" --ex-override-starttime $ex_override_starttime"
