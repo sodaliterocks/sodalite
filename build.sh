@@ -224,7 +224,7 @@ function build_sodalite() {
         treefile="$(get_treefile)"
     fi
 
-    [[ $unified != "true" ]] && unified="false"
+    [[ $unified_core == "true" ]] && unified="true"
 
     buildinfo_file="$src_dir/src/sysroot/common/usr/lib/sodalite-buildinfo"
     lockfile="$src_dir/src/shared/overrides.yaml"
