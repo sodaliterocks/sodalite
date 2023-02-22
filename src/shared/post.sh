@@ -81,7 +81,7 @@ _vendor=""
 
 # Setup
 
-if [[ ! -f $($_buildinfo_file) ]]; then
+if [[ ! -f $_buildinfo_file ]]; then
     _naked_build="true"
 else
     if [[ "$(cat $_buildinfo_file)" == "" ]]; then
