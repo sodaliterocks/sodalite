@@ -481,7 +481,7 @@ function main() {
         chown -R root:root "$working_dir"
 
         if [[ ! $(command -v "rpm-ostree") ]]; then
-            build_die "rpm-ostree not installed. Cannot build"
+            build_die "rpm-ostree not installed (try --container)"
         fi
 
         build_sodalite
