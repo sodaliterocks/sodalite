@@ -3,13 +3,14 @@
 _PLUGIN_TITLE="Sodalite Builder"
 _PLUGIN_DESCRIPTION=""
 _PLUGIN_OPTIONS=(
-    "tree;t;\tTreefile (from ./src/treefiles/sodalite-*.yaml)"
+    "tree;t;\tTreefile from ./src/treefiles/sodalite-*.yaml (default: custom)"
     "container;c;Build tree inside Podman container"
-    "working-dir;w;Directory to output build artifacts to"
+    "working-dir;w;Directory to output build artifacts to (default: ./build)"
     "buildinfo-anon;;Do not print sensitive information into buildinfo file"
-    "skip-cleanup;;Skip cleaning up (removing useless files, fixing permissions) on exit"
+    "skip-cleanup;;Skip cleaning up on exit"
     "skip-tests;;\tSkip executing tests"
     "unified-core;;Use --unified-core option with rpm-ostree"
+    "vendor;;Vendor to use in CPE (default: \$USER)"
     "ex-container-args;;"
     "ex-container-hostname;;"
     "ex-container-image;;"
@@ -43,7 +44,6 @@ start_time=""
 src_dir=""
 tests_dir=""
 treefile=""
-vendor=""
 
 # Utilities
 
@@ -260,14 +260,6 @@ function build_sodalite() {
                 git_tag="$(git -C $src_dir describe --exact-match --tags $(git -C $src_dir log -n1 --pretty='%h') 2>/dev/null)"
             fi
 
-            if [[ "$git_origin_url" != "" ]]; then
-                if [[ "$git_origin_url" =~ ([a-zA-Z0-9.-_]+\@[a-zA-Z0-9.-_]+:([a-zA-Z0-9.-_]+)\/([a-zA-Z0-9.-_]+).git) ]]; then
-                    vendor="${BASH_REMATCH[2]}"
-                elif [[ "$git_origin_url" =~ (https:\/\/github.com\/([a-zA-Z0-9.-_]+)\/([a-zA-Z0-9.-_]+).git) ]]; then
-                    vendor="${BASH_REMATCH[2]}"
-                fi
-            fi
-
             say primary "$(build_emj "🗑️")Cleaning up Git repository..."
             nudo git fetch --prune
             nudo git fetch --prune-tags
@@ -393,6 +385,18 @@ function main() {
 
     [[ "$tree" == "true" ]] || [[ -z "$tree" ]] && tree="custom"
     [[ "$working_dir" == "true" ]] || [[ -z "$working_dir" ]] && working_dir="$src_dir/build"
+
+    if [[ "$vendor" == "true" ]] || [[ -z "$vendor" ]]; then
+        if [[ $SUDO_USER != "" ]]; then
+            vendor="$SUDO_USER"
+        else
+            vendor="$USER"
+        fi
+
+        if [[ $vendor == "root" ]]; then
+            vendor="unknown"
+        fi
+    else
 
     [[ ! -d "$working_dir" ]] && mkdir -p "$working_dir"
 
