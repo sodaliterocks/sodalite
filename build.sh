@@ -3,14 +3,14 @@
 _PLUGIN_TITLE="Sodalite Builder"
 _PLUGIN_DESCRIPTION=""
 _PLUGIN_OPTIONS=(
-    "tree;t;\tTreefile from ./src/treefiles/sodalite-*.yaml (default: custom)"
+    "tree;t;\tTreefile from ./src/treefiles (default: custom)"
     "container;c;Build tree inside Podman container"
     "working-dir;w;Directory to output build artifacts to (default: ./build)"
     "buildinfo-anon;;Do not print sensitive information into buildinfo file"
     "skip-cleanup;;Skip cleaning up on exit"
     "skip-tests;;\tSkip executing tests"
     "unified-core;;Use --unified-core option with rpm-ostree"
-    "vendor;;Vendor to use in CPE (default: \$USER)"
+    "vendor;;\tVendor to use in CPE (default: \$USER)"
     "ex-container-args;;"
     "ex-container-hostname;;"
     "ex-container-image;;"
@@ -396,7 +396,7 @@ function main() {
         if [[ $vendor == "root" ]]; then
             vendor="unknown"
         fi
-    else
+    fi
 
     [[ ! -d "$working_dir" ]] && mkdir -p "$working_dir"
 
@@ -433,12 +433,11 @@ function main() {
             container_args="run --rm --privileged \
                 --hostname \"$container_hostname\" \
                 --name \"$container_name\" \
-                --volume \"$working_dir:/wd/out/\" "
+                --volume \"$working_dir:/wd/out/\" \
+                --volume \"$src_dir:/wd/src\" "
             [[ $ex_conatiner_args != "" ]] && container_args+="$ex_container_args "
             container_command="touch /.sodalite-containerenv;"
             container_command+="dnf install -y curl git-core git-lfs hostname policycoreutils rpm-ostree selinux-policy selinux-policy-targeted;"
-
-            container_args+="--volume \"$src_dir:/wd/src\" "
 
             container_command+="cd /wd/src; /wd/src/build.sh $container_build_args;"
             container_args+="$container_image /bin/bash -c \"$container_command\""
