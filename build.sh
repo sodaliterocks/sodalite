@@ -3,19 +3,18 @@
 _PLUGIN_TITLE="Sodalite Builder"
 _PLUGIN_DESCRIPTION=""
 _PLUGIN_OPTIONS=(
-    "tree;t;\tTreefile (from ./src/treefiles/sodalite-*.yaml)"
+    "tree;t;\tTreefile from ./src/treefiles (default: custom)"
     "container;c;Build tree inside Podman container"
-    "working-dir;w;Directory to output build artifacts to"
+    "working-dir;w;Directory to output build artifacts to (default: ./build)"
     "buildinfo-anon;;Do not print sensitive information into buildinfo file"
-    "ci;;\t\tUse remote Git repository when building with --container"
-    "ci-branch;;\tBranch to use when building with --ci"
-    "skip-cleanup;;Skip cleaning up (removing useless files, fixing permissions) on exit"
+    "skip-cleanup;;Skip cleaning up on exit"
     "skip-tests;;\tSkip executing tests"
     "unified-core;;Use --unified-core option with rpm-ostree"
+    "vendor;;\tVendor to use in CPE (default: \$USER)"
     "ex-container-args;;"
     "ex-container-hostname;;"
     "ex-container-image;;"
-    "ex-log;;" # TODO: Do something with the logs in --ci mode?
+    "ex-log;;"
     "ex-ntfy;;"
     "ex-ntfy-endpoint;;"
     "ex-ntfy-password;;"
@@ -45,7 +44,6 @@ start_time=""
 src_dir=""
 tests_dir=""
 treefile=""
-vendor=""
 
 # Utilities
 
@@ -262,14 +260,6 @@ function build_sodalite() {
                 git_tag="$(git -C $src_dir describe --exact-match --tags $(git -C $src_dir log -n1 --pretty='%h') 2>/dev/null)"
             fi
 
-            if [[ "$git_origin_url" != "" ]]; then
-                if [[ "$git_origin_url" =~ ([a-zA-Z0-9.-_]+\@[a-zA-Z0-9.-_]+:([a-zA-Z0-9.-_]+)\/([a-zA-Z0-9.-_]+).git) ]]; then
-                    vendor="${BASH_REMATCH[2]}"
-                elif [[ "$git_origin_url" =~ (https:\/\/github.com\/([a-zA-Z0-9.-_]+)\/([a-zA-Z0-9.-_]+).git) ]]; then
-                    vendor="${BASH_REMATCH[2]}"
-                fi
-            fi
-
             say primary "$(build_emj "🗑️")Cleaning up Git repository..."
             nudo git fetch --prune
             nudo git fetch --prune-tags
@@ -393,13 +383,20 @@ function main() {
     src_dir="$(realpath -s "$base_dir/../../..")"
     [[ ! -d $src_dir ]] && build_die "Unable to compute source directory"
 
-    [[ "$ci" != "" && "$container" == "" ]] && build_die "--ci cannot be used without --container"
-    [[ "$ci_branch" != "" && "$ci" == "" ]] && build_die "--ci-branch cannot be used without --ci"
-    [[ "$skip_test" != "" && "$ci" != "" ]] && build_die "--skip-test cannot be used with --ci"
-
-    [[ "$ci_branch" == "true" ]] || [[ -z "$ci_branch" ]] && ci_branch="devel"
     [[ "$tree" == "true" ]] || [[ -z "$tree" ]] && tree="custom"
     [[ "$working_dir" == "true" ]] || [[ -z "$working_dir" ]] && working_dir="$src_dir/build"
+
+    if [[ "$vendor" == "true" ]] || [[ -z "$vendor" ]]; then
+        if [[ $SUDO_USER != "" ]]; then
+            vendor="$SUDO_USER"
+        else
+            vendor="$USER"
+        fi
+
+        if [[ $vendor == "root" ]]; then
+            vendor="unknown"
+        fi
+    fi
 
     [[ ! -d "$working_dir" ]] && mkdir -p "$working_dir"
 
@@ -422,6 +419,7 @@ function main() {
             [[ $skip_test != "" ]] && container_build_args+=" --skip-test $skip_test"
             [[ $tree != "" ]] && container_build_args+=" --tree $tree"
             [[ $unified_core != "" ]] && container_build_args+=" --unified-core $unified_core"
+            [[ $vendor != "" ]] && container_build_args+=" --vendor $vendor"
 
             if [[ $ex_override_starttime != "" ]]; then
                 container_build_args+=" --ex-override-starttime $ex_override_starttime"
@@ -435,17 +433,11 @@ function main() {
             container_args="run --rm --privileged \
                 --hostname \"$container_hostname\" \
                 --name \"$container_name\" \
-                --volume \"$working_dir:/wd/out/\" "
+                --volume \"$working_dir:/wd/out/\" \
+                --volume \"$src_dir:/wd/src\" "
             [[ $ex_conatiner_args != "" ]] && container_args+="$ex_container_args "
             container_command="touch /.sodalite-containerenv;"
             container_command+="dnf install -y curl git-core git-lfs hostname policycoreutils rpm-ostree selinux-policy selinux-policy-targeted;"
-
-            if [[ $ci == "true" ]]; then
-                #[[ $(git show-ref refs/heads/$ci_branch) == "" ]] && build_die "Branch '$ci_branch' does not exist"
-                container_command+="git clone --recurse-submodules -b $ci_branch https://github.com/sodaliterocks/sodalite.git /wd/src;"
-            else
-                container_args+="--volume \"$src_dir:/wd/src\" "
-            fi
 
             container_command+="cd /wd/src; /wd/src/build.sh $container_build_args;"
             container_args+="$container_image /bin/bash -c \"$container_command\""
