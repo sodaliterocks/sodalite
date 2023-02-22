@@ -383,6 +383,12 @@ function main() {
     src_dir="$(realpath -s "$base_dir/../../..")"
     [[ ! -d $src_dir ]] && build_die "Unable to compute source directory"
 
+    [[ "$ex_ntfy_endpoint" == "true" ]] && build_die "--ex-ntfy-endpoint needs a value (example: https://ntfy.myserver.com)"
+    [[ "$ex_ntfy_password" == "true" ]] && build_die "--ex-ntfy-password needs a value (example: abc123XYZ)"
+    [[ "$ex_ntfy_topic" == "true" ]] && build_die "--ex-ntfy-topic needs a value (example: sodalite)"
+    [[ "$ex_ntfy_username" == "true" ]] && build_die "--ex-ntfy-username needs a value (example: theduckster)"
+    [[ "$ex_override_starttime" == "true" ]] && build_die "--ex-override-starttime needs a value (example: 1640551980)"
+
     [[ "$tree" == "true" ]] || [[ -z "$tree" ]] && tree="custom"
     [[ "$working_dir" == "true" ]] || [[ -z "$working_dir" ]] && working_dir="$src_dir/build"
 
