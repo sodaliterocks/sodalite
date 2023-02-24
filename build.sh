@@ -7,6 +7,8 @@ _PLUGIN_OPTIONS=(
     "container;c;Build tree inside Podman container"
     "working-dir;w;Directory to output build artifacts to (default: ./build)"
     "buildinfo-anon;;Do not print sensitive information into buildinfo file"
+    "serve;;Serve repository after successful build"
+    "serve-port;;Port to serve on when using --serve (default: 8080)"
     "skip-cleanup;;Skip cleaning up on exit"
     "skip-tests;;\tSkip executing tests"
     "unified-core;;Use --unified-core option with rpm-ostree"
@@ -229,7 +231,11 @@ function build_sodalite() {
         treefile="$(get_treefile)"
     fi
 
-    [[ $unified_core == "true" ]] && unified="true"
+    if [[ $unified_core == "true" ]]; then
+        unified="true"
+    else
+        unified="false"
+    fi
 
     buildinfo_file="$src_dir/src/sysroot/common/usr/lib/sodalite-buildinfo"
     lockfile="$src_dir/src/shared/overrides.yaml"
@@ -306,6 +312,7 @@ function build_sodalite() {
 \nOS_REF=\"$ref\"
 \nOS_UNIFIED=$unified
 \nOS_VARIANT=\"$ref_variant\"
+\nTREEFILE=\"$(basename "$treefile")\"
 \nVENDOR=\"$vendor\""
 
     echo -e $buildinfo_content > $buildinfo_file
@@ -382,6 +389,12 @@ function test_sodalite() {
     fi
 }
 
+function serve_repo() {
+    say primary "$(build_emj "🥄")Serving repository..."
+    python -m http.server --bind 0.0.0.0 --directory "$working_dir/repo" $serve_port
+    [[ $? != 0 ]] && build_die "Failed to run HTTP server"
+}
+
 # Entrypoint
 
 function main() {
@@ -397,6 +410,7 @@ function main() {
     [[ "$ex_override_starttime" == "true" ]] && build_die "--ex-override-starttime needs a value (example: 1640551980)"
 
     [[ "$ex_remote_version_branch" == "true" ]] || [[ -z "$ex_remote_version_branch" ]] && ex_remote_version_branch="main"
+    [[ "$serve_port" == "true" ]] || [[ -z "$serve_port" ]] && serve_port=8080
     [[ "$tree" == "true" ]] || [[ -z "$tree" ]] && tree="custom"
     [[ "$working_dir" == "true" ]] || [[ -z "$working_dir" ]] && working_dir="$src_dir/build"
 
@@ -441,7 +455,7 @@ function main() {
     fi
 
     if [[ $ex_test_print  != "" ]]; then
-        echo "3"
+        echo "4"
         exit 0
     fi
 
@@ -567,6 +581,10 @@ function main() {
         [[ $highscore == "true" ]] && echo "$(build_emj "🏆") You're Winner (previous: $(print_time $prev_highscore))!"
 
         trigger_ntfy
+    fi
+
+    if [[ $serve != "" ]]; then
+        serve_repo
     fi
 
     exit 0

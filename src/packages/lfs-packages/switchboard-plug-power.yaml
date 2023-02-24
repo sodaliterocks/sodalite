@@ -1,0 +1,13 @@
+add-files: [
+  ["../../../lfs/binaries/fedora/switchboard-plug-power/2.7.0-1.fc37~x86_64/usr/lib64/switchboard/hardware/libpower.so", "/usr/lib64/switchboard/hardware/libpower.so"],
+  ["../../../lfs/binaries/fedora/switchboard-plug-power/2.7.0-1.fc37~x86_64/usr/libexec/io.elementary.logind.helper", "/usr/libexec/io.elementary.logind.helper"],
+  ["../../../lfs/binaries/fedora/switchboard-plug-power/2.7.0-1.fc37~x86_64/usr/share/dbus-1/system-services/io.elementary.logind.helper.service", "/usr/share/dbus-1/system-services/io.elementary.logind.helper.service"],
+  ["../../../lfs/binaries/fedora/switchboard-plug-power/2.7.0-1.fc37~x86_64/usr/share/dbus-1/system.d/io.elementary.logind.helper.conf", "/usr/share/dbus-1/system.d/io.elementary.logind.helper.conf"],
+  ["../../../lfs/binaries/fedora/switchboard-plug-power/2.7.0-1.fc37~x86_64/usr/share/doc/switchboard-plug-power/README.md", "/usr/share/doc/switchboard-plug-power/README.md"],
+  ["../../../lfs/binaries/fedora/switchboard-plug-power/2.7.0-1.fc37~x86_64/usr/share/licenses/switchboard-plug-power/COPYING", "/usr/sha../re/licenses/switchboard-plug-power/COPYING"],
+  ["../../../lfs/binaries/fedora/switchboard-plug-power/2.7.0-1.fc37~x86_64/usr/share/locale/en_AU/LC_MESSAGES/power-plug.mo", "/usr/share/locale/en_AU/LC_MESSAGES/power-plug.mo"],
+  ["../../../lfs/binaries/fedora/switchboard-plug-power/2.7.0-1.fc37~x86_64/usr/share/locale/en_CA/LC_MESSAGES/power-plug.mo", "/usr/share/locale/en_CA/LC_MESSAGES/power-plug.mo"],
+  ["../../../lfs/binaries/fedora/switchboard-plug-power/2.7.0-1.fc37~x86_64/usr/share/locale/en_GB/LC_MESSAGES/power-plug.mo", "/usr/share/locale/en_GB/LC_MESSAGES/power-plug.mo"],
+  ["../../../lfs/binaries/fedora/switchboard-plug-power/2.7.0-1.fc37~x86_64/usr/share/metainfo/io.elementary.switchboard.power.appdata.xml", "/usr/share/metainfo/io.elementary.switchboard.power.appdata.xml"],
+  ["../../../lfs/binaries/fedora/switchboard-plug-power/2.7.0-1.fc37~x86_64/usr/share/polkit-1/actions/io.elementary.switchboard.power.policy", "/usr/share/polkit-1/actions/io.elementary.switchboard.power.policy"]
+]

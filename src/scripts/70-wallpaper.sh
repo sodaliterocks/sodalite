@@ -10,7 +10,7 @@ case $_os_version_id in
     "4.1"*) wallpaper="default/dustin-humes-OrO_HSqlZMY-unsplash" ;;
     "5.0"*) wallpaper="default/zara-walker-_pC5hT6aXfs-unsplash" ;;
     *)
-        wallpaper="$_devel_wallpaper" ;;
+        wallpaper="$_devel_wallpaper"
         pantheon_system_background="phil-botha-a0TJ3hy-UD8-unsplash"
         ;;
 esac

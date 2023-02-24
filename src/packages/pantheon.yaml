@@ -66,6 +66,7 @@ packages:
  - wingpanel-indicator-sound
  - xdg-desktop-portal-gnome
  #- xdg-desktop-portal-pantheon # provided by decathorpe/elementary-staging repo, which no longer exists as of 24-Feb-2023
+ - zeitgeist-libs
 exclude-packages:
  - gnome-tour
  #- ufw

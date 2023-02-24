@@ -1,12 +1,12 @@
 include: [
-  "../../lib/workstation-ostree-config_f38/fedora-common-ostree-pkgs.yaml",
+  "../../lib/workstation-ostree-config_f37/fedora-common-ostree-pkgs.yaml",
   "../packages/essential.yaml",
   "../packages/flatpak.yaml",
   "../packages/fonts.yaml",
   "../packages/tools.yaml",
 ]
 
-releasever: "38"
+releasever: "37"
 automatic-version-prefix: "5.0rc2-<date:%y%j>"
 automatic-version-suffix: "."
 mutate-os-release: "${releasever}"

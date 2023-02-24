@@ -1,0 +1,6 @@
+add-files: [
+  ["../../../lfs/binaries/fedora/switchboard-plug-useraccounts/2.4.2-1.fc36~x86_64/usr/lib64/libgnome-desktop-3.so.19", "/usr/lib64/libgnome-desktop-3.so.19"],
+  ["../../../lfs/binaries/fedora/switchboard-plug-useraccounts/2.4.2-1.fc36~x86_64/usr/lib64/switchboard/system/libuseraccounts.so", "/usr/lib64/switchboard/system/libuseraccounts.so"],
+  ["../../../lfs/binaries/fedora/switchboard-plug-useraccounts/2.4.2-1.fc36~x86_64/usr/lib64/switchboard/system/pantheon-useraccounts/guest-session-toggle", "/usr/lib64/switchboard/system/pantheon-useraccounts/guest-session-toggle"],
+  ["../../../lfs/binaries/fedora/switchboard-plug-useraccounts/2.4.2-1.fc36~x86_64/usr/share/polkit-1/actions/io.elementary.switchboard.useraccounts.policy", "/usr/share/polkit-1/actions/io.elementary.switchboard.useraccounts.policy"]
+]

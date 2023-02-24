@@ -1,0 +1,10 @@
+add-files: [
+  ["../../../lfs/binaries/fedora/wingpanel-indicator-a11y/1.0.0-1.fc37~x86_64/usr/lib64/wingpanel/liba11y.so", "/usr/lib64/wingpanel/liba11y.so"],
+  ["../../../lfs/binaries/fedora/wingpanel-indicator-a11y/1.0.0-1.fc37~x86_64/usr/share/doc/wingpanel-indicator-a11y/README.md", "/usr/share/doc/wingpanel-indicator-a11y/README.md"],
+  ["../../../lfs/binaries/fedora/wingpanel-indicator-a11y/1.0.0-1.fc37~x86_64/usr/share/glib-2.0/schemas/io.elementary.desktop.wingpanel.a11y.gschema.xml", "/usr/share/glib-2.0/schemas/io.elementary.desktop.wingpanel.a11y.gschema.xml"],
+  ["../../../lfs/binaries/fedora/wingpanel-indicator-a11y/1.0.0-1.fc37~x86_64/usr/share/licenses/wingpanel-indicator-a11y/COPYING", "/usr/share/licenses/wingpanel-indicator-a11y/COPYING"],
+  ["../../../lfs/binaries/fedora/wingpanel-indicator-a11y/1.0.0-1.fc37~x86_64/usr/share/locale/en_AU/LC_MESSAGES/a11y-indicator.mo", "/usr/share/locale/en_AU/LC_MESSAGES/a11y-indicator.mo"],
+  ["../../../lfs/binaries/fedora/wingpanel-indicator-a11y/1.0.0-1.fc37~x86_64/usr/share/locale/en_CA/LC_MESSAGES/a11y-indicator.mo", "/usr/share/locale/en_CA/LC_MESSAGES/a11y-indicator.mo"],
+  ["../../../lfs/binaries/fedora/wingpanel-indicator-a11y/1.0.0-1.fc37~x86_64/usr/share/locale/en_GB/LC_MESSAGES/a11y-indicator.mo", "/usr/share/locale/en_GB/LC_MESSAGES/a11y-indicator.mo"],
+  ["../../../lfs/binaries/fedora/wingpanel-indicator-a11y/1.0.0-1.fc37~x86_64/usr/share/metainfo/io.elementary.wingpanel.a11y.appdata.xml", "/usr/share/metainfo/io.elementary.wingpanel.a11y.appdata.xml"]
+]
