@@ -440,8 +440,8 @@ function main() {
         fi
     fi
 
-    if [[ $ex_test_print  != "" ]];
-        echo "1"
+    if [[ $ex_test_print  != "" ]]; then
+        echo "2"
         exit 0
     fi
 
