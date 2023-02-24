@@ -9,3 +9,4 @@ src/sysroot/common/usr/lib/sodalite-buildinfo
 .Trash-*
 .nfs*
 *.orig
+build.sh+*

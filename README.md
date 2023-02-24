@@ -35,7 +35,7 @@ If something breaks, you can rollback by running `sudo rpm-ostree rollback` at a
 
 #### Update Schedule
 
-Updates are built on the build server commencing **4:00 GMT/±0** **(20:00 PT/-8)** every **Wednesday** and **Saturday**.
+Updates are built on the build server commencing **6:00 GMT/±0** **(22:00 PT/-8)** every **Wednesday** and **Saturday**.
 
 #### "Long-term" Branches
 
@@ -223,7 +223,7 @@ _(todo)_
 * [Jorge O. Castro](https://github.com/castrojo), for including Sodalite in [awesome-immutable](https://github.com/castrojo/awesome-immutable)
 * [Timothée Ravier](https://tim.siosm.fr), for their extensive guidance to the community concerning Fedora Silverblue
 * ["Topfi"](https://github.com/ACertainTopfi), for their various contributions
-* The amazing photographers/artists of the included wallpapers &mdash; [Adrien Olichon](https://unsplash.com/@adrienolichon), [Austin Neill](https://unsplash.com/@arstyy), [Cody Fitzgerald](https://unsplash.com/@cfitz), [Dustin Humes](https://unsplash.com/@dustinhumes_photography), [Jack B.](https://unsplash.com/@nervum), [Jeremy Gerritsen](https://unsplash.com/@jeremygerritsen), [Karsten Würth](https://unsplash.com/@karsten_wuerth), [Max Okhrimenko](https://unsplash.com/@maxokhrimenko), [Nathan Dumlao](https://unsplash.com/@nate_dumlao), [Ryan Stone](https://unsplash.com/@rstone_design), [Smaran Alva](https://unsplash.com/@smal), [Willian Daigneault](https://unsplash.com/@williamdaigneault), and [Zara Walker](https://unsplash.com/@mojoblogs)
+* The amazing photographers/artists of the included wallpapers &mdash; [Adrien Olichon](https://unsplash.com/@adrienolichon), [Ashwini Chaudhary](https://unsplash.com/@suicide_chewbacca), [Austin Neill](https://unsplash.com/@arstyy), [Cody Fitzgerald](https://unsplash.com/@cfitz), [Dustin Humes](https://unsplash.com/@dustinhumes_photography), [Eugene Golovesov](https://unsplash.com/@eugene_golovesov), [Jack B.](https://unsplash.com/@nervum), [Jeremy Gerritsen](https://unsplash.com/@jeremygerritsen), [Karsten Würth](https://unsplash.com/@karsten_wuerth), [Marek Piwnicki](https://unsplash.com/@marekpiwnicki), [Max Okhrimenko](https://unsplash.com/@maxokhrimenko), [Nathan Dumlao](https://unsplash.com/@nate_dumlao), [Piermanuele Sberni](https://unsplash.com/@piermanuele_sberni), [Phil Botha](https://unsplash.com/@philbotha), [Ryan Stone](https://unsplash.com/@rstone_design), [Smaran Alva](https://unsplash.com/@smal), [Takashi Miyazaki](https://unsplash.com/@miyatankun), [Willian Daigneault](https://unsplash.com/@williamdaigneault), and [Zara Walker](https://unsplash.com/@mojoblogs)
 
 ### Teams & Organizations
 

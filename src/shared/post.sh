@@ -69,6 +69,7 @@ _post_scripts_dir="/usr/libexec/sodalite-post"
 
 _git_hash=""
 _git_tag=""
+_naked_build="false"
 _os_arch=""
 _os_base_version=""
 _os_core=""
@@ -79,6 +80,27 @@ _os_variant=""
 _vendor=""
 
 # Setup
+
+if [[ ! -f $_buildinfo_file ]]; then
+    _naked_build="true"
+else
+    if [[ "$(cat $_buildinfo_file)" == "" ]]; then
+        _naked_build="true"
+    fi
+fi
+
+if [[ $_naked_build == "true" ]]; then
+    echo ""
+    echo " ############################################################ "
+    echo " #                                                          # "
+    echo " #   Building Sodalite without build.sh is not supported!   # "
+    echo " #                     We did warn you.                     # "
+    echo " #                                                          # "
+    echo " ############################################################ "
+    echo ""
+
+    exit 255
+fi
 
 declare -a ran_scripts
 
