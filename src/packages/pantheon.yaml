@@ -54,7 +54,7 @@ packages:
  - touchegg
  - wingpanel
  - wingpanel-applications-menu
- - wingpanel-indicator-a11y
+ #- wingpanel-indicator-a11y # provided by decathorpe/elementary-staging repo, which no longer exists as of 24-Feb-2023
  - wingpanel-indicator-bluetooth
  - wingpanel-indicator-datetime
  - wingpanel-indicator-keyboard
@@ -65,7 +65,7 @@ packages:
  - wingpanel-indicator-session
  - wingpanel-indicator-sound
  - xdg-desktop-portal-gnome
- - xdg-desktop-portal-pantheon
+ #- xdg-desktop-portal-pantheon # provided by decathorpe/elementary-staging repo, which no longer exists as of 24-Feb-2023
 exclude-packages:
  - gnome-tour
  #- ufw
