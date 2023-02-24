@@ -20,7 +20,10 @@ _PLUGIN_OPTIONS=(
     "ex-ntfy-password;;"
     "ex-ntfy-topic;;"
     "ex-ntfy-username;;"
+    "ex-remote-version;;"
+    "ex-remote-version-branch;;"
     "ex-override-starttime;;"
+    "ex-test-print;;"
 )
 _PLUGIN_ROOT="true"
 
@@ -76,7 +79,9 @@ function cleanup() {
         rm -rf /var/tmp/rpm-ostree.*
 
         if [[ $SUDO_USER != "" ]]; then
-            chown -R $SUDO_USER:$SUDO_USER "$working_dir"
+            if [[ -d "$working_dir" ]]; then
+                chown -R $SUDO_USER:$SUDO_USER "$working_dir"
+            fi
         fi
     else
         say warning "Not cleaning up (--skip-cleanup used)"
@@ -381,6 +386,8 @@ function test_sodalite() {
 
 function main() {
     src_dir="$(realpath -s "$base_dir/../../..")"
+    me_filename="$(basename "$plugin")"
+
     [[ ! -d $src_dir ]] && build_die "Unable to compute source directory"
 
     [[ "$ex_ntfy_endpoint" == "true" ]] && build_die "--ex-ntfy-endpoint needs a value (example: https://ntfy.myserver.com)"
@@ -389,6 +396,7 @@ function main() {
     [[ "$ex_ntfy_username" == "true" ]] && build_die "--ex-ntfy-username needs a value (example: theduckster)"
     [[ "$ex_override_starttime" == "true" ]] && build_die "--ex-override-starttime needs a value (example: 1640551980)"
 
+    [[ "$ex_remote_version_branch" == "true" ]] || [[ -z "$ex_remote_version_branch" ]] && ex_remote_version_branch="main"
     [[ "$tree" == "true" ]] || [[ -z "$tree" ]] && tree="custom"
     [[ "$working_dir" == "true" ]] || [[ -z "$working_dir" ]] && working_dir="$src_dir/build"
 
@@ -405,6 +413,37 @@ function main() {
     fi
 
     [[ ! -d "$working_dir" ]] && mkdir -p "$working_dir"
+
+    if [[ $ex_remote_version != "" ]]; then
+        online_file_branch="$(echo $ex_remote_version_branch | sed "s|/|__|g")"
+        online_file="https://raw.githubusercontent.com/sodaliterocks/sodalite/main/build.sh"
+        downloaded_file="$src_dir/$me_filename+$online_file_branch"
+
+        me_md5sum="$(cat "$src_dir/$me_filename" | md5sum | cut -d ' ' -f1)"
+        online_md5sum="$(curl -sL $online_file | md5sum | cut -d ' ' -f1)"
+
+        if [[ $? == 0 ]]; then
+            if [[ $me_md5sum != $online_md5sum ]]; then
+                curl -sL $online_file > "$downloaded_file"
+                chmod +x "$downloaded_file"
+
+                say primary "$(emj "🌐")Executing remote version ($online_file_branch)..."
+
+                bash -c "$downloaded_file $(echo $options | sed "s|--ex-remote-version||")"
+                downloaded_file_result="$?"
+
+                rm -f "$downloaded_file"
+                exit $downloaded_file_result
+            fi
+        else
+            build_die "Unable to check latest remote version of $me_filename"
+        fi
+    fi
+
+    if [[ $ex_test_print  != "" ]];
+        echo "1"
+        exit 0
+    fi
 
     if [[ $container == "true" ]]; then # BUG: Podman sets $container (usually to "oci"), so we need to look for "true" instead
         if [[ $(command -v "podman") ]]; then
@@ -445,7 +484,7 @@ function main() {
             container_command="touch /.sodalite-containerenv;"
             container_command+="dnf install -y curl git-core git-lfs hostname policycoreutils rpm-ostree selinux-policy selinux-policy-targeted;"
 
-            container_command+="cd /wd/src; /wd/src/build.sh $container_build_args;"
+            container_command+="cd /wd/src; /wd/src/$me_filename $container_build_args;"
             container_args+="$container_image /bin/bash -c \"$container_command\""
 
             say primary "$(build_emj "⬇️")Pulling container image ($container_image)..."
