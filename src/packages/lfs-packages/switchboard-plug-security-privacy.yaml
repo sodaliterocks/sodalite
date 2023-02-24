@@ -1,0 +1,12 @@
+add-files: [
+  ["../../../lfs/binaries/fedora/switchboard-plug-security-privacy/2.4.0-1.fc37~x86_64/usr/lib64/switchboard/personal/libsecurity-privacy.so", "/usr/lib64/switchboard/personal/libsecurity-privacy.so"],
+  #["../../../lfs/binaries/fedora/switchboard-plug-security-privacy/2.4.0-1.fc37~x86_64/usr/lib64/switchboard/personal/security-privacy-plug-helper", "/usr/lib64/switchboard/personal/security-privacy-plug-helper"],
+  ["../../../lfs/binaries/fedora/switchboard-plug-security-privacy/2.4.0-1.fc37~x86_64/usr/share/doc/switchboard-plug-security-privacy/README.md", "/usr/share/doc/switchboard-plug-security-privacy/README.md"],
+  ["../../../lfs/binaries/fedora/switchboard-plug-security-privacy/2.4.0-1.fc37~x86_64/usr/share/glib-2.0/schemas/io.elementary.switchboard.security-privacy.gschema.xml", "/usr/share/glib-2.0/schemas/io.elementary.switchboard.security-privacy.gschema.xml"],
+  ["../../../lfs/binaries/fedora/switchboard-plug-security-privacy/2.4.0-1.fc37~x86_64/usr/share/licenses/switchboard-plug-security-privacy/COPYING", "/usr/share/licenses/switchboard-plug-security-privacy/COPYING"],
+  ["../../../lfs/binaries/fedora/switchboard-plug-security-privacy/2.4.0-1.fc37~x86_64/usr/share/locale/en_AU/LC_MESSAGES/security-privacy-plug.mo", "/usr/share/locale/en_AU/LC_MESSAGES/security-privacy-plug.mo"],
+  ["../../../lfs/binaries/fedora/switchboard-plug-security-privacy/2.4.0-1.fc37~x86_64/usr/share/locale/en_CA/LC_MESSAGES/security-privacy-plug.mo", "/usr/share/locale/en_CA/LC_MESSAGES/security-privacy-plug.mo"],
+  ["../../../lfs/binaries/fedora/switchboard-plug-security-privacy/2.4.0-1.fc37~x86_64/usr/share/locale/en_GB/LC_MESSAGES/security-privacy-plug.mo", "/usr/share/locale/en_GB/LC_MESSAGES/security-privacy-plug.mo"],
+  ["../../../lfs/binaries/fedora/switchboard-plug-security-privacy/2.4.0-1.fc37~x86_64/usr/share/metainfo/io.elementary.switchboard.security-privacy.appdata.xml", "/usr/share/metainfo/io.elementary.switchboard.security-privacy.appdata.xml"],
+  ["../../../lfs/binaries/fedora/switchboard-plug-security-privacy/2.4.0-1.fc37~x86_64/usr/share/polkit-1/actions/io.elementary.switchboard.security-privacy.policy", "/usr/share/polkit-1/actions/io.elementary.switchboard.security-privacy.policy"]
+]

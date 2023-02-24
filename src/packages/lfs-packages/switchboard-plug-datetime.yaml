@@ -1,0 +1,9 @@
+add-files: [
+  ["../../../lfs/binaries/fedora/switchboard-plug-datetime/2.2.0-1.fc37~x86_64/usr/lib64/switchboard/system/libdatetime.so", "/usr/lib64/switchboard/system/libdatetime.so"],
+  ["../../../lfs/binaries/fedora/switchboard-plug-datetime/2.2.0-1.fc37~x86_64/usr/share/doc/switchboard-plug-datetime/README.md", "/usr/share/doc/switchboard-plug-datetime/README.md"],
+  ["../../../lfs/binaries/fedora/switchboard-plug-datetime/2.2.0-1.fc37~x86_64/usr/share/licenses/switchboard-plug-datetime/COPYING", "/usr/share/licenses/switchboard-plug-datetime/COPYING"],
+  ["../../../lfs/binaries/fedora/switchboard-plug-datetime/2.2.0-1.fc37~x86_64/usr/share/locale/en_AU/LC_MESSAGES/datetime-plug.mo", "/usr/share/locale/en_AU/LC_MESSAGES/datetime-plug.mo"],
+  ["../../../lfs/binaries/fedora/switchboard-plug-datetime/2.2.0-1.fc37~x86_64/usr/share/locale/en_CA/LC_MESSAGES/datetime-plug.mo", "/usr/share/locale/en_CA/LC_MESSAGES/datetime-plug.mo"],
+  ["../../../lfs/binaries/fedora/switchboard-plug-datetime/2.2.0-1.fc37~x86_64/usr/share/locale/en_GB/LC_MESSAGES/datetime-plug.mo", "/usr/share/locale/en_GB/LC_MESSAGES/datetime-plug.mo"],
+  ["../../../lfs/binaries/fedora/switchboard-plug-datetime/2.2.0-1.fc37~x86_64/usr/share/metainfo/io.elementary.switchboard.datetime.appdata.xml", "/usr/share/metainfo/io.elementary.switchboard.datetime.appdata.xml"]
+]

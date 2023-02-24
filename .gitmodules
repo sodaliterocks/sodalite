@@ -11,9 +11,6 @@
 [submodule "lib/sodaliterocks.hacks"]
 	path = lib/sodaliterocks.hacks
 	url = https://github.com/sodaliterocks/hacks
-[submodule "lib/workstation-ostree-config_f36"]
-	path = lib/workstation-ostree-config_f36
-	url = https://pagure.io/workstation-ostree-config
 [submodule "lib/workstation-ostree-config_f38"]
 	path = lib/workstation-ostree-config_f38
 	url = https://pagure.io/workstation-ostree-config
