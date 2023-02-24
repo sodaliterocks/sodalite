@@ -6,7 +6,6 @@ include: [
 ]
 
 repos:
- - copr.decathorpe.elementary-staging
  - copr.stsdc.monitor
 
 add-files: [

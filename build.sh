@@ -441,7 +441,7 @@ function main() {
     fi
 
     if [[ $ex_test_print  != "" ]]; then
-        echo "2"
+        echo "3"
         exit 0
     fi
 
