@@ -569,11 +569,12 @@ function main() {
         built_commit="$(echo "$(ost log $ref | grep "commit " | sed "s/commit //")" | head -1)"
         built_version="$(ost cat $built_commit /usr/lib/os-release | grep "OSTREE_VERSION=" | sed "s/OSTREE_VERSION=//" | sed "s/'//g")"
 
-        say "$(build_emj "ℹ️")\033[1;35mName: \033[0;0m$(ost cat $built_commit /usr/lib/os-release | grep "PRETTY_NAME=" | sed "s/PRETTY_NAME=//" | sed "s/\"//g")"
-        say "   \033[1;35mBase: \033[0;0m$(ost cat $built_commit /usr/lib/upstream-os-release | grep "PRETTY_NAME=" | sed "s/PRETTY_NAME=//" | sed "s/\"//g")"
-        say "   \033[1;35mCPE: \033[0;0m$(ost cat $built_commit /usr/lib/system-release-cpe)"
+        say "$(build_emj "ℹ️")\033[1;35mName:    \033[0;0m$(ost cat $built_commit /usr/lib/os-release | grep "PRETTY_NAME=" | sed "s/PRETTY_NAME=//" | sed "s/\"//g")"
+        say "   \033[1;35mBase:    \033[0;0m$(ost cat $built_commit /usr/lib/upstream-os-release | grep "PRETTY_NAME=" | sed "s/PRETTY_NAME=//" | sed "s/\"//g")"
+        say "   \033[1;35mCPE:     \033[0;0m$(ost cat $built_commit /usr/lib/system-release-cpe)"
+        say "   \033[1;35mRef:     \033[0;0m$(ost cat $built_commit /usr/lib/sodalite-buildinfo | grep "REF=" | sed "s/OSTREE_VERSION=//" | sed "s/\"//g")"
         say "   \033[1;35mVersion: \033[0;0m$built_version"
-        say "   \033[1;35mCommit: \033[0;0m$built_commit"
+        say "   \033[1;35mCommit:  \033[0;0m$built_commit"
 
         echo "$(repeat "-" 80)"
 
