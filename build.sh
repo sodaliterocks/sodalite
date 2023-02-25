@@ -430,7 +430,7 @@ function main() {
 
     if [[ $ex_remote_version != "" ]]; then
         online_file_branch="$(echo $ex_remote_version_branch | sed "s|/|__|g")"
-        online_file="https://raw.githubusercontent.com/sodaliterocks/sodalite/main/build.sh"
+        online_file="https://raw.githubusercontent.com/sodaliterocks/sodalite/$ex_remote_version_branch/build.sh"
         downloaded_file="$src_dir/$me_filename+$online_file_branch"
 
         me_md5sum="$(cat "$src_dir/$me_filename" | md5sum | cut -d ' ' -f1)"
