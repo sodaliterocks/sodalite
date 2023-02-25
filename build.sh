@@ -24,7 +24,6 @@ _PLUGIN_OPTIONS=(
     "ex-ntfy-username;;"
     "ex-remote-version;;"
     "ex-remote-version-branch;;"
-    "ex-override-starttime;;"
     "ex-test-print;;"
 )
 _PLUGIN_ROOT="true"
@@ -452,11 +451,6 @@ function main() {
         else
             build_die "Unable to check latest remote version of $me_filename"
         fi
-    fi
-
-    if [[ $ex_test_print  != "" ]]; then
-        echo "4"
-        exit 0
     fi
 
     if [[ $container == "true" ]]; then # BUG: Podman sets $container (usually to "oci"), so we need to look for "true" instead
