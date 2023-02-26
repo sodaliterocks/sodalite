@@ -291,7 +291,7 @@ function build_sodalite() {
     buildinfo_build_host_os="$(get_property /usr/lib/os-release "PRETTY_NAME")"
     buildinfo_build_tool="rpm-ostree $(echo "$(rpm-ostree --version)" | grep "Version:" | sed "s/ Version: //" | tr -d "'")+$(echo "$(rpm-ostree --version)" | grep "Git:" | sed "s/ Git: //")"
 
-    if [[ $buildinfo_anon != ]]; then
+    if [[ $buildinfo_anon != "" ]]; then
         buildinfo_build_host_kernel="(Undisclosed)"
         buildinfo_build_host_name="(Undisclosed)"
         buildinfo_build_host_os="(Undisclosed)"
