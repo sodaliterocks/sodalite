@@ -24,7 +24,6 @@ _PLUGIN_OPTIONS=(
     "ex-ntfy-username;;"
     "ex-remote-version;;"
     "ex-remote-version-branch;;"
-    "ex-test-print;;"
 )
 _PLUGIN_ROOT="true"
 
