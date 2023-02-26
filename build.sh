@@ -3,27 +3,28 @@
 _PLUGIN_TITLE="Sodalite Builder"
 _PLUGIN_DESCRIPTION=""
 _PLUGIN_OPTIONS=(
-    "tree;t;\tTreefile from ./src/treefiles (default: custom)"
+    "tree;t;\tTreefile from ./src/treefiles (default: custom);string"
     "container;c;Build tree inside Podman container"
-    "working-dir;w;Directory to output build artifacts to (default: ./build)"
+    "working-dir;w;Directory to output build artifacts to (default: ./build);string"
     "buildinfo-anon;;Do not print sensitive information into buildinfo file"
+    "git-version;;\tExecute latest version of $_PLUGIN_TITLE from Git"
     "serve;;\tServe repository after successful build"
-    "serve-port;;\tPort to serve on when using --serve (default: 8080)"
+    "serve-port;;\tPort to serve on when using --serve (default: 8080);int"
     "skip-cleanup;;Skip cleaning up on exit"
     "skip-tests;;\tSkip executing tests"
     "unified-core;;Use --unified-core option with rpm-ostree"
-    "vendor;;\tVendor to use in CPE (default: \$USER)"
+    "vendor;;\tVendor to use in CPE (default: \$USER);string"
     "ex-container-args;;"
     "ex-container-hostname;;"
     "ex-container-image;;"
+    "ex-git-version-branch;;"
     "ex-log;;"
     "ex-ntfy;;"
     "ex-ntfy-endpoint;;"
     "ex-ntfy-password;;"
     "ex-ntfy-topic;;"
     "ex-ntfy-username;;"
-    "ex-remote-version;;"
-    "ex-remote-version-branch;;"
+    "ex-override-starttime;;"
 )
 _PLUGIN_ROOT="true"
 
@@ -290,7 +291,7 @@ function build_sodalite() {
     buildinfo_build_host_os="$(get_property /usr/lib/os-release "PRETTY_NAME")"
     buildinfo_build_tool="rpm-ostree $(echo "$(rpm-ostree --version)" | grep "Version:" | sed "s/ Version: //" | tr -d "'")+$(echo "$(rpm-ostree --version)" | grep "Git:" | sed "s/ Git: //")"
 
-    if [[ $buildinfo_anon == "true" ]]; then
+    if [[ $buildinfo_anon != ]]; then
         buildinfo_build_host_kernel="(Undisclosed)"
         buildinfo_build_host_name="(Undisclosed)"
         buildinfo_build_host_os="(Undisclosed)"
@@ -407,7 +408,7 @@ function main() {
     [[ "$ex_ntfy_username" == "true" ]] && build_die "--ex-ntfy-username needs a value (example: theduckster)"
     [[ "$ex_override_starttime" == "true" ]] && build_die "--ex-override-starttime needs a value (example: 1640551980)"
 
-    [[ "$ex_remote_version_branch" == "true" ]] || [[ -z "$ex_remote_version_branch" ]] && ex_remote_version_branch="main"
+    [[ "$ex_git_version_branch" == "true" ]] || [[ -z "$ex_git_version_branch" ]] && ex_git_version_branch="main"
     [[ "$serve_port" == "true" ]] || [[ -z "$serve_port" ]] && serve_port=8080
     [[ "$tree" == "true" ]] || [[ -z "$tree" ]] && tree="custom"
     [[ "$working_dir" == "true" ]] || [[ -z "$working_dir" ]] && working_dir="$src_dir/build"
@@ -426,9 +427,9 @@ function main() {
 
     [[ ! -d "$working_dir" ]] && mkdir -p "$working_dir"
 
-    if [[ $ex_remote_version != "" ]]; then
-        online_file_branch="$(echo $ex_remote_version_branch | sed "s|/|__|g")"
-        online_file="https://raw.githubusercontent.com/sodaliterocks/sodalite/$ex_remote_version_branch/build.sh"
+    if [[ $git_version != "" ]]; then
+        online_file_branch="$(echo $ex_git_version_branch | sed "s|/|__|g")"
+        online_file="https://raw.githubusercontent.com/sodaliterocks/sodalite/$ex_git_version_branch/build.sh"
         downloaded_file="$src_dir/$me_filename+$online_file_branch"
 
         me_md5sum="$(cat "$src_dir/$me_filename" | md5sum | cut -d ' ' -f1)"
@@ -439,7 +440,7 @@ function main() {
                 curl -sL $online_file > "$downloaded_file"
                 chmod +x "$downloaded_file"
 
-                say primary "$(emj "🌐")Executing remote version ($online_file_branch)..."
+                say primary "$(emj "🌐")Executing Git version ($online_file_branch)..."
 
                 bash -c "$downloaded_file $(echo $options | sed "s|--ex-remote-version||")"
                 downloaded_file_result="$?"
