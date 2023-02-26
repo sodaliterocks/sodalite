@@ -103,7 +103,6 @@ add-files: [
   ["../../lfs/wallpapers/max-okhrimenko-R-CoXmMrWFk-unsplash.jpg", "/usr/share/backgrounds/default/max-okhrimenko-R-CoXmMrWFk-unsplash.jpg"],
   ["../../lfs/wallpapers/nathan-dumlao-y_qtd7IizFE-unsplash.jpg", "/usr/share/backgrounds/default/nathan-dumlao-y_qtd7IizFE-unsplash.jpg"],
   ["../../lfs/wallpapers/phil-botha-a0TJ3hy-UD8-unsplash.jpg", "/usr/share/backgrounds/default/phil-botha-a0TJ3hy-UD8-unsplash.jpg"],
-  ["../../lfs/wallpapers/phil-botha-a0TJ3hy-UD8-unsplash~devel.jpg", "/usr/share/backgrounds/devel-wallpaper.jpg"],
   ["../../lfs/wallpapers/piermanuele-sberni-9jVmJ_mBRE8-unsplash~3967x2645.jpg", "/usr/share/backgrounds/default/piermanuele-sberni-9jVmJ_mBRE8-unsplash~3967x2645.jpg"],
   ["../../lfs/wallpapers/ryan-stone-U3cctUBucn0-unsplash.jpg", "/usr/share/backgrounds/default/ryan-stone-U3cctUBucn0-unsplash.jpg"],
   ["../../lfs/wallpapers/smaran-alva-hno1wDtV1X4-unsplash.jpg", "/usr/share/backgrounds/default/smaran-alva-hno1wDtV1X4-unsplash.jpg"],
