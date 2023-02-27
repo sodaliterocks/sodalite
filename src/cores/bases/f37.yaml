@@ -1,3 +1,9 @@
+include: [
+  "../../../lib/workstation-ostree-config_f37/fedora-common-ostree-pkgs.yaml"
+]
+
+releasever: "37"
+
 packages:
  - distribution-gpg-keys
  - fedora-release
