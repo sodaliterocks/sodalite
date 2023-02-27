@@ -1,5 +1,5 @@
 include: [
-  "bases/f38.yaml",
+  "bases/f37.yaml",
   "../packages/flatpak.yaml",
   "../packages/fonts.yaml",
   "../packages/tools.yaml",
