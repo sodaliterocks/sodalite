@@ -304,15 +304,22 @@ function build_sodalite() {
 \nBUILD_HOST_NAME=\"$buildinfo_build_host_name\"
 \nBUILD_HOST_OS=\"$buildinfo_build_host_os\"
 \nBUILD_TOOL=\"$buildinfo_build_tool\"
+\nBUILD_UNIFIED=$unified
 \nGIT_COMMIT=$git_commit
 \nGIT_TAG=$git_tag
+\nTREE_FILENAME=\"$(basename "$treefile")\"
+\nTREE_REF=\"$ref\"
+\nTREE_REF_ARCH=\"$ref_arch\"
+\nTREE_REF_CHANNEL=\"$ref_channel\"
+\nTREE_REF_VARIANT=\"$ref_variant\"
+\nVENDOR=\"$vendor\"
+\n#Legacy
 \nOS_ARCH=\"$ref_arch\"
 \nOS_CHANNEL=\"$ref_channel\"
 \nOS_REF=\"$ref\"
 \nOS_UNIFIED=$unified
 \nOS_VARIANT=\"$ref_variant\"
-\nTREEFILE=\"$(basename "$treefile")\"
-\nVENDOR=\"$vendor\""
+\nTREEFILE=\"$(basename "$treefile")\""
 
     echo -e $buildinfo_content > $buildinfo_file
     cat $buildinfo_file
