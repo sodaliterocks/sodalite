@@ -442,7 +442,7 @@ function main() {
 
                 say primary "$(emj "🌐")Executing Git version ($online_file_branch)..."
 
-                bash -c "$downloaded_file $(echo $options | sed "s|--ex-remote-version||")"
+                bash -c "$downloaded_file $(echo $options | sed "s|--git-version||")"
                 downloaded_file_result="$?"
 
                 rm -f "$downloaded_file"
