@@ -3,29 +3,28 @@
 _PLUGIN_TITLE="Sodalite Builder"
 _PLUGIN_DESCRIPTION=""
 _PLUGIN_OPTIONS=(
-    "tree;t;\tTreefile from ./src/treefiles (default: custom)"
+    "tree;t;\tTreefile from ./src/treefiles (default: custom);string"
     "container;c;Build tree inside Podman container"
-    "working-dir;w;Directory to output build artifacts to (default: ./build)"
+    "working-dir;w;Directory to output build artifacts to (default: ./build);string"
     "buildinfo-anon;;Do not print sensitive information into buildinfo file"
+    "git-version;;\tExecute latest version of $_PLUGIN_TITLE from Git"
     "serve;;\tServe repository after successful build"
-    "serve-port;;\tPort to serve on when using --serve (default: 8080)"
+    "serve-port;;\tPort to serve on when using --serve (default: 8080);int"
     "skip-cleanup;;Skip cleaning up on exit"
     "skip-tests;;\tSkip executing tests"
     "unified-core;;Use --unified-core option with rpm-ostree"
-    "vendor;;\tVendor to use in CPE (default: \$USER)"
+    "vendor;;\tVendor to use in CPE (default: \$USER);string"
     "ex-container-args;;"
     "ex-container-hostname;;"
     "ex-container-image;;"
+    "ex-git-version-branch;;"
     "ex-log;;"
     "ex-ntfy;;"
     "ex-ntfy-endpoint;;"
     "ex-ntfy-password;;"
     "ex-ntfy-topic;;"
     "ex-ntfy-username;;"
-    "ex-remote-version;;"
-    "ex-remote-version-branch;;"
     "ex-override-starttime;;"
-    "ex-test-print;;"
 )
 _PLUGIN_ROOT="true"
 
@@ -292,7 +291,7 @@ function build_sodalite() {
     buildinfo_build_host_os="$(get_property /usr/lib/os-release "PRETTY_NAME")"
     buildinfo_build_tool="rpm-ostree $(echo "$(rpm-ostree --version)" | grep "Version:" | sed "s/ Version: //" | tr -d "'")+$(echo "$(rpm-ostree --version)" | grep "Git:" | sed "s/ Git: //")"
 
-    if [[ $buildinfo_anon == "true" ]]; then
+    if [[ $buildinfo_anon != "" ]]; then
         buildinfo_build_host_kernel="(Undisclosed)"
         buildinfo_build_host_name="(Undisclosed)"
         buildinfo_build_host_os="(Undisclosed)"
@@ -305,14 +304,14 @@ function build_sodalite() {
 \nBUILD_HOST_NAME=\"$buildinfo_build_host_name\"
 \nBUILD_HOST_OS=\"$buildinfo_build_host_os\"
 \nBUILD_TOOL=\"$buildinfo_build_tool\"
+\nBUILD_UNIFIED=$unified
 \nGIT_COMMIT=$git_commit
 \nGIT_TAG=$git_tag
-\nOS_ARCH=\"$ref_arch\"
-\nOS_CHANNEL=\"$ref_channel\"
-\nOS_REF=\"$ref\"
-\nOS_UNIFIED=$unified
-\nOS_VARIANT=\"$ref_variant\"
-\nTREEFILE=\"$(basename "$treefile")\"
+\nTREE_FILENAME=\"$(basename "$treefile")\"
+\nTREE_REF=\"$ref\"
+\nTREE_REF_ARCH=\"$ref_arch\"
+\nTREE_REF_CHANNEL=\"$ref_channel\"
+\nTREE_REF_VARIANT=\"$ref_variant\"
 \nVENDOR=\"$vendor\""
 
     echo -e $buildinfo_content > $buildinfo_file
@@ -409,7 +408,7 @@ function main() {
     [[ "$ex_ntfy_username" == "true" ]] && build_die "--ex-ntfy-username needs a value (example: theduckster)"
     [[ "$ex_override_starttime" == "true" ]] && build_die "--ex-override-starttime needs a value (example: 1640551980)"
 
-    [[ "$ex_remote_version_branch" == "true" ]] || [[ -z "$ex_remote_version_branch" ]] && ex_remote_version_branch="main"
+    [[ "$ex_git_version_branch" == "true" ]] || [[ -z "$ex_git_version_branch" ]] && ex_git_version_branch="main"
     [[ "$serve_port" == "true" ]] || [[ -z "$serve_port" ]] && serve_port=8080
     [[ "$tree" == "true" ]] || [[ -z "$tree" ]] && tree="custom"
     [[ "$working_dir" == "true" ]] || [[ -z "$working_dir" ]] && working_dir="$src_dir/build"
@@ -428,9 +427,9 @@ function main() {
 
     [[ ! -d "$working_dir" ]] && mkdir -p "$working_dir"
 
-    if [[ $ex_remote_version != "" ]]; then
-        online_file_branch="$(echo $ex_remote_version_branch | sed "s|/|__|g")"
-        online_file="https://raw.githubusercontent.com/sodaliterocks/sodalite/main/build.sh"
+    if [[ $git_version != "" ]]; then
+        online_file_branch="$(echo $ex_git_version_branch | sed "s|/|__|g")"
+        online_file="https://raw.githubusercontent.com/sodaliterocks/sodalite/$ex_git_version_branch/build.sh"
         downloaded_file="$src_dir/$me_filename+$online_file_branch"
 
         me_md5sum="$(cat "$src_dir/$me_filename" | md5sum | cut -d ' ' -f1)"
@@ -441,9 +440,9 @@ function main() {
                 curl -sL $online_file > "$downloaded_file"
                 chmod +x "$downloaded_file"
 
-                say primary "$(emj "🌐")Executing remote version ($online_file_branch)..."
+                say primary "$(emj "🌐")Executing Git version ($online_file_branch)..."
 
-                bash -c "$downloaded_file $(echo $options | sed "s|--ex-remote-version||")"
+                bash -c "$downloaded_file $(echo $options | sed "s|--git-version||")"
                 downloaded_file_result="$?"
 
                 rm -f "$downloaded_file"
@@ -452,11 +451,6 @@ function main() {
         else
             build_die "Unable to check latest remote version of $me_filename"
         fi
-    fi
-
-    if [[ $ex_test_print  != "" ]]; then
-        echo "4"
-        exit 0
     fi
 
     if [[ $container == "true" ]]; then # BUG: Podman sets $container (usually to "oci"), so we need to look for "true" instead
@@ -571,9 +565,9 @@ function main() {
 
         say "$(build_emj "ℹ️")\033[1;35mName:    \033[0;0m$(ost cat $built_commit /usr/lib/os-release | grep "PRETTY_NAME=" | sed "s/PRETTY_NAME=//" | sed "s/\"//g")"
         say "   \033[1;35mBase:    \033[0;0m$(ost cat $built_commit /usr/lib/upstream-os-release | grep "PRETTY_NAME=" | sed "s/PRETTY_NAME=//" | sed "s/\"//g")"
-        say "   \033[1;35mCPE:     \033[0;0m$(ost cat $built_commit /usr/lib/system-release-cpe)"
-        say "   \033[1;35mRef:     \033[0;0m$(ost cat $built_commit /usr/lib/sodalite-buildinfo | grep "REF=" | sed "s/OSTREE_VERSION=//" | sed "s/\"//g")"
         say "   \033[1;35mVersion: \033[0;0m$built_version"
+        say "   \033[1;35mCPE:     \033[0;0m$(ost cat $built_commit /usr/lib/system-release-cpe)"
+        say "   \033[1;35mRef:     \033[0;0m$(ost cat $built_commit /usr/lib/sodalite-buildinfo | grep "TREE_REF=" | sed "s/TREE_REF=//" | sed "s/\"//g")"
         say "   \033[1;35mCommit:  \033[0;0m$built_commit"
 
         echo "$(repeat "-" 80)"

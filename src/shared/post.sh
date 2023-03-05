@@ -114,17 +114,17 @@ if [[ $(cat $_buildinfo_file) != "" ]]; then
     [[ ! -z $(get_property $_buildinfo_file "GIT_TAG") ]] && \
         _git_tag="$(get_property $_buildinfo_file "GIT_TAG")"
 
-    [[ ! -z $(get_property $_buildinfo_file "OS_ARCH") ]] && \
-        _os_arch="$(get_property $_buildinfo_file "OS_ARCH")"
+    [[ ! -z $(get_property $_buildinfo_file "TREE_REF") ]] && \
+        _os_ref="$(get_property $_buildinfo_file "TREE_REF")"
 
-    [[ ! -z $(get_property $_buildinfo_file "OS_CHANNEL") ]] && \
-        _os_channel="$(get_property $_buildinfo_file "OS_CHANNEL")"
+    [[ ! -z $(get_property $_buildinfo_file "TREE_REF_ARCH") ]] && \
+        _os_arch="$(get_property $_buildinfo_file "TREE_REF_ARCH")"
 
-    [[ ! -z $(get_property $_buildinfo_file "OS_REF") ]] && \
-        _os_ref="$(get_property $_buildinfo_file "OS_REF")"
+    [[ ! -z $(get_property $_buildinfo_file "TREE_REF_CHANNEL") ]] && \
+        _os_channel="$(get_property $_buildinfo_file "TREE_REF_CHANNEL")"
 
-    [[ ! -z $(get_property $_buildinfo_file "OS_VARIANT") ]] && \
-        _os_variant="$(get_property $_buildinfo_file "OS_VARIANT")"
+    [[ ! -z $(get_property $_buildinfo_file "TREE_REF_VARIANT") ]] && \
+        _os_variant="$(get_property $_buildinfo_file "TREE_REF_VARIANT")"
 
     [[ ! -z $(get_property $_buildinfo_file "VENDOR") ]] && \
         _vendor="$(get_property $_buildinfo_file "VENDOR")"
