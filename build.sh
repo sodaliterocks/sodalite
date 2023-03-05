@@ -312,14 +312,7 @@ function build_sodalite() {
 \nTREE_REF_ARCH=\"$ref_arch\"
 \nTREE_REF_CHANNEL=\"$ref_channel\"
 \nTREE_REF_VARIANT=\"$ref_variant\"
-\nVENDOR=\"$vendor\"
-\n#Legacy
-\nOS_ARCH=\"$ref_arch\"
-\nOS_CHANNEL=\"$ref_channel\"
-\nOS_REF=\"$ref\"
-\nOS_UNIFIED=$unified
-\nOS_VARIANT=\"$ref_variant\"
-\nTREEFILE=\"$(basename "$treefile")\""
+\nVENDOR=\"$vendor\""
 
     echo -e $buildinfo_content > $buildinfo_file
     cat $buildinfo_file
@@ -574,7 +567,7 @@ function main() {
         say "   \033[1;35mBase:    \033[0;0m$(ost cat $built_commit /usr/lib/upstream-os-release | grep "PRETTY_NAME=" | sed "s/PRETTY_NAME=//" | sed "s/\"//g")"
         say "   \033[1;35mVersion: \033[0;0m$built_version"
         say "   \033[1;35mCPE:     \033[0;0m$(ost cat $built_commit /usr/lib/system-release-cpe)"
-        say "   \033[1;35mRef:     \033[0;0m$(ost cat $built_commit /usr/lib/sodalite-buildinfo | grep "OS_REF=" | sed "s/OS_REF=//" | sed "s/\"//g")"
+        say "   \033[1;35mRef:     \033[0;0m$(ost cat $built_commit /usr/lib/sodalite-buildinfo | grep "TREE_REF=" | sed "s/TREE_REF=//" | sed "s/\"//g")"
         say "   \033[1;35mCommit:  \033[0;0m$built_commit"
 
         echo "$(repeat "-" 80)"
