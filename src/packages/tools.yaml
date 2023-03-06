@@ -5,9 +5,11 @@ packages:
  - distrobox
  - ffmpeg
  - git-core
+ - git-core-doc
  - gstreamer1-plugins-good-gtk
  - lm_sensors
  - meson
+ - ncurses
  - podman
  - scrcpy
  - skopeo

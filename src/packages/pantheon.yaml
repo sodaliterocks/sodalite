@@ -24,6 +24,7 @@ packages:
  - gvfs-mtp
  - gvfs-nfs
  - gvfs-smb
+ - light-locker
  - onboard
  - pantheon-agent-geoclue2
  - pantheon-agent-polkit
@@ -34,27 +35,27 @@ packages:
  - switchboard-plug-about
  - switchboard-plug-applications
  - switchboard-plug-bluetooth
- - switchboard-plug-datetime
+ #- switchboard-plug-datetime # provided by decathorpe/elementary-staging repo, which no longer exists as of 24-Feb-2023
  - switchboard-plug-display
  - switchboard-plug-keyboard
- #- switchboard-plug-locale # Buggy on Fedora (relies on apt)
+ #- switchboard-plug-locale # provided by decathorpe/elementary-staging repo, which no longer exists as of 24-Feb-2023 — broken anyways (relies on apt)
  - switchboard-plug-mouse-touchpad
  - switchboard-plug-networking
  - switchboard-plug-notifications
  - switchboard-plug-onlineaccounts
  - switchboard-plug-pantheon-shell
- - switchboard-plug-parental-controls
+# - switchboard-plug-parental-controls # provided by decathorpe/elementary-staging repo, which no longer exists as of 24-Feb-2023 — not really high-priority
  - switchboard-plug-printers
- - switchboard-plug-power
- - switchboard-plug-security-privacy
+ #- switchboard-plug-power # provided by decathorpe/elementary-staging repo, which no longer exists as of 24-Feb-2023
+ #- switchboard-plug-security-privacy # provided by decathorpe/elementary-staging repo, which no longer exists as of 24-Feb-2023
  - switchboard-plug-sharing
  - switchboard-plug-sound
  - switchboard-plug-tweaks
- #- switchboard-plug-useraccounts # Untested (potentially dangerous?)
+ #- switchboard-plug-useraccounts # provided by decathorpe/elementary-staging repo, which no longer exists as of 24-Feb-2023
  - touchegg
  - wingpanel
  - wingpanel-applications-menu
- - wingpanel-indicator-a11y
+ #- wingpanel-indicator-a11y # provided by decathorpe/elementary-staging repo, which no longer exists as of 24-Feb-2023
  - wingpanel-indicator-bluetooth
  - wingpanel-indicator-datetime
  - wingpanel-indicator-keyboard
@@ -64,8 +65,8 @@ packages:
  - wingpanel-indicator-power
  - wingpanel-indicator-session
  - wingpanel-indicator-sound
- - xdg-desktop-portal-gnome
- - xdg-desktop-portal-pantheon
+ #- xdg-desktop-portal-pantheon # provided by decathorpe/elementary-staging repo, which no longer exists as of 24-Feb-2023
+ - zeitgeist-libs
 exclude-packages:
  - gnome-tour
  #- ufw

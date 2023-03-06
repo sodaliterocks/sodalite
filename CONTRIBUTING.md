@@ -55,7 +55,9 @@ All code submitted into this repository will be [licensed as MIT](https://github
 	* This could be a filename (no extension), directory, or function name.
 	* For more specificness, add a "parent" area in brackets (e.g. `child-thingy (parent-thingy):`).
 * `message`: Brief message of changes.
-	* Written in lowercase (unless a proper noun); written in present tense  (e.g. `modify` not `modified`); begin with a verb.
+	* Written in lowercase (unless a proper noun)
+	* Written in the present tense (e.g. `modify` not `modified`)
+	* Begin with a verb
 	* Some messages use a certain format:
 		* **Branch merges** (with 🔀 emoji), use `from_branch → to_branch`.
 		* **PR merges** (with 🔀 emoji), use `PR #123 (pr_branch)`.

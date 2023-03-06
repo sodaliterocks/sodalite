@@ -3,19 +3,22 @@
 _PLUGIN_TITLE="Sodalite Builder"
 _PLUGIN_DESCRIPTION=""
 _PLUGIN_OPTIONS=(
-    "tree;t;\tTreefile (from ./src/treefiles/sodalite-*.yaml)"
+    "tree;t;\tTreefile from ./src/treefiles (default: custom);string"
     "container;c;Build tree inside Podman container"
-    "working-dir;w;Directory to output build artifacts to"
+    "working-dir;w;Directory to output build artifacts to (default: ./build);string"
     "buildinfo-anon;;Do not print sensitive information into buildinfo file"
-    "ci;;\t\tUse remote Git repository when building with --container"
-    "ci-branch;;\tBranch to use when building with --ci"
-    "skip-cleanup;;Skip cleaning up (removing useless files, fixing permissions) on exit"
+    "git-version;;\tExecute latest version of $_PLUGIN_TITLE from Git"
+    "serve;;\tServe repository after successful build"
+    "serve-port;;\tPort to serve on when using --serve (default: 8080);int"
+    "skip-cleanup;;Skip cleaning up on exit"
     "skip-tests;;\tSkip executing tests"
     "unified-core;;Use --unified-core option with rpm-ostree"
+    "vendor;;\tVendor to use in CPE (default: \$USER);string"
     "ex-container-args;;"
     "ex-container-hostname;;"
     "ex-container-image;;"
-    "ex-log;;" # TODO: Do something with the logs in --ci mode?
+    "ex-git-version-branch;;"
+    "ex-log;;"
     "ex-ntfy;;"
     "ex-ntfy-endpoint;;"
     "ex-ntfy-password;;"
@@ -45,7 +48,6 @@ start_time=""
 src_dir=""
 tests_dir=""
 treefile=""
-vendor=""
 
 # Utilities
 
@@ -78,7 +80,9 @@ function cleanup() {
         rm -rf /var/tmp/rpm-ostree.*
 
         if [[ $SUDO_USER != "" ]]; then
-            chown -R $SUDO_USER:$SUDO_USER "$working_dir"
+            if [[ -d "$working_dir" ]]; then
+                chown -R $SUDO_USER:$SUDO_USER "$working_dir"
+            fi
         fi
     else
         say warning "Not cleaning up (--skip-cleanup used)"
@@ -226,7 +230,11 @@ function build_sodalite() {
         treefile="$(get_treefile)"
     fi
 
-    [[ $unified != "true" ]] && unified="false"
+    if [[ $unified_core == "true" ]]; then
+        unified="true"
+    else
+        unified="false"
+    fi
 
     buildinfo_file="$src_dir/src/sysroot/common/usr/lib/sodalite-buildinfo"
     lockfile="$src_dir/src/shared/overrides.yaml"
@@ -262,14 +270,6 @@ function build_sodalite() {
                 git_tag="$(git -C $src_dir describe --exact-match --tags $(git -C $src_dir log -n1 --pretty='%h') 2>/dev/null)"
             fi
 
-            if [[ "$git_origin_url" != "" ]]; then
-                if [[ "$git_origin_url" =~ ([a-zA-Z0-9.-_]+\@[a-zA-Z0-9.-_]+:([a-zA-Z0-9.-_]+)\/([a-zA-Z0-9.-_]+).git) ]]; then
-                    vendor="${BASH_REMATCH[2]}"
-                elif [[ "$git_origin_url" =~ (https:\/\/github.com\/([a-zA-Z0-9.-_]+)\/([a-zA-Z0-9.-_]+).git) ]]; then
-                    vendor="${BASH_REMATCH[2]}"
-                fi
-            fi
-
             say primary "$(build_emj "🗑️")Cleaning up Git repository..."
             nudo git fetch --prune
             nudo git fetch --prune-tags
@@ -291,7 +291,7 @@ function build_sodalite() {
     buildinfo_build_host_os="$(get_property /usr/lib/os-release "PRETTY_NAME")"
     buildinfo_build_tool="rpm-ostree $(echo "$(rpm-ostree --version)" | grep "Version:" | sed "s/ Version: //" | tr -d "'")+$(echo "$(rpm-ostree --version)" | grep "Git:" | sed "s/ Git: //")"
 
-    if [[ $buildinfo_anon == "true" ]]; then
+    if [[ $buildinfo_anon != "" ]]; then
         buildinfo_build_host_kernel="(Undisclosed)"
         buildinfo_build_host_name="(Undisclosed)"
         buildinfo_build_host_os="(Undisclosed)"
@@ -304,13 +304,14 @@ function build_sodalite() {
 \nBUILD_HOST_NAME=\"$buildinfo_build_host_name\"
 \nBUILD_HOST_OS=\"$buildinfo_build_host_os\"
 \nBUILD_TOOL=\"$buildinfo_build_tool\"
+\nBUILD_UNIFIED=$unified
 \nGIT_COMMIT=$git_commit
 \nGIT_TAG=$git_tag
-\nOS_ARCH=\"$ref_arch\"
-\nOS_CHANNEL=\"$ref_channel\"
-\nOS_REF=\"$ref\"
-\nOS_UNIFIED=$unified
-\nOS_VARIANT=\"$ref_variant\"
+\nTREE_FILENAME=\"$(basename "$treefile")\"
+\nTREE_REF=\"$ref\"
+\nTREE_REF_ARCH=\"$ref_arch\"
+\nTREE_REF_CHANNEL=\"$ref_channel\"
+\nTREE_REF_VARIANT=\"$ref_variant\"
 \nVENDOR=\"$vendor\""
 
     echo -e $buildinfo_content > $buildinfo_file
@@ -387,21 +388,70 @@ function test_sodalite() {
     fi
 }
 
+function serve_repo() {
+    say primary "$(build_emj "🥄")Serving repository..."
+    python -m http.server --bind 0.0.0.0 --directory "$working_dir/repo" $serve_port
+    [[ $? != 0 ]] && build_die "Failed to run HTTP server"
+}
+
 # Entrypoint
 
 function main() {
     src_dir="$(realpath -s "$base_dir/../../..")"
+    me_filename="$(basename "$plugin")"
+
     [[ ! -d $src_dir ]] && build_die "Unable to compute source directory"
 
-    [[ "$ci" != "" && "$container" == "" ]] && build_die "--ci cannot be used without --container"
-    [[ "$ci_branch" != "" && "$ci" == "" ]] && build_die "--ci-branch cannot be used without --ci"
-    [[ "$skip_test" != "" && "$ci" != "" ]] && build_die "--skip-test cannot be used with --ci"
+    [[ "$ex_ntfy_endpoint" == "true" ]] && build_die "--ex-ntfy-endpoint needs a value (example: https://ntfy.myserver.com)"
+    [[ "$ex_ntfy_password" == "true" ]] && build_die "--ex-ntfy-password needs a value (example: abc123XYZ)"
+    [[ "$ex_ntfy_topic" == "true" ]] && build_die "--ex-ntfy-topic needs a value (example: sodalite)"
+    [[ "$ex_ntfy_username" == "true" ]] && build_die "--ex-ntfy-username needs a value (example: theduckster)"
+    [[ "$ex_override_starttime" == "true" ]] && build_die "--ex-override-starttime needs a value (example: 1640551980)"
 
-    [[ "$ci_branch" == "true" ]] || [[ -z "$ci_branch" ]] && ci_branch="devel"
+    [[ "$ex_git_version_branch" == "true" ]] || [[ -z "$ex_git_version_branch" ]] && ex_git_version_branch="main"
+    [[ "$serve_port" == "true" ]] || [[ -z "$serve_port" ]] && serve_port=8080
     [[ "$tree" == "true" ]] || [[ -z "$tree" ]] && tree="custom"
     [[ "$working_dir" == "true" ]] || [[ -z "$working_dir" ]] && working_dir="$src_dir/build"
 
+    if [[ "$vendor" == "true" ]] || [[ -z "$vendor" ]]; then
+        if [[ $SUDO_USER != "" ]]; then
+            vendor="$SUDO_USER"
+        else
+            vendor="$USER"
+        fi
+
+        if [[ $vendor == "root" ]]; then
+            vendor="unknown"
+        fi
+    fi
+
     [[ ! -d "$working_dir" ]] && mkdir -p "$working_dir"
+
+    if [[ $git_version != "" ]]; then
+        online_file_branch="$(echo $ex_git_version_branch | sed "s|/|__|g")"
+        online_file="https://raw.githubusercontent.com/sodaliterocks/sodalite/$ex_git_version_branch/build.sh"
+        downloaded_file="$src_dir/$me_filename+$online_file_branch"
+
+        me_md5sum="$(cat "$src_dir/$me_filename" | md5sum | cut -d ' ' -f1)"
+        online_md5sum="$(curl -sL $online_file | md5sum | cut -d ' ' -f1)"
+
+        if [[ $? == 0 ]]; then
+            if [[ $me_md5sum != $online_md5sum ]]; then
+                curl -sL $online_file > "$downloaded_file"
+                chmod +x "$downloaded_file"
+
+                say primary "$(emj "🌐")Executing Git version ($online_file_branch)..."
+
+                bash -c "$downloaded_file $(echo $options | sed "s|--git-version||")"
+                downloaded_file_result="$?"
+
+                rm -f "$downloaded_file"
+                exit $downloaded_file_result
+            fi
+        else
+            build_die "Unable to check latest remote version of $me_filename"
+        fi
+    fi
 
     if [[ $container == "true" ]]; then # BUG: Podman sets $container (usually to "oci"), so we need to look for "true" instead
         if [[ $(command -v "podman") ]]; then
@@ -422,6 +472,7 @@ function main() {
             [[ $skip_test != "" ]] && container_build_args+=" --skip-test $skip_test"
             [[ $tree != "" ]] && container_build_args+=" --tree $tree"
             [[ $unified_core != "" ]] && container_build_args+=" --unified-core $unified_core"
+            [[ $vendor != "" ]] && container_build_args+=" --vendor $vendor"
 
             if [[ $ex_override_starttime != "" ]]; then
                 container_build_args+=" --ex-override-starttime $ex_override_starttime"
@@ -435,19 +486,13 @@ function main() {
             container_args="run --rm --privileged \
                 --hostname \"$container_hostname\" \
                 --name \"$container_name\" \
-                --volume \"$working_dir:/wd/out/\" "
+                --volume \"$working_dir:/wd/out/\" \
+                --volume \"$src_dir:/wd/src\" "
             [[ $ex_conatiner_args != "" ]] && container_args+="$ex_container_args "
             container_command="touch /.sodalite-containerenv;"
             container_command+="dnf install -y curl git-core git-lfs hostname policycoreutils rpm-ostree selinux-policy selinux-policy-targeted;"
 
-            if [[ $ci == "true" ]]; then
-                #[[ $(git show-ref refs/heads/$ci_branch) == "" ]] && build_die "Branch '$ci_branch' does not exist"
-                container_command+="git clone --recurse-submodules -b $ci_branch https://github.com/sodaliterocks/sodalite.git /wd/src;"
-            else
-                container_args+="--volume \"$src_dir:/wd/src\" "
-            fi
-
-            container_command+="cd /wd/src; /wd/src/build.sh $container_build_args;"
+            container_command+="cd /wd/src; /wd/src/$me_filename $container_build_args;"
             container_args+="$container_image /bin/bash -c \"$container_command\""
 
             say primary "$(build_emj "⬇️")Pulling container image ($container_image)..."
@@ -489,7 +534,7 @@ function main() {
         chown -R root:root "$working_dir"
 
         if [[ ! $(command -v "rpm-ostree") ]]; then
-            build_die "rpm-ostree not installed. Cannot build"
+            build_die "rpm-ostree not installed (try --container)"
         fi
 
         build_sodalite
@@ -518,11 +563,12 @@ function main() {
         built_commit="$(echo "$(ost log $ref | grep "commit " | sed "s/commit //")" | head -1)"
         built_version="$(ost cat $built_commit /usr/lib/os-release | grep "OSTREE_VERSION=" | sed "s/OSTREE_VERSION=//" | sed "s/'//g")"
 
-        say "$(build_emj "ℹ️")\033[1;35mName: \033[0;0m$(ost cat $built_commit /usr/lib/os-release | grep "PRETTY_NAME=" | sed "s/PRETTY_NAME=//" | sed "s/\"//g")"
-        say "   \033[1;35mBase: \033[0;0m$(ost cat $built_commit /usr/lib/upstream-os-release | grep "PRETTY_NAME=" | sed "s/PRETTY_NAME=//" | sed "s/\"//g")"
-        say "   \033[1;35mCPE: \033[0;0m$(ost cat $built_commit /usr/lib/system-release-cpe)"
+        say "$(build_emj "ℹ️")\033[1;35mName:    \033[0;0m$(ost cat $built_commit /usr/lib/os-release | grep "PRETTY_NAME=" | sed "s/PRETTY_NAME=//" | sed "s/\"//g")"
+        say "   \033[1;35mBase:    \033[0;0m$(ost cat $built_commit /usr/lib/upstream-os-release | grep "PRETTY_NAME=" | sed "s/PRETTY_NAME=//" | sed "s/\"//g")"
         say "   \033[1;35mVersion: \033[0;0m$built_version"
-        say "   \033[1;35mCommit: \033[0;0m$built_commit"
+        say "   \033[1;35mCPE:     \033[0;0m$(ost cat $built_commit /usr/lib/system-release-cpe)"
+        say "   \033[1;35mRef:     \033[0;0m$(ost cat $built_commit /usr/lib/sodalite-buildinfo | grep "TREE_REF=" | sed "s/TREE_REF=//" | sed "s/\"//g")"
+        say "   \033[1;35mCommit:  \033[0;0m$built_commit"
 
         echo "$(repeat "-" 80)"
 
@@ -530,6 +576,10 @@ function main() {
         [[ $highscore == "true" ]] && echo "$(build_emj "🏆") You're Winner (previous: $(print_time $prev_highscore))!"
 
         trigger_ntfy
+    fi
+
+    if [[ $serve != "" ]]; then
+        serve_repo
     fi
 
     exit 0

@@ -2,11 +2,15 @@ include: [
   "./common.yaml",
   "../packages/pantheon.yaml",
   "../packages/pantheon-apps.yaml",
-  "../packages/pantheon-extras.yaml"
+  "../packages/pantheon-extras.yaml",
+  "../packages/lfs-packages/switchboard-plug-datetime.yaml",
+  "../packages/lfs-packages/switchboard-plug-power.yaml",
+  "../packages/lfs-packages/switchboard-plug-security-privacy.yaml",
+  "../packages/lfs-packages/switchboard-plug-useraccounts.yaml",
+  "../packages/lfs-packages/wingpanel-indicator-a11y.yaml"
 ]
 
 repos:
- - copr.decathorpe.elementary-staging
  - copr.stsdc.monitor
 
 add-files: [
@@ -41,9 +45,6 @@ add-files: [
   ["../sysroot/cores/pantheon/usr/lib/sodalite-core", "/usr/lib/sodalite-core"],
 
   # /usr/lib64
-  ["../../lfs/binaries/fedora/switchboard-plug-useraccounts/2.4.2-1.fc36~x86_64/usr/lib64/libgnome-desktop-3.so.19", "/usr/lib64/libgnome-desktop-3.so.19"],
-  ["../../lfs/binaries/fedora/switchboard-plug-useraccounts/2.4.2-1.fc36~x86_64/usr/lib64/switchboard/system/libuseraccounts.so", "/usr/lib64/switchboard/system/libuseraccounts.so"],
-  ["../../lfs/binaries/fedora/switchboard-plug-useraccounts/2.4.2-1.fc36~x86_64/usr/lib64/switchboard/system/pantheon-useraccounts/guest-session-toggle", "/usr/lib64/switchboard/system/pantheon-useraccounts/guest-session-toggle"],
   ["../sysroot/cores/pantheon/usr/lib64/switchboard/personal/security-privacy-plug-helper", "/usr/lib64/switchboard/personal/security-privacy-plug-helper"],
 
   # /usr/libexec
@@ -76,7 +77,4 @@ add-files: [
   ["../../lib/elementary.icons/apps/48/system-software-install.svg", "/usr/share/icons/elementary/apps/48/system-software-install.svg"],
   ["../../lib/elementary.icons/apps/64/system-software-install.svg", "/usr/share/icons/elementary/apps/64/system-software-install.svg"],
   ["../../lib/elementary.icons/apps/symbolic/system-software-install-symbolic.svg", "/usr/share/icons/elementary/apps/symbolic/system-software-install-symbolic.svg"],
-  
-  # /usr/share/polkit-1
-  ["../../lfs/binaries/fedora/switchboard-plug-useraccounts/2.4.2-1.fc36~x86_64/usr/share/polkit-1/actions/io.elementary.switchboard.useraccounts.policy", "/usr/share/polkit-1/actions/io.elementary.switchboard.useraccounts.policy"]
 ]
