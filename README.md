@@ -228,7 +228,7 @@ _(todo)_
 _These fine folks' work is no longer included in, or relevant to, Sodalite, but they're still worth a shout-out!_
 
 * [Fabio "decathorpe" Valentini](https://decathorpe.com/), for maintaining elementary/Pantheon packages on Fedora
-  * Due to various packaging issues with Pantheon on Fedora's official repos (see [#44](https://github.com/sodaliterocks/sodalite/issues/44)), these packages were dropped from these repositories in late February 2023. Despite this, decathorpe's contributions are essentially what sparked Sodalite in the first place.
+  * Due to various packaging issues with Pantheon on Fedora's official repos (see [#44](https://github.com/sodaliterocks/sodalite/issues/44), and [writing (about) code ➔ elementary-stable](https://decathorpe.com/fedora-elementary-stable-status.html)), these packages were dropped entirely (including the addtional ~~[elementary-staging](https://copr.fedorainfracloud.org/coprs/decathorpe/elementary-staging/)~~ and ~~[elementary-nightly](https://copr.fedorainfracloud.org/coprs/decathorpe/elementary-nightly/)~~ Copr repos, dropped in Feb '23). Despite this, decathorpe's contributions are essentially what sparked Sodalite in the first place.
 * ["Topfi"](https://github.com/ACertainTopfi), for their various contributions
 
 ### Teams & Organizations
