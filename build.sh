@@ -25,6 +25,7 @@ _PLUGIN_OPTIONS=(
     "ex-ntfy-topic;;"
     "ex-ntfy-username;;"
     "ex-override-starttime;;"
+    "ex-print-github-release-table-row;;"
 )
 _PLUGIN_ROOT="true"
 
@@ -562,13 +563,20 @@ function main() {
 
         built_commit="$(echo "$(ost log $ref | grep "commit " | sed "s/commit //")" | head -1)"
         built_version="$(ost cat $built_commit /usr/lib/os-release | grep "OSTREE_VERSION=" | sed "s/OSTREE_VERSION=//" | sed "s/'//g")"
+        built_pretty_name="$(ost cat $built_commit /usr/lib/os-release | grep "PRETTY_NAME=" | sed "s/PRETTY_NAME=//" | sed "s/\"//g")"
 
-        say "$(build_emj "ℹ️")\033[1;35mName:    \033[0;0m$(ost cat $built_commit /usr/lib/os-release | grep "PRETTY_NAME=" | sed "s/PRETTY_NAME=//" | sed "s/\"//g")"
+        say "$(build_emj "ℹ️")\033[1;35mName:    \033[0;0m$built_pretty_name"
         say "   \033[1;35mBase:    \033[0;0m$(ost cat $built_commit /usr/lib/upstream-os-release | grep "PRETTY_NAME=" | sed "s/PRETTY_NAME=//" | sed "s/\"//g")"
         say "   \033[1;35mVersion: \033[0;0m$built_version"
         say "   \033[1;35mCPE:     \033[0;0m$(ost cat $built_commit /usr/lib/system-release-cpe)"
         say "   \033[1;35mRef:     \033[0;0m$(ost cat $built_commit /usr/lib/sodalite-buildinfo | grep "TREE_REF=" | sed "s/TREE_REF=//" | sed "s/\"//g")"
         say "   \033[1;35mCommit:  \033[0;0m$built_commit"
+
+        if [[ $ex_print_github_release_table_row != "" ]]; then
+            echo "$(repeat "-" 80)"
+            github_release_table_row="| <pre><b>$ref</b></pre> | **$(echo $built_pretty_name | sed -s "s| |\&#160;|g")** | $built_version | <pre>$built_commit</pre> |"
+            say "$github_release_table_row"
+        fi
 
         echo "$(repeat "-" 80)"
 
