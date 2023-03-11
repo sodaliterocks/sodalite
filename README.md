@@ -228,14 +228,14 @@ _(todo)_
 _These fine folks' work is no longer included in, or relevant to, Sodalite, but they're still worth a shout-out!_
 
 * [Fabio "decathorpe" Valentini](https://decathorpe.com/), for providing the packages for elementary on Fedora
-  * Due to various packaging issues on Fedora's repos (see [#44](https://github.com/sodaliterocks/sodalite/issues/44)), these packages were dropped from Fedora's official repositories in late February 2023. Despite this, decathorpe's contributions are essentially what sparked Sodalite in the first place.
+  * Due to various packaging issues with Pantheon on Fedora's official repos (see [#44](https://github.com/sodaliterocks/sodalite/issues/44)), these packages were dropped from these repositories in late February 2023. Despite this, decathorpe's contributions are essentially what sparked Sodalite in the first place.
 * ["Topfi"](https://github.com/ACertainTopfi), for their various contributions
 
 ### Teams & Organizations
 
 * [elementary](https://elementary.io/team), for building lovely stuff
 * [Fyra Labs](https://fyralabs.com), for maintaining [Terra](https://terra.fyralabs.com/)
-  * Due to various packaging issues on Fedora's repos (see [#44](https://github.com/sodaliterocks/sodalite/issues/44)), Sodalite was almost doomed after f36+ reached EoL. However, Terra maintains builds of Pantheon and effectively keeps the lights on here!
+  * Due to various packaging issues with Pantheon on Fedora's official repos (see [#44](https://github.com/sodaliterocks/sodalite/issues/44)), Sodalite was almost doomed after f36+ reached EoL. However, Terra maintains builds of Pantheon and effectively keeps the lights on here!
 * The contributors to [workstation-ostree-config](https://pagure.io/workstation-ostree-config), for a solid ground to work from
 
 ### Miscellaneous
