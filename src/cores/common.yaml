@@ -39,6 +39,7 @@ add-files: [
   ["../sysroot/common/etc/xdg/autostart/rocks.sodalite.user-daemon.desktop", "/etc/xdg/autostart/rocks.sodalite.user-daemon.desktop"],
   
   # /etc/yum.repos.d
+  ["../treefiles/rpmfusion.repo", "/etc/yum.repos.d/rpmfusion.repo"],
   ["../treefiles/terra.repo", "/etc/yum.repos.d/terra.repo"],
 
   # /usr/bin
