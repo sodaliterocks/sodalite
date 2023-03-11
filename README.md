@@ -219,17 +219,25 @@ _(todo)_
 
 ### Individuals
 
-* [Fabio "decathorpe" Valentini](https://decathorpe.com/), for providing the extra packages for elementary on Fedora via the [elementary-staging Copr repository](https://copr.fedorainfracloud.org/coprs/decathorpe/elementary-staging/)
+* ~~~~
+
 * [Jorge O. Castro](https://github.com/castrojo), for including Sodalite in [awesome-immutable](https://github.com/castrojo/awesome-immutable)
 * [Timothée Ravier](https://tim.siosm.fr), for their extensive guidance to the community concerning Fedora Silverblue
-* ["Topfi"](https://github.com/ACertainTopfi), for their various contributions
 * The amazing photographers/artists of the included wallpapers &mdash; [Adrien Olichon](https://unsplash.com/@adrienolichon), [Ashwini Chaudhary](https://unsplash.com/@suicide_chewbacca), [Austin Neill](https://unsplash.com/@arstyy), [Cody Fitzgerald](https://unsplash.com/@cfitz), [Dustin Humes](https://unsplash.com/@dustinhumes_photography), [Eugene Golovesov](https://unsplash.com/@eugene_golovesov), [Jack B.](https://unsplash.com/@nervum), [Jeremy Gerritsen](https://unsplash.com/@jeremygerritsen), [Karsten Würth](https://unsplash.com/@karsten_wuerth), [Marek Piwnicki](https://unsplash.com/@marekpiwnicki), [Max Okhrimenko](https://unsplash.com/@maxokhrimenko), [Nathan Dumlao](https://unsplash.com/@nate_dumlao), [Piermanuele Sberni](https://unsplash.com/@piermanuele_sberni), [Phil Botha](https://unsplash.com/@philbotha), [Ryan Stone](https://unsplash.com/@rstone_design), [Smaran Alva](https://unsplash.com/@smal), [Takashi Miyazaki](https://unsplash.com/@miyatankun), [Willian Daigneault](https://unsplash.com/@williamdaigneault), and [Zara Walker](https://unsplash.com/@mojoblogs)
+
+#### Past Individuals
+
+_These fine folks' work is no longer included in, or relevant to, Sodalite, but they're still worth a shout-out!_
+
+* [Fabio "decathorpe" Valentini](https://decathorpe.com/), for providing the packages for elementary on Fedora
+  * Due to various packaging issues on Fedora's repos (see [#44](https://github.com/sodaliterocks/sodalite/issues/44)), these packages were dropped from Fedora's official repositories in late February 2023. Despite this, decathorpe's contributions are essentially what sparked Sodalite in the first place.
+* ["Topfi"](https://github.com/ACertainTopfi), for their various contributions
 
 ### Teams & Organizations
 
 * [elementary](https://elementary.io/team), for building lovely stuff
 * [Fyra Labs](https://fyralabs.com), for maintaining [Terra](https://terra.fyralabs.com/)
-  * The official Fedora repos ran into issues (see [#44](https://github.com/sodaliterocks/sodalite/issues/44)) with Pantheon packages for f37+, potentially dooming Sodalite after f36 reached EoL: Terra solved this
+  * Due to various packaging issues on Fedora's repos (see [#44](https://github.com/sodaliterocks/sodalite/issues/44)), Sodalite was almost doomed after f36+ reached EoL. However, Terra maintains builds of Pantheon and effectively keeps the lights on here!
 * The contributors to [workstation-ostree-config](https://pagure.io/workstation-ostree-config), for a solid ground to work from
 
 ### Miscellaneous
