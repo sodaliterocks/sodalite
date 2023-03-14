@@ -49,7 +49,7 @@ To allow for several versions to co-exist and be developed in tandem with each o
 
 * `<name>`: **Name** of the branch; always `sodalite`
 * `<channel>`: **Channel** of the branch. Possible values:
-  - `current`: Current stable release (currently 4, based on [Fedora Linux 37](https://docs.fedoraproject.org/en-US/releases/f37/))
+  - `current`: Current stable release (currently [4.1](https://github.com/sodaliterocks/sodalite/releases/tag/v%2F4%2F4.1%2Fcurrent), based on [Fedora Linux 37](https://docs.fedoraproject.org/en-US/releases/f37/))
   - `long-<version>`: "Long-term" releases to stay with a specific version
     - `4`: 4.x, based on [Fedora Linux 37](https://docs.fedoraproject.org/en-US/releases/f37/). Reaches end-of-life on 14-Nov-2023 (2023-11-14)
   - `next`: Upcoming release candidates. **Potentially broken!**
