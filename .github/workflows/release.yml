@@ -4,6 +4,7 @@ on:
       - release/current
       - release/long/4
       - release/next
+      - test-github-actions
 
 jobs:
   build:
