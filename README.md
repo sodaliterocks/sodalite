@@ -110,7 +110,8 @@ _(todo)_
 
 #### Environment
 * Permission to `sudo`
-  - `rpm-ostree` needs superuser access to work: there's no way around this.
+  - `rpm-ostree` needs superuser access to work: there's no way around this
+  - Building in a container, however, is possible and supported: just pass the `-c`/`--container` flag to `build.sh` (mentioned below)
 * &gt;10GiB disk space
   - The repository itself (including submodules) takes up ~300MiB
   - Initial builds will take up ~4GiB, with subsequent builds adding to this
@@ -173,6 +174,10 @@ This will usually take 10-15 minutes. Remember when I told you to grab a cuppa? 
 * `<working-dir>` _(optional)_ Directory for build output (defaults to `./build`)
 
 #### Additional Notes
+
+##### Building in a Container
+
+If you have [Podman](https://podman.io/), you can build Sodalite entirely in a container: just use `-c`/`--container`. This is in fact how builds are done on the release server! However, this will add an extra few minutes for the build to complete as the Fedora container needs to install packages first.
 
 ##### NTFS/FAT partitions
 
