@@ -8,7 +8,7 @@ on:
 
 jobs:
   build:
-    runs-on: zio.de01
+    runs-on: self-hosted
 
     steps:
         - uses: actions/checkout@v3
