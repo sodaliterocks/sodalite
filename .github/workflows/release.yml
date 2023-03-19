@@ -1,0 +1,17 @@
+on:
+  push:
+    branches:
+      - release/current
+      - release/long/4
+      - release/next
+      - test-github-actions
+
+jobs:
+  build:
+    runs-on: zio.de01
+
+    steps:
+        - uses: actions/checkout@v3
+
+        - name: Test
+          run: echo "Hello, world!"
