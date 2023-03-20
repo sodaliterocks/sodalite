@@ -497,13 +497,10 @@ function main() {
             container_command+="cd /wd/src; /wd/src/$me_filename $container_build_args;"
             container_args+="$container_image /bin/bash -c \"$container_command\""
 
-            echo "12" >> test3
-
             say primary "$(build_emj "⬇️")Pulling container image ($container_image)..."
             podman pull $container_image
 
             say primary "$(build_emj "📦")Executing container ($container_name)..."
-            echo "13: $container_args" >> test3
             eval "podman $container_args"
         else
             build_die "Podman not installed. Cannot build with --container"
