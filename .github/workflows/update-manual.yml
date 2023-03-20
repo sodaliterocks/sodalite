@@ -15,7 +15,7 @@ on:
         - desktop-gnome
 
 jobs:
-  ci:
+  custom:
     name: Update (Manual)
     uses: sodaliterocks/sodalite/.github/workflows/ci.yml@main
     with:
