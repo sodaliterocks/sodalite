@@ -24,6 +24,10 @@ function step_build_tree() {
         --ex-container-image "$container_image" \
         --ex-override-starttime "$start_time" \
         --ex-print-github-release-table-row
+
+    if [[ $? != 0 ]]; then
+        die "Failed to build"
+    fi
 }
 
 function step_checkout_branch() {
