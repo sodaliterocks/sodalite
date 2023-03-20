@@ -4,13 +4,19 @@ on:
   workflow_dispatch:
     inputs:
       branch:
+        default: desktop
         description: "Tree"
+        required: true
+        type: choice
         options:
         - desktop
+        - desktop-budgie
+        - desktop-deepin
+        - desktop-gnome
 
 jobs:
   ci:
-    name: CI
+    name: CI (${{ inputs.tree }})
     uses: sodaliterocks/sodalite/.github/workflows/ci.yml@main
     with:
       deploy: true
