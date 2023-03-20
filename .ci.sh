@@ -9,16 +9,11 @@ function die() {
 
 function step_build_tree() {
     tree="$1"
-    deploy="$2"
+    ostree_repo="$2"
 
     container_hostname="$(hostname -f)"
     container_image="fedora:37"
-    ostree_repo=""
     start_time="$(date +%s)"
-
-    if [[ $deploy != "true" ]]; then
-        ostree_repo="/srv/store/variable/ostree"
-    fi
 
     ./build.sh \
         --container \
