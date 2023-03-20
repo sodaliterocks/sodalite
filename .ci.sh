@@ -45,7 +45,7 @@ function step_test_environment() {
 shift
 
 case $step in
-    "build-tree") step_build_tree $1 ;;
+    "build-tree") step_build_tree $1 $2 ;;
     "checkout-branch") step_checkout_branch $1 $2 ;;
     "test-environment") step_test_environment ;;
     "update-submodules") step_update_submodules ;;
