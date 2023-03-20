@@ -34,7 +34,7 @@ jobs:
     name: "Update: Desktop (Devel)"
     uses: sodaliterocks/sodalite/.github/workflows/ci.yml@main
     with:
-      branch: release/next
+      branch: main
       repo: /srv/store/variable/ostree
       tree: desktop
 
@@ -42,7 +42,7 @@ jobs:
     name: "Update: Budgie (Devel)"
     uses: sodaliterocks/sodalite/.github/workflows/ci.yml@main
     with:
-      branch: release/next
+      branch: main
       repo: /srv/store/variable/ostree
       tree: desktop-budgie
 
@@ -50,7 +50,7 @@ jobs:
     name: "Update: Deepin (Devel)"
     uses: sodaliterocks/sodalite/.github/workflows/ci.yml@main
     with:
-      branch: release/next
+      branch: main
       repo: /srv/store/variable/ostree
       tree: desktop-deepin
 
@@ -58,6 +58,6 @@ jobs:
     name: "Update: GNOME (Devel)"
     uses: sodaliterocks/sodalite/.github/workflows/ci.yml@main
     with:
-      branch: release/next
+      branch: main
       repo: /srv/store/variable/ostree
       tree: desktop-deepin
