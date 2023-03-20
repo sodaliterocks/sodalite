@@ -502,6 +502,10 @@ function main() {
 
             say primary "$(build_emj "📦")Executing container ($container_name)..."
             eval "podman $container_args"
+
+            if [[ $? != 0 ]]; then
+                exit $?
+            fi
         else
             build_die "Podman not installed. Cannot build with --container"
         fi
