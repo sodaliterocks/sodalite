@@ -1,16 +1,15 @@
-name: Release
+name: Update (Current)
 
 on:
-  push:
-    branches:
-      - release/current
-      - release/long/4
-      - release/next
+  schedule:
+    - cron: '0 4 * * 3,6'
+  workflow_dispatch:
 
 jobs:
-  desktop:
+  desktop--current:
     name: Desktop
     uses: sodaliterocks/sodalite/.github/workflows/ci.yml@main
     with:
+      branch: release/current
       deploy: true
       tree: desktop

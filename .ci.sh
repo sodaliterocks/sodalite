@@ -1,20 +1,58 @@
 #!/bin/bash
 
 step="$1"
-branch="$2"
-variant="$3"
 
 function die() {
-    echo "$1"
+    echo "Error: $1"
     exit 255
 }
 
-function step_update_submodules() {
-    git pull --recurse-submodules
-    git submodule update --remote --recursive
+function step_build_tree() {
+    tree="$1"
+    deploy="$2"
+
+    container_hostname="$(hostname -f)"
+    container_image="fedora:37"
+    ostree_repo=""
+    start_time="$(date +%s)"
+
+    if [[ $deploy != "true" ]]; then
+        ostree_repo="/srv/store/variable/ostree"
+    fi
+
+    ./build.sh \
+        --container \
+        --tree "$tree" \
+        --vendor "sodaliterocks" \
+        --working-dir "$ostree_repo" \
+        --ex-container-hostname "$container_hostname" \
+        --ex-container-image "$container_image" \
+        --ex-override-starttime "$start_time" \
+        --ex-print-github-release-table-row
 }
 
+function step_checkout_branch() {
+    branch="$1"
+    git checkout $branch
+}
+
+function step_update_submodules() {
+    git submodule sync
+    git submodule update --init --recursive
+}
+
+function step_test_environment() {
+    if [[ $(id -u) != 0 ]]; then
+        die "Unauthorized (are you root?)"
+    fi
+}
+
+shift
+
 case $step in
+    "build-tree") step_build_tree $1 ;;
+    "checkout-branch") step_checkout_branch $1 $2 ;;
+    "test-environment") step_test_environment ;;
     "update-submodules") step_update_submodules ;;
     *)
         die "Step '$step' does not exist"

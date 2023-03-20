@@ -1,0 +1,15 @@
+name: Update (Long 4)
+
+on:
+  schedule:
+    - cron: '0 4 * * 3,6'
+  workflow_dispatch:
+
+jobs:
+  desktop--long-4:
+    name: Desktop (Long 4)
+    uses: sodaliterocks/sodalite/.github/workflows/ci.yml@main
+    with:
+      branch: release/long/4
+      deploy: true
+      tree: desktop
