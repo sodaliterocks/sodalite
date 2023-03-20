@@ -501,11 +501,7 @@ function main() {
             podman pull $container_image
 
             say primary "$(build_emj "📦")Executing container ($container_name)..."
-            eval "podman $container_args"
-
-            if [[ $? != 0 ]]; then
-                exit $?
-            fi
+            eval "podman $container_args" # BUG: Exits with 0 always
         else
             build_die "Podman not installed. Cannot build with --container"
         fi
