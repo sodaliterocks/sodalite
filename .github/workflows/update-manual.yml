@@ -1,4 +1,4 @@
-name: Update
+name: Update (Manual)
 
 on:
   workflow_dispatch:
@@ -16,7 +16,7 @@ on:
 
 jobs:
   ci:
-    name: CI (${{ inputs.tree }})
+    name: Update (Manual)
     uses: sodaliterocks/sodalite/.github/workflows/ci.yml@main
     with:
       deploy: true
