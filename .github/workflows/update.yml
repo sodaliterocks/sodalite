@@ -4,15 +4,14 @@ on:
   workflow_dispatch:
     inputs:
       branch:
-        description: "Branch"
+        description: "Tree"
         options:
-        - release/current
+        - desktop
 
 jobs:
-  desktop:
-    name: Desktop
+  ci:
+    name: CI
     uses: sodaliterocks/sodalite/.github/workflows/ci.yml@main
     with:
-      branch: ${{ inputs.branch }}
       deploy: true
-      tree: desktop
+      tree: ${{ inputs.tree }}
