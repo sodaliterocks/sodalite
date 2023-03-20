@@ -60,4 +60,4 @@ jobs:
     with:
       branch: main
       repo: /srv/store/variable/ostree
-      tree: desktop-deepin
+      tree: desktop-gnome
