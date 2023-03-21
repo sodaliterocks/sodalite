@@ -20,6 +20,9 @@ jobs:
       - name: Test environment
         run: ./.ci.sh test-environment
 
+      - name: Fetch tags
+        run: ./.ci.sh fetch-tags
+
       - name: Checkout branch
         if: ${{ inputs.branch != '' }}
         run: ./.ci.sh checkout-branch ${{ inputs.branch }}

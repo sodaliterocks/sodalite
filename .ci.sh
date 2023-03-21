@@ -35,6 +35,10 @@ function step_checkout_branch() {
     git checkout $branch
 }
 
+function step_fetch_tags() {
+    git fetch --tags origin
+}
+
 function step_update_submodules() {
     git submodule sync
     git submodule update --init --recursive
@@ -51,6 +55,7 @@ shift
 case $step in
     "build-tree") step_build_tree $1 $2 ;;
     "checkout-branch") step_checkout_branch $1 $2 ;;
+    "fetch-tags") step_fetch_tags ;;
     "test-environment") step_test_environment ;;
     "update-submodules") step_update_submodules ;;
     *)
