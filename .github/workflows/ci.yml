@@ -5,8 +5,6 @@ on:
     inputs:
       branch:
         type: string
-      repo:
-        type: string
       tree:
         required: true
         type: string
@@ -17,18 +15,36 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Test environment
-        run: ./.ci.sh test-environment
+      - name: Check permissions
+        run: |
+          if [[ $(id -u) != 0 ]]; then
+            echo "Unauthorized (are you root?)"
+            exit 255
+          fi
+        shell: bash
 
-      - name: Fetch tags
-        run: ./.ci.sh fetch-tags
-
-      - name: Checkout branch
+      - name: Checkout alternate branch
         if: ${{ inputs.branch != '' }}
-        run: ./.ci.sh checkout-branch ${{ inputs.branch }}
+        run: |
+          git checkout ${{ inputs.branch }}
+        shell: bash
 
-      - name: Update submodules
-        run: ./.ci.sh update-submodules
+      - name: Prepare codebase
+        run: |
+          git fetch --tags origin
+          git submodule sync
+          git submodule update --init --recursive
+        shell: bash
 
       - name: Build tree
-        run: ./.ci.sh build-tree ${{ inputs.tree }} ${{ inputs.repo }}
+        run: |
+          ./build.sh \
+            --container \
+            --tree "${{ inputs.tree }}" \
+            --vendor "sodaliterocks" \
+            --working-dir "/srv/store/variable/ostree" \
+            --ex-container-hostname "$(hostname -f)" \
+            --ex-container-image "fedora:37" \
+            --ex-override-starttime "$(date +%s)" \
+            --ex-print-github-release-table-row
+        shell: bash

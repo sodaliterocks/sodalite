@@ -20,5 +20,4 @@ jobs:
     name: Update (Manual)
     uses: sodaliterocks/sodalite/.github/workflows/ci.yml@main
     with:
-      repo: /srv/store/variable/ostree
       tree: ${{ inputs.tree }}

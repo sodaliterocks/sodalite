@@ -11,7 +11,6 @@ jobs:
     uses: sodaliterocks/sodalite/.github/workflows/ci.yml@main
     with:
       branch: release/current
-      repo: /srv/store/variable/ostree
       tree: desktop
 
   desktop--long-4:
@@ -19,7 +18,6 @@ jobs:
     uses: sodaliterocks/sodalite/.github/workflows/ci.yml@main
     with:
       branch: release/long/4
-      repo: /srv/store/variable/ostree
       tree: desktop
 
   desktop--next:
@@ -27,7 +25,6 @@ jobs:
     uses: sodaliterocks/sodalite/.github/workflows/ci.yml@main
     with:
       branch: release/next
-      repo: /srv/store/variable/ostree
       tree: desktop
 
   desktop--devel:
@@ -35,7 +32,6 @@ jobs:
     uses: sodaliterocks/sodalite/.github/workflows/ci.yml@main
     with:
       branch: main
-      repo: /srv/store/variable/ostree
       tree: desktop
 
   desktop-budgie--devel:
@@ -43,7 +39,6 @@ jobs:
     uses: sodaliterocks/sodalite/.github/workflows/ci.yml@main
     with:
       branch: main
-      repo: /srv/store/variable/ostree
       tree: desktop-budgie
 
   desktop-deepin--devel:
@@ -51,7 +46,6 @@ jobs:
     uses: sodaliterocks/sodalite/.github/workflows/ci.yml@main
     with:
       branch: main
-      repo: /srv/store/variable/ostree
       tree: desktop-deepin
 
   desktop-gnome--devel:
@@ -59,5 +53,4 @@ jobs:
     uses: sodaliterocks/sodalite/.github/workflows/ci.yml@main
     with:
       branch: main
-      repo: /srv/store/variable/ostree
       tree: desktop-gnome
