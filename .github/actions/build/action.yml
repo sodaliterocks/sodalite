@@ -13,19 +13,14 @@ runs:
   using: "composite"
   steps:
       - run: |
-           function test_input() {
-               input="$1"
-               default_value="$2"
-
-               if [[ "$input" == "" ]]; then
-                   echo "$input"
-               else
-                   echo "$default_value"
-               fi
-           }
-
-            echo "$(test_input "${{ inputs.container_image }}" "fedora:37")"
-
+          function test_input() {
+              if [[ "$1" == "" ]]; then
+                  echo "$1"
+              else
+                  echo "$2"
+              fi
+          }
+          echo "$(test_input "${{ inputs.container_image }}" "fedora:37")"
           ./build.sh \
             --container \
             --tree "${{ inputs.tree }}" \
