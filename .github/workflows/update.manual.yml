@@ -15,8 +15,7 @@ on:
         - desktop-gnome
 
 jobs:
-  custom:
-    name: Update (Manual)
+  ci:
     uses: sodaliterocks/sodalite/.github/workflows/ci.yml@main
     with:
       tree: ${{ inputs.tree }}
