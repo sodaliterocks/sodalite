@@ -28,7 +28,7 @@ runs:
               [[ "$1" != "" ]] && echo "$1" || echo "$2"
           }
           start_time="$(date +%s)"
-          if [[ ${{ inputs.dry_run }} == "true" ]]; then
+          if [[ "${{ inputs.dry_run }}" != "" ]]; then
               working_dir="/tmp/sodalite-build-$start_time"
               ./build.sh \
                   --container \
