@@ -20,7 +20,6 @@ runs:
                   echo "$2"
               fi
           }
-          echo "$(test_input "${{ inputs.container_image }}" "fedora:37")"
           ./build.sh \
             --container \
             --tree "${{ inputs.tree }}" \

@@ -13,6 +13,22 @@ on:
         - desktop-budgie
         - desktop-deepin
         - desktop-gnome
+      dry_run:
+        default: false
+        description: "Dry Run"
+        type: boolean
+      container_image:
+        default: fedora:37
+        description: "Container Image"
+        required: true
+        type: choice
+        options:
+        - "fedora:latest"
+        - "fedora:36"
+        - "fedora:37"
+        - "fedora:38"
+        - "fedora:39"
+        - "fedora:rawhide"
 
 jobs:
   ci:
