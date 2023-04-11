@@ -1,0 +1,18 @@
+name: Prepare
+inputs:
+  branch:
+    type: string
+runs:
+  using: "composite"
+  steps:
+      - run: [[ $(id -u) != 0 ]] && exit 255
+        shell: bash
+      - if: ${{ inputs.branch != '' }}
+        run: git checkout ${{ inputs.branch }}
+        shell: bash
+      - run: git fetch --tags origin
+        shell: bash
+      - run: git submodule sync
+        shell: bash
+      - run: git submodule update --init --recursive
+        shell: bash

@@ -1,0 +1,19 @@
+name: Build
+inputs:
+  tree:
+    required: true
+    type: string
+runs:
+  using: "composite"
+  steps:
+      - run: |
+          ./build.sh \
+            --container \
+            --tree "${{ inputs.tree }}" \
+            --vendor "sodaliterocks" \
+            --working-dir "/srv/store/variable/ostree" \
+            --ex-container-hostname "$(hostname -f)" \
+            --ex-container-image "fedora:37" \
+            --ex-override-starttime "$(date +%s)" \
+            --ex-print-github-release-table-row
+        shell: bash
