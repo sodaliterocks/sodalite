@@ -16,6 +16,8 @@ on:
 
 jobs:
   ci:
-    uses: sodaliterocks/sodalite/.github/workflows/ci.yml@main
-    with:
-      tree: ${{ inputs.tree }}
+    runs-on: self-hosted
+    steps:
+      - uses: sodaliterocks/sodalite/.github/workflows/ci.yml@main
+        with:
+          tree: ${{ inputs.tree }}

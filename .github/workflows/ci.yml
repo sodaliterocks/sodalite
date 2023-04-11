@@ -1,18 +1,15 @@
 name: CI
 
-on:
-  workflow_call:
-    inputs:
-      branch:
-        type: string
-      tree:
-        required: true
-        type: string
+inputs:
+  branch:
+    type: string
+  tree:
+    required: true
+    type: string
 
-jobs:
-  ci:
-    runs-on: self-hosted
-    steps:
+runs:
+  using: "composite"
+  steps:
       - uses: actions/checkout@v3
 
       - name: Check permissions
