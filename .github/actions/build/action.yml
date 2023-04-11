@@ -1,5 +1,11 @@
 name: Build
 inputs:
+  container_image:
+    required: false
+    type: string
+  dry_run:
+    required: false
+    type: boolean
   tree:
     required: true
     type: string
@@ -7,13 +13,26 @@ runs:
   using: "composite"
   steps:
       - run: |
+           function test_input() {
+               input="$1"
+               default_value="$2"
+
+               if [[ "$input" == "" ]]; then
+                   echo "$input"
+               else
+                   echo "$default_value"
+               fi
+           }
+
+            echo "$(test_input "${{ inputs.container_image }}" "fedora:37")"
+
           ./build.sh \
             --container \
             --tree "${{ inputs.tree }}" \
             --vendor "sodaliterocks" \
             --working-dir "/srv/store/variable/ostree" \
             --ex-container-hostname "$(hostname -f)" \
-            --ex-container-image "fedora:37" \
+            --ex-container-image "$(test_input "${{ inputs.container_image }}" "fedora:37")" \
             --ex-override-starttime "$(date +%s)" \
             --ex-print-github-release-table-row
         shell: bash
