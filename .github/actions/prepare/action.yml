@@ -5,8 +5,6 @@ inputs:
 runs:
   using: "composite"
   steps:
-      - run: "[[ $(id -u) != 0 ]] && exit 255"
-        shell: bash
       - if: ${{ inputs.branch != '' }}
         run: git checkout ${{ inputs.branch }}
         shell: bash
