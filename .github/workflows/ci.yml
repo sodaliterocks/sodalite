@@ -1,0 +1,17 @@
+name: CI
+
+on:
+  workflow_dispatch:
+
+jobs:
+  desktop--devel:
+    name: "Desktop (Devel)"
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ./.github/actions/prepare
+      - uses: ./.github/actions/build
+        with:
+          branch: main
+          dry_run: true
+          tree: desktop

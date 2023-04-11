@@ -14,19 +14,29 @@ runs:
   steps:
       - run: |
           function test_input() {
-              if [[ "$1" != "" ]]; then
-                  echo "$1"
-              else
-                  echo "$2"
-              fi
+              [[ "$1" != "" ]] && echo "$1" || echo "$2"
           }
-          ./build.sh \
-            --container \
-            --tree "${{ inputs.tree }}" \
-            --vendor "sodaliterocks" \
-            --working-dir "/srv/store/variable/ostree" \
-            --ex-container-hostname "$(hostname -f)" \
-            --ex-container-image "$(test_input "${{ inputs.container_image }}" "fedora:37")" \
-            --ex-override-starttime "$(date +%s)" \
-            --ex-print-github-release-table-row
+          start_time="$(date +%s)"
+          if [[ ${{ inputs.dry_run }} == "true" ]]; then
+              working_dir="/tmp/sodalite-build-$start_time"
+              ./build.sh \
+                  --container \
+                  --tree "${{ inputs.tree }}" \
+                  --vendor "sodaliterocks" \
+                  --working-dir "$working_dir" \
+                  --ex-container-hostname "$(hostname -f)" \
+                  --ex-container-image "$(test_input "${{ inputs.container_image }}" "fedora:37")" \
+                  --ex-override-starttime "$start_time"
+              rm -rf "$working_dir"
+          else
+              ./build.sh \
+                  --container \
+                  --tree "${{ inputs.tree }}" \
+                  --vendor "sodaliterocks" \
+                  --working-dir "/srv/store/variable/ostree" \
+                  --ex-container-hostname "$(hostname -f)" \
+                  --ex-container-image "$(test_input "${{ inputs.container_image }}" "fedora:37")" \
+                  --ex-override-starttime "$start_time" \
+                  --ex-print-github-release-table-row
+          fi
         shell: bash
