@@ -10,8 +10,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: ./.github/actions/prepare
-      - uses: ./.github/actions/build
         with:
           branch: main
+      - uses: ./.github/actions/build
+        with:
           dry_run: true
           tree: desktop
