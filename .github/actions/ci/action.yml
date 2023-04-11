@@ -1,5 +1,7 @@
-name: Build
+name: CI
 inputs:
+  branch:
+    type: string
   container_image:
     required: false
     type: string
@@ -12,6 +14,15 @@ inputs:
 runs:
   using: "composite"
   steps:
+      - if: ${{ inputs.branch != '' }}
+        run: git checkout ${{ inputs.branch }}
+        shell: bash
+      - run: git fetch --tags origin
+        shell: bash
+      - run: git submodule sync
+        shell: bash
+      - run: git submodule update --init --recursive
+        shell: bash
       - run: |
           function test_input() {
               [[ "$1" != "" ]] && echo "$1" || echo "$2"

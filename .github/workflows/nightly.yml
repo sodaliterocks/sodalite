@@ -1,4 +1,4 @@
-name: CI
+name: Nightly
 
 on:
   workflow_dispatch:
@@ -9,10 +9,8 @@ jobs:
     runs-on: self-hosted
     steps:
       - uses: actions/checkout@v3
-      - uses: ./.github/actions/prepare
-        with:
-          branch: main
       - uses: ./.github/actions/build
         with:
+          branch: main
           dry_run: true
           tree: desktop
