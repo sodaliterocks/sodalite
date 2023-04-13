@@ -1,28 +1,18 @@
-name: "Update (Scheduled)"
+name: "Update: Current"
 
 on:
   schedule:
     - cron: '0 4 * * 3,6' # At 04:00 on Wednesday and Saturday
-  workflow_dispatch:
 
 jobs:
-  desktop--current:
-    name: "Desktop (Current)"
+  desktop:
+    name: "Desktop"
     runs-on: self-hosted
     steps:
       - uses: actions/checkout@v3
       - uses: ./.github/actions/ci
         with:
           branch: release/current
-          tree: desktop
-  desktop--long-4:
-    name: "Desktop (Long 4)"
-    runs-on: self-hosted
-    steps:
-      - uses: actions/checkout@v3
-      - uses: ./.github/actions/ci
-        with:
-          branch: release/long/4
           tree: desktop
   desktop--next:
     name: "Desktop (Next)"
