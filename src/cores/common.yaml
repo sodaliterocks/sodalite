@@ -5,7 +5,7 @@ include: [
   "../packages/tools.yaml",
 ]
 
-automatic-version-prefix: "5.0rc2-<date:%y%j>"
+automatic-version-prefix: "4.2-<date:%y%j>"
 automatic-version-suffix: "."
 mutate-os-release: "${releasever}"
 
