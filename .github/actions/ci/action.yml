@@ -1,0 +1,53 @@
+name: CI
+inputs:
+  branch:
+    type: string
+  container_image:
+    required: false
+    type: string
+  dry_run:
+    required: false
+    type: boolean
+  tree:
+    required: true
+    type: string
+runs:
+  using: "composite"
+  steps:
+      - if: ${{ inputs.branch != '' }}
+        run: git checkout ${{ inputs.branch }}
+        shell: bash
+      - run: git fetch --tags origin
+        shell: bash
+      - run: git submodule sync
+        shell: bash
+      - run: git submodule update --init --recursive
+        shell: bash
+      - run: |
+          function test_input() {
+              [[ "$1" != "" ]] && echo "$1" || echo "$2"
+          }
+          start_time="$(date +%s)"
+          if [[ "${{ inputs.dry_run }}" != "" ]]; then
+              working_dir="/tmp/sodalite-build-$start_time"
+              ./build.sh \
+                  --container \
+                  --tree "${{ inputs.tree }}" \
+                  --vendor "sodaliterocks" \
+                  --working-dir "$working_dir" \
+                  --ex-container-hostname "$(hostname -f)" \
+                  --ex-container-image "$(test_input "${{ inputs.container_image }}" "fedora:37")" \
+                  --ex-override-starttime "$start_time"
+              rm -rf "$working_dir"
+          else
+              ./build.sh \
+                  --container \
+                  --tree "${{ inputs.tree }}" \
+                  --vendor "sodaliterocks" \
+                  --working-dir "/srv/store/variable/ostree" \
+                  --ex-container-hostname "$(hostname -f)" \
+                  --ex-container-image "$(test_input "${{ inputs.container_image }}" "fedora:37")" \
+                  --ex-override-starttime "$start_time" \
+                  --ex-print-github-release-table-row
+          fi
+        shell: bash
