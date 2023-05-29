@@ -1,0 +1,41 @@
+name: Update (Manual)
+
+on:
+  workflow_dispatch:
+    inputs:
+      tree:
+        default: desktop
+        description: "Tree"
+        required: true
+        type: choice
+        options:
+        - desktop
+        - desktop-budgie
+        - desktop-deepin
+        - desktop-gnome
+      dry_run:
+        default: false
+        description: "Dry Run"
+        type: boolean
+      container_image:
+        default: fedora:37
+        description: "Container Image"
+        required: true
+        type: choice
+        options:
+        - "fedora:latest"
+        - "fedora:36"
+        - "fedora:37"
+        - "fedora:38"
+        - "fedora:39"
+        - "fedora:rawhide"
+
+jobs:
+  custom:
+    name: "Custom"
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ./.github/actions/ci
+        with:
+          tree: ${{ inputs.tree }}

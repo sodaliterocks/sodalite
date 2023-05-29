@@ -470,6 +470,7 @@ function main() {
             [[ $ex_ntfy_password != "" ]] && container_build_args+=" --ex-ntfy-password $ex_ntfy_password"
             [[ $ex_ntfy_topic != "" ]] && container_build_args+=" --ex-ntfy-topic $ex_ntfy_topic"
             [[ $ex_ntfy_username != "" ]] && container_build_args+=" --ex-ntfy-username $ex_ntfy_username"
+            [[ $ex_print_github_release_table_row != "" ]] && container_build_args+=" --ex-print-github-release-table-row $ex_print_github_release_table_row"
             [[ $skip_cleanup != "" ]] && container_build_args+=" --skip-cleanup $skip_cleanup"
             [[ $skip_test != "" ]] && container_build_args+=" --skip-test $skip_test"
             [[ $tree != "" ]] && container_build_args+=" --tree $tree"
