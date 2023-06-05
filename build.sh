@@ -12,13 +12,13 @@ _PLUGIN_OPTIONS=(
     "serve-port;;\tPort to serve on when using --serve (default: 8080);int"
     "skip-cleanup;;Skip cleaning up on exit"
     "skip-tests;;\tSkip executing tests"
-    "unified-core;;Use --unified-core option with rpm-ostree"
     "vendor;;\tVendor to use in CPE (default: \$USER);string"
     "ex-container-args;;"
     "ex-container-hostname;;"
     "ex-container-image;;"
     "ex-git-version-branch;;"
     "ex-log;;"
+    "ex-no-unified-core;;Do not use --unified-core option with rpm-ostree"
     "ex-ntfy;;"
     "ex-ntfy-endpoint;;"
     "ex-ntfy-password;;"
@@ -231,10 +231,10 @@ function build_sodalite() {
         treefile="$(get_treefile)"
     fi
 
-    if [[ $unified_core == "true" ]]; then
-        unified="true"
-    else
+    if [[ $ex_no_unified_core == "true" ]]; then
         unified="false"
+    else
+        unified="true"
     fi
 
     buildinfo_file="$src_dir/src/sysroot/common/usr/lib/sodalite-buildinfo"
