@@ -12,19 +12,20 @@ _PLUGIN_OPTIONS=(
     "serve-port;;\tPort to serve on when using --serve (default: 8080);int"
     "skip-cleanup;;Skip cleaning up on exit"
     "skip-tests;;\tSkip executing tests"
-    "unified-core;;Use --unified-core option with rpm-ostree"
     "vendor;;\tVendor to use in CPE (default: \$USER);string"
     "ex-container-args;;"
     "ex-container-hostname;;"
     "ex-container-image;;"
     "ex-git-version-branch;;"
     "ex-log;;"
+    "ex-no-unified-core;;Do not use --unified-core option with rpm-ostree"
     "ex-ntfy;;"
     "ex-ntfy-endpoint;;"
     "ex-ntfy-password;;"
     "ex-ntfy-topic;;"
     "ex-ntfy-username;;"
     "ex-override-starttime;;"
+    "ex-print-github-release-table-row;;"
 )
 _PLUGIN_ROOT="true"
 
@@ -230,10 +231,10 @@ function build_sodalite() {
         treefile="$(get_treefile)"
     fi
 
-    if [[ $unified_core == "true" ]]; then
-        unified="true"
-    else
+    if [[ $ex_no_unified_core == "true" ]]; then
         unified="false"
+    else
+        unified="true"
     fi
 
     buildinfo_file="$src_dir/src/sysroot/common/usr/lib/sodalite-buildinfo"
@@ -454,10 +455,11 @@ function main() {
     fi
 
     if [[ $container == "true" ]]; then # BUG: Podman sets $container (usually to "oci"), so we need to look for "true" instead
+
         if [[ $(command -v "podman") ]]; then
             container_start_time=$(date +%s)
 
-            container_name="sodalite-build_$(get_random_string 6)"
+            container_name="sodalite-build_$(echo $RANDOM | md5sum | head -c 6; echo;)"
             container_hostname="$(echo $container_name | sed s/_/-/g)"
             container_image="fedora:37"
 
@@ -468,6 +470,7 @@ function main() {
             [[ $ex_ntfy_password != "" ]] && container_build_args+=" --ex-ntfy-password $ex_ntfy_password"
             [[ $ex_ntfy_topic != "" ]] && container_build_args+=" --ex-ntfy-topic $ex_ntfy_topic"
             [[ $ex_ntfy_username != "" ]] && container_build_args+=" --ex-ntfy-username $ex_ntfy_username"
+            [[ $ex_print_github_release_table_row != "" ]] && container_build_args+=" --ex-print-github-release-table-row $ex_print_github_release_table_row"
             [[ $skip_cleanup != "" ]] && container_build_args+=" --skip-cleanup $skip_cleanup"
             [[ $skip_test != "" ]] && container_build_args+=" --skip-test $skip_test"
             [[ $tree != "" ]] && container_build_args+=" --tree $tree"
@@ -499,7 +502,7 @@ function main() {
             podman pull $container_image
 
             say primary "$(build_emj "📦")Executing container ($container_name)..."
-            eval "podman $container_args"
+            eval "podman $container_args" # BUG: Exits with 0 always
         else
             build_die "Podman not installed. Cannot build with --container"
         fi
@@ -562,13 +565,20 @@ function main() {
 
         built_commit="$(echo "$(ost log $ref | grep "commit " | sed "s/commit //")" | head -1)"
         built_version="$(ost cat $built_commit /usr/lib/os-release | grep "OSTREE_VERSION=" | sed "s/OSTREE_VERSION=//" | sed "s/'//g")"
+        built_pretty_name="$(ost cat $built_commit /usr/lib/os-release | grep "PRETTY_NAME=" | sed "s/PRETTY_NAME=//" | sed "s/\"//g")"
 
-        say "$(build_emj "ℹ️")\033[1;35mName:    \033[0;0m$(ost cat $built_commit /usr/lib/os-release | grep "PRETTY_NAME=" | sed "s/PRETTY_NAME=//" | sed "s/\"//g")"
+        say "$(build_emj "ℹ️")\033[1;35mName:    \033[0;0m$built_pretty_name"
         say "   \033[1;35mBase:    \033[0;0m$(ost cat $built_commit /usr/lib/upstream-os-release | grep "PRETTY_NAME=" | sed "s/PRETTY_NAME=//" | sed "s/\"//g")"
         say "   \033[1;35mVersion: \033[0;0m$built_version"
         say "   \033[1;35mCPE:     \033[0;0m$(ost cat $built_commit /usr/lib/system-release-cpe)"
         say "   \033[1;35mRef:     \033[0;0m$(ost cat $built_commit /usr/lib/sodalite-buildinfo | grep "TREE_REF=" | sed "s/TREE_REF=//" | sed "s/\"//g")"
         say "   \033[1;35mCommit:  \033[0;0m$built_commit"
+
+        if [[ $ex_print_github_release_table_row != "" ]]; then
+            echo "$(repeat "-" 80)"
+            github_release_table_row="| <pre><b>$ref</b></pre> | **$(echo $built_pretty_name | sed -s "s| |\&#160;|g")** | $built_version | <pre>$built_commit</pre> |"
+            say "$github_release_table_row"
+        fi
 
         echo "$(repeat "-" 80)"
 

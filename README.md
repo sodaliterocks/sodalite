@@ -49,7 +49,7 @@ To allow for several versions to co-exist and be developed in tandem with each o
 
 * `<name>`: **Name** of the branch; always `sodalite`
 * `<channel>`: **Channel** of the branch. Possible values:
-  - `current`: Current stable release (currently 4, based on [Fedora Linux 37](https://docs.fedoraproject.org/en-US/releases/f37/))
+  - `current`: Current stable release (currently [4.1](https://github.com/sodaliterocks/sodalite/releases/tag/v%2F4%2F4.1%2Fcurrent), based on [Fedora Linux 37](https://docs.fedoraproject.org/en-US/releases/f37/))
   - `long-<version>`: "Long-term" releases to stay with a specific version
     - `4`: 4.x, based on [Fedora Linux 37](https://docs.fedoraproject.org/en-US/releases/f37/). Reaches end-of-life on 14-Nov-2023 (2023-11-14)
   - `next`: Upcoming release candidates. **Potentially broken!**
@@ -110,7 +110,8 @@ _(todo)_
 
 #### Environment
 * Permission to `sudo`
-  - `rpm-ostree` needs superuser access to work: there's no way around this.
+  - `rpm-ostree` needs superuser access to work: there's no way around this
+  - Building in a container, however, is possible and supported: just pass the `-c`/`--container` flag to `build.sh` (mentioned below)
 * &gt;10GiB disk space
   - The repository itself (including submodules) takes up ~300MiB
   - Initial builds will take up ~4GiB, with subsequent builds adding to this
@@ -174,6 +175,10 @@ This will usually take 10-15 minutes. Remember when I told you to grab a cuppa? 
 
 #### Additional Notes
 
+##### Building in a Container
+
+If you have [Podman](https://podman.io/), you can build Sodalite entirely in a container: just use `-c`/`--container`. This is in fact how builds are done on the release server! However, this will add an extra few minutes for the build to complete as the Fedora container needs to install packages first.
+
 ##### NTFS/FAT partitions
 
 Build failures are inevitable on drives formatted as NTFS, FAT, or anything other filesystems that do not support Unix-like permissions, as `build.sh` sets permissions on various objects.
@@ -219,17 +224,25 @@ _(todo)_
 
 ### Individuals
 
-* [Fabio "decathorpe" Valentini](https://decathorpe.com/), for providing the extra packages for elementary on Fedora via the [elementary-staging Copr repository](https://copr.fedorainfracloud.org/coprs/decathorpe/elementary-staging/)
 * [Jorge O. Castro](https://github.com/castrojo), for including Sodalite in [awesome-immutable](https://github.com/castrojo/awesome-immutable)
 * [Timothée Ravier](https://tim.siosm.fr), for their extensive guidance to the community concerning Fedora Silverblue
+* The amazing photographers/artists of the included wallpapers &mdash; [Adrien Olichon](https://unsplash.com/@adrienolichon), [Ashwini Chaudhary](https://unsplash.com/@suicide_chewbacca), [Austin Neill](https://unsplash.com/@arstyy), [Cody Fitzgerald](https://unsplash.com/@cfitz), [Dustin Humes](https://unsplash.com/@dustinhumes_photography), [Eugene Golovesov](https://unsplash.com/@eugene_golovesov), [Jack B.](https://unsplash.com/@nervum), [Jeremy Gerritsen](https://unsplash.com/@jeremygerritsen), [Marek Piwnicki](https://unsplash.com/@marekpiwnicki), [Max Okhrimenko](https://unsplash.com/@maxokhrimenko), [Nathan Dumlao](https://unsplash.com/@nate_dumlao), [Piermanuele Sberni](https://unsplash.com/@piermanuele_sberni), [Phil Botha](https://unsplash.com/@philbotha), [Ryan Stone](https://unsplash.com/@rstone_design), [Smaran Alva](https://unsplash.com/@smal), [Takashi Miyazaki](https://unsplash.com/@miyatankun), [Willian Daigneault](https://unsplash.com/@williamdaigneault), and [Zara Walker](https://unsplash.com/@mojoblogs)
+
+#### Past Individuals
+
+_These fine folks' work is no longer included in, or relevant to, Sodalite, but they're still worth a shout-out!_
+
+* [Fabio "decathorpe" Valentini](https://decathorpe.com/), for maintaining elementary/Pantheon packages on Fedora
+  * Due to various packaging issues with Pantheon on Fedora's official repos (see [#44](https://github.com/sodaliterocks/sodalite/issues/44), and [writing (about) code ➔ elementary-stable](https://decathorpe.com/fedora-elementary-stable-status.html)), these packages were dropped entirely (including the addtional ~~[elementary-staging](https://copr.fedorainfracloud.org/coprs/decathorpe/elementary-staging/)~~ and ~~[elementary-nightly](https://copr.fedorainfracloud.org/coprs/decathorpe/elementary-nightly/)~~ Copr repos, dropped in Feb '23). Despite this, decathorpe's contributions are essentially what sparked Sodalite in the first place.
 * ["Topfi"](https://github.com/ACertainTopfi), for their various contributions
-* The amazing photographers/artists of the included wallpapers &mdash; [Adrien Olichon](https://unsplash.com/@adrienolichon), [Ashwini Chaudhary](https://unsplash.com/@suicide_chewbacca), [Austin Neill](https://unsplash.com/@arstyy), [Cody Fitzgerald](https://unsplash.com/@cfitz), [Dustin Humes](https://unsplash.com/@dustinhumes_photography), [Eugene Golovesov](https://unsplash.com/@eugene_golovesov), [Jack B.](https://unsplash.com/@nervum), [Jeremy Gerritsen](https://unsplash.com/@jeremygerritsen), [Karsten Würth](https://unsplash.com/@karsten_wuerth), [Marek Piwnicki](https://unsplash.com/@marekpiwnicki), [Max Okhrimenko](https://unsplash.com/@maxokhrimenko), [Nathan Dumlao](https://unsplash.com/@nate_dumlao), [Piermanuele Sberni](https://unsplash.com/@piermanuele_sberni), [Phil Botha](https://unsplash.com/@philbotha), [Ryan Stone](https://unsplash.com/@rstone_design), [Smaran Alva](https://unsplash.com/@smal), [Takashi Miyazaki](https://unsplash.com/@miyatankun), [Willian Daigneault](https://unsplash.com/@williamdaigneault), and [Zara Walker](https://unsplash.com/@mojoblogs)
+* The amazing photographers/artists of the now **excluded** wallpapers &mdash; [Karsten Würth](https://unsplash.com/@karsten_wuerth)
+  * Old wallpapers from old releases are eventually purged to keep `/usr/share/backgrounds/default/` from getting too large. No hard feelings!
 
 ### Teams & Organizations
 
 * [elementary](https://elementary.io/team), for building lovely stuff
 * [Fyra Labs](https://fyralabs.com), for maintaining [Terra](https://terra.fyralabs.com/)
-  * The official Fedora repos ran into issues (see [#44](https://github.com/sodaliterocks/sodalite/issues/44)) with Pantheon packages for f37+, potentially dooming Sodalite after f36 reached EoL: Terra solved this
+  * Due to various packaging issues with Pantheon on Fedora's official repos (see [#44](https://github.com/sodaliterocks/sodalite/issues/44)), Sodalite was almost doomed after f36+ reached EoL. However, Terra maintains builds of Pantheon and effectively keeps the lights on here!
 * The contributors to [workstation-ostree-config](https://pagure.io/workstation-ostree-config), for a solid ground to work from
 
 ### Miscellaneous
