@@ -1,9 +1,0 @@
-include: [
-  "./common.yaml",
-  "../packages/budgie.yaml"
-]
-
-add-files: [
-  ["../../lfs/binaries/gnome-extensions/stuarthayhurst.AlphabeticalAppGrid/26.0/AlphabeticalAppGrid@stuarthayhurst.shell-extension.zip", "/usr/share/gnome-shell/extensions/AlphabeticalAppGrid@stuarthayhurst.shell-extension.zip"],
-  ["../sysroot/cores/gnome/usr/lib/sodalite-core", "/usr/lib/sodalite-core"]
-]

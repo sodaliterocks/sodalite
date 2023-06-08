@@ -1,8 +1,0 @@
-include: [
-  "./common.yaml",
-  "../packages/deepin.yaml"
-]
-
-add-files: [
-  ["../sysroot/cores/deepin/usr/lib/sodalite-core", "/usr/lib/sodalite-core"]
-]
