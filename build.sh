@@ -12,13 +12,13 @@ _PLUGIN_OPTIONS=(
     "serve-port;;\tPort to serve on when using --serve (default: 8080);int"
     "skip-cleanup;;Skip cleaning up on exit"
     "skip-tests;;\tSkip executing tests"
-    "unified-core;;Use --unified-core option with rpm-ostree"
     "vendor;;\tVendor to use in CPE (default: \$USER);string"
     "ex-container-args;;"
     "ex-container-hostname;;"
     "ex-container-image;;"
     "ex-git-version-branch;;"
     "ex-log;;"
+    "ex-no-unified-core;;Do not use --unified-core option with rpm-ostree"
     "ex-ntfy;;"
     "ex-ntfy-endpoint;;"
     "ex-ntfy-password;;"
@@ -231,10 +231,10 @@ function build_sodalite() {
         treefile="$(get_treefile)"
     fi
 
-    if [[ $unified_core == "true" ]]; then
-        unified="true"
-    else
+    if [[ $ex_no_unified_core == "true" ]]; then
         unified="false"
+    else
+        unified="true"
     fi
 
     buildinfo_file="$src_dir/src/sysroot/common/usr/lib/sodalite-buildinfo"
@@ -461,10 +461,11 @@ function main() {
 
             container_name="sodalite-build_$(echo $RANDOM | md5sum | head -c 6; echo;)"
             container_hostname="$(echo $container_name | sed s/_/-/g)"
-            container_image="fedora:37"
+            container_image="fedora:38"
 
             container_build_args="--working-dir /wd/out"
             [[ $ex_log != "" ]] && container_build_args+=" --ex-log $ex_log"
+            [[ $ex_no_unified_core != "" ]] && container_build_args+=" --ex-no-unified-core $ex_no_unified_core"
             [[ $ex_ntfy != "" ]] && container_build_args+=" --ex-ntfy $ex_ntfy"
             [[ $ex_ntfy_endpoint != "" ]] && container_build_args+=" --ex-ntfy-endpoint $ex_ntfy_endpoint"
             [[ $ex_ntfy_password != "" ]] && container_build_args+=" --ex-ntfy-password $ex_ntfy_password"
@@ -474,7 +475,6 @@ function main() {
             [[ $skip_cleanup != "" ]] && container_build_args+=" --skip-cleanup $skip_cleanup"
             [[ $skip_test != "" ]] && container_build_args+=" --skip-test $skip_test"
             [[ $tree != "" ]] && container_build_args+=" --tree $tree"
-            [[ $unified_core != "" ]] && container_build_args+=" --unified-core $unified_core"
             [[ $vendor != "" ]] && container_build_args+=" --vendor $vendor"
 
             if [[ $ex_override_starttime != "" ]]; then

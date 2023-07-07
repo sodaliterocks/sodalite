@@ -191,18 +191,6 @@ On WSL2, do not build to any `/mnt/<drive-letter>` directories as these will be 
 
 Most rpm-ostree distros can be built just be simply doing `rpm-ostree compose`, but `build.sh` provided with Sodalite does some extra steps which are required for the post-build script (which **will** fail without these being ran). It is therefore not recommended to do it this way: any issues building the distro this way will be closed and marked as invalid.
 
-##### Without `--unified-core` deprecation warning
-
-During the build you will face this warning:
-
-```sh
-NOTICE: Running rpm-ostree compose tree without --unified-core is deprecated.
- Please add --unified-core to the command line and ensure your content
- works with it.  For more information, see https://github.com/coreos/rpm-ostree/issues/729
-```
-
-You can safely ignore this: Sodalite builds without `--unified-core` due to historical reasons. To test building with the option, append `--unified-core` to `build.sh`'s options.
-
 #### Cleaning Up
 
 Build contents is located at `./build/` (or whatever you set `<working-dir>` to), which can be deleted to start afresh. Specifically this holds the following files/directories (of which can be individually deleted instead):

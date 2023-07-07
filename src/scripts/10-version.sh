@@ -28,6 +28,7 @@ function get_codename() {
         "4.0"*) echo "Nubia" ;;
         "4.1"*) echo "Toniki" ;;
         "4.2"*) echo "Bantu" ;;
+        "4.3"*) echo "Wari" ;;
         "5.0"*) echo "Iberia" ;;
     esac
 }

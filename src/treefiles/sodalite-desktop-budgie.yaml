@@ -1,3 +1,0 @@
-ref: sodalite/current/${basearch}/desktop-budgie
-include:
-  - ../cores/budgie.yaml
