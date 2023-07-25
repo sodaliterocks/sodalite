@@ -4,6 +4,6 @@
 #
 # See https://rpm-ostree.readthedocs.io/en/stable/manual/treefile/ for help.
 
-ref: sodalite/current/${basearch}/custom
+ref: sodalite/long-5/${basearch}/custom
 include:
   - ../cores/pantheon.yaml
