@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 
-# TODO: Work out if we even need some of these, as the related issues are
-#       pretty old.
-
 if [[ $_os_base_version == "38" ]]; then
     # BUG: https://github.com/projectatomic/rpm-ostree/issues/1542#issuecomment-419684977
 for x in /etc/yum.repos.d/*modular.repo; do
