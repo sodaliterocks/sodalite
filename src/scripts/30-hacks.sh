@@ -3,12 +3,12 @@
 # TODO: Work out if we even need some of these, as the related issues are
 #       pretty old.
 
-# BUG: https://github.com/projectatomic/rpm-ostree/issues/1542#issuecomment-419684977
+if [[ $_os_base_version == "38" ]]; then
+    # BUG: https://github.com/projectatomic/rpm-ostree/issues/1542#issuecomment-419684977
 for x in /etc/yum.repos.d/*modular.repo; do
     sed -i -e 's,enabled=[01],enabled=0,' ${x}
 done
 
-if [[ $_os_base_version == "38" ]]; then
     # Work around https://bugzilla.redhat.com/show_bug.cgi?id=1265295
     # From https://github.com/coreos/fedora-coreos-config/blob/testing-devel/overlay.d/05core/usr/lib/systemd/journald.conf.d/10-coreos-persistent.conf
     install -dm0755 /usr/lib/systemd/journald.conf.d/
