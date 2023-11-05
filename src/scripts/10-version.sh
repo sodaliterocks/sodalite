@@ -123,8 +123,8 @@ if [[ $version_v_major != "" ]]; then
 
         pretty_version="$version"
 
-        mkdir -p /etc/apt/sources.list.d/
-        echo "daily" > /etc/apt/sources.list.d/elementary.list
+        #mkdir -p /etc/apt/sources.list.d/
+        #echo "daily" > /etc/apt/sources.list.d/elementary.list
     fi
 
     if [[ $channel != "" ]]; then

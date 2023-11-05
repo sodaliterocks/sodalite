@@ -23,9 +23,6 @@ add-files: [
   ["../sysroot/common/etc/issue", "/etc/issue"],
   ["../sysroot/common/etc/tlp.d/50-vm-writeback.conf", "/etc/tlp.d/50-vm-writeback.conf"],
 
-  # /etc/fonts
-  ["../sysroot/common/etc/fonts/conf.d/63-inter.conf", "/etc/fonts/conf.d/63-inter.conf"],
-
   # /etc/skel
   ["../sysroot/common/etc/skel/dot.bashrc", "/etc/skel/.bashrc"],
   ["../sysroot/common/etc/skel/dot.config/touchegg/touchegg.conf", "/etc/skel/.config/touchegg/touchegg.conf"],
