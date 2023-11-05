@@ -24,8 +24,12 @@ _* There are multiple branches available; see [Branches](#branches)_.
 
 ### Branches
 
-Several branches (or images) of Sodalite co-exist and are developed side-by-side; these are distinguished by their ref &mdash; like any other rpm-ostree distro &mdash; where `<name>/<version>/<arch>/<edition>`:
+Several branches (or images) of Sodalite co-exist and are developed side-by-side; these are distinguished by their ref &mdash; like any other rpm-ostree distro &mdash; where `sodalite/<version>/<arch>/<edition>`:
 
+|**`<version>`**|**`<arch>`**|**`<edition>`**||
+|`current`|`x86_64`|`desktop`|**Sodalite 5** _(based on [Fedora 37](https://docs.fedoraproject.org/en-US/releases/f37/))_|
+
+<!--
 * `<name>`: **Name** of the branch; always `sodalite`
 * `<channel>`: **Channel** of the branch. Possible values:
   - `current`: Current stable release (currently [4.1](https://github.com/sodaliterocks/sodalite/releases/tag/v%2F4%2F4.1%2Fcurrent), based on [Fedora Linux 37](https://docs.fedoraproject.org/en-US/releases/f37/))
@@ -60,6 +64,8 @@ Possible combinations built on the OSTree remote (`https://ostree.sodalite.rocks
 |`sodalite`|`devel`|`x86_64`|`desktop`<br />`desktop-deepin`<br />`desktop-gnome`|
 
 _For example, `sodalite/current/x86_64/desktop` exists on the build server and can be pulled, but `sodalite/long-5/x86_64/desktop-gnome` does not._
+
+-->
 
 ### Versioning
 
