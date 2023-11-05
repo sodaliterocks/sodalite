@@ -13,6 +13,7 @@ case $_os_version_id in
     "5.0"*)
         wallpaper="zara-walker-_pC5hT6aXfs-unsplash"
         pantheon_accent="cocoa"
+        ;;
     "6.0"*)
         wallpaper="marek-piwnicki-fIxvIQ6mH-E-unsplash"
         pantheon_accent="bubblegum"
