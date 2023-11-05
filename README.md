@@ -36,10 +36,10 @@ Several branches (or images) of Sodalite co-exist and are developed side-by-side
 
 |**`<version>`**|**`<arch>`**|**`<edition>`**|Name|EOL|
 |-|-|-|-|-|
-|`current`|`x86_64`|`desktop`|**Sodalite&#160;5**&#160;_(based&#160;on&#160;[Fedora&#160;38](https://docs.fedoraproject.org/en-US/releases/f38/))_|∞|
-|`long-5`|`x86_64`|`desktop`|**Sodalite&#160;5&#160;(Long)¹**&#160;_(based&#160;on&#160;[Fedora&#160;38](https://docs.fedoraproject.org/en-US/releases/f38/))_|14-May-2023|
-|`long-4`|`x86_64`|`desktop`|**Sodalite&#160;4.2&#160;(Long)¹**&#160;_(based&#160;on&#160;[Fedora&#160;37](https://docs.fedoraproject.org/en-US/releases/f37/))_|14-Nov-2024|
-|`next`|`x86_64`|`desktop`|**Sodalite&#160;6&#160;(Next)²**&#160;_(based&#160;on&#160;[Fedora&#160;39](https://docs.fedoraproject.org/en-US/releases/f39/))_|∞|
+|`current`|`x86_64`|`desktop`|**5&#160;Iberia**&#160;_(based&#160;on&#160;[Fedora&#160;38](https://docs.fedoraproject.org/en-US/releases/f38/))_|∞|
+|`long-5`|`x86_64`|`desktop`|**5&#160;Iberia**&#160;(Long)¹&#160;_(based&#160;on&#160;[Fedora&#160;38](https://docs.fedoraproject.org/en-US/releases/f38/))_|14-May-2023|
+|`long-4`|`x86_64`|`desktop`|**4.2&#160;Bantu**&#160;(Long)¹&#160;_(based&#160;on&#160;[Fedora&#160;37](https://docs.fedoraproject.org/en-US/releases/f37/))_|14-Nov-2024|
+|`next`|`x86_64`|`desktop`|**6&#160;Kutai**&#160;(Next)²&#160;_(based&#160;on&#160;[Fedora&#160;39](https://docs.fedoraproject.org/en-US/releases/f39/))_|∞|
 
 > **¹** Unlike `current`, `long-*` (Long) branches do not update to the current major release: **updates will stop the same day as the base Fedora version**. Only use these if neccessary (i.e. problematic drivers requiring certain versions, critical systems, etc.)
 >
