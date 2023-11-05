@@ -68,7 +68,7 @@ Updates are built on the build server commencing **6:00 GMT/±0** **(22:00 PT/-8
 
 #### "Long-term" Branches
 
-If you chose to use a "long-term" branch (see <a href="#branches">Branches</a> below), you will need to rebase whenever the Sodalite version reaches end-of-life. This can be done with `sudo rpm-ostree rebase sodalite:sodalite/<version>/<arch>/<edition>`, where `<version>` is the version you're wanting to rebase to and other values are your current values.
+If you chose to use a "long-term" branch (see <a href="#branches">Branches</a> above), you will need to rebase whenever the Sodalite version reaches end-of-life. This can be done with `sudo rpm-ostree rebase sodalite:sodalite/<version>/<arch>/<edition>`, where `<version>` is the version you're wanting to rebase to and other values are your current values.
 
 It's vital you carry out this process as updates stop the day the base version reaches end-of-life (at the same time as the base Fedora Linux version) and you will be left without updates to vital system components.
 
