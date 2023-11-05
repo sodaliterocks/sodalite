@@ -27,6 +27,7 @@ _* There are multiple branches available; see [Branches](#branches)_.
 Several branches (or images) of Sodalite co-exist and are developed side-by-side; these are distinguished by their ref &mdash; like any other rpm-ostree distro &mdash; where `sodalite/<version>/<arch>/<edition>`:
 
 |**`<version>`**|**`<arch>`**|**`<edition>`**||
+|-|-|-|-|
 |`current`|`x86_64`|`desktop`|**Sodalite 5** _(based on [Fedora 37](https://docs.fedoraproject.org/en-US/releases/f37/))_|
 
 <!--
