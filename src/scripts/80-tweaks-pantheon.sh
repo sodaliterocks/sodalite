@@ -7,6 +7,7 @@ if [[ $_os_core == "pantheon" ]]; then
     fi
 
     systemctl disable gdm
+
     systemctl enable generate-oemconf
     systemctl enable lightdm
     systemctl enable touchegg

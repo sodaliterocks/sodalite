@@ -1,12 +1,12 @@
 include: [
-  "bases/f38.yaml",
+  "bases/f39.yaml",
   "../packages/flatpak.yaml",
   "../packages/fonts.yaml",
   "../packages/tools.yaml",
 ]
 
-releasever: "38"
-automatic-version-prefix: "5.0rc3-<date:%y%j>"
+releasever: "39"
+automatic-version-prefix: "6.0rc1-<date:%y%j>"
 automatic-version-suffix: "."
 mutate-os-release: "${releasever}"
 
@@ -30,11 +30,6 @@ add-files: [
   ["../sysroot/common/etc/skel/dot.bashrc", "/etc/skel/.bashrc"],
   ["../sysroot/common/etc/skel/dot.config/touchegg/touchegg.conf", "/etc/skel/.config/touchegg/touchegg.conf"],
 
-  # /etc/systemd
-  ["../sysroot/common/etc/systemd/system/generate-oemconf.service", "/etc/systemd/system/generate-oemconf.service"],
-  ["../sysroot/common/etc/systemd/system/sodalite-auto-update.service", "/etc/systemd/system/sodalite-auto-update.service"],
-  ["../sysroot/common/etc/systemd/system/sodalite-migrate.service", "/etc/systemd/system/sodalite-migrate.service"],
-
   # /etc/xdg
   #["../sysroot/common/etc/xdg/autostart/appimaged.desktop", "/etc/xdg/autostart/appimaged.desktop"], # BUG: https://github.com/sodaliterocks/sodalite/issues/42
   ["../sysroot/common/etc/xdg/autostart/rocks.sodalite.user-daemon.desktop", "/etc/xdg/autostart/rocks.sodalite.user-daemon.desktop"],
@@ -57,6 +52,11 @@ add-files: [
 
   # /usr/lib
   ["../sysroot/common/usr/lib/sodalite-buildinfo", "/usr/lib/sodalite-buildinfo"],
+
+  # /usr/lib/systemd
+  ["../sysroot/common/usr/lib/systemd/system/generate-oemconf.service", "/usr/lib/systemd/system/generate-oemconf.service"],
+  ["../sysroot/common/usr/lib/systemd/system/sodalite-auto-update.service", "/usr/lib/systemd/system/sodalite-auto-update.service"],
+  ["../sysroot/common/usr/lib/systemd/system/sodalite-migrate.service", "/usr/lib/systemd/system/sodalite-migrate.service"],
 
   # /usr/libexec
   ["../../lib/sodaliterocks.hacks/src/plugins/auto-update.sh", "/usr/libexec/rocks.sodalite.hacks/plugins/auto-update.sh"],

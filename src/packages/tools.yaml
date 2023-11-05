@@ -3,9 +3,10 @@ packages:
  - buildah
  - dbus-x11
  - distrobox
- - ffmpeg
+ #- ffmpeg # temporary (package resolve errors currently with f39)
  - git-core
  - git-core-doc
+ - git-lfs
  - gstreamer1-plugins-good-gtk
  - lm_sensors
  - meson
