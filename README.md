@@ -10,6 +10,12 @@
 
 ---
 
+<p align="center">
+    Psst! We're on <a href="https://t.me/sodalitechat">Telegram</a>. While you're free to use <a href="https://github.com/sodaliterocks/sodalite/discussions">Discussions</a>, the majority of the discussion relating to this project will happen over on Telegram.
+</p>
+
+---
+
 ## 🎉 Installing
 
 > As rpm-ostree is an ever-evolving technology, and ISO installs are currently a low priority, **ISOs are currently not available**. An existing rpm-ostree-based OS, such as [Fedora Silverblue](https://silverblue.fedoraproject.org/), is required: this OS will be used to "rebase" to Sodalite.
