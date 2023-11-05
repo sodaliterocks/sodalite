@@ -29,11 +29,12 @@ Several branches (or images) of Sodalite co-exist and are developed side-by-side
 |**`<version>`**|**`<arch>`**|**`<edition>`**||
 |-|-|-|-|
 |`current`|`x86_64`|`desktop`|**Sodalite 5** _(based on [Fedora 38](https://docs.fedoraproject.org/en-US/releases/f38/))_|
-|`long-5`|`x86_64`|`desktop`|**Sodalite 5 (Long)**¹ _(based on [Fedora 38](https://docs.fedoraproject.org/en-US/releases/f38/))_|
-|`long-4`|`x86_64`|`desktop`|**Sodalite 4.2 (Long)**¹ _(based on [Fedora 37](https://docs.fedoraproject.org/en-US/releases/f37/))_|
-|`next`|`x86_64`|`desktop`|**Sodalite 6 (Next)**² _(based on [Fedora 37](https://docs.fedoraproject.org/en-US/releases/f37/))_
+|`long-5`|`x86_64`|`desktop`|**Sodalite 5 (Long)¹** _(based on [Fedora 38](https://docs.fedoraproject.org/en-US/releases/f38/))_|
+|`long-4`|`x86_64`|`desktop`|**Sodalite 4.2 (Long)¹** _(based on [Fedora 37](https://docs.fedoraproject.org/en-US/releases/f37/))_|
+|`next`|`x86_64`|`desktop`|**Sodalite 6 (Next)²** _(based on [Fedora 37](https://docs.fedoraproject.org/en-US/releases/f37/))_
 
 > **¹** Unlike `current`, `long-*` (Long) branches do not update to the current major release: **updates will stop the same day as the base Fedora version**. Only use these if neccessary (i.e. problematic drivers requiring certain versions, critical systems, etc.)
+>
 > **²** Unstable. Here be dragons. Abandon all hope. You know the drill.
 
 ### Versioning
