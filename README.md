@@ -8,6 +8,8 @@
 
 <!--This is mostly a developer-orientated README; you're probably better off heading to [Sodalite Docs](https://docs.sodalite.rocks) if you're a user, or you can head down to <b><a href="#-quickstart">🎉 Quickstart</a></b> to get going.-->
 
+---
+
 ## 🎉 Installing
 
 > As rpm-ostree is an ever-evolving technology, and ISO installs are currently a low priority, **ISOs are currently not available**. An existing rpm-ostree-based OS, such as [Fedora Silverblue](https://silverblue.fedoraproject.org/), is required: this OS will be used to "rebase" to Sodalite.
@@ -189,6 +191,8 @@ Unless stopped manually, `build.sh` will clean itself up whenever it exits (on b
 ### 4. Using
 
 _(todo)_
+
+---
 
 ## 🤝 Acknowledgements
 
