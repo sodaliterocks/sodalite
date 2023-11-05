@@ -28,45 +28,13 @@ Several branches (or images) of Sodalite co-exist and are developed side-by-side
 
 |**`<version>`**|**`<arch>`**|**`<edition>`**||
 |-|-|-|-|
-|`current`|`x86_64`|`desktop`|**Sodalite 5** _(based on [Fedora 37](https://docs.fedoraproject.org/en-US/releases/f37/))_|
+|`current`|`x86_64`|`desktop`|**Sodalite 5** _(based on [Fedora 38](https://docs.fedoraproject.org/en-US/releases/f38/))_|
+|`long-5`|`x86_64`|`desktop`|**Sodalite 5 (Long)**¹ _(based on [Fedora 38](https://docs.fedoraproject.org/en-US/releases/f38/))_|
+|`long-4`|`x86_64`|`desktop`|**Sodalite 4.2 (Long)**¹ _(based on [Fedora 37](https://docs.fedoraproject.org/en-US/releases/f37/))_|
+|`next`|`x86_64`|`desktop`|**Sodalite 6 (Next)**² _(based on [Fedora 37](https://docs.fedoraproject.org/en-US/releases/f37/))_
 
-<!--
-* `<name>`: **Name** of the branch; always `sodalite`
-* `<channel>`: **Channel** of the branch. Possible values:
-  - `current`: Current stable release (currently [4.1](https://github.com/sodaliterocks/sodalite/releases/tag/v%2F4%2F4.1%2Fcurrent), based on [Fedora Linux 37](https://docs.fedoraproject.org/en-US/releases/f37/))
-  - `long-<version>`: "Long-term" releases to stay with a specific version
-    - `4`: 4.x, based on [Fedora Linux 37](https://docs.fedoraproject.org/en-US/releases/f37/). Reaches end-of-life on 14-Nov-2023 (2023-11-14)
-    - `5`: 5.x, based on [Fedora Linux 38](https://docs.fedoraproject.org/en-US/releases/f38/). Reaches end-of-life on 14-May-2024 (2023-05-14)
-    - `6`: 6.x, based on [Fedora Linux 39](https://docs.fedoraproject.org/en-US/releases/f39/). Reaches end-of-life on 12-Nov-2024 (2023-11-12)
-  - `next`: Upcoming release candidates. **Potentially broken!**
-  - `devel`: Current development code (on `main`). **Do not use on production systems!**
-* `<arch>`: **Architecture** of the branch. Possible values:
-  - `x86_64`: For 64-bit CPUs (`x86_64`, `amd64`, or `x64`)
-  - ~~`x86`: [What year is it!?](https://c.tenor.com/9OcQhlCBNG0AAAAd/what-year-is-it-jumanji.gif)~~
-* `<edition>`: **Edition** (or variant) of the branch: Possible values:
-  - `desktop`: Standard Pantheon desktop
-  - `desktop-budgie`: Alternate Budgie desktop
-  - `desktop-deepin`: Alternate Deepin desktop
-  - `desktop-gnome`: Alternate GNOME desktop
-
-**For most installs, `sodalite/current/x86_64/desktop` will be enough.**
-
-#### Available Branches
-
-Possible combinations built on the OSTree remote (`https://ostree.sodalite.rocks`) are as follows:
-
-|Name|Version(s)|Arch.(s)|Edition(s)|
-|-|-|-|-|
-|`sodalite`|`current`|`x86_64`|`desktop`|
-|`sodalite`|`long-4`|`x86_64`|`desktop`|
-|`sodalite`|`long-5`|`x86_64`|`desktop`|
-|`sodalite`|`long-6`|`x86_64`|`desktop`|
-|`sodalite`|`next`|`x86_64`|`desktop`|
-|`sodalite`|`devel`|`x86_64`|`desktop`<br />`desktop-deepin`<br />`desktop-gnome`|
-
-_For example, `sodalite/current/x86_64/desktop` exists on the build server and can be pulled, but `sodalite/long-5/x86_64/desktop-gnome` does not._
-
--->
+> **¹** Unlike `current`, `long-*` (Long) branches do not update to the current major release: **updates will stop the same day as the base Fedora version**. Only use these if neccessary (i.e. problematic drivers requiring certain versions, critical systems, etc.)
+> **²** Unstable. Here be dragons. Abandon all hope. You know the drill.
 
 ### Versioning
 
