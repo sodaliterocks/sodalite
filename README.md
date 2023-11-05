@@ -8,9 +8,7 @@
 
 <!--This is mostly a developer-orientated README; you're probably better off heading to [Sodalite Docs](https://docs.sodalite.rocks) if you're a user, or you can head down to <b><a href="#-quickstart">🎉 Quickstart</a></b> to get going.-->
 
-## 🎉 Quickstart
-
-### Installing
+## 🎉 Installing
 
 > As rpm-ostree is an ever-evolving technology, and ISO installs are currently a low priority, **ISOs are currently not available**. An existing rpm-ostree-based OS, such as [Fedora Silverblue](https://silverblue.fedoraproject.org/), is required: this OS will be used to "rebase" to Sodalite.
 
@@ -23,29 +21,6 @@
 4. Reboot when prompted. Use it, enjoy it, make something cool with it, (try to) break it &mdash; [submit a ticket if you do](https://github.com/sodaliterocks/sodalite/issues/new)!
 
 _* There are multiple branches available; see [Branches](#branches)_.
-
-### Updating
-
-Performing a system update can be done by either:
-
-* Running `sudo rpm-ostree upgrade` in a shell
-* Opening **Software**, selecting **Updates** from the headerbar, and pressing **Update All**
-  - As Software runs in the background and periodically checks for updates, you may also receive a notification of a new update; clicking on this opens the appropriate page
-  - An update for the OS may take a while to appear in Software (which will appear as "Operating System Updates"), so the above method is preferred
-
-Reboot after either method has finished. You can verify the version installed by opening **System Settings** and navigating to **System ➔ Operating System**: the version proceeds the word "Sodalite"
-
-If something breaks, you can rollback by running `sudo rpm-ostree rollback` at a terminal. Remember to also [create a new issue](https://github.com/sodaliterocks/sodalite/issues/new) if appropriate!
-
-#### Update Schedule
-
-Updates are built on the build server commencing **6:00 GMT/±0** **(22:00 PT/-8)** every **Wednesday** and **Saturday**.
-
-#### "Long-term" Branches
-
-If you chose to use a "long-term" branch (see <a href="#branches">Branches</a> below), you will need to rebase whenever the Sodalite version reaches end-of-life. This can be done with `sudo rpm-ostree rebase sodalite:sodalite/<version>/<arch>/<edition>`, where `<version>` is the version you're wanting to rebase to and other values are your current values.
-
-It's vital you carry out this process as updates stop the day the base version reaches end-of-life (at the same time as the base Fedora Linux version) and you will be left without updates to vital system components.
 
 ### Branches
 
@@ -89,6 +64,29 @@ _For example, `sodalite/current/x86_64/desktop` exists on the build server and c
 ### Versioning
 
 _(Todo)_
+
+## 🔄 Updating
+
+Performing a system update can be done by either:
+
+* Running `sudo rpm-ostree upgrade` in a shell
+* Opening **Software**, selecting **Updates** from the headerbar, and pressing **Update All**
+  - As Software runs in the background and periodically checks for updates, you may also receive a notification of a new update; clicking on this opens the appropriate page
+  - An update for the OS may take a while to appear in Software (which will appear as "Operating System Updates"), so the above method is preferred
+
+Reboot after either method has finished. You can verify the version installed by opening **System Settings** and navigating to **System ➔ Operating System**: the version proceeds the word "Sodalite"
+
+If something breaks, you can rollback by running `sudo rpm-ostree rollback` at a terminal. Remember to also [create a new issue](https://github.com/sodaliterocks/sodalite/issues/new) if appropriate!
+
+#### Update Schedule
+
+Updates are built on the build server commencing **6:00 GMT/±0** **(22:00 PT/-8)** every **Wednesday** and **Saturday**.
+
+#### "Long-term" Branches
+
+If you chose to use a "long-term" branch (see <a href="#branches">Branches</a> below), you will need to rebase whenever the Sodalite version reaches end-of-life. This can be done with `sudo rpm-ostree rebase sodalite:sodalite/<version>/<arch>/<edition>`, where `<version>` is the version you're wanting to rebase to and other values are your current values.
+
+It's vital you carry out this process as updates stop the day the base version reaches end-of-life (at the same time as the base Fedora Linux version) and you will be left without updates to vital system components.
 
 ---
 
