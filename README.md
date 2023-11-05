@@ -10,15 +10,19 @@
 
 ## 🎉 Quickstart
 
-Know what you're in for? Here goes:
+### Installing
+
+> As rpm-ostree is an ever-evolving technology, and ISO installs are currently a low priority, **ISOs are currently not available**. An existing rpm-ostree-based OS, such as [Fedora Silverblue](https://silverblue.fedoraproject.org/), is required: this OS will be used to "rebase" to Sodalite.
 
 1. Install an rpm-ostree-based version of Fedora, such as [Fedora Silverblue](https://silverblue.fedoraproject.org/), or use an already-existing install
 2. Fire up a terminal and issue these commands:
    - `sudo ostree remote add --if-not-exists sodalite https://ostree.sodalite.rocks --no-gpg-verify`
-   - `sudo ostree pull sodalite:sodalite/current/x86_64/desktop`
+   - `sudo ostree pull sodalite:sodalite/current/x86_64/desktop`*
    - `sudo rpm-ostree rebase sodalite:sodalite/current/x86_64/desktop`
 3. Stick the kettle on and make yourself a cuppa. It'll take a while
 4. Reboot when prompted. Use it, enjoy it, make something cool with it, (try to) break it &mdash; [submit a ticket if you do](https://github.com/sodaliterocks/sodalite/issues/new)!
+
+_* There are multiple branches available; see [Branches](#branches)_.
 
 ### Updating
 
