@@ -24,7 +24,7 @@ _* There are multiple branches available; see [Branches](#branches)_.
 
 ### Branches
 
-To allow for several versions to co-exist and be developed in tandem with each other, Sodalite &mdash; like any other rpm-ostree distro &mdash; carries a ref to distinguish itself. Where `<name>/<version>/<arch>/<edition>`, the format and possible values are as follows:
+Several branches (or images) of Sodalite co-exist and are developed side-by-side; these are distinguished by their ref &mdash; like any other rpm-ostree distro &mdash; where `<name>/<version>/<arch>/<edition>`:
 
 * `<name>`: **Name** of the branch; always `sodalite`
 * `<channel>`: **Channel** of the branch. Possible values:
@@ -44,11 +44,11 @@ To allow for several versions to co-exist and be developed in tandem with each o
   - `desktop-deepin`: Alternate Deepin desktop
   - `desktop-gnome`: Alternate GNOME desktop
 
-**As mentioned above, most users will want `sodalite/current/x86_64/desktop`.**
+**For most installs, `sodalite/current/x86_64/desktop` will be enough.**
 
 #### Available Branches
 
-Possible combinations built on the OSTree remote (`ostree.sodalite.rocks`) are as follows:
+Possible combinations built on the OSTree remote (`https://ostree.sodalite.rocks`) are as follows:
 
 |Name|Version(s)|Arch.(s)|Edition(s)|
 |-|-|-|-|
