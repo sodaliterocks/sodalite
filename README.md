@@ -52,6 +52,8 @@ To allow for several versions to co-exist and be developed in tandem with each o
   - `current`: Current stable release (currently [4.1](https://github.com/sodaliterocks/sodalite/releases/tag/v%2F4%2F4.1%2Fcurrent), based on [Fedora Linux 37](https://docs.fedoraproject.org/en-US/releases/f37/))
   - `long-<version>`: "Long-term" releases to stay with a specific version
     - `4`: 4.x, based on [Fedora Linux 37](https://docs.fedoraproject.org/en-US/releases/f37/). Reaches end-of-life on 14-Nov-2023 (2023-11-14)
+    - `5`: 5.x, based on [Fedora Linux 38](https://docs.fedoraproject.org/en-US/releases/f38/). Reaches end-of-life on 14-May-2024 (2023-05-14)
+    - `6`: 6.x, based on [Fedora Linux 39](https://docs.fedoraproject.org/en-US/releases/f39/). Reaches end-of-life on 12-Nov-2024 (2023-11-12)
   - `next`: Upcoming release candidates. **Potentially broken!**
   - `devel`: Current development code (on `main`). **Do not use on production systems!**
 * `<arch>`: **Architecture** of the branch. Possible values:
@@ -73,6 +75,8 @@ Possible combinations built on the OSTree remote (`ostree.sodalite.rocks`) are a
 |-|-|-|-|
 |`sodalite`|`current`|`x86_64`|`desktop`|
 |`sodalite`|`long-4`|`x86_64`|`desktop`|
+|`sodalite`|`long-5`|`x86_64`|`desktop`|
+|`sodalite`|`long-6`|`x86_64`|`desktop`|
 |`sodalite`|`next`|`x86_64`|`desktop`|
 |`sodalite`|`devel`|`x86_64`|`desktop`<br />`desktop-deepin`<br />`desktop-gnome`|
 
