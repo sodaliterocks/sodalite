@@ -461,7 +461,7 @@ function main() {
 
             container_name="sodalite-build_$(echo $RANDOM | md5sum | head -c 6; echo;)"
             container_hostname="$(echo $container_name | sed s/_/-/g)"
-            container_image="fedora:38"
+            container_image="fedora:39"
 
             container_build_args="--working-dir /wd/out"
             [[ $ex_log != "" ]] && container_build_args+=" --ex-log $ex_log"

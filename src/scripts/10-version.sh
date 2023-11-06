@@ -28,8 +28,9 @@ function get_codename() {
         "4.0"*) echo "Nubia" ;;
         "4.1"*) echo "Toniki" ;;
         "4.2"*) echo "Bantu" ;;
-        "4.3"*) echo "Wari" ;;
         "5.0"*) echo "Iberia" ;;
+        "6.0"*) echo "Kutai" ;;
+        "7.0"*) echo "Nazca" ;;
     esac
 }
 
@@ -122,8 +123,8 @@ if [[ $version_v_major != "" ]]; then
 
         pretty_version="$version"
 
-        mkdir -p /etc/apt/sources.list.d/
-        echo "daily" > /etc/apt/sources.list.d/elementary.list
+        #mkdir -p /etc/apt/sources.list.d/
+        #echo "daily" > /etc/apt/sources.list.d/elementary.list
     fi
 
     if [[ $channel != "" ]]; then
