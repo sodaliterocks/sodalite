@@ -46,17 +46,29 @@ _* There are multiple branches available; see [Branches](#branches)_.
 
 Several branches (or images) of Sodalite co-exist and are developed side-by-side; these are distinguished by their ref &mdash; like any other rpm-ostree distro &mdash; where `sodalite/<version>/<arch>/<edition>`:
 
+#### Current
+
 |**`<version>`**|**`<arch>`**|**`<edition>`**|Release|Base|EOL|
 |-|-|-|-|-|-|
 |`current`|`x86_64`|`desktop`|**5&#160;Iberia**&#160;|[Fedora&#160;38](https://docs.fedoraproject.org/en-US/releases/f38/)|∞|
+
+#### Long
+
+|**`<version>`**|**`<arch>`**|**`<edition>`**|Release|Base|EOL|
+|-|-|-|-|-|-|
 |`long-6`|`x86_64`|`desktop`|**6.0rc1&#160;Kutai**&#160;(Long)¹|[Fedora&#160;39](https://docs.fedoraproject.org/en-US/releases/f39/)|12-Nov-2024|
 |`long-5`|`x86_64`|`desktop`|**5&#160;Iberia**&#160;(Long)¹|[Fedora&#160;38](https://docs.fedoraproject.org/en-US/releases/f38/)|14-May-2024|
 |`long-4`|`x86_64`|`desktop`|**4.2&#160;Bantu**&#160;(Long)¹|[Fedora&#160;37](https://docs.fedoraproject.org/en-US/releases/f37/)|14-Nov-2023|
+
+> Unlike **Current** (`current`), these branches do not update to the current major release: **updates will stop the same day as the base Fedora version**. Only use these if neccessary (i.e. problematic drivers requiring certain versions, critical systems, etc.)
+
+#### Next
+
+|**`<version>`**|**`<arch>`**|**`<edition>`**|Release|Base|EOL|
+|-|-|-|-|-|-|
 |`next`|`x86_64`|`desktop`|**6.0rc1&#160;Kutai**&#160;(Next)²&#160;|[Fedora&#160;39](https://docs.fedoraproject.org/en-US/releases/f39/)|∞|
 
-> **¹ Long:** Unlike **Current** (`current`), these branches branches do not update to the current major release: **updates will stop the same day as the base Fedora version**. Only use these if neccessary (i.e. problematic drivers requiring certain versions, critical systems, etc.)
->
-> **² Next:** Unstable. Here be dragons. Abandon all hope. You know the drill.
+> Unstable. Here be dragons. Abandon all hope. You know the drill.
 
 ### Versioning
 
@@ -86,16 +98,6 @@ If you chose to use a "long-term" branch (see <a href="#branches">Branches</a> a
 It's vital you carry out this process as updates stop the day the base version reaches end-of-life (at the same time as the base Fedora Linux version) and you will be left without updates to vital system components.
 
 ---
-
-<!--<p align="center">
-    <s><b>See <a href="https://docs.sodalite.rocks)">Sodalite Docs</a> for more information</b></s> <i>(Docs are still a work-in-progress)</i> &mdash; the README beyond this is intended mostly for developers.
-</p>-->
-
-<!--
-## ✨ Status
-
-_(todo)_
--->
 
 ## 🏗️ Building
 
