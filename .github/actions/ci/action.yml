@@ -15,9 +15,9 @@ runs:
   using: "composite"
   steps:
       - if: ${{ inputs.branch != '' }}
-        run: git checkout ${{ inputs.branch }}
+        run: git fetch origin; git fetch --tags origin
         shell: bash
-      - run: git fetch --tags origin
+      - run: git checkout ${{ inputs.branch }}
         shell: bash
       - run: git submodule sync
         shell: bash
