@@ -4,14 +4,26 @@
     Sodalite
 </h1>
 
-**Sodalite** is an immutable desktop OS built with [rpm-ostree](https://coreos.github.io/rpm-ostree/) and on-top of [Fedora](https://getfedora.org/) &mdash; similar to [Fedora Silverblue](https://silverblue.fedoraproject.org/) &mdash; making use of the [Pantheon desktop](https://elementary.io/docs/learning-the-basics), sticking closely to the ethos and workflow perpetrated by [elementary](https://elementary.io/open-source). A work-in-progress but entirely usable as a production desktop.
-
-<!--This is mostly a developer-orientated README; you're probably better off heading to [Sodalite Docs](https://docs.sodalite.rocks) if you're a user, or you can head down to <b><a href="#-quickstart">🎉 Quickstart</a></b> to get going.-->
+<p align="centeR">
+<strong>Sodalite</strong> is an immutable desktop OS built with <a href="https://coreos.github.io/rpm-ostree/">rpm-ostree</a> and on-top of <a href="https://getfedora.org/">Fedora</a> &mdash; similar to <a href="https://silverblue.fedoraproject.org/">Fedora Silverblue</a> &mdash; making use of the <a href="https://elementary.io/docs/learning-the-basics">Pantheon desktop</a>, sticking closely to the ethos and workflow perpetrated by <a href="https://elementary.io/open-source">elementary</a>. A work-in-progress but entirely usable as a production desktop.
+</p>
 
 ---
 
+<h4 align="center">
+    Hmm, it's been X days since the last commit; is this still active?
+</h4>
+
 <p align="center">
-    Psst! We're on <a href="https://t.me/sodalitechat">Telegram</a>. While you're free to use <a href="https://github.com/sodaliterocks/sodalite/discussions">Discussions</a>, the majority of the discussion relating to this project will happen over on Telegram.
+    <strong>Yes.</strong>
+</p>
+
+<p align="center">
+    Despite a <em>very</em> active commit history, Sodalite is fairly self-sustaining these days &mdash; mostly thanks to the awesome people at <a href="https://fyralabs.com">Fyra Labs</a> &mdash; and thus the repository will go months without any activity. This does not mean the project is abandoned, especially since <a href="https://github.com/electricduck">it's developer</a> uses it as their main OS. Regardless of repository activity, updates are built twice every week from the repository: logs are available at <a href="https://github.com/sodaliterocks/sodalite/actions">Actions</a>.
+</p>
+
+<p align="center">
+    Psst! We're on <a href="https://t.me/sodalitechat">Telegram</a> too. While you're free to use <a href="https://github.com/sodaliterocks/sodalite/discussions">Discussions</a>, the majority of the discussion relating to this project will happen over on Telegram.
 </p>
 
 ---
