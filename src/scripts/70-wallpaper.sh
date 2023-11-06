@@ -18,6 +18,14 @@ case $_os_version_id in
         wallpaper="marek-piwnicki-fIxvIQ6mH-E-unsplash"
         pantheon_accent="bubblegum"
         ;;
+    "6.1")
+        wallpaper="jack-b-vcNPMwS08UI-unsplash"
+        pantheon_accent="orange"
+        ;;
+    "7.0")
+        wallpaper="ashwini-chaudhary-monty-dAvJGJ54g5s-unsplash"
+        pantheon_accent="slate"
+        ;;
     *) wallpaper="$_fallback_wallpaper" ;;
 esac
 
