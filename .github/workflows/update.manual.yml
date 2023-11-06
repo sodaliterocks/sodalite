@@ -48,4 +48,5 @@ jobs:
       - uses: ./.github/actions/ci
         with:
           branch: release/${{ inputs.version }}
+          container_image: ${{ inputs.container_image }}
           tree: ${{ inputs.tree }}

@@ -36,7 +36,7 @@ runs:
                   --vendor "sodaliterocks" \
                   --working-dir "$working_dir" \
                   --ex-container-hostname "$(hostname -f)" \
-                  --ex-container-image "$(test_input "${{ inputs.container_image }}" "fedora:37")" \
+                  --ex-container-image "$(test_input "${{ inputs.container_image }}" "fedora:39")" \
                   --ex-override-starttime "$start_time"
               rm -rf "$working_dir"
           else
@@ -46,7 +46,7 @@ runs:
                   --vendor "sodaliterocks" \
                   --working-dir "/srv/store/variable/ostree" \
                   --ex-container-hostname "$(hostname -f)" \
-                  --ex-container-image "$(test_input "${{ inputs.container_image }}" "fedora:37")" \
+                  --ex-container-image "$(test_input "${{ inputs.container_image }}" "fedora:39")" \
                   --ex-override-starttime "$start_time" \
                   --ex-print-github-release-table-row
           fi
