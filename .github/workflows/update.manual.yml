@@ -10,15 +10,24 @@ on:
         type: choice
         options:
         - desktop
-        - desktop-budgie
-        - desktop-deepin
         - desktop-gnome
       dry_run:
         default: false
         description: "Dry Run"
         type: boolean
+      version:
+        default: current
+        description: "Version"
+        required: true
+        type: choice
+        options:
+        - "current"
+        - "long/4"
+        - "long/5"
+        - "long/6"
+        - "next"
       container_image:
-        default: fedora:37
+        default: fedora:39
         description: "Container Image"
         required: true
         type: choice
@@ -38,4 +47,5 @@ jobs:
       - uses: actions/checkout@v3
       - uses: ./.github/actions/ci
         with:
+          branch: release/${{ inputs.version }}
           tree: ${{ inputs.tree }}
