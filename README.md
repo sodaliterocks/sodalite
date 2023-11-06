@@ -34,11 +34,12 @@ _* There are multiple branches available; see [Branches](#branches)_.
 
 Several branches (or images) of Sodalite co-exist and are developed side-by-side; these are distinguished by their ref &mdash; like any other rpm-ostree distro &mdash; where `sodalite/<version>/<arch>/<edition>`:
 
-|**`<version>`**|**`<arch>`**|**`<edition>`**|Name|Base|EOL|
+|**`<version>`**|**`<arch>`**|**`<edition>`**|Release|Base|EOL|
 |-|-|-|-|-|-|
 |`current`|`x86_64`|`desktop`|**5&#160;Iberia**&#160;|[Fedora&#160;38](https://docs.fedoraproject.org/en-US/releases/f38/)|∞|
-|`long-5`|`x86_64`|`desktop`|**5&#160;Iberia**&#160;(Long)¹|[Fedora&#160;38](https://docs.fedoraproject.org/en-US/releases/f38/)|14-May-2023|
-|`long-4`|`x86_64`|`desktop`|**4.2&#160;Bantu**&#160;(Long)¹|[Fedora&#160;37](https://docs.fedoraproject.org/en-US/releases/f37/)|14-Nov-2024|
+|`long-6`|`x86_64`|`desktop`|**6&#160;Kutai**&#160;(Long)¹|[Fedora&#160;39](https://docs.fedoraproject.org/en-US/releases/f39/)|12-Nov-2024|
+|`long-5`|`x86_64`|`desktop`|**5&#160;Iberia**&#160;(Long)¹|[Fedora&#160;38](https://docs.fedoraproject.org/en-US/releases/f38/)|14-May-2024|
+|`long-4`|`x86_64`|`desktop`|**4.2&#160;Bantu**&#160;(Long)¹|[Fedora&#160;37](https://docs.fedoraproject.org/en-US/releases/f37/)|14-Nov-2023|
 |`next`|`x86_64`|`desktop`|**6&#160;Kutai**&#160;(Next)²&#160;|[Fedora&#160;39](https://docs.fedoraproject.org/en-US/releases/f39/)|∞|
 
 > **¹ Long:** Unlike **Current** (`current`), these branches branches do not update to the current major release: **updates will stop the same day as the base Fedora version**. Only use these if neccessary (i.e. problematic drivers requiring certain versions, critical systems, etc.)
