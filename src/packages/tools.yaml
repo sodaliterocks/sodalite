@@ -3,7 +3,7 @@ packages:
  - buildah
  - dbus-x11
  - distrobox
- #- ffmpeg # temporary (package resolve errors currently with f39)
+ - ffmpeg
  - git-core
  - git-core-doc
  - git-lfs
