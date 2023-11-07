@@ -25,6 +25,7 @@ function get_codename() {
     # * https://en.wikipedia.org/wiki/Ancient_history
 
     case "$1" in
+        "1"*|"2"*|"3"*) echo "" ;;
         "4.0"*) echo "Nubia" ;;
         "4.1"*) echo "Toniki" ;;
         "4.2"*) echo "Bantu" ;;
