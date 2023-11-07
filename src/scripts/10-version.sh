@@ -33,6 +33,7 @@ function get_codename() {
         "6.0"*) echo "Kutai" ;;
         "6.1"*) echo "Fremont" ;;
         "7.0"*) echo "Nazca" ;;
+        *) echo "Caral" ;;
     esac
 }
 
