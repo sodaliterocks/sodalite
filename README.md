@@ -68,7 +68,9 @@ Several branches (or images) of Sodalite co-exist and are developed side-by-side
 |-|-|-|-|-|-|
 |`next`|`x86_64`|`desktop`|**6&#160;Kutai**&#160;(Next)&#160;|[Fedora&#160;39](https://docs.fedoraproject.org/en-US/releases/f39/)|∞|
 
-> Unstable. Here be dragons. Abandon all hope. You know the drill.
+> Early versions of upcoming releases. Unstable. Here be dragons. Abandon all hope. You know the drill.
+>
+> This may sometimes be at the same version as **Current**, but be aware you'll be bumped to an upcoming release without warning if/when released to this branch.
 
 ### Versioning
 
