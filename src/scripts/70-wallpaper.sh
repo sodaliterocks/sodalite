@@ -7,9 +7,6 @@ wallpaper=""
 pantheon_accent=""
 
 case $_os_version_id in
-    "4.0"*) wallpaper="jeremy-gerritsen-_iviuukstI4-unsplash" ;;
-    "4.1"*) wallpaper="dustin-humes-OrO_HSqlZMY-unsplash" ;;
-    "4.2"*) wallpaper="piermanuele-sberni-9jVmJ_mBRE8-unsplash~3967x2645" ;;
     "5.0"*)
         wallpaper="zara-walker-_pC5hT6aXfs-unsplash"
         pantheon_accent="cocoa"
