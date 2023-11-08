@@ -3,6 +3,13 @@ picture-options='zoom'
 picture-uri=''
 primary-color='#3689E6'
 
+[org.gnome.desktop.interface]
+document-font-name='Open Sans 10'
+font-antialiasing='grayscale'
+font-hinting='none'
+font-name='Inter V 9'
+monospace-font-name='Roboto Mono 10'
+
 [org.gnome.desktop.wm.preferences:GNOME]
 action-middle-click-titlebar='minimize'
 button-layout='close:appmenu'
@@ -42,13 +49,8 @@ xkb-options=['grp:alt_shift_toggle']
 
 [org.gnome.desktop.interface:Pantheon]
 cursor-theme='elementary'
-document-font-name='Open Sans 10'
-font-antialiasing='grayscale'
-font-hinting='none'
-font-name='Inter V 9'
 gtk-theme='io.elementary.stylesheet.blueberry'
 icon-theme='elementary'
-monospace-font-name='Roboto Mono 10'
 
 [org.gnome.desktop.peripherals.touchpad:Pantheon]
 natural-scroll=true
