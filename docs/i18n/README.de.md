@@ -18,3 +18,7 @@ _(Todo: siehe [englische Version](../../README.md))_
   <a href="../../README.md">🇬🇧</a>
   <a href="README.de.md">🇩🇪</a>
 </p>
+
+<p align="center">
+    <i>Übersetzt von <a href="https://github.com/sodaliterocks/sodalite/commit/a6025d11a88ed0173d22389091480a6ef2a06371">a6025d11a88ed0173d22389091480a6ef2a06371</a></i>
+</p>
