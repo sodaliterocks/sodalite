@@ -7,7 +7,7 @@ wallpaper=""
 pantheon_accent=""
 
 case $_os_version_id in
-    "5.0"*|"5.1"*)
+    "5.0"*|"5.1"*|"5.2"*)
         wallpaper="zara-walker-_pC5hT6aXfs-unsplash"
         pantheon_accent="cocoa"
         ;;
