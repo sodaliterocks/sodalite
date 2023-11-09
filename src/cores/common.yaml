@@ -13,6 +13,7 @@ mutate-os-release: "${releasever}"
 repos:
  - fedora
  - fedora.updates
+# - fedora-rawhide
  - terra
  - copr.zeno.scrcpy
  - rpmfusion.free
