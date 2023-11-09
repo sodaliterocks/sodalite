@@ -4,8 +4,8 @@
     Sodalite
 </h1>
 
-<p align="centeR">
-<strong>Sodalite</strong> is an immutable desktop OS built with <a href="https://coreos.github.io/rpm-ostree/">rpm-ostree</a> and on-top of <a href="https://getfedora.org/">Fedora</a> &mdash; similar to <a href="https://silverblue.fedoraproject.org/">Fedora Silverblue</a> &mdash; making use of the <a href="https://elementary.io/docs/learning-the-basics">Pantheon desktop</a>, sticking closely to the ethos and workflow perpetrated by <a href="https://elementary.io/open-source">elementary</a>. A work-in-progress but entirely usable as a production desktop.
+<p align="center">
+    <strong>Sodalite</strong> is an immutable desktop OS built with <a href="https://coreos.github.io/rpm-ostree/">rpm-ostree</a> and on-top of <a href="https://getfedora.org/">Fedora</a> &mdash; similar to <a href="https://silverblue.fedoraproject.org/">Fedora Silverblue</a> &mdash; making use of the <a href="https://elementary.io/docs/learning-the-basics">Pantheon desktop</a>, sticking closely to the ethos and workflow perpetrated by <a href="https://elementary.io/open-source">elementary</a>. A work-in-progress but entirely usable as a production desktop.
 </p>
 
 ---
@@ -258,5 +258,5 @@ _These fine folks' work is no longer included in, or relevant to, Sodalite, but 
 
 <p align="center">
   <a href="README.md">🇬🇧</a>
-  <!--a href="docs/README.de.md">🇩🇪</a-->
+  <a href="docs/i18n/README.de.md">🇩🇪</a>
 </p>
