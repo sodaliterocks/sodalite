@@ -11,7 +11,7 @@
 ---
 
 <h4 align="center">
-    Hmm, es sind 20 Tage seit der letzten Übertragung vergangen; ist das immer noch aktiv?
+    Hmm, es sind X Tage seit der letzten Übertragung vergangen; ist das immer noch aktiv?
 </h4>
 
 <p align="center">
