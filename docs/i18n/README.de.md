@@ -28,6 +28,55 @@
 
 ---
 
+## 🎉 Installieren
+
+> Da rpm-ostree eine sich ständig weiterentwickelnde Technologie ist und ISO-Installationen derzeit eine geringe Priorität haben, **sind derzeit keine ISOs verfügbar**. Ein bestehendes rpm-ostree-basiertes Betriebssystem wie [Fedora Silverblue](https://silverblue.fedoraproject.org/) ist erforderlich: Dieses Betriebssystem wird für die "Umstellung" auf Sodalite verwendet.
+
+1. Installieren Sie eine rpm-ostree-basierte Version von Fedora, wie z.B. [Fedora Silverblue](https://silverblue.fedoraproject.org/), oder verwenden Sie eine bereits vorhandene Installation
+2. Öffnen Sie ein Terminal und geben Sie diese Befehle ein:
+   - `sudo ostree remote add --if-not-exists sodalite https://ostree.sodalite.rocks --no-gpg-verify`
+   - `sudo ostree pull sodalite:sodalite/current/x86_64/desktop`*
+   - `sudo rpm-ostree rebase sodalite:sodalite/current/x86_64/desktop`
+3. Setzen Sie den Teekessel auf und machen Sie sich eine Tasse Tee. Es wird eine Weile dauern
+4. Starten Sie neu, wenn Sie dazu aufgefordert werden. Verwenden Sie es, genießen Sie es, machen Sie etwas Cooles damit, (versuchen Sie) es kaputt zu machen &mdash; [senden Sie ein Ticket, wenn Sie es tun](https://github.com/sodaliterocks/sodalite/issues/new)!
+
+_* Es sind mehrere Zweigstellen verfügbar; siehe Zweigstellen_
+
+### Zweigstellen
+
+Mehrere Zweige (oder Images) von Sodalite existieren nebeneinander und werden nebeneinander entwickelt; diese werden durch ihre Ref. unterschieden &mdash; wie jede andere rpm-ostree-Distribution &mdash; wobei `sodalite/<version>/<arch>/<edition>`:
+
+#### Aktuell (Current)
+
+|**`<version>`**|**`<arch>`**|**`<edition>`**|Freigabe|Basis|EOL|
+|-|-|-|-|-|-|
+|`current`|`x86_64`|`desktop`|**6&#160;Kutai**&#160;|[Fedora&#160;38](https://docs.fedoraproject.org/de/releases/f38/)|∞|
+
+#### Lang (Long)
+
+|**`<version>`**|**`<arch>`**|**`<edition>`**|Freigabe|Basis|EOL|
+|-|-|-|-|-|-|
+|`long-6`|`x86_64`|`desktop`|**6&#160;Kutai**&#160;(Long)|[Fedora&#160;39](https://docs.fedoraproject.org/de/releases/f39/)|12-Nov-2024|
+|`long-5`|`x86_64`|`desktop`|**5.1&#160;Varri**&#160;(Long)|[Fedora&#160;38](https://docs.fedoraproject.org/de/releases/f38/)|14-May-2024|
+
+> Im Gegensatz zu **Aktuell** (`current`) aktualisieren diese Zweige nicht auf die aktuelle Hauptversion: **Updates werden am selben Tag wie die Fedora-Basisversion eingestellt**. Verwenden Sie diese Zweige nur, wenn es notwendig ist (z.B. problematische Treiber, die bestimmte Versionen erfordern, kritische Systeme usw.)
+
+#### Weiter (Next)
+
+|**`<version>`**|**`<arch>`**|**`<edition>`**|Freigabe|Basis|EOL|
+|-|-|-|-|-|-|
+|`next`|`x86_64`|`desktop`|**6&#160;Kutai**&#160;(Next)&#160;|[Fedora&#160;39](https://docs.fedoraproject.org/de/releases/f39/)|∞|
+
+> Frühe Versionen der kommenden Versionen. Unstabil. Hier sind Drachen. Gebt alle Hoffnung auf. Sie wissen, wie es läuft.
+>
+> Dies kann manchmal die gleiche Version wie **Aktuell** (`current`) sein, aber seien Sie sich bewusst, dass Sie ohne Vorwarnung auf eine kommende Version verschoben werden, wenn Sie in diesem Zweig veröffentlicht werden.
+
+### Versionierung
+
+_(Todo)_
+
+---
+
 _(Todo: siehe [englische Version](../../README.md))_
 
 ---

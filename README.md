@@ -59,7 +59,7 @@ Several branches (or images) of Sodalite co-exist and are developed side-by-side
 |`long-6`|`x86_64`|`desktop`|**6&#160;Kutai**&#160;(Long)|[Fedora&#160;39](https://docs.fedoraproject.org/en-US/releases/f39/)|12-Nov-2024|
 |`long-5`|`x86_64`|`desktop`|**5.1&#160;Varri**&#160;(Long)|[Fedora&#160;38](https://docs.fedoraproject.org/en-US/releases/f38/)|14-May-2024|
 
-> Unlike **Current** (`current`), these branches do not update to the current major release: **updates will stop the same day as the base Fedora version**. Only use these if neccessary (i.e. problematic drivers requiring certain versions, critical systems, etc.)
+> Unlike **Current** (`current`), these branches do not update to the current major release: **updates will stop the same day as the base Fedora version**. Only use these if necessary (i.e. problematic drivers requiring certain versions, critical systems, etc.)
 
 #### Next
 
