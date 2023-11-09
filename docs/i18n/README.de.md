@@ -40,7 +40,7 @@
 3. Setzen Sie den Teekessel auf und machen Sie sich eine Tasse Tee. Es wird eine Weile dauern
 4. Starten Sie neu, wenn Sie dazu aufgefordert werden. Verwenden Sie es, genießen Sie es, machen Sie etwas Cooles damit, (versuchen Sie) es kaputt zu machen &mdash; [senden Sie ein Ticket, wenn Sie es tun](https://github.com/sodaliterocks/sodalite/issues/new)!
 
-_* Es sind mehrere Zweigstellen verfügbar; siehe Zweigstellen_
+_* Es sind mehrere Zweigstellen verfügbar; siehe [Zweigstellen](#zweigstellen)_
 
 ### Zweigstellen
 
