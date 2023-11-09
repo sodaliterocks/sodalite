@@ -10,6 +10,24 @@
 
 ---
 
+<h4 align="center">
+    Hmm, es sind 20 Tage seit der letzten Übertragung vergangen; ist das immer noch aktiv?
+</h4>
+
+<p align="center">
+    <strong>Ja.</strong>
+</p>
+
+<p align="center">
+    Trotz einer sehr aktiven Commit-Historie ist Sodalite heutzutage ziemlich selbstversorgend &mdash; hauptsächlich dank der großartigen Leute von <a href="https://fyralabs.com">Fyra Labs</a> &mdash; und so kann das Repository Monate ohne jegliche Aktivität überstehen. Das bedeutet nicht, dass das Projekt aufgegeben wurde, zumal <a href="https://github.com/electricduck">der Entwickler</a> es als sein Hauptbetriebssystem verwendet. Unabhängig von der Aktivität des Repositorys werden zweimal pro Woche Aktualisierungen aus dem Repository erstellt: Protokolle sind unter <a href="https://github.com/sodaliterocks/sodalite/actions">Actions</a> verfügbar.
+</p>
+
+<p align="center">
+    Psst! Wir sind auch auf <a href="https://t.me/sodalitechat">Telegram</a>. Es steht Ihnen zwar frei, <a href="https://github.com/sodaliterocks/sodalite/discussions">Discussions</a> zu verwenden, aber der Großteil der Diskussion über dieses Projekt wird auf Telegram stattfinden.
+</p>
+
+---
+
 _(Todo: siehe [englische Version](../../README.md))_
 
 ---
