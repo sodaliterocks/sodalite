@@ -20,5 +20,5 @@ _(Todo: siehe [englische Version](../../README.md))_
 </p>
 
 <p align="center">
-    <i>Übersetzt von <a href="https://github.com/sodaliterocks/sodalite/commit/a6025d11a88ed0173d22389091480a6ef2a06371">a6025d11a88ed0173d22389091480a6ef2a06371</a></i>
+    <i>Übersetzt von <a href="https://github.com/sodaliterocks/sodalite/blob/a6025d11a88ed0173d22389091480a6ef2a06371/README.md">a6025d1</a></i>
 </p>
