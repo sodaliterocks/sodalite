@@ -114,7 +114,7 @@ if [[ $version_v_major != "" ]]; then
             channel=""
         fi
     else
-        # Un-tagged (Devel)
+        # Un-tagged (Nightly)
 
         version+=".$version_v_minor"
         [[ $version_v_build != "" ]] && version+="-$version_v_build"
