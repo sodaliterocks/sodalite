@@ -66,6 +66,8 @@ add-files: [
   ["../../lib/sodaliterocks.hacks/src/plugins/serve.sh", "/usr/libexec/rocks.sodalite.hacks/plugins/serve.sh"],
   ["../../lib/sodaliterocks.hacks/src/plugins/vscode.sh", "/usr/libexec/rocks.sodalite.hacks/plugins/vscode.sh"],
   ["../../lib/sodaliterocks.hacks/src/utils.sh", "/usr/libexec/rocks.sodalite.hacks/utils.sh"],
+  ["../../lib/sodaliterocks.invoker/src/utils/misc.sh", "/usr/libexec/sodalite/invoker/misc/utils.sh"],
+  ["../../lib/sodaliterocks.invoker/src/invoke.sh", "/usr/libexec/sodalite/invoker/invoke.sh"],
   ["../sysroot/common/usr/libexec/rocks.sodalite.cleanup", "/usr/libexec/rocks.sodalite.cleanup"],
 
   # /usr/libexec/sodalite-post
