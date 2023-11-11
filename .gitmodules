@@ -29,3 +29,6 @@
 [submodule "lib/sodaliterocks.invoker"]
 	path = lib/sodaliterocks.invoker
 	url = https://github.com/sodaliterocks/invoker
+[submodule "lib/sodaliterocks.progs"]
+	path = lib/sodaliterocks.progs
+	url = https://github.com/sodaliterocks/progs
