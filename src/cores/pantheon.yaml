@@ -10,9 +10,6 @@ include: [
   "../packages/lfs-packages/wingpanel-indicator-a11y.yaml"
 ]
 
-repos:
- - copr.stsdc.monitor
-
 add-files: [
   # /etc
   ["../sysroot/cores/pantheon/etc/dconf/db/local.d/01-elementary-theme", "/etc/dconf/db/local.d/10-elementary-theme"],
