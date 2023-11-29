@@ -1,5 +1,4 @@
 packages:
- - com.github.stsdc.monitor
  - firewall-config
  - gnome-font-viewer
  - gnome-software # Replacement for AppCenter
