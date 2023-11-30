@@ -6,7 +6,7 @@ if [[ $_os_core == "pantheon" ]]; then
         mv /usr/bin/gnome-software-wrapper /usr/bin/gnome-software
     fi
 
-    systemctl disable gdm
+    #systemctl disable gdm
 
     systemctl enable generate-oemconf
     systemctl enable lightdm

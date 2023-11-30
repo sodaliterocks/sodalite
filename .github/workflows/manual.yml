@@ -1,4 +1,4 @@
-name: Update (Manual)
+name: Manual
 
 on:
   workflow_dispatch:
@@ -41,7 +41,7 @@ on:
 
 jobs:
   custom:
-    name: "Custom"
+    name: "CI"
     runs-on: self-hosted
     steps:
       - uses: actions/checkout@v3
