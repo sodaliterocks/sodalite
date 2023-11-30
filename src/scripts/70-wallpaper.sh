@@ -42,4 +42,6 @@ if [[ -f "${_wallpaper_dir}/$wallpaper.jpg" ]]; then
             fi
         fi
     fi
+else
+    set_property /usr/share/glib-2.0/schemas/00_sodalite.gschema.override picture-uri "'file:\/\/$(echo "${_wallpaper_dir}/$_fallback_wallpaper" | sed "s|/|\\\/|g").jpg'"
 fi
