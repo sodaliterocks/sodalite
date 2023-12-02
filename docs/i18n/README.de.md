@@ -50,7 +50,7 @@ Mehrere Zweige (oder Images) von Sodalite existieren nebeneinander und werden ne
 
 |**`<version>`**|**`<arch>`**|**`<edition>`**|Freigabe|Basis|EOL|
 |-|-|-|-|-|-|
-|`current`|`x86_64`|`desktop`|**6&#160;Kutai**&#160;|[Fedora&#160;38](https://docs.fedoraproject.org/de/releases/f38/)|∞|
+|`current`|`x86_64`|`desktop`|**6&#160;Kutai**&#160;|[Fedora&#160;39](https://docs.fedoraproject.org/de/releases/f39/)|∞|
 
 #### Lang (Long)
 

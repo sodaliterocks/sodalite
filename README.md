@@ -50,7 +50,7 @@ Several branches (or images) of Sodalite co-exist and are developed side-by-side
 
 |**`<version>`**|**`<arch>`**|**`<edition>`**|Release|Base|EOL|
 |-|-|-|-|-|-|
-|`current`|`x86_64`|`desktop`|**6&#160;Kutai**&#160;|[Fedora&#160;38](https://docs.fedoraproject.org/en-US/releases/f38/)|∞|
+|`current`|`x86_64`|`desktop`|**6&#160;Kutai**&#160;|[Fedora&#160;39](https://docs.fedoraproject.org/en-US/releases/f39/)|∞|
 
 #### Long
 
