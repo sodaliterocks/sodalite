@@ -56,7 +56,7 @@ Mehrere Zweige (oder Images) von Sodalite existieren nebeneinander und werden ne
 
 |**`<version>`**|**`<arch>`**|**`<edition>`**|Freigabe|Basis|Status|
 |-|-|-|-|-|-|
-|`long-6`|`x86_64`|`desktop`|**6&#160;Kutai**&#160;(Long)|[Fedora&#160;39](https://docs.fedoraproject.org/de/releases/f39/)|[GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/sodaliterocks/sodalite/update__sodalite.long-6.x86_64.desktop.yml?label=long-6%2Fx86_64%2Fdesktop)|
+|`long-6`|`x86_64`|`desktop`|**6&#160;Kutai**&#160;(Long)|[Fedora&#160;39](https://docs.fedoraproject.org/de/releases/f39/)|![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/sodaliterocks/sodalite/update__sodalite.long-6.x86_64.desktop.yml?label=long-6%2Fx86_64%2Fdesktop)|
 |`long-5`|`x86_64`|`desktop`|**5.1&#160;Varri**&#160;(Long)|[Fedora&#160;38](https://docs.fedoraproject.org/de/releases/f38/)|![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/sodaliterocks/sodalite/update__sodalite.long-5.x86_64.desktop.yml?label=long-5%2Fx86_64%2Fdesktop)|
 
 > Im Gegensatz zu **Aktuell** (`current`) aktualisieren diese Zweige nicht auf die aktuelle Hauptversion: **Updates werden am selben Tag wie die Fedora-Basisversion eingestellt**. Verwenden Sie diese Zweige nur, wenn es notwendig ist (z.B. problematische Treiber, die bestimmte Versionen erfordern, kritische Systeme usw.)
