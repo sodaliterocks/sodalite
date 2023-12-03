@@ -65,7 +65,7 @@ Several branches (or images) of Sodalite co-exist and are developed side-by-side
 
 |**`<version>`**|**`<arch>`**|**`<edition>`**|Release|Base|Status|
 |-|-|-|-|-|-|
-|`next`|`x86_64`|`desktop`|**6&#160;Kutai**&#160;(Next)&#160;|[Fedora&#160;39](https://docs.fedoraproject.org/en-US/releases/f39/)|![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/sodaliterocks/sodalite/update__sodalite.next.x86_64.desktop.yml?label=next%2Fx86_64%2Fdesktop)||
+|`next`|`x86_64`|`desktop`|**6&#160;Kutai**&#160;(Next)&#160;|[Fedora&#160;39](https://docs.fedoraproject.org/en-US/releases/f39/)|![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/sodaliterocks/sodalite/update__sodalite.next.x86_64.desktop.yml?label=next%2Fx86_64%2Fdesktop)|
 
 > Early versions of upcoming releases. Unstable. Here be dragons. Abandon all hope. You know the drill.
 >
