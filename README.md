@@ -50,14 +50,14 @@ Several branches (or images) of Sodalite co-exist and are developed side-by-side
 
 |**`<version>`**|**`<arch>`**|**`<edition>`**|Release|Base|Status|
 |-|-|-|-|-|-|
-|`current`|`x86_64`|`desktop`|**6&#160;Kutai**&#160;|[Fedora&#160;39](https://docs.fedoraproject.org/en-US/releases/f39/)|![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/sodaliterocks/sodalite/update__sodalite.current.x86_64.desktop.yml?label=current%2Fx86_64%2Fdesktop)|
+|`current`|`x86_64`|`desktop`|**6&#160;Kutai**&#160;|[Fedora&#160;39](https://docs.fedoraproject.org/en-US/releases/f39/)|[![Update: sodalite/current/x86_64/desktop](https://img.shields.io/github/actions/workflow/status/sodaliterocks/sodalite/update__sodalite.current.x86_64.desktop.yml?label=current%2Fx86_64%2Fdesktop)](https://github.com/sodaliterocks/sodalite/actions/workflows/update__sodalite.current.x86_64.desktop.yml)|
 
 #### Long
 
 |**`<version>`**|**`<arch>`**|**`<edition>`**|Release|Base|Status|
 |-|-|-|-|-|-|
-|`long-6`|`x86_64`|`desktop`|**6&#160;Kutai**&#160;(Long)|[Fedora&#160;39](https://docs.fedoraproject.org/en-US/releases/f39/)|![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/sodaliterocks/sodalite/update__sodalite.long-6.x86_64.desktop.yml?label=long-6%2Fx86_64%2Fdesktop)|
-|`long-5`|`x86_64`|`desktop`|**5.1&#160;Varri**&#160;(Long)|[Fedora&#160;38](https://docs.fedoraproject.org/en-US/releases/f38/)|![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/sodaliterocks/sodalite/update__sodalite.long-5.x86_64.desktop.yml?label=long-5%2Fx86_64%2Fdesktop)|
+|`long-6`|`x86_64`|`desktop`|**6&#160;Kutai**&#160;(Long)|[Fedora&#160;39](https://docs.fedoraproject.org/en-US/releases/f39/)|[![Update: sodalite/long-6/x86_64/desktop](https://img.shields.io/github/actions/workflow/status/sodaliterocks/sodalite/update__sodalite.long-6.x86_64.desktop.yml?label=long-6%2Fx86_64%2Fdesktop)](https://github.com/sodaliterocks/sodalite/actions/workflows/update__sodalite.long-6.x86_64.desktop.yml)|
+|`long-5`|`x86_64`|`desktop`|**5.1&#160;Varri**&#160;(Long)|[Fedora&#160;38](https://docs.fedoraproject.org/en-US/releases/f38/)|[![Update: sodalite/long-5/x86_64/desktop](https://img.shields.io/github/actions/workflow/status/sodaliterocks/sodalite/update__sodalite.long-5.x86_64.desktop.yml?label=long-5%2Fx86_64%2Fdesktop)](https://github.com/sodaliterocks/sodalite/actions/workflows/update__sodalite.long-5.x86_64.desktop.yml)|
 
 > Unlike **Current** (`current`), these branches do not update to the current major release: **updates will stop the same day as the base Fedora version**. Only use these if necessary (i.e. problematic drivers requiring certain versions, critical systems, etc.)
 
@@ -65,7 +65,7 @@ Several branches (or images) of Sodalite co-exist and are developed side-by-side
 
 |**`<version>`**|**`<arch>`**|**`<edition>`**|Release|Base|Status|
 |-|-|-|-|-|-|
-|`next`|`x86_64`|`desktop`|**6&#160;Kutai**&#160;(Next)&#160;|[Fedora&#160;39](https://docs.fedoraproject.org/en-US/releases/f39/)|![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/sodaliterocks/sodalite/update__sodalite.next.x86_64.desktop.yml?label=next%2Fx86_64%2Fdesktop)|
+|`next`|`x86_64`|`desktop`|**6&#160;Kutai**&#160;(Next)&#160;|[Fedora&#160;39](https://docs.fedoraproject.org/en-US/releases/f39/)|[![Update: sodalite/next/x86_64/desktop](https://img.shields.io/github/actions/workflow/status/sodaliterocks/sodalite/update__sodalite.next.x86_64.desktop.yml?label=next%2Fx86_64%2Fdesktop)](https://github.com/sodaliterocks/sodalite/actions/workflows/update__sodalite.next.x86_64.desktop.yml)|
 
 > Early versions of upcoming releases. Unstable. Here be dragons. Abandon all hope. You know the drill.
 >
