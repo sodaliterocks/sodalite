@@ -65,7 +65,7 @@ function set_property() {
 
 _buildinfo_file="/usr/lib/sodalite-buildinfo"
 _core_file="/usr/lib/sodalite-core"
-_post_scripts_dir="/usr/libexec/sodalite-post"
+_post_scripts_dir="/usr/libexec/sodalite/post-build"
 
 _git_hash=""
 _git_tag=""

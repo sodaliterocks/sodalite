@@ -39,6 +39,7 @@ add-files: [
   # /usr/bin
   ["../../lfs/binaries/appimage/appimaged_718~x86_64.AppImage", "/usr/bin/appimaged"],
   ["../../lib/sodaliterocks.hacks/src/hacks.sh", "/usr/bin/rocks.sodalite.hacks"],
+  ["../../lib/sodaliterocks.progs/src/rocks.sodalite.builder", "/usr/bin/rocks.sodalite.builder"],
   ["../../lib/sodaliterocks.progs/src/rocks.sodalite.http-server", "/usr/bin/rocks.sodalite.http-server"],
   ["../../lib/sodaliterocks.progs/src/rocks.sodalite.links", "/usr/bin/rocks.sodalite.links"],
   ["../sysroot/common/usr/bin/detach", "/usr/bin/detach"],
@@ -65,22 +66,24 @@ add-files: [
   ["../../lib/sodaliterocks.hacks/src/plugins/oemconf.sh", "/usr/libexec/rocks.sodalite.hacks/plugins/oemconf.sh"],
   ["../../lib/sodaliterocks.hacks/src/plugins/vscode.sh", "/usr/libexec/rocks.sodalite.hacks/plugins/vscode.sh"],
   ["../../lib/sodaliterocks.hacks/src/utils.sh", "/usr/libexec/rocks.sodalite.hacks/utils.sh"],
-  ["../../lib/sodaliterocks.invoker/src/utils/misc.sh", "/usr/libexec/sodalite/invoker/misc/utils.sh"],
-  ["../../lib/sodaliterocks.invoker/src/invoke.sh", "/usr/libexec/sodalite/invoker/invoke.sh"],
   ["../sysroot/common/usr/libexec/rocks.sodalite.cleanup", "/usr/libexec/rocks.sodalite.cleanup"],
 
-  # /usr/libexec/sodalite-post
-  ["../scripts/00-print-buildinfo.sh", "/usr/libexec/sodalite-post/00-print-buildinfo.sh"],
-  ["../scripts/10-version.sh", "/usr/libexec/sodalite-post/10-version.sh"],
-  ["../scripts/30-hacks.sh", "/usr/libexec/sodalite-post/30-hacks.sh"],
-  ["../scripts/50-file-removals.sh", "/usr/libexec/sodalite-post/50-file-removals.sh"],
-  ["../scripts/70-firefox.sh", "/usr/libexec/sodalite-post/70-firefox.sh"],
-  ["../scripts/70-flatpak-aliases.sh", "/usr/libexec/sodalite-post/70-flatpak-aliases.sh"],
-  ["../scripts/70-gnome-extensions.sh", "/usr/libexec/sodalite-post/70-gnome-extensions.sh"],
-  ["../scripts/70-wallpaper.sh", "/usr/libexec/sodalite-post/70-wallpaper.sh"],
-  ["../scripts/80-tweaks.sh", "/usr/libexec/sodalite-post/80-tweaks.sh"],
-  ["../scripts/80-tweaks-pantheon.sh", "/usr/libexec/sodalite-post/80-tweaks-pantheon.sh"],
-  ["../scripts/90-cleanup.sh", "/usr/libexec/sodalite-post/90-cleanup.sh"],
+  # /usr/libexec/sodalite/invoker
+  ["../../lib/sodaliterocks.invoker/src/utils/misc.sh", "/usr/libexec/sodalite/invoker/misc/utils.sh"],
+  ["../../lib/sodaliterocks.invoker/src/invoke.sh", "/usr/libexec/sodalite/invoker/invoke.sh"],
+
+  # /usr/libexec/sodalite/post-build
+  ["../scripts/00-print-buildinfo.sh", "/usr/libexec/sodalite/post-build/00-print-buildinfo.sh"],
+  ["../scripts/10-version.sh", "/usr/libexec/sodalite/post-build/10-version.sh"],
+  ["../scripts/30-hacks.sh", "/usr/libexec/sodalite/post-build/30-hacks.sh"],
+  ["../scripts/50-file-removals.sh", "/usr/libexec/sodalite/post-build/50-file-removals.sh"],
+  ["../scripts/70-firefox.sh", "/usr/libexec/sodalite/post-build/70-firefox.sh"],
+  ["../scripts/70-flatpak-aliases.sh", "/usr/libexec/sodalite/post-build/70-flatpak-aliases.sh"],
+  ["../scripts/70-gnome-extensions.sh", "/usr/libexec/sodalite/post-build/70-gnome-extensions.sh"],
+  ["../scripts/70-wallpaper.sh", "/usr/libexec/sodalite/post-build/70-wallpaper.sh"],
+  ["../scripts/80-tweaks.sh", "/usr/libexec/sodalite/post-build/80-tweaks.sh"],
+  ["../scripts/80-tweaks-pantheon.sh", "/usr/libexec/sodalite/post-build/80-tweaks-pantheon.sh"],
+  ["../scripts/90-cleanup.sh", "/usr/libexec/sodalite/post-build/90-cleanup.sh"],
 
   # /usr/share
   ["../sysroot/common/usr/share/glib-2.0/schemas/00_sodalite.gschema.override", "/usr/share/glib-2.0/schemas/00_sodalite.gschema.override"],
