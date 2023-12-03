@@ -48,24 +48,24 @@ Mehrere Zweige (oder Images) von Sodalite existieren nebeneinander und werden ne
 
 #### Aktuell (Current)
 
-|**`<version>`**|**`<arch>`**|**`<edition>`**|Freigabe|Basis|EOL|
+|**`<version>`**|**`<arch>`**|**`<edition>`**|Freigabe|Basis|Status|
 |-|-|-|-|-|-|
-|`current`|`x86_64`|`desktop`|**6&#160;Kutai**&#160;|[Fedora&#160;39](https://docs.fedoraproject.org/de/releases/f39/)|∞|
+|`current`|`x86_64`|`desktop`|**6&#160;Kutai**&#160;|[Fedora&#160;39](https://docs.fedoraproject.org/de/releases/f39/)|![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/sodaliterocks/sodalite/update__sodalite.current.x86_64.desktop.yml?label=current%2Fx86_64%2Fdesktop)|
 
 #### Lang (Long)
 
-|**`<version>`**|**`<arch>`**|**`<edition>`**|Freigabe|Basis|EOL|
+|**`<version>`**|**`<arch>`**|**`<edition>`**|Freigabe|Basis|Status|
 |-|-|-|-|-|-|
-|`long-6`|`x86_64`|`desktop`|**6&#160;Kutai**&#160;(Long)|[Fedora&#160;39](https://docs.fedoraproject.org/de/releases/f39/)|12-Nov-2024|
-|`long-5`|`x86_64`|`desktop`|**5.1&#160;Varri**&#160;(Long)|[Fedora&#160;38](https://docs.fedoraproject.org/de/releases/f38/)|14-May-2024|
+|`long-6`|`x86_64`|`desktop`|**6&#160;Kutai**&#160;(Long)|[Fedora&#160;39](https://docs.fedoraproject.org/de/releases/f39/)|[GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/sodaliterocks/sodalite/update__sodalite.long-6.x86_64.desktop.yml?label=long-6%2Fx86_64%2Fdesktop)|
+|`long-5`|`x86_64`|`desktop`|**5.1&#160;Varri**&#160;(Long)|[Fedora&#160;38](https://docs.fedoraproject.org/de/releases/f38/)|![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/sodaliterocks/sodalite/update__sodalite.long-5.x86_64.desktop.yml?label=long-5%2Fx86_64%2Fdesktop)|
 
 > Im Gegensatz zu **Aktuell** (`current`) aktualisieren diese Zweige nicht auf die aktuelle Hauptversion: **Updates werden am selben Tag wie die Fedora-Basisversion eingestellt**. Verwenden Sie diese Zweige nur, wenn es notwendig ist (z.B. problematische Treiber, die bestimmte Versionen erfordern, kritische Systeme usw.)
 
 #### Weiter (Next)
 
-|**`<version>`**|**`<arch>`**|**`<edition>`**|Freigabe|Basis|EOL|
+|**`<version>`**|**`<arch>`**|**`<edition>`**|Freigabe|Basis|Status|
 |-|-|-|-|-|-|
-|`next`|`x86_64`|`desktop`|**6&#160;Kutai**&#160;(Next)&#160;|[Fedora&#160;39](https://docs.fedoraproject.org/de/releases/f39/)|∞|
+|`next`|`x86_64`|`desktop`|**6&#160;Kutai**&#160;(Next)&#160;|[Fedora&#160;39](https://docs.fedoraproject.org/de/releases/f39/)|![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/sodaliterocks/sodalite/update__sodalite.next.x86_64.desktop.yml?label=next%2Fx86_64%2Fdesktop)|
 
 > Frühe Versionen der kommenden Versionen. Unstabil. Hier sind Drachen. Gebt alle Hoffnung auf. Sie wissen, wie es läuft.
 >
@@ -87,5 +87,5 @@ _(Todo: siehe [englische Version](../../README.md))_
 </p>
 
 <p align="center">
-    <i>Übersetzt von <a href="https://github.com/sodaliterocks/sodalite/blob/a6025d11a88ed0173d22389091480a6ef2a06371/README.md">a6025d1</a></i>
+    <i>Übersetzt von <a href="https://github.com/sodaliterocks/sodalite/blob/847ad18d8f7c7dbcce83e2b0d6262b58bc66049e/README.md">847ad18</a></i>
 </p>
