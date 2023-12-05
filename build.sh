@@ -40,4 +40,7 @@ else
 fi
 
 bash -c "$builder_command"
-exit $?
+exit_code=$?
+
+echo -c "Exit: $exit_code"
+exit $exit_code
