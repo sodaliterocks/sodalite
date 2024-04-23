@@ -31,7 +31,6 @@ function get_codename() {
         "4.2"*) echo "Bantu" ;;
         "5.0"*) echo "Iberia" ;;
         "5.1"*) echo "Varri" ;;
-        "5.2"*) echo "Solici" ;;
         "6.0"*) echo "Kutai" ;;
         "6.1"*) echo "Fremont" ;;
         "7.0"*) echo "Nazca" ;;
