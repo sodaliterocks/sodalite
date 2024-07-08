@@ -151,6 +151,8 @@ to_remove+=(
     "/usr/share/backgrounds/f36"
     "/usr/share/backgrounds/f37"
     "/usr/share/backgrounds/f38"
+    "/usr/share/backgrounds/f39"
+    "/usr/share/backgrounds/f40"
     "/usr/share/backgrounds/fedora-workstation"
 )
 
