@@ -25,13 +25,13 @@ packages:
  - gvfs-nfs
  - gvfs-smb
  - light-locker
- - onboard
+ #- onboard # Onboard is busted
  - pantheon-agent-geoclue2
  - pantheon-agent-polkit
  - pantheon-session-settings
  - plank
  - switchboard
- - switchboard-plug-a11y
+ #- switchboard-plug-a11y # Onboard is busted
  - switchboard-plug-about
  - switchboard-plug-applications
  - switchboard-plug-bluetooth

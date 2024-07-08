@@ -1,12 +1,12 @@
 include: [
-  "bases/f39.yaml",
+  "bases/f40.yaml",
   "../packages/flatpak.yaml",
   "../packages/fonts.yaml",
   "../packages/tools.yaml",
 ]
 
-releasever: "39"
-automatic-version-prefix: "6.0-<date:%y%j>"
+releasever: "40"
+automatic-version-prefix: "7.0-<date:%y%j>"
 automatic-version-suffix: "."
 mutate-os-release: "${releasever}"
 
