@@ -39,8 +39,8 @@ else
     builder_command="sudo $builder_path --path \"$base_dir\" $@"
 fi
 
-bash -c "$builder_command"
+#bash -c "$builder_command"
 exit_code=$?
 
-echo -c "Exit: $exit_code"
+echo -e "\033[1;37m🛑 Exit ($exit_code)\033[0m"
 exit $exit_code
