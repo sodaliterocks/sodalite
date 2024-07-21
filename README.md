@@ -107,6 +107,22 @@ It's vital you carry out this process as updates stop the day the base version r
 
 #### Software
 
+##### Containerized (with `--container`/`-c`)
+
+_Running in a container is the preffered way of building Sodalite._
+
+* Linux
+* [Podman](https://podman.io/)
+  - To use Docker instead, pass `--ex-use-docker`. **Running in Docker is entirely untested and experimental!**
+* Bash
+* [Git LFS](https://git-lfs.com/)
+  - As well as including pretty wallpapers, the LFS also includes vital binaries that Sodalite needs to work properly, so don't miss installing this!
+  - Unsure if you have LFS support? Tpe `git lfs`: a help output prints if installed
+  
+##### OS-level
+
+_If you don't have Podman, or are having issues with running in a container, you can try running on the host itself._
+
 * [Fedora Linux](https://getfedora.org/) (or other Fedora-based/compatible distros)
 * [rpm-ostree](https://coreos.github.io/rpm-ostree/)
   - On most Fedora-based distros, this can be installed with `dnf install rpm-ostree`
@@ -116,9 +132,9 @@ It's vital you carry out this process as updates stop the day the base version r
   - Unsure if you have LFS support? Tpe `git lfs`: a help output prints if installed
 
 #### Environment
+
 * Permission to `sudo`
-  - `rpm-ostree` needs superuser access to work: there's no way around this
-  - Building in a container, however, is possible and supported: just pass the `-c`/`--container` flag to `build.sh` (mentioned below)
+  - Do not run `sudo ./build.sh`: the script will ask for permission when it needs it
 * &gt;10GiB disk space
   - The repository itself (including submodules) takes up ~300MiB
   - Initial builds will take up ~4GiB, with subsequent builds adding to this
@@ -161,7 +177,7 @@ Unless the world collectively favours GitLab, or anything else, Sodalite will st
 ### 3. Building
 
 ```sh
-sudo ./build.sh [-t <edition>] [-w <working-dir>]
+./build.sh [-t <edition>] [-w <working-dir>]
 ```
 
 _See `build.sh --help` for more options._
