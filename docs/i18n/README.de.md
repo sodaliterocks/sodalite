@@ -88,5 +88,5 @@ _(Todo: siehe [englische Version](../../README.md))_
 </p>
 
 <p align="center">
-    <i>Übersetzt von <a href="https://github.com/sodaliterocks/sodalite/blob/9f7115eaac6b2817396a213690cd628271caf602/README.md">9f7115e</a></i>
+    <i>Übersetzt von <a href="https://github.com/sodaliterocks/sodalite/blob/6ef30bc826d80e9b89d59521a3b26fdd92b82c14/README.md">6ef30bc</a></i>
 </p>
