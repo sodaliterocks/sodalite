@@ -17,7 +17,7 @@ click-action='minimize'
 dock-position='BOTTOM'
 intellihide-mode='FOCUS_APPLICATION_WINDOWS'
 require-pressure-to-show=false
-show-apps-at-top=true
+show-mounts=false
 show-trash=false
 
 [net.launchpad.plank.dock.settings:Pantheon]
