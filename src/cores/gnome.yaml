@@ -5,7 +5,7 @@ include: [
 
 add-files: [
   # /usr/share/pixmaps
-  ["../../lfs/graphics/logo/logo--100px.png", "/usr/share/pixmaps/fedora-gdm-logo.png"],
+  ["../../lfs/graphics/logo/logo--46px.png", "/usr/share/pixmaps/fedora-gdm-logo.png"],
   ["../../lfs/graphics/logo/logo-dark--160px.png", "/usr/share/pixmaps/fedora-logo.png"],
   ["../../lfs/graphics/logo/logo-dark--100px.png", "/usr/share/pixmaps/fedora_logo_med.png"],
   ["../../lfs/graphics/logo/logo-dark--46px.png", "/usr/share/pixmaps/fedora-logo-small.png"],
