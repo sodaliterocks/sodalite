@@ -5,7 +5,7 @@ include: [
 
 add-files: [
   # /usr/lib
-  ["../sysroot/cores/gnome/usr/lib/sodalite-core", "/usr/lib/sodalite-core"]
+  ["../sysroot/cores/gnome/usr/lib/sodalite-core", "/usr/lib/sodalite-core"],
 
   # /usr/share/pixmaps
   ["../../lfs/graphics/logo/logo--46px.png", "/usr/share/pixmaps/fedora-gdm-logo.png"],
