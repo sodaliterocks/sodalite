@@ -1,5 +1,5 @@
 [fedora-rawhide]
-name=Fedora (rawhide~$basearch)
+name=Sodalite: fedora (rawhide~$basearch)
 mirrorlist=https://mirrors.fedoraproject.org/metalink?repo=rawhide&arch=$basearch
 enabled=1
 gpgcheck=1

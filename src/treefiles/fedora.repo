@@ -1,12 +1,12 @@
 [fedora]
-name=Fedora ($releasever~$basearch)
+name=Sodalite: fedora ($releasever~$basearch)
 mirrorlist=https://mirrors.fedoraproject.org/metalink?repo=fedora-$releasever&arch=$basearch
 enabled=0
 gpgcheck=1
 metadata_expire=1d
 
 [fedora.updates]
-name=Fedora: Updates ($releasever~$basearch)
+name=Sodalite: fedora.updates ($releasever~$basearch)
 mirrorlist=https://mirrors.fedoraproject.org/metalink?repo=updates-released-f$releasever&arch=$basearch
 enabled=0
 gpgcheck=1

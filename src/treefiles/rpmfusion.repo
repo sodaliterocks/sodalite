@@ -4,7 +4,7 @@ gpgcheck=0
 gpgkey=https://rpmfusion.org/keys?action=AttachFile&do=get&target=RPM-GPG-KEY-rpmfusion-free-fedora-2020
 metadata_expire=14d
 metalink=https://mirrors.rpmfusion.org/metalink?repo=free-fedora-$releasever&arch=$basearch
-name=RPM Fusion: Free ($releasever~$basearch)
+name=Sodalite: rpmfusion.free ($releasever~$basearch)
 repo_gpgcheck=0
 type=rpm-md
 
@@ -14,7 +14,7 @@ gpgcheck=0
 gpgkey=https://rpmfusion.org/keys?action=AttachFile&do=get&target=RPM-GPG-KEY-rpmfusion-free-fedora-2020
 metadata_expire=7d
 metalink=https://mirrors.rpmfusion.org/metalink?repo=free-fedora-debug-$releasever&arch=$basearch
-name=RPM Fusion: Free/Debug ($releasever~$basearch)
+name=Sodalite: rpmfusion.free.debug ($releasever~$basearch)
 repo_gpgcheck=0
 type=rpm-md
 
@@ -24,7 +24,7 @@ gpgcheck=0
 gpgkey=https://rpmfusion.org/keys?action=AttachFile&do=get&target=RPM-GPG-KEY-rpmfusion-free-fedora-2020
 metadata_expire=7d
 metalink=https://mirrors.rpmfusion.org/metalink?repo=free-fedora-source-$releasever&arch=$basearch
-name=RPM Fusion: Free/Source ($releasever~$basearch)
+name=Sodalite: rpmfusion.free.source ($releasever~$basearch)
 repo_gpgcheck=0
 type=rpm-md
 
@@ -34,7 +34,7 @@ enabled_metadata=1
 gpgcheck=0
 gpgkey=https://rpmfusion.org/keys?action=AttachFile&do=get&target=RPM-GPG-KEY-rpmfusion-free-fedora-2020
 metalink=https://mirrors.rpmfusion.org/metalink?repo=free-fedora-updates-released-$releasever&arch=$basearch
-name=RPM Fusion: Free/Updates ($releasever~$basearch)
+name=Sodalite: rpmfusion.free.updates ($releasever~$basearch)
 repo_gpgcheck=0
 type=rpm-md
 
@@ -43,7 +43,7 @@ enabled=0
 gpgcheck=0
 gpgkey=https://rpmfusion.org/keys?action=AttachFile&do=get&target=RPM-GPG-KEY-rpmfusion-free-fedora-2020
 metalink=https://mirrors.rpmfusion.org/metalink?repo=free-fedora-updates-released-debug-$releasever&arch=$basearch
-name=RPM Fusion: Free/Updates/Debug ($releasever~$basearch)
+name=Sodalite: rpmfusion.free.updates.debug ($releasever~$basearch)
 repo_gpgcheck=0
 type=rpm-md
 
@@ -52,7 +52,7 @@ enabled=0
 gpgcheck=0
 gpgkey=https://rpmfusion.org/keys?action=AttachFile&do=get&target=RPM-GPG-KEY-rpmfusion-free-fedora-2020
 metalink=https://mirrors.rpmfusion.org/metalink?repo=free-fedora-updates-released-source-$releasever&arch=$basearch
-name=RPM Fusion: Free/Updates/Source ($releasever~$basearch)
+name=Sodalite: rpmfusion.free.updates.source ($releasever~$basearch)
 repo_gpgcheck=0
 type=rpm-md
 
@@ -63,7 +63,7 @@ gpgcheck=0
 gpgkey=https://rpmfusion.org/keys?action=AttachFile&do=get&target=RPM-GPG-KEY-rpmfusion-nonfree-fedora-2020
 metadata_expire=14d
 metalink=https://mirrors.rpmfusion.org/metalink?repo=nonfree-fedora-$releasever&arch=$basearch
-name=RPM Fusion: NonFree ($releasever~$basearch)
+name=Sodalite: rpmfusion.nonfree ($releasever~$basearch)
 repo_gpgcheck=0
 type=rpm-md
 
@@ -74,7 +74,7 @@ gpgcheck=0
 gpgkey=https://rpmfusion.org/keys?action=AttachFile&do=get&target=RPM-GPG-KEY-rpmfusion-nonfree-fedora-2020
 metadata_expire=7d
 metalink=https://mirrors.rpmfusion.org/metalink?repo=nonfree-fedora-$releasever&arch=$basearch
-name=RPM Fusion: NonFree/Debug ($releasever~$basearch)
+name=Sodalite: rpmfusion.nonfree.debug ($releasever~$basearch)
 repo_gpgcheck=0
 type=rpm-md
 
@@ -85,7 +85,7 @@ gpgcheck=0
 gpgkey=https://rpmfusion.org/keys?action=AttachFile&do=get&target=RPM-GPG-KEY-rpmfusion-nonfree-fedora-2020
 metadata_expire=7d
 metalink=https://mirrors.rpmfusion.org/metalink?repo=nonfree-fedora-$releasever&arch=$basearch
-name=RPM Fusion: NonFree/Source ($releasever~$basearch)
+name=Sodalite: rpmfusion.nonfree.source ($releasever~$basearch)
 repo_gpgcheck=0
 type=rpm-md
 
@@ -95,7 +95,7 @@ enabled_metadata=1
 gpgcheck=0
 gpgkey=https://rpmfusion.org/keys?action=AttachFile&do=get&target=RPM-GPG-KEY-rpmfusion-nonfree-fedora-2020
 metalink=https://mirrors.rpmfusion.org/metalink?repo=nonfree-fedora-updates-released-$releasever&arch=$basearch
-name=RPM Fusion: NonFree/Updates ($releasever~$basearch)
+name=Sodalite: rpmfusion.nonfree.updates ($releasever~$basearch)
 repo_gpgcheck=0
 type=rpm-md
 
@@ -104,7 +104,7 @@ enabled=0
 gpgcheck=0
 gpgkey=https://rpmfusion.org/keys?action=AttachFile&do=get&target=RPM-GPG-KEY-rpmfusion-nonfree-fedora-2020
 metalink=https://mirrors.rpmfusion.org/metalink?repo=nonfree-fedora-updates-released-debug-$releasever&arch=$basearch
-name=RPM Fusion: NonFree/Updates/Debug ($releasever~$basearch)
+name=Sodalite: rpmfusion.nonfree.updates.debug ($releasever~$basearch)
 repo_gpgcheck=0
 type=rpm-md
 
@@ -113,6 +113,6 @@ enabled=0
 gpgcheck=0
 gpgkey=https://rpmfusion.org/keys?action=AttachFile&do=get&target=RPM-GPG-KEY-rpmfusion-nonfree-fedora-2020
 metalink=https://mirrors.rpmfusion.org/metalink?repo=nonfree-fedora-updates-released-source-$releasever&arch=$basearch
-name=RPM Fusion: NonFree/Updates/Source ($releasever~$basearch)
+name=Sodalite: rpmfusion.nonfree.updates.source ($releasever~$basearch)
 repo_gpgcheck=0
 type=rpm-md
