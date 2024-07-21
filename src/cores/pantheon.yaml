@@ -57,6 +57,7 @@ add-files: [
   ["../sysroot/cores/pantheon/usr/share/applications/nm-connection-editor.desktop", "/usr/share/applications/nm-connection-editor.desktop"],
   ["../sysroot/cores/pantheon/usr/share/applications/org.gnome.DiskUtility.desktop", "/usr/share/applications/org.gnome.DiskUtility.desktop"],
   ["../sysroot/cores/pantheon/usr/share/applications/org.gnome.Software.desktop", "/usr/share/applications/org.gnome.Software.desktop"],
+  ["../sysroot/common/usr/share/applications/rocks.sodalite.links.telegram-chat.desktop", "/usr/share/applications/rocks.sodalite.links.telegram-chat.desktop"],
   ["../sysroot/cores/pantheon/usr/share/applications/rocks.sodalite.locale-selector.desktop", "/usr/share/applications/rocks.sodalite.locale-selector.desktop"],
 
   # /usr/share/icons

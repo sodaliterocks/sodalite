@@ -90,7 +90,6 @@ add-files: [
 
   # /usr/share/applications
   ["../sysroot/common/usr/share/applications/rocks.sodalite.phone-mirror.desktop", "/usr/share/applications/rocks.sodalite.phone-mirror.desktop"],
-  ["../sysroot/common/usr/share/applications/rocks.sodalite.links.telegram-chat.desktop", "/usr/share/applications/rocks.sodalite.links.telegram-chat.desktop"],
 
   # /usr/share/backgrounds
   ["../../lfs/wallpapers/adrien-olichon-gXqgs6Smvw-unsplash.jpg", "/usr/share/backgrounds/default/adrien-olichon-gXqgs6Smvw-unsplash.jpg"],
