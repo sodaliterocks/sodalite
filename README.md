@@ -135,6 +135,7 @@ _If you don't have Podman, or are having issues with running in a container, you
 
 * Permission to `sudo`
   - Do not run `sudo ./build.sh`: the script will ask for permission when it needs it
+  - Whether or not you run containerized **you must have** access to superuser
 * &gt;10GiB disk space
   - The repository itself (including submodules) takes up ~300MiB
   - Initial builds will take up ~4GiB, with subsequent builds adding to this
