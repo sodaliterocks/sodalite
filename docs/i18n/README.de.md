@@ -66,7 +66,7 @@ Mehrere Zweige (oder Images) von Sodalite existieren nebeneinander und werden ne
 |**`<version>`**|**`<arch>`**|**`<edition>`**|Release|Base|Status|
 |-|-|-|-|-|-|
 |`next`|`x86_64`|`desktop`|**6&#160;Kutai**&#160;(Next)&#160;|[Fedora&#160;39](https://docs.fedoraproject.org/en-US/releases/f39/)|[![Update: sodalite/next/x86_64/desktop](https://img.shields.io/github/actions/workflow/status/sodaliterocks/sodalite/update__sodalite.next.x86_64.desktop.yml?label=next%2Fx86_64%2Fdesktop)](https://github.com/sodaliterocks/sodalite/actions/workflows/update__sodalite.next.x86_64.desktop.yml)|
-|`next`|`x86_64`|`desktop-gnome`|**7&#160;GNOME**&#160;(Next)&#160;|[Fedora&#160;40](https://docs.fedoraproject.org/en-US/releases/f40/)|[![Update: sodalite/next/x86_64/desktop](https://img.shields.io/github/actions/workflow/status/sodaliterocks/sodalite/update__sodalite.next.x86_64.desktop.yml?label=next%2Fx86_64%2Fdesktop)](https://github.com/sodaliterocks/sodalite/actions/workflows/update__sodalite.next.x86_64.desktop.yml)|
+|`next`|`x86_64`|`desktop-gnome`|**7&#160;GNOME**&#160;(Next)&#160;|[Fedora&#160;40](https://docs.fedoraproject.org/en-US/releases/f40/)|[![Update: sodalite/next/x86_64/desktop-gnome](https://img.shields.io/github/actions/workflow/status/sodaliterocks/sodalite/update__sodalite.next.x86_64.desktop.yml?label=next%2Fx86_64%2Fdesktop-gnome)](https://github.com/sodaliterocks/sodalite/actions/workflows/update__sodalite.next.x86_64.desktop-gnome.yml)|
 
 > Frühe Versionen der kommenden Versionen. Unstabil. Hier sind Drachen. Gebt alle Hoffnung auf. Sie wissen, wie es läuft.
 >
