@@ -12,5 +12,5 @@ Categories=Other;
 
 [Desktop Action HideApp]
 Name=Hide Entry
-Exec=rocks.sodalite.hacks hide-app --desktop-file rocks.sodalite.links.telegram-chat --confirm-before-hiding
+Exec=rocks.sodalite.hide-app --desktop-file rocks.sodalite.links.telegram-chat --confirm-before-hiding
 

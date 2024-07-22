@@ -1,0 +1,40 @@
+include: [
+  "../../../lib/workstation-ostree-config_f40/fedora-common-ostree-pkgs.yaml"
+]
+
+releasever: "40"
+
+packages:
+ - hfsplus-tools
+ - kernel
+ - kernel-modules
+ - kernel-modules-extra
+ - lvm2
+ - ostree-grub2
+ - nss-altfiles
+ - fedora-release
+ - fedora-release-ostree-desktop
+ - fedora-repos-archive
+ - fedora-repos-ostree
+ - slirp4netns
+packages-aarch64:
+  - grub2-efi
+  - efibootmgr
+  - shim
+packages-ppc64le:
+  - grub2
+packages-x86_64:
+  - grub2-efi-ia32
+  - grub2-efi-x64
+  - grub2-pc
+  - efibootmgr
+  - shim-ia32
+  - shim-x64
+exclude-packages:
+  - PackageKit
+  - dnf
+  - dnf-plugins-core
+  - dnf5
+  - dnf5-plugins
+  - grubby
+  - sdubby

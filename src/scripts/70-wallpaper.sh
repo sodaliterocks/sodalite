@@ -7,16 +7,21 @@ wallpaper=""
 pantheon_accent=""
 
 case $_os_version_id in
-    "4.0"*) wallpaper="jeremy-gerritsen-_iviuukstI4-unsplash" ;;
-    "4.1"*) wallpaper="dustin-humes-OrO_HSqlZMY-unsplash" ;;
-    "4.2"*) wallpaper="piermanuele-sberni-9jVmJ_mBRE8-unsplash~3967x2645" ;;
-    "5.0"*)
+    "5.0"*|"5.1"*)
         wallpaper="zara-walker-_pC5hT6aXfs-unsplash"
         pantheon_accent="cocoa"
         ;;
     "6.0"*)
         wallpaper="marek-piwnicki-fIxvIQ6mH-E-unsplash"
         pantheon_accent="bubblegum"
+        ;;
+    "6.1"*)
+        wallpaper="jack-b-vcNPMwS08UI-unsplash"
+        pantheon_accent="orange"
+        ;;
+    "7.0"*)
+        wallpaper="ashwini-chaudhary-monty-dAvJGJ54g5s-unsplash"
+        pantheon_accent="slate"
         ;;
     *) wallpaper="$_fallback_wallpaper" ;;
 esac
@@ -37,4 +42,6 @@ if [[ -f "${_wallpaper_dir}/$wallpaper.jpg" ]]; then
             fi
         fi
     fi
+else
+    set_property /usr/share/glib-2.0/schemas/00_sodalite.gschema.override picture-uri "'file:\/\/$(echo "${_wallpaper_dir}/$_fallback_wallpaper" | sed "s|/|\\\/|g").jpg'"
 fi

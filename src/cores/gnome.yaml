@@ -4,6 +4,17 @@ include: [
 ]
 
 add-files: [
-  ["../../lfs/binaries/gnome-extensions/stuarthayhurst.AlphabeticalAppGrid/26.0/AlphabeticalAppGrid@stuarthayhurst.shell-extension.zip", "/usr/share/gnome-shell/extensions/AlphabeticalAppGrid@stuarthayhurst.shell-extension.zip"],
-  ["../sysroot/cores/gnome/usr/lib/sodalite-core", "/usr/lib/sodalite-core"]
+  # /usr/lib
+  ["../sysroot/cores/gnome/usr/lib/sodalite-core", "/usr/lib/sodalite-core"],
+
+  # /usr/share/pixmaps
+  ["../../lfs/graphics/logo/logo--46px.png", "/usr/share/pixmaps/fedora-gdm-logo.png"],
+  ["../../lfs/graphics/logo/logo-dark--160px.png", "/usr/share/pixmaps/fedora-logo.png"],
+  ["../../lfs/graphics/logo/logo-dark--100px.png", "/usr/share/pixmaps/fedora_logo_med.png"],
+  ["../../lfs/graphics/logo/logo-dark--46px.png", "/usr/share/pixmaps/fedora-logo-small.png"],
+  ["../../lfs/graphics/logo/logo--100px.png", "/usr/share/pixmaps/fedora_whitelogo_med.png"],
+  
+  # /usr/share/gnome-shell/extensions/
+  ["../../lfs/binaries/gnome-extensions/micheleg.dash-to-dock/92.0/dash-to-dock@micxgx.gmail.com.zip", "/usr/share/gnome-shell/extensions/dash-to-dock@micxgx.gmail.com.shell-extension.zip"],
+  ["../../lfs/binaries/gnome-extensions/stuarthayhurst.AlphabeticalAppGrid/40.0/AlphabeticalAppGrid@stuarthayhurst.shell-extension.zip", "/usr/share/gnome-shell/extensions/AlphabeticalAppGrid@stuarthayhurst.shell-extension.zip"]
 ]

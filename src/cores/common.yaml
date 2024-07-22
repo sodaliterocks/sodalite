@@ -1,18 +1,19 @@
 include: [
-  "bases/f39.yaml",
+  "bases/f40.yaml",
   "../packages/flatpak.yaml",
   "../packages/fonts.yaml",
   "../packages/tools.yaml",
 ]
 
-releasever: "39"
-automatic-version-prefix: "6.0-<date:%y%j>"
+releasever: "40"
+automatic-version-prefix: "7.0rc1-<date:%y%j>"
 automatic-version-suffix: "."
 mutate-os-release: "${releasever}"
 
 repos:
  - fedora
  - fedora.updates
+# - fedora-rawhide
  - terra
  - copr.zeno.scrcpy
  - rpmfusion.free
@@ -38,10 +39,13 @@ add-files: [
   # /usr/bin
   ["../../lfs/binaries/appimage/appimaged_718~x86_64.AppImage", "/usr/bin/appimaged"],
   ["../../lib/sodaliterocks.hacks/src/hacks.sh", "/usr/bin/rocks.sodalite.hacks"],
+  ["../../lib/sodaliterocks.progs/src/rocks.sodalite.builder", "/usr/bin/rocks.sodalite.builder"],
+  ["../../lib/sodaliterocks.progs/src/rocks.sodalite.cleanup-files", "/usr/bin/rocks.sodalite.cleanup-files"],
+  ["../../lib/sodaliterocks.progs/src/rocks.sodalite.hide-app", "/usr/bin/rocks.sodalite.hide-app"],
+  ["../../lib/sodaliterocks.progs/src/rocks.sodalite.http-server", "/usr/bin/rocks.sodalite.http-server"],
+  ["../../lib/sodaliterocks.progs/src/rocks.sodalite.links", "/usr/bin/rocks.sodalite.links"],
   ["../sysroot/common/usr/bin/detach", "/usr/bin/detach"],
   ["../sysroot/common/usr/bin/rocks.sodalite.flatpak-helper", "/usr/bin/rocks.sodalite.flatpak-helper"],
-  ["../sysroot/common/usr/bin/rocks.sodalite.http-server", "/usr/bin/rocks.sodalite.http-server"],
-  ["../sysroot/common/usr/bin/rocks.sodalite.links", "/usr/bin/rocks.sodalite.links"],
   ["../sysroot/common/usr/bin/rocks.sodalite.phone-mirror", "/usr/bin/rocks.sodalite.phone-mirror"],
   ["../sysroot/common/usr/bin/rocks.sodalite.user-daemon", "/usr/bin/rocks.sodalite.user-daemon"],
   ["../sysroot/common/usr/bin/nudo", "/usr/bin/nudo"],
@@ -57,50 +61,50 @@ add-files: [
 
   # /usr/libexec
   ["../../lib/sodaliterocks.hacks/src/plugins/auto-update.sh", "/usr/libexec/rocks.sodalite.hacks/plugins/auto-update.sh"],
-  ["../../lib/sodaliterocks.hacks/src/plugins/cleanup.sh", "/usr/libexec/rocks.sodalite.hacks/plugins/cleanup.sh"],
-  ["../../lib/sodaliterocks.hacks/src/plugins/hide-app.sh", "/usr/libexec/rocks.sodalite.hacks/plugins/hide-app.sh"],
   ["../../lib/sodaliterocks.hacks/src/plugins/migrate.sh", "/usr/libexec/rocks.sodalite.hacks/plugins/migrate.sh"],
   ["../../lib/sodaliterocks.hacks/src/plugins/nvidia.sh", "/usr/libexec/rocks.sodalite.hacks/plugins/nvidia.sh"],
   ["../../lib/sodaliterocks.hacks/src/plugins/oemconf.sh", "/usr/libexec/rocks.sodalite.hacks/plugins/oemconf.sh"],
-  ["../../lib/sodaliterocks.hacks/src/plugins/serve.sh", "/usr/libexec/rocks.sodalite.hacks/plugins/serve.sh"],
   ["../../lib/sodaliterocks.hacks/src/plugins/vscode.sh", "/usr/libexec/rocks.sodalite.hacks/plugins/vscode.sh"],
   ["../../lib/sodaliterocks.hacks/src/utils.sh", "/usr/libexec/rocks.sodalite.hacks/utils.sh"],
   ["../sysroot/common/usr/libexec/rocks.sodalite.cleanup", "/usr/libexec/rocks.sodalite.cleanup"],
 
-  # /usr/libexec/sodalite-post
-  ["../scripts/00-print-buildinfo.sh", "/usr/libexec/sodalite-post/00-print-buildinfo.sh"],
-  ["../scripts/10-version.sh", "/usr/libexec/sodalite-post/10-version.sh"],
-  ["../scripts/30-hacks.sh", "/usr/libexec/sodalite-post/30-hacks.sh"],
-  ["../scripts/50-file-removals.sh", "/usr/libexec/sodalite-post/50-file-removals.sh"],
-  ["../scripts/70-firefox.sh", "/usr/libexec/sodalite-post/70-firefox.sh"],
-  ["../scripts/70-flatpak-aliases.sh", "/usr/libexec/sodalite-post/70-flatpak-aliases.sh"],
-  ["../scripts/70-gnome-extensions.sh", "/usr/libexec/sodalite-post/70-gnome-extensions.sh"],
-  ["../scripts/70-wallpaper.sh", "/usr/libexec/sodalite-post/70-wallpaper.sh"],
-  ["../scripts/80-tweaks.sh", "/usr/libexec/sodalite-post/80-tweaks.sh"],
-  ["../scripts/80-tweaks-pantheon.sh", "/usr/libexec/sodalite-post/80-tweaks-pantheon.sh"],
-  ["../scripts/90-cleanup.sh", "/usr/libexec/sodalite-post/90-cleanup.sh"],
+  # /usr/libexec/sodalite/invoker
+  ["../../lib/sodaliterocks.invoker/src/utils/misc.sh", "/usr/libexec/sodalite/invoker/misc/utils.sh"],
+  ["../../lib/sodaliterocks.invoker/src/invoke.sh", "/usr/libexec/sodalite/invoker/invoke.sh"],
+
+  # /usr/libexec/sodalite/post-build
+  ["../scripts/00-print-buildinfo.sh", "/usr/libexec/sodalite/post-build/00-print-buildinfo.sh"],
+  ["../scripts/10-version.sh", "/usr/libexec/sodalite/post-build/10-version.sh"],
+  ["../scripts/30-hacks.sh", "/usr/libexec/sodalite/post-build/30-hacks.sh"],
+  ["../scripts/50-file-removals.sh", "/usr/libexec/sodalite/post-build/50-file-removals.sh"],
+  ["../scripts/70-firefox.sh", "/usr/libexec/sodalite/post-build/70-firefox.sh"],
+  ["../scripts/70-flatpak-aliases.sh", "/usr/libexec/sodalite/post-build/70-flatpak-aliases.sh"],
+  ["../scripts/70-gnome-extensions.sh", "/usr/libexec/sodalite/post-build/70-gnome-extensions.sh"],
+  ["../scripts/70-wallpaper.sh", "/usr/libexec/sodalite/post-build/70-wallpaper.sh"],
+  ["../scripts/80-tweaks.sh", "/usr/libexec/sodalite/post-build/80-tweaks.sh"],
+  ["../scripts/80-tweaks-pantheon.sh", "/usr/libexec/sodalite/post-build/80-tweaks-pantheon.sh"],
+  ["../scripts/90-cleanup.sh", "/usr/libexec/sodalite/post-build/90-cleanup.sh"],
 
   # /usr/share
   ["../sysroot/common/usr/share/glib-2.0/schemas/00_sodalite.gschema.override", "/usr/share/glib-2.0/schemas/00_sodalite.gschema.override"],
 
   # /usr/share/applications
   ["../sysroot/common/usr/share/applications/rocks.sodalite.phone-mirror.desktop", "/usr/share/applications/rocks.sodalite.phone-mirror.desktop"],
-  ["../sysroot/common/usr/share/applications/rocks.sodalite.links.telegram-chat.desktop", "/usr/share/applications/rocks.sodalite.links.telegram-chat.desktop"],
 
   # /usr/share/backgrounds
   ["../../lfs/wallpapers/adrien-olichon-gXqgs6Smvw-unsplash.jpg", "/usr/share/backgrounds/default/adrien-olichon-gXqgs6Smvw-unsplash.jpg"],
   ["../../lfs/wallpapers/ashwini-chaudhary-monty-dAvJGJ54g5s-unsplash.jpg", "/usr/share/backgrounds/default/ashwini-chaudhary-monty-dAvJGJ54g5s-unsplash.jpg"],
   ["../../lfs/wallpapers/austin-neill-AGPGx6Yr9NI-unsplash.jpg", "/usr/share/backgrounds/default/austin-neill-AGPGx6Yr9NI-unsplash.jpg"],
   ["../../lfs/wallpapers/cody-fitzgerald-iUBG6hQe4N0-unsplash.jpg", "/usr/share/backgrounds/default/cody-fitzgerald-iUBG6hQe4N0-unsplash.jpg"],
-  ["../../lfs/wallpapers/dustin-humes-OrO_HSqlZMY-unsplash.jpg", "/usr/share/backgrounds/default/dustin-humes-OrO_HSqlZMY-unsplash.jpg"],
+  ["../../lfs/wallpapers/david-becker-oKRYcofa7K8-unsplash.jpg", "/usr/share/backgrounds/default/david-becker-oKRYcofa7K8-unsplash.jpg"],
   ["../../lfs/wallpapers/eugene-golovesov-ZC-WQ3hYYrI-unsplash~3000x2000.jpg", "/usr/share/backgrounds/default/eugene-golovesov-ZC-WQ3hYYrI-unsplash~3000x2000.jpg"],
   ["../../lfs/wallpapers/jack-b-vcNPMwS08UI-unsplash.jpg", "/usr/share/backgrounds/default/jack-b-vcNPMwS08UI-unsplash.jpg"],
-  ["../../lfs/wallpapers/jeremy-gerritsen-_iviuukstI4-unsplash.jpg", "/usr/share/backgrounds/default/jeremy-gerritsen-_iviuukstI4-unsplash.jpg"],
+  ["../../lfs/wallpapers/karsten-wurth-AtszKnWTIyA-unsplash.jpg", "/usr/share/backgrounds/default/karsten-wurth-AtszKnWTIyA-unsplash.jpg"],
+  ["../../lfs/wallpapers/karsten-wurth-MaiU4Y0pdcE-unsplash.jpg", "/usr/share/backgrounds/default/karsten-wurth-MaiU4Y0pdcE-unsplashjpg"],
   ["../../lfs/wallpapers/marek-piwnicki-fIxvIQ6mH-E-unsplash.jpg", "/usr/share/backgrounds/default/marek-piwnicki-fIxvIQ6mH-E-unsplash.jpg"],
   ["../../lfs/wallpapers/max-okhrimenko-R-CoXmMrWFk-unsplash.jpg", "/usr/share/backgrounds/default/max-okhrimenko-R-CoXmMrWFk-unsplash.jpg"],
   ["../../lfs/wallpapers/nathan-dumlao-y_qtd7IizFE-unsplash.jpg", "/usr/share/backgrounds/default/nathan-dumlao-y_qtd7IizFE-unsplash.jpg"],
   ["../../lfs/wallpapers/phil-botha-a0TJ3hy-UD8-unsplash.jpg", "/usr/share/backgrounds/default/phil-botha-a0TJ3hy-UD8-unsplash.jpg"],
-  ["../../lfs/wallpapers/piermanuele-sberni-9jVmJ_mBRE8-unsplash~3967x2645.jpg", "/usr/share/backgrounds/default/piermanuele-sberni-9jVmJ_mBRE8-unsplash~3967x2645.jpg"],
   ["../../lfs/wallpapers/ryan-stone-U3cctUBucn0-unsplash.jpg", "/usr/share/backgrounds/default/ryan-stone-U3cctUBucn0-unsplash.jpg"],
   ["../../lfs/wallpapers/smaran-alva-hno1wDtV1X4-unsplash.jpg", "/usr/share/backgrounds/default/smaran-alva-hno1wDtV1X4-unsplash.jpg"],
   ["../../lfs/wallpapers/takashi-miyazaki-R6me1o4eWxg-unsplash.jpg", "/usr/share/backgrounds/default/takashi-miyazaki-R6me1o4eWxg-unsplash.jpg"],
@@ -132,24 +136,24 @@ add-files: [
   ["../../lfs/fonts/inter/3.19/Inter-V.ttf", "/usr/share/fonts/inter/Inter-V.ttf"],
 
   # /usr/share/gnome-background-properties
-  ["../sysroot/common/usr/share/gnome-background-properties/adrien-olichon.xml", "/usr/share/gnome-background-properties/adrien-olichon.xml"],
-  ["../sysroot/common/usr/share/gnome-background-properties/ashwini-chaudhary-monty.xml", "/usr/share/gnome-background-properties/ashwini-chaudhary-monty.xml"],
-  ["../sysroot/common/usr/share/gnome-background-properties/austin-neill.xml", "/usr/share/gnome-background-properties/austin-neill.xml"],
-  ["../sysroot/common/usr/share/gnome-background-properties/cody-fitzgerald.xml", "/usr/share/gnome-background-properties/cody-fitzgerald.xml"],
-  ["../sysroot/common/usr/share/gnome-background-properties/dustin-humes.xml", "/usr/share/gnome-background-properties/dustin-humes.xml"],
-  ["../sysroot/common/usr/share/gnome-background-properties/eugene-golovesov.xml", "/usr/share/gnome-background-properties/eugene-golovesov.xml"],
-  ["../sysroot/common/usr/share/gnome-background-properties/jack-b.xml", "/usr/share/gnome-background-properties/jack-b.xml"],
-  ["../sysroot/common/usr/share/gnome-background-properties/jeremy-gerritsen.xml", "/usr/share/gnome-background-properties/jeremy-gerritsen.xml"],
-  ["../sysroot/common/usr/share/gnome-background-properties/marek-piwnicki.xml", "/usr/share/gnome-background-properties/marek-piwnicki.xml"],
-  ["../sysroot/common/usr/share/gnome-background-properties/max-okhrimenko.xml", "/usr/share/gnome-background-properties/max-okhrimenko.xml"],
-  ["../sysroot/common/usr/share/gnome-background-properties/nathan-dumlao.xml", "/usr/share/gnome-background-properties/nathan-dumlao.xml"],
-  ["../sysroot/common/usr/share/gnome-background-properties/phil-botha.xml", "/usr/share/gnome-background-properties/phil-botha.xml"],
-  ["../sysroot/common/usr/share/gnome-background-properties/piermanuele-sberni.xml", "/usr/share/gnome-background-properties/piermanuele-sberni.xml"],
-  ["../sysroot/common/usr/share/gnome-background-properties/ryan-stone.xml", "/usr/share/gnome-background-properties/ryan-stone.xml"],
-  ["../sysroot/common/usr/share/gnome-background-properties/smaran-alva.xml", "/usr/share/gnome-background-properties/smaran-alva.xml"],
-  ["../sysroot/common/usr/share/gnome-background-properties/takashi-miyazaki.xml", "/usr/share/gnome-background-properties/takashi-miyazaki.xml"],
-  ["../sysroot/common/usr/share/gnome-background-properties/william-daigneault.xml", "/usr/share/gnome-background-properties/william-daigneault.xml"],
-  ["../sysroot/common/usr/share/gnome-background-properties/zara-walker.xml", "/usr/share/gnome-background-properties/zara-walker.xml"],
+  ["../../lfs/wallpapers/meta/gnome-wp-list/adrien-olichon.xml", "/usr/share/gnome-background-properties/adrien-olichon.xml"],
+  ["../../lfs/wallpapers/meta/gnome-wp-list/ashwini-chaudhary-monty.xml", "/usr/share/gnome-background-properties/ashwini-chaudhary-monty.xml"],
+  ["../../lfs/wallpapers/meta/gnome-wp-list/austin-neill.xml", "/usr/share/gnome-background-properties/austin-neill.xml"],
+  ["../../lfs/wallpapers/meta/gnome-wp-list/cody-fitzgerald.xml", "/usr/share/gnome-background-properties/cody-fitzgerald.xml"],
+  ["../../lfs/wallpapers/meta/gnome-wp-list/david-becker.xml", "/usr/share/gnome-background-properties/david-becker.xml"],
+  ["../../lfs/wallpapers/meta/gnome-wp-list/eugene-golovesov.xml", "/usr/share/gnome-background-properties/eugene-golovesov.xml"],
+  ["../../lfs/wallpapers/meta/gnome-wp-list/jack-b.xml", "/usr/share/gnome-background-properties/jack-b.xml"],
+  ["../../lfs/wallpapers/meta/gnome-wp-list/karsten-wurth-2.xml", "/usr/share/gnome-background-properties/karsten-wurth-2.xml"],
+  ["../../lfs/wallpapers/meta/gnome-wp-list/karsten-wurth-3.xml", "/usr/share/gnome-background-properties/karsten-wurth-3.xml"],
+  ["../../lfs/wallpapers/meta/gnome-wp-list/marek-piwnicki.xml", "/usr/share/gnome-background-properties/marek-piwnicki.xml"],
+  ["../../lfs/wallpapers/meta/gnome-wp-list/max-okhrimenko.xml", "/usr/share/gnome-background-properties/max-okhrimenko.xml"],
+  ["../../lfs/wallpapers/meta/gnome-wp-list/nathan-dumlao.xml", "/usr/share/gnome-background-properties/nathan-dumlao.xml"],
+  ["../../lfs/wallpapers/meta/gnome-wp-list/phil-botha.xml", "/usr/share/gnome-background-properties/phil-botha.xml"],
+  ["../../lfs/wallpapers/meta/gnome-wp-list/ryan-stone.xml", "/usr/share/gnome-background-properties/ryan-stone.xml"],
+  ["../../lfs/wallpapers/meta/gnome-wp-list/smaran-alva.xml", "/usr/share/gnome-background-properties/smaran-alva.xml"],
+  ["../../lfs/wallpapers/meta/gnome-wp-list/takashi-miyazaki.xml", "/usr/share/gnome-background-properties/takashi-miyazaki.xml"],
+  ["../../lfs/wallpapers/meta/gnome-wp-list/william-daigneault.xml", "/usr/share/gnome-background-properties/william-daigneault.xml"],
+  ["../../lfs/wallpapers/meta/gnome-wp-list/zara-walker.xml", "/usr/share/gnome-background-properties/zara-walker.xml"],
 
   # /usr/share/plymouth
   ["../../lfs/graphics/os-boot-splash-logo/os-boot-splash-logo.png", "/usr/share/plymouth/themes/spinner/watermark.png"],

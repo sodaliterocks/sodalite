@@ -1,5 +1,5 @@
 [copr.zeno.scrcpy]
-name=Copr: zeno/scrcpy
+name=Sodalite: copr.zeno.scrcpy ($releasever~$basearch)
 baseurl=https://download.copr.fedorainfracloud.org/results/zeno/scrcpy/fedora-$releasever-$basearch/
 type=rpm-md
 skip_if_unavailable=True

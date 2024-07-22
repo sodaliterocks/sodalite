@@ -7,6 +7,7 @@ declare -a to_remove
 if [[ $_os_core == "gnome" ]]; then
     to_remove+=(
         # misc.
+        "/usr/share/backgrounds/gnome"
         "/usr/share/gnome-shell/extensions/apps-menu@gnome-shell-extensions.gcampax.github.com"
         "/usr/share/gnome-shell/extensions/launch-new-instance@gnome-shell-extensions.gcampax.github.com"
         "/usr/share/gnome-shell/extensions/places-menu@gnome-shell-extensions.gcampax.github.com"
@@ -144,6 +145,7 @@ fi
 if [[ -f "/usr/share/applications/rocks.sodalite.phone-mirror.desktop" ]]; then
     to_remove+=(
         "/usr/share/applications/scrcpy.desktop"
+        "/usr/share/applications/scrcpy-console.desktop"
     )
 fi
 
@@ -151,6 +153,8 @@ to_remove+=(
     "/usr/share/backgrounds/f36"
     "/usr/share/backgrounds/f37"
     "/usr/share/backgrounds/f38"
+    "/usr/share/backgrounds/f39"
+    "/usr/share/backgrounds/f40"
     "/usr/share/backgrounds/fedora-workstation"
 )
 

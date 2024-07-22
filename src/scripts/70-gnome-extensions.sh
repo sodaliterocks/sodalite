@@ -5,6 +5,7 @@ if [[ $_os_core == "gnome" ]]; then
 
     declare -a gnome_extensions=(
         "AlphabeticalAppGrid@stuarthayhurst"
+        "dash-to-dock@micxgx.gmail.com"
     )
 
     for gnome_extension in ${gnome_extensions[@]}; do

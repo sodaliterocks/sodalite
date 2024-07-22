@@ -1,0 +1,81 @@
+#!/usr/bin/env bash
+
+_PLUG_TITLE="Package Manager"
+_PLUG_DESCRIPTION="Manage overlayed (and system) packages on Sodalite"
+_PLUG_ROOT="true"
+_PLUG_ARGS=(
+    "install;i;Install overlayed packages;string"
+    "remove;u;Remove overlayed packages;string"
+    "search;s;Search for packages;string"
+    "system;b;Manage base/system packages;bool"
+    "no-apply-live;;Do not apply package requests to the current deployment;bool"
+)
+
+# TODO: Test if a deployment is already queued up (don't run apply-live if there is)
+function main() {
+    packages_changed="false"
+    has_ran="false"
+
+    check_prog "rpm-ostree"
+
+    if [[ $_search != "" ]]; then
+        say info "Searching for '$_search'..."
+        rpm-ostree search $_search
+
+        has_ran="true"
+        _remove=""
+        _install=""
+    fi
+
+    if [[ $_remove != "" ]]; then
+        say info "Removing packages: $_remove"
+
+        if [[ $_system == "true" ]]; then
+            rpm-ostree override remove $_remove
+            [[ $? == 0 ]] && packages_changed="true"
+        else
+            rpm-ostree uninstall --assumeyes $_remove
+            [[ $? == 0 ]] && packages_changed="true"
+        fi
+
+        has_ran="true"
+    fi
+
+    if [[ $_install != "" ]]; then
+        say info "Installing packages: $_install"
+
+        if [[ $_system == "true" ]]; then
+            rpm-ostree override reset $_install
+            [[ $? == 0 ]] && packages_changed="true"
+        else
+            rpm-ostree install --assumeyes $_install
+            [[ $? == 0 ]] && packages_changed="true"
+        fi
+
+        has_ran="true"
+    fi
+
+    if [[ $packages_changed == "true" ]]; then
+        if [[ $_ex_no_apply_live == "true" ]]; then
+            say warning "Not applying package requests to current deployment (used --no-apply-live)"
+        else
+            say info "Applying pending package requests..."
+            rpm-ostree apply-live --allow-replacement
+        fi
+    fi
+
+    if [[ $has_ran == "false" ]]; then
+        die "No option specified (see --help)"
+    fi
+}
+
+if [[ $_PLUG_INVOKED != "true" ]]; then
+    base_dir="$(dirname "$(realpath -s "$0")")"
+    git_dir="$base_dir/../../../../.."
+
+    if [[ -d "$git_dir/.git" ]]; then
+        "$git_dir/lib/sodaliterocks.invoker/src/invoke.sh" "$0" $@
+    else
+        "/usr/libexec/sodalite/invoker/invoke.sh" "$0" $@
+    fi
+fi

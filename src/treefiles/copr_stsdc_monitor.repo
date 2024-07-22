@@ -1,5 +1,5 @@
 [copr.stsdc.monitor]
-name=Copr: stsdc/monitor (37~$basearch)
+name=Sodalite: copr.stsdc.monitor (37~$basearch)
 baseurl=https://download.copr.fedorainfracloud.org/results/stsdc/monitor/fedora-37-$basearch/
 type=rpm-md
 skip_if_unavailable=True

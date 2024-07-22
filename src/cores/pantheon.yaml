@@ -33,6 +33,7 @@ add-files: [
   ["../sysroot/cores/pantheon/etc/xdg/autostart/plank-wrapper.desktop", "/etc/xdg/autostart/plank-wrapper.desktop"],
 
   # /usr/bin
+  ["../../lib/sodaliterocks.progs/src/rocks.sodalite.gcc-sb-shim", "/usr/bin/rocks.sodalite.gcc-sb-shim"],
   ["../sysroot/cores/pantheon/usr/bin/gnome-control-center", "/usr/bin/gnome-control-center"],
   ["../sysroot/cores/pantheon/usr/bin/gnome-software-wrapper", "/usr/bin/gnome-software-wrapper"],
   ["../sysroot/cores/pantheon/usr/bin/plank-wrapper", "/usr/bin/plank-wrapper"],
@@ -45,7 +46,6 @@ add-files: [
   ["../sysroot/cores/pantheon/usr/lib64/switchboard/personal/security-privacy-plug-helper", "/usr/lib64/switchboard/personal/security-privacy-plug-helper"],
 
   # /usr/libexec
-  ["../../lib/sodaliterocks.hacks/src/plugins/gcc-shim.sh", "/usr/libexec/rocks.sodalite.hacks/plugins/gcc-shim.sh"],
   ["../../lib/sodaliterocks.hacks/src/plugins/web.sh", "/usr/libexec/rocks.sodalite.hacks/plugins/web.sh"],
 
   # /usr/share
@@ -57,6 +57,7 @@ add-files: [
   ["../sysroot/cores/pantheon/usr/share/applications/nm-connection-editor.desktop", "/usr/share/applications/nm-connection-editor.desktop"],
   ["../sysroot/cores/pantheon/usr/share/applications/org.gnome.DiskUtility.desktop", "/usr/share/applications/org.gnome.DiskUtility.desktop"],
   ["../sysroot/cores/pantheon/usr/share/applications/org.gnome.Software.desktop", "/usr/share/applications/org.gnome.Software.desktop"],
+  ["../sysroot/common/usr/share/applications/rocks.sodalite.links.telegram-chat.desktop", "/usr/share/applications/rocks.sodalite.links.telegram-chat.desktop"],
   ["../sysroot/cores/pantheon/usr/share/applications/rocks.sodalite.locale-selector.desktop", "/usr/share/applications/rocks.sodalite.locale-selector.desktop"],
 
   # /usr/share/icons

@@ -44,7 +44,7 @@ runs:
                   --container \
                   --tree "${{ inputs.tree }}" \
                   --vendor "sodaliterocks" \
-                  --working-dir "/srv/store/variable/ostree" \
+                  --working-dir "/srv/ostree" \
                   --ex-container-hostname "$(hostname -f)" \
                   --ex-container-image "$(test_input "${{ inputs.container_image }}" "fedora:39")" \
                   --ex-override-starttime "$start_time" \

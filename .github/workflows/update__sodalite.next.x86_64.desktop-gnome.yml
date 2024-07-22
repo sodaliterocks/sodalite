@@ -1,4 +1,4 @@
-name: "Update: Long (4)"
+name: "Update: sodalite/next/x86_64/desktop"
 
 on:
   schedule:
@@ -6,11 +6,11 @@ on:
 
 jobs:
   desktop:
-    name: "Desktop"
+    name: "CI"
     runs-on: self-hosted
     steps:
       - uses: actions/checkout@v3
       - uses: ./.github/actions/ci
         with:
-          branch: release/long/4
-          tree: desktop
+          branch: release/next
+          tree: desktop-gnome

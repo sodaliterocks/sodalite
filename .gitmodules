@@ -17,12 +17,18 @@
 [submodule "lib/sodaliterocks.firefox"]
 	path = lib/sodaliterocks.firefox
 	url = https://github.com/sodaliterocks/firefox
-[submodule "lib/workstation-ostree-config_f37"]
-	path = lib/workstation-ostree-config_f37
-	url = https://pagure.io/workstation-ostree-config
 [submodule "lib/workstation-ostree-config"]
 	path = lib/workstation-ostree-config
 	url = https://pagure.io/workstation-ostree-config
 [submodule "lib/workstation-ostree-config_f39"]
 	path = lib/workstation-ostree-config_f39
 	url = https://pagure.io/workstation-ostree-config
+[submodule "lib/workstation-ostree-config_f40"]
+	path = lib/workstation-ostree-config_f40
+	url = https://pagure.io/workstation-ostree-config
+[submodule "lib/sodaliterocks.invoker"]
+	path = lib/sodaliterocks.invoker
+	url = https://github.com/sodaliterocks/invoker
+[submodule "lib/sodaliterocks.progs"]
+	path = lib/sodaliterocks.progs
+	url = https://github.com/sodaliterocks/progs
