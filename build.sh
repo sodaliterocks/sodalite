@@ -5,8 +5,10 @@ function die() {
     exit 255
 }
 
-if [[ $(id -u) == 0 ]]; then
-    die "Cannot initialise Builder as root"
+if [[ "$SODALITE_BUILDER_ALLOW_AS_ROOT" != "true" ]]; then
+    if [[ $(id -u) == 0 ]]; then
+        die "Cannot initialise Builder as root"
+    fi
 fi
 
 base_dir="$(dirname "$(realpath -s "$0")")"

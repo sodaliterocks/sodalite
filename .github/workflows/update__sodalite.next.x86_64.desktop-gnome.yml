@@ -1,4 +1,4 @@
-name: "Update: sodalite/next/x86_64/desktop"
+name: "Update: sodalite/next/x86_64/desktop-gnome"
 
 on:
   schedule:

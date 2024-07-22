@@ -27,7 +27,7 @@ on:
         - "long/6"
         - "next"
       container_image:
-        default: fedora:39
+        default: fedora:40
         description: "Container Image"
         required: true
         type: choice
@@ -37,6 +37,7 @@ on:
         - "fedora:37"
         - "fedora:38"
         - "fedora:39"
+        - "fedora:40"
         - "fedora:rawhide"
 
 jobs:
