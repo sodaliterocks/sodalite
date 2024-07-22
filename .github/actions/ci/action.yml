@@ -33,7 +33,7 @@ runs:
               working_dir="/tmp/sodalite-build-$start_time"
               ./lib/sodaliterocks.progs/src/rocks.sodalite.builder \
                   --container \
-                  --path "./" \
+                  --path "." \
                   --tree "${{ inputs.tree }}" \
                   --vendor "sodaliterocks" \
                   --working-dir "$working_dir" \
@@ -44,7 +44,7 @@ runs:
           else
               ./lib/sodaliterocks.progs/src/rocks.sodalite.builder \
                   --container \
-                  --path "./"
+                  --path "." \
                   --tree "${{ inputs.tree }}" \
                   --vendor "sodaliterocks" \
                   --working-dir "/srv/ostree" \
