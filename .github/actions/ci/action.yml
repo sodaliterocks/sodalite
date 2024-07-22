@@ -31,8 +31,9 @@ runs:
           export SODALITE_BUILDER_ALLOW_AS_ROOT="true"
           if [[ "${{ inputs.dry_run }}" != "" ]]; then
               working_dir="/tmp/sodalite-build-$start_time"
-              ./build.sh \
+              ./lib/sodaliterocks.progs/src/rocks.sodalite.builder \
                   --container \
+                  --path "." \
                   --tree "${{ inputs.tree }}" \
                   --vendor "sodaliterocks" \
                   --working-dir "$working_dir" \
@@ -41,8 +42,9 @@ runs:
                   --ex-override-starttime "$start_time"
               rm -rf "$working_dir"
           else
-              ./build.sh \
+              ./lib/sodaliterocks.progs/src/rocks.sodalite.builder \
                   --container \
+                  --path "." \
                   --tree "${{ inputs.tree }}" \
                   --vendor "sodaliterocks" \
                   --working-dir "/srv/ostree" \
