@@ -28,6 +28,7 @@ runs:
               [[ "$1" != "" ]] && echo "$1" || echo "$2"
           }
           start_time="$(date +%s)"
+          export SODALITE_BUILDER_ALLOW_AS_ROOT="true"
           if [[ "${{ inputs.dry_run }}" != "" ]]; then
               working_dir="/tmp/sodalite-build-$start_time"
               ./build.sh \
