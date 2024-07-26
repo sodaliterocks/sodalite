@@ -74,7 +74,6 @@ add-files: [
   ["../../lib/sodaliterocks.invoker/src/invoke.sh", "/usr/libexec/sodalite/invoker/invoke.sh"],
 
   # /usr/libexec/sodalite/post-build
-  ["../sysroot/common/usr/libexec/post-build/options", "/usr/libexec/sodalite/post-build/options"]
   ["../scripts/00-print-buildinfo.sh", "/usr/libexec/sodalite/post-build/00-print-buildinfo.sh"],
   ["../scripts/10-version.sh", "/usr/libexec/sodalite/post-build/10-version.sh"],
   ["../scripts/30-hacks.sh", "/usr/libexec/sodalite/post-build/30-hacks.sh"],
