@@ -22,6 +22,7 @@ case $_os_version_id in
     "8.0"*)
         wallpaper="jack-b-vcNPMwS08UI-unsplash"
         pantheon_accent="orange"
+        ;;
     *) wallpaper="$_fallback_wallpaper" ;;
 esac
 
