@@ -53,6 +53,7 @@ add-files: [
 
   # /usr/lib
   ["../sysroot/common/usr/lib/sodalite-buildinfo", "/usr/lib/sodalite-buildinfo"],
+  ["../sysroot/common/usr/lib/sodalite-buildopts", "/usr/lib/sodalite-buildopts"],
 
   # /usr/lib/systemd
   ["../sysroot/common/usr/lib/systemd/system/generate-oemconf.service", "/usr/lib/systemd/system/generate-oemconf.service"],
@@ -73,6 +74,7 @@ add-files: [
   ["../../lib/sodaliterocks.invoker/src/invoke.sh", "/usr/libexec/sodalite/invoker/invoke.sh"],
 
   # /usr/libexec/sodalite/post-build
+  ["../sysroot/common/usr/libexec/post-build/options", "/usr/libexec/sodalite/post-build/options"]
   ["../scripts/00-print-buildinfo.sh", "/usr/libexec/sodalite/post-build/00-print-buildinfo.sh"],
   ["../scripts/10-version.sh", "/usr/libexec/sodalite/post-build/10-version.sh"],
   ["../scripts/30-hacks.sh", "/usr/libexec/sodalite/post-build/30-hacks.sh"],
@@ -84,6 +86,7 @@ add-files: [
   ["../scripts/80-tweaks.sh", "/usr/libexec/sodalite/post-build/80-tweaks.sh"],
   ["../scripts/80-tweaks-pantheon.sh", "/usr/libexec/sodalite/post-build/80-tweaks-pantheon.sh"],
   ["../scripts/90-cleanup.sh", "/usr/libexec/sodalite/post-build/90-cleanup.sh"],
+  ["../scripts/95-test-options.sh", "/usr/libexec/sodalite/post-build/95-test-options.sh"],
 
   # /usr/share
   ["../sysroot/common/usr/share/glib-2.0/schemas/00_sodalite.gschema.override", "/usr/share/glib-2.0/schemas/00_sodalite.gschema.override"],

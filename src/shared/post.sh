@@ -34,6 +34,16 @@ function emj() {
     echo "$emoji$(eval "for i in {1..$emoji_length}; do echo -n " "; done")"
 }
 
+function get_buildopt() {
+    option="$1"
+
+    if [ ! -z $(grep "$option" "/common/usr/lib/sodalite-buildopts") ]; then
+        echo true
+    else
+        echo false
+    fi
+}
+
 function get_property() {
     file=$1
     property=$2
