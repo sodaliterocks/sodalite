@@ -129,8 +129,10 @@ if [[ $version_v_major != "" ]]; then
 
         pretty_version="$version"
 
-        #mkdir -p /etc/apt/sources.list.d/
-        #echo "daily" > /etc/apt/sources.list.d/elementary.list
+        if [[ $(get_buildopt "elementary-early-access-warning") == true ]]; then
+            mkdir -p /etc/apt/sources.list.d/
+            echo "daily" > /etc/apt/sources.list.d/elementary.list
+        fi
     fi
 
     if [[ $channel != "" ]]; then
