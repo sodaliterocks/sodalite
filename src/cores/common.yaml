@@ -108,11 +108,11 @@ add-files: [
   ["../../lfs/wallpapers/max-okhrimenko-R-CoXmMrWFk-unsplash.jpg", "/usr/share/backgrounds/default/max-okhrimenko-R-CoXmMrWFk-unsplash.jpg"],
   ["../../lfs/wallpapers/nathan-dumlao-y_qtd7IizFE-unsplash.jpg", "/usr/share/backgrounds/default/nathan-dumlao-y_qtd7IizFE-unsplash.jpg"],
   ["../../lfs/wallpapers/phil-botha-a0TJ3hy-UD8-unsplash.jpg", "/usr/share/backgrounds/default/phil-botha-a0TJ3hy-UD8-unsplash.jpg"],
+  ["../../lfs/wallpapers/rodion-kutsaiev-pVoEPpLw818-unsplash", "/usr/share/backgrounds/default/rodion-kutsaiev-pVoEPpLw818-unsplash.jpg"],
   ["../../lfs/wallpapers/ryan-stone-U3cctUBucn0-unsplash.jpg", "/usr/share/backgrounds/default/ryan-stone-U3cctUBucn0-unsplash.jpg"],
   ["../../lfs/wallpapers/smaran-alva-hno1wDtV1X4-unsplash.jpg", "/usr/share/backgrounds/default/smaran-alva-hno1wDtV1X4-unsplash.jpg"],
   ["../../lfs/wallpapers/takashi-miyazaki-R6me1o4eWxg-unsplash.jpg", "/usr/share/backgrounds/default/takashi-miyazaki-R6me1o4eWxg-unsplash.jpg"],
   ["../../lfs/wallpapers/william-daigneault-7c8z4KEvgds-unsplash.jpg", "/usr/share/backgrounds/default/william-daigneault-7c8z4KEvgds-unsplash.jpg"],
-  ["../../lfs/wallpapers/zara-walker-_pC5hT6aXfs-unsplash.jpg", "/usr/share/backgrounds/default/zara-walker-_pC5hT6aXfs-unsplash.jpg"],
   
   # /usr/share/fontconfig
   ["../sysroot/common/usr/share/fontconfig/conf.avail/63-inter.conf", "/usr/share/fontconfig/conf.avail/63-inter.conf"],
@@ -152,11 +152,11 @@ add-files: [
   ["../../lfs/wallpapers/meta/gnome-wp-list/max-okhrimenko.xml", "/usr/share/gnome-background-properties/max-okhrimenko.xml"],
   ["../../lfs/wallpapers/meta/gnome-wp-list/nathan-dumlao.xml", "/usr/share/gnome-background-properties/nathan-dumlao.xml"],
   ["../../lfs/wallpapers/meta/gnome-wp-list/phil-botha.xml", "/usr/share/gnome-background-properties/phil-botha.xml"],
+  ["../../lfs/wallpapers/meta/gnome-wp-list/rodion-kutsaiev.xml", "/usr/share/gnome-background-properties/rodion-kutsaiev.xml"],
   ["../../lfs/wallpapers/meta/gnome-wp-list/ryan-stone.xml", "/usr/share/gnome-background-properties/ryan-stone.xml"],
   ["../../lfs/wallpapers/meta/gnome-wp-list/smaran-alva.xml", "/usr/share/gnome-background-properties/smaran-alva.xml"],
   ["../../lfs/wallpapers/meta/gnome-wp-list/takashi-miyazaki.xml", "/usr/share/gnome-background-properties/takashi-miyazaki.xml"],
   ["../../lfs/wallpapers/meta/gnome-wp-list/william-daigneault.xml", "/usr/share/gnome-background-properties/william-daigneault.xml"],
-  ["../../lfs/wallpapers/meta/gnome-wp-list/zara-walker.xml", "/usr/share/gnome-background-properties/zara-walker.xml"],
 
   # /usr/share/plymouth
   ["../../lfs/graphics/os-boot-splash-logo/os-boot-splash-logo.png", "/usr/share/plymouth/themes/spinner/watermark.png"],

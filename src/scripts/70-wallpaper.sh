@@ -7,10 +7,6 @@ wallpaper=""
 pantheon_accent=""
 
 case $_os_version_id in
-    "5.0"*|"5.1"*)
-        wallpaper="zara-walker-_pC5hT6aXfs-unsplash"
-        pantheon_accent="cocoa"
-        ;;
     "6.0"|"6.1"*)
         wallpaper="marek-piwnicki-fIxvIQ6mH-E-unsplash"
         pantheon_accent="bubblegum"
