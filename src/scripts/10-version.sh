@@ -25,17 +25,18 @@ function get_codename() {
     # * https://en.wikipedia.org/wiki/Ancient_history
 
     case "$1" in
-        "1"*|"2"*|"3"*) echo "" ;;
-        "4.0"*) echo "Nubia" ;;
-        "4.1"*) echo "Toniki" ;;
-        "4.2"*) echo "Bantu" ;;
-        "5.0"*) echo "Iberia" ;;
-        "5.1"*) echo "Varri" ;;
-        "6.0"*) echo "Kutai" ;;
-        "6.1"*) echo "Fremont" ;;
-        "7.0"*) echo "Nazca" ;;
-        "8.0"*) echo "Toltec" ;;
-        *) echo "Caral" ;;
+         "4.0"*) echo "Nubia" ;;
+         "4.1"*) echo "Toniki" ;;
+         "4.2"*) echo "Bantu" ;;
+         "5.0"*) echo "Iberia" ;;
+         "5.1"*) echo "Varri" ;;
+         "6.0"*) echo "Kutai" ;;
+         "6.1"*) echo "Fremont" ;;
+         "7.0"*) echo "Nazca" ;;
+         "8.0"*) echo "Toltec" ;;
+         "9.0"*) echo "Dacia" ;;
+        "10.0"*) echo "Caral" ;;
+        "1"*|"2"*|"3"*|*) echo "" ;;
     esac
 }
 
@@ -128,8 +129,10 @@ if [[ $version_v_major != "" ]]; then
 
         pretty_version="$version"
 
-        #mkdir -p /etc/apt/sources.list.d/
-        #echo "daily" > /etc/apt/sources.list.d/elementary.list
+        if [[ $(get_buildopt "elementary-early-access-warning") == true ]]; then
+            mkdir -p /etc/apt/sources.list.d/
+            echo "daily" > /etc/apt/sources.list.d/elementary.list
+        fi
     fi
 
     if [[ $channel != "" ]]; then

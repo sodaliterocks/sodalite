@@ -6,7 +6,7 @@ include: [
 ]
 
 releasever: "40"
-automatic-version-prefix: "7.0rc1-<date:%y%j>"
+automatic-version-prefix: "7.0rc2-<date:%y%j>"
 automatic-version-suffix: "."
 mutate-os-release: "${releasever}"
 
@@ -53,6 +53,7 @@ add-files: [
 
   # /usr/lib
   ["../sysroot/common/usr/lib/sodalite-buildinfo", "/usr/lib/sodalite-buildinfo"],
+  ["../sysroot/common/usr/lib/sodalite-buildopts", "/usr/lib/sodalite-buildopts"],
 
   # /usr/lib/systemd
   ["../sysroot/common/usr/lib/systemd/system/generate-oemconf.service", "/usr/lib/systemd/system/generate-oemconf.service"],
@@ -81,9 +82,11 @@ add-files: [
   ["../scripts/70-flatpak-aliases.sh", "/usr/libexec/sodalite/post-build/70-flatpak-aliases.sh"],
   ["../scripts/70-gnome-extensions.sh", "/usr/libexec/sodalite/post-build/70-gnome-extensions.sh"],
   ["../scripts/70-wallpaper.sh", "/usr/libexec/sodalite/post-build/70-wallpaper.sh"],
+  ["../scripts/80-caches.sh", "/usr/libexec/sodalite/post-build/80-caches.sh"],
+  ["../scripts/80-services.sh", "/usr/libexec/sodalite/post-build/80-services.sh"],
   ["../scripts/80-tweaks.sh", "/usr/libexec/sodalite/post-build/80-tweaks.sh"],
-  ["../scripts/80-tweaks-pantheon.sh", "/usr/libexec/sodalite/post-build/80-tweaks-pantheon.sh"],
   ["../scripts/90-cleanup.sh", "/usr/libexec/sodalite/post-build/90-cleanup.sh"],
+  ["../scripts/95-validate-github-ci-build.sh", "/usr/libexec/sodalite/post-build/95-validate-github-ci-build.sh"],
 
   # /usr/share
   ["../sysroot/common/usr/share/glib-2.0/schemas/00_sodalite.gschema.override", "/usr/share/glib-2.0/schemas/00_sodalite.gschema.override"],
@@ -105,11 +108,11 @@ add-files: [
   ["../../lfs/wallpapers/max-okhrimenko-R-CoXmMrWFk-unsplash.jpg", "/usr/share/backgrounds/default/max-okhrimenko-R-CoXmMrWFk-unsplash.jpg"],
   ["../../lfs/wallpapers/nathan-dumlao-y_qtd7IizFE-unsplash.jpg", "/usr/share/backgrounds/default/nathan-dumlao-y_qtd7IizFE-unsplash.jpg"],
   ["../../lfs/wallpapers/phil-botha-a0TJ3hy-UD8-unsplash.jpg", "/usr/share/backgrounds/default/phil-botha-a0TJ3hy-UD8-unsplash.jpg"],
+  ["../../lfs/wallpapers/rodion-kutsaiev-pVoEPpLw818-unsplash.jpg", "/usr/share/backgrounds/default/rodion-kutsaiev-pVoEPpLw818-unsplash.jpg"],
   ["../../lfs/wallpapers/ryan-stone-U3cctUBucn0-unsplash.jpg", "/usr/share/backgrounds/default/ryan-stone-U3cctUBucn0-unsplash.jpg"],
   ["../../lfs/wallpapers/smaran-alva-hno1wDtV1X4-unsplash.jpg", "/usr/share/backgrounds/default/smaran-alva-hno1wDtV1X4-unsplash.jpg"],
   ["../../lfs/wallpapers/takashi-miyazaki-R6me1o4eWxg-unsplash.jpg", "/usr/share/backgrounds/default/takashi-miyazaki-R6me1o4eWxg-unsplash.jpg"],
   ["../../lfs/wallpapers/william-daigneault-7c8z4KEvgds-unsplash.jpg", "/usr/share/backgrounds/default/william-daigneault-7c8z4KEvgds-unsplash.jpg"],
-  ["../../lfs/wallpapers/zara-walker-_pC5hT6aXfs-unsplash.jpg", "/usr/share/backgrounds/default/zara-walker-_pC5hT6aXfs-unsplash.jpg"],
   
   # /usr/share/fontconfig
   ["../sysroot/common/usr/share/fontconfig/conf.avail/63-inter.conf", "/usr/share/fontconfig/conf.avail/63-inter.conf"],
@@ -149,11 +152,11 @@ add-files: [
   ["../../lfs/wallpapers/meta/gnome-wp-list/max-okhrimenko.xml", "/usr/share/gnome-background-properties/max-okhrimenko.xml"],
   ["../../lfs/wallpapers/meta/gnome-wp-list/nathan-dumlao.xml", "/usr/share/gnome-background-properties/nathan-dumlao.xml"],
   ["../../lfs/wallpapers/meta/gnome-wp-list/phil-botha.xml", "/usr/share/gnome-background-properties/phil-botha.xml"],
+  ["../../lfs/wallpapers/meta/gnome-wp-list/rodion-kutsaiev.xml", "/usr/share/gnome-background-properties/rodion-kutsaiev.xml"],
   ["../../lfs/wallpapers/meta/gnome-wp-list/ryan-stone.xml", "/usr/share/gnome-background-properties/ryan-stone.xml"],
   ["../../lfs/wallpapers/meta/gnome-wp-list/smaran-alva.xml", "/usr/share/gnome-background-properties/smaran-alva.xml"],
   ["../../lfs/wallpapers/meta/gnome-wp-list/takashi-miyazaki.xml", "/usr/share/gnome-background-properties/takashi-miyazaki.xml"],
   ["../../lfs/wallpapers/meta/gnome-wp-list/william-daigneault.xml", "/usr/share/gnome-background-properties/william-daigneault.xml"],
-  ["../../lfs/wallpapers/meta/gnome-wp-list/zara-walker.xml", "/usr/share/gnome-background-properties/zara-walker.xml"],
 
   # /usr/share/plymouth
   ["../../lfs/graphics/os-boot-splash-logo/os-boot-splash-logo.png", "/usr/share/plymouth/themes/spinner/watermark.png"],

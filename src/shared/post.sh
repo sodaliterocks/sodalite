@@ -2,6 +2,25 @@
 
 echo "--------------------------------------------------------------------------------"
 
+# Variables
+
+_buildinfo_file="/usr/lib/sodalite-buildinfo"
+_buildopts_file="/usr/lib/sodalite-buildopts"
+_core_file="/usr/lib/sodalite-core"
+_post_scripts_dir="/usr/libexec/sodalite/post-build"
+
+_git_hash=""
+_git_tag=""
+_naked_build="false"
+_os_arch=""
+_os_base_version=""
+_os_core=""
+_os_ref=""
+_os_version=""
+_os_version_id=""
+_os_variant=""
+_vendor=""
+
 # Utilities
 
 function check_variable() {
@@ -34,6 +53,16 @@ function emj() {
     echo "$emoji$(eval "for i in {1..$emoji_length}; do echo -n " "; done")"
 }
 
+function get_buildopt() {
+    option="$1"
+
+    if [ ! -z $(grep "$option" "$_buildopts_file") ]; then
+        echo true
+    else
+        echo false
+    fi
+}
+
 function get_property() {
     file=$1
     property=$2
@@ -60,24 +89,6 @@ function set_property() {
         fi
     fi
 }
-
-# Variables
-
-_buildinfo_file="/usr/lib/sodalite-buildinfo"
-_core_file="/usr/lib/sodalite-core"
-_post_scripts_dir="/usr/libexec/sodalite/post-build"
-
-_git_hash=""
-_git_tag=""
-_naked_build="false"
-_os_arch=""
-_os_base_version=""
-_os_core=""
-_os_ref=""
-_os_version=""
-_os_version_id=""
-_os_variant=""
-_vendor=""
 
 # Setup
 
@@ -158,6 +169,7 @@ for post_script in $_post_scripts_dir/*.sh; do
 done
 
 rm -rf $_post_scripts_dir
+rm -f $_buildopts_file
 
 echo "--------------------------------------------------------------------------------"
 
