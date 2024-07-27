@@ -5,7 +5,7 @@
 </h1>
 
 <p align="center">
-    <strong>Sodalite</strong> ist ein unveränderliches Desktop-Betriebssystem, das mit <a href="https://coreos.github.io/rpm-ostree/">rpm-ostree</a> und auf <a href="https://getfedora.org/">Fedora</a> aufgebaut ist &mdash; ähnlich wie <a href="https://silverblue.fedoraproject.org/">Fedora Silverblue</a> &mdash; es nutzt den <a href="https://elementary.io/docs/learning-the-basics">Pantheon-Desktop</a> und hält sich eng an das Ethos und den Workflow von <a href="https://elementary.io/open-source">elementary</a> hält. Ein Work-in-Progress, der als Produktions-Desktop durchaus brauchbar ist.
+    <strong>Sodalite</strong> ist ein unveränderliches Desktop-Betriebssystem, das mit <a href="https://coreos.github.io/rpm-ostree/">rpm-ostree</a> und auf <a href="https://getfedora.org/">Fedora</a> aufgebaut ist &mdash; ähnlich wie <a href="https://silverblue.fedoraproject.org/">Fedora Silverblue</a> &mdash; es nutzt den <a href="https://elementary.io/docs/learning-the-basics">Pantheon-Desktop</a> und hält sich eng an das Ethos und den Workflow von <a href="https://elementary.io/open-source">elementary</a> hält.
 </p>
 
 ---
