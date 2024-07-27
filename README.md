@@ -109,7 +109,7 @@ It's vital you carry out this process as updates stop the day the base version r
 
 ##### Containerized (with `--container`/`-c`)
 
-_Running in a container is the preffered way of building Sodalite_
+_Running in a container is the preferred way of building Sodalite_
 
 * Linux
 * [Podman](https://podman.io/)
