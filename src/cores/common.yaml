@@ -82,10 +82,10 @@ add-files: [
   ["../scripts/70-flatpak-aliases.sh", "/usr/libexec/sodalite/post-build/70-flatpak-aliases.sh"],
   ["../scripts/70-gnome-extensions.sh", "/usr/libexec/sodalite/post-build/70-gnome-extensions.sh"],
   ["../scripts/70-wallpaper.sh", "/usr/libexec/sodalite/post-build/70-wallpaper.sh"],
+  ["../scripts/80-caches.sh", "/usr/libexec/sodalite/post-build/80-caches.sh"],
+  ["../scripts/80-services.sh", "/usr/libexec/sodalite/post-build/80-services.sh"],
   ["../scripts/80-tweaks.sh", "/usr/libexec/sodalite/post-build/80-tweaks.sh"],
-  ["../scripts/80-tweaks-pantheon.sh", "/usr/libexec/sodalite/post-build/80-tweaks-pantheon.sh"],
   ["../scripts/90-cleanup.sh", "/usr/libexec/sodalite/post-build/90-cleanup.sh"],
-  ["../scripts/95-test-options.sh", "/usr/libexec/sodalite/post-build/95-test-options.sh"],
   ["../scripts/95-validate-github-ci-build.sh", "/usr/libexec/sodalite/post-build/95-validate-github-ci-build.sh"],
 
   # /usr/share
