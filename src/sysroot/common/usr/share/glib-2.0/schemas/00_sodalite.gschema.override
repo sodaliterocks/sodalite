@@ -18,6 +18,24 @@ button-layout='close:appmenu'
 enabled-extensions=['AlphabeticalAppGrid@stuarthayhurst', 'dash-to-dock@micxgx.gmail.com']
 favorite-apps=['firefox.desktop', 'org.gnome.Nautilus.desktop', 'org.gnome.Console.desktop', 'org.gnome.TextEditor.desktop', 'rocks.sodalite.phone-mirror.desktop', 'org.gnome.Software.desktop']
 
+[org.gnome.shell.extensions.blur-my-shell:GNOME]
+pipelines="{'pipeline_sodalite': {'name': <'Sodalite'>, 'effects': <[<{'type': <'native_static_gaussian_blur'>, 'id': <'effect_000000000000'>, 'params': <{'radius': <30>, 'brightness': <0.59999999999999998>}>}>]>}, 'pipeline_sodalite_dash': {'name': <'Sodalite (Dash)'>, 'effects': <[<{'type': <'native_static_gaussian_blur'>, 'id': <'effect_17431923445231'>, 'params': <@a{sv} {}>}>, <{'type': <'corner'>, 'id': <'effect_48214700877755'>, 'params': <@a{sv} {}>}>]>}}"
+
+[org.gnome.shell.extensions.blur-my-shell.dash-to-dock:GNOME]
+pipeline='pipeline_sodalite_dash'
+
+[org.gnome.shell.extensions.blur-my-shell.lockscreen:GNOME]
+pipeline='pipeline_sodalite'
+
+[org.gnome.shell.extensions.blur-my-shell.overview:GNOME]
+pipeline='pipeline_sodalite'
+
+[org.gnome.shell.extensions.blur-my-shell.panel:GNOME]
+pipeline='pipeline_sodalite'
+
+[org.gnome.shell.extensions.blur-my-shell.screenshot:GNOME]
+pipeline='pipeline_sodalite'
+
 [org.gnome.shell.extensions.dash-to-dock:GNOME]
 apply-custom-theme=true
 click-action='minimize'
