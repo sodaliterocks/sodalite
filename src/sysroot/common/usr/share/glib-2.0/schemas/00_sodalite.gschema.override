@@ -32,6 +32,7 @@ pipeline='pipeline_sodalite'
 pipeline='pipeline_sodalite'
 
 [org.gnome.shell.extensions.blur-my-shell.panel:GNOME]
+override-background-dynamically=true
 pipeline='pipeline_sodalite'
 
 [org.gnome.shell.extensions.blur-my-shell.screenshot:GNOME]
@@ -42,7 +43,7 @@ apply-custom-theme=true
 click-action='minimize'
 dock-position='BOTTOM'
 intellihide-mode='FOCUS_APPLICATION_WINDOWS'
-require-pressure-to-show=false
+require-pressure-to-show=true
 show-mounts=false
 show-trash=false
 
