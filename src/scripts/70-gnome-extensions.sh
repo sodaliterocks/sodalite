@@ -10,13 +10,19 @@ if [[ $_os_core == "gnome" ]]; then
     )
 
     for gnome_extension in ${gnome_extensions[@]}; do
-        mkdir -p "$gnome_extensions_prefix/$gnome_extension"
-        unzip "$gnome_extensions_prefix/$gnome_extension.shell-extension.zip" -d "$gnome_extensions_prefix/$gnome_extension"
+        gnome_extension_dir="$gnome_extensions_prefix/$gnome_extension"
+        gnome_extension_schemas_dir="$gnome_extension_dir/schemas"
+        sodalite_schema_file="00_sodalite.gschema.override"
 
-        if [[ -d "$gnome_extensions_prefix/$gnome_extension/schemas" ]]; then
-            cp "$gnome_extensions_prefix/$gnome_extension/schemas/"*.gschema.xml /usr/share/glib-2.0/schemas
+        mkdir -p "$gnome_extension_dir"
+        unzip "$gnome_extension_dir.shell-extension.zip" -d "$gnome_extension_dir"
+
+        if [[ -d "$gnome_extension_schemas_dir" ]]; then
+            cp "/usr/share/glib-2.0/schemas/$sodalite_schema_file" "$gnome_extension_schemas_dir/$sodalite_schema_file"
+            glib-compile-schemas "$gnome_extension_schemas_dir"
+            rm "$gnome_extension_schemas_dir/$sodalite_schema_file"
         fi
 
-        rm "$gnome_extensions_prefix/$gnome_extension.shell-extension.zip"
+        rm "$gnome_extension_dir.shell-extension.zip"
     done
 fi
