@@ -33,7 +33,7 @@ function get_codename() {
          "6.0"*) echo "Kutai" ;;
          "6.1"*) echo "Fremont" ;;
          "7.0"*) echo "Nazca" ;;
-         "8.0"*) echo "Toltec" ;;
+         "8.0"*) echo "Lâm Ấp" ;;
          "9.0"*) echo "Dacia" ;;
         "10.0"*) echo "Caral" ;;
         "1"*|"2"*|"3"*|*) echo "" ;;
@@ -55,6 +55,7 @@ function get_variant() {
 
         case "$decoded_variant" in
             "gnome") decoded_variant="GNOME" ;;
+            "kde") decoded_variant="KDE" ;;
             *) decoded_variant="${decoded_variant^}" ;;
         esac
     else

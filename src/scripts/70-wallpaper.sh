@@ -4,6 +4,7 @@ _fallback_wallpaper="phil-botha-a0TJ3hy-UD8-unsplash"
 _wallpaper_dir="/usr/share/backgrounds/default"
 
 wallpaper=""
+wallpaper_dark=""
 pantheon_accent=""
 
 case $_os_version_id in
@@ -23,7 +24,15 @@ case $_os_version_id in
 esac
 
 if [[ -f "${_wallpaper_dir}/$wallpaper.jpg" ]]; then
+	if [[ ! -n "$wallpaper_dark" ]]; then
+	    wallpaper_dark="$wallpaper"
+	fi
+
     set_property /usr/share/glib-2.0/schemas/00_sodalite.gschema.override picture-uri "'file:\/\/$(echo "${_wallpaper_dir}/$wallpaper" | sed "s|/|\\\/|g").jpg'"
+
+	if [[ $_os_core == "gnome" ]]; then
+    	set_property /usr/share/glib-2.0/schemas/00_sodalite.gschema.override picture-uri-dark "'file:\/\/$(echo "${_wallpaper_dir}/$wallpaper_dark" | sed "s|/|\\\/|g").jpg'"
+    fi
 
     if [[ $_os_core == "pantheon" ]]; then
         ln -s "${_wallpaper_dir}/$wallpaper.jpg" /usr/share/backgrounds/elementaryos-default
