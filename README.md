@@ -5,7 +5,7 @@
 </h1>
 
 <p align="center">
-    <strong>Sodalite</strong> is an immutable deskotp OS built with <a href="https://coreos.github.io/rpm-ostree/">rpm-ostree</a> &mdash; similar to <a href="https://silverblue.fedoraproject.org/">Fedora Silverblue</a> &mdash; focusing on a more independent and smaller community experience, freeing it from the clutches of <a href="https://fedoraproject.org/">Fedora Project</a>.
+    <strong>Sodalite</strong> is an immutable deskotp OS built with <a href="https://coreos.github.io/rpm-ostree/">rpm-ostree</a> and utilizing <a href="https://www.gnome.org">GNOME desktop</a>: an alternative to <a href="https://silverblue.fedoraproject.org/">Fedora Silverblue</a>, freeing itself from the clutches of <a href="https://fedoraproject.org/">Fedora Project</a>, and providing a more independent and smaller community-focused experience.
 </p>
 
 <p align="center">
