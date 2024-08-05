@@ -4,9 +4,10 @@ packages:
  - at-spi2-core
  - avahi
  - dconf
- - fprintd-pam
  - evince-previewer
  - evince-thumbnailer
+ - firewall-config
+ - fprintd-pam
  - gdm
  - glib-networking
  - gnome-backgrounds
