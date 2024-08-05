@@ -5,7 +5,11 @@
 </h1>
 
 <p align="center">
-    <strong>Sodalite</strong> is an immutable desktop OS built with <a href="https://coreos.github.io/rpm-ostree/">rpm-ostree</a> and on-top of <a href="https://getfedora.org/">Fedora</a> &mdash; similar to <a href="https://silverblue.fedoraproject.org/">Fedora Silverblue</a> &mdash; making use of the <a href="https://elementary.io/docs/learning-the-basics">Pantheon desktop</a>, sticking closely to the ethos and workflow perpetrated by <a href="https://elementary.io/open-source">elementary</a>.
+    <strong>Sodalite</strong> is an immutable deskotp OS built with <a href="https://coreos.github.io/rpm-ostree/">rpm-ostree</a> &mdash; similar to <a href="https://silverblue.fedoraproject.org/">Fedora Silverblue</a> &mdash; focusing on a more independent and smaller community experience, freeing it from the clutches of <a href="https://fedoraproject.org/">Fedora Project</a>.
+</p>
+
+<p align="center">
+    Up until <a href="#">7 Nazca</a>, Sodalite was focused on utilizing the <a href="https://elementary.io/docs/learning-the-basics">Pantheon desktop</a>, but due to various constant on-going problems this edition is now no longer the priority: however, it is still maintained and installable (see below).
 </p>
 
 ---
@@ -19,7 +23,7 @@
 </p>
 
 <p align="center">
-    Despite a <em>very</em> active commit history, Sodalite is fairly self-sustaining these days &mdash; mostly thanks to the awesome people at <a href="https://fyralabs.com">Fyra Labs</a> &mdash; and thus the repository will go months without any activity. This does not mean the project is abandoned, especially since <a href="https://github.com/electricduck">it's developer</a> uses it as their main OS. Regardless of repository activity, updates are built twice every week from the repository: logs are available at <a href="https://github.com/sodaliterocks/sodalite/actions">Actions</a>.
+    Despite a <em>very</em> active commit history, Sodalite is fairly self-sustaining these days and thus the repository will go months without any activity. This does not mean the project is abandoned, especially since <a href="https://github.com/electricduck">it's developer</a> uses it as their main OS. Regardless of repository activity, updates are built twice every week from the repository: logs are available at <a href="https://github.com/sodaliterocks/sodalite/actions">Actions</a>.
 </p>
 
 <p align="center">
@@ -188,8 +192,9 @@ This will usually take 10-15 minutes. Remember when I told you to grab a cuppa? 
 
 * `<edition>` _(optional)_ Edition/variant of Sodalite (defaults to `custom`)
   - This is any of the `sodalite-<edition>.yaml` files listed in `./src/treefiles/`. Either use `sodalite-<edition>` or just `<edition>` as the argument. Currently, there is:
-    - `desktop`: Standard Pantheon desktop
-    - `desktop-gnome`: Alternate GNOME desktop, intended for possible future versions
+    - `desktop`: Sodalite desktop &mdash; essentially identical to `desktop-gnome`
+    - `desktop-gnome`: The <a href="https://www.gnome.org/">GNOME desktop</a>
+    - `desktop-pantheon`: The original <a href="https://elementary.io/docs/learning-the-basics">Pantheon desktop</a> (currently broken and on-hold)
     - `custom`: See below point
   - `sodalite-custom.yaml` is a good place to employ your own changes instead of modifying any of the other treefiles
 * `<working-dir>` _(optional)_ Directory for build output (defaults to `./build`)
@@ -249,15 +254,21 @@ _These fine folks' work is no longer included in, or relevant to, Sodalite, but 
 
 ### Teams & Organizations
 
-* [elementary](https://elementary.io/team), for building lovely stuff
-* [Fyra Labs](https://fyralabs.com), for maintaining [Terra](https://terra.fyralabs.com/)
-  * Due to various packaging issues with Pantheon on Fedora's official repos (see [#44](https://github.com/sodaliterocks/sodalite/issues/44)), Sodalite was almost doomed after f36+ reached EoL. However, Terra maintains builds of Pantheon and effectively keeps the lights on here!
 * The contributors to [workstation-ostree-config](https://pagure.io/workstation-ostree-config), for a solid ground to work from
+
+#### Past Teams & Organizations
+
+* [Fyra Labs](https://fyralabs.com), for maintaining [Terra](https://terra.fyralabs.com/)
+  * Due to various packaging issues with Pantheon on Fedora's official repos (see [#44](https://github.com/sodaliterocks/sodalite/issues/44)), Sodalite was almost doomed after f36+ reached EoL. However, Terra maintains builds of Pantheon and effectively kept the lights on for the original Pantheon edition.
 
 ### Miscellaneous
 
 * The [Sodalite mineral](https://en.wikipedia.org/wiki/Sodalite), for the name. [It's a mineral, not a rock, Jesus](https://www.youtube.com/watch?v=r1yYJBzf1VQ)!
 * The [Omicron variant of SARS-CoV-2](https://en.wikipedia.org/wiki/SARS-CoV-2_Omicron_variant), for giving [Ducky](https://github.com/electricduck) the initial free time to make this thing
+
+### Past Acknowledgements
+
+
 
 ## 👀 See Also
 
@@ -268,10 +279,3 @@ _These fine folks' work is no longer included in, or relevant to, Sodalite, but 
 ### Related
 
 * **[🔗 Fedora Docs ➔ Fedora Silverblue User Guide](https://docs.fedoraproject.org/en-US/fedora-silverblue/)**
-
----
-
-<p align="center">
-  <a href="README.md">🇬🇧</a>
-  <a href="docs/i18n/README.de.md">🇩🇪</a>
-</p>
