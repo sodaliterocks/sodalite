@@ -8,7 +8,7 @@ primary-color='#3689E6'
 document-font-name='Open Sans 10'
 font-antialiasing='grayscale'
 font-hinting='none'
-font-name='Inter 10'
+font-name='Inter 9'
 monospace-font-name='Roboto Mono 10'
 
 [org.gnome.desktop.wm.preferences:GNOME]
