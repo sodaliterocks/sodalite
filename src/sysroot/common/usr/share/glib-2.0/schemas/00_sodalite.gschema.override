@@ -8,7 +8,7 @@ primary-color='#3689E6'
 document-font-name='Open Sans 10'
 font-antialiasing='grayscale'
 font-hinting='none'
-font-name='Inter 10'
+font-name='Inter 9'
 monospace-font-name='Roboto Mono 10'
 
 [org.gnome.desktop.wm.preferences:GNOME]
@@ -32,6 +32,7 @@ pipeline='pipeline_sodalite'
 pipeline='pipeline_sodalite'
 
 [org.gnome.shell.extensions.blur-my-shell.panel:GNOME]
+override-background-dynamically=true
 pipeline='pipeline_sodalite'
 
 [org.gnome.shell.extensions.blur-my-shell.screenshot:GNOME]
@@ -42,7 +43,7 @@ apply-custom-theme=true
 click-action='minimize'
 dock-position='BOTTOM'
 intellihide-mode='FOCUS_APPLICATION_WINDOWS'
-require-pressure-to-show=false
+require-pressure-to-show=true
 show-mounts=false
 show-trash=false
 
