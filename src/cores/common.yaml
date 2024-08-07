@@ -31,7 +31,7 @@ add-files: [
   # /etc/xdg
   #["../sysroot/common/etc/xdg/autostart/appimaged.desktop", "/etc/xdg/autostart/appimaged.desktop"], # BUG: https://github.com/sodaliterocks/sodalite/issues/42
   ["../sysroot/common/etc/xdg/autostart/rocks.sodalite.user-daemon.desktop", "/etc/xdg/autostart/rocks.sodalite.user-daemon.desktop"],
-  
+
   # /etc/yum.repos.d
   ["../treefiles/rpmfusion.repo", "/etc/yum.repos.d/rpmfusion.repo"],
   ["../treefiles/terra.repo", "/etc/yum.repos.d/terra.repo"],
@@ -93,6 +93,7 @@ add-files: [
 
   # /usr/share/applications
   ["../sysroot/common/usr/share/applications/rocks.sodalite.phone-mirror.desktop", "/usr/share/applications/rocks.sodalite.phone-mirror.desktop"],
+  ["../sysroot/cores/pantheon/usr/share/applications/org.gnome.Software.desktop", "/usr/share/applications/org.gnome.Software.desktop"],
 
   # /usr/share/backgrounds
   ["../../lfs/wallpapers/adrien-olichon-gXqgs6Smvw-unsplash.jpg", "/usr/share/backgrounds/default/adrien-olichon-gXqgs6Smvw-unsplash.jpg"],
@@ -113,7 +114,7 @@ add-files: [
   ["../../lfs/wallpapers/smaran-alva-hno1wDtV1X4-unsplash.jpg", "/usr/share/backgrounds/default/smaran-alva-hno1wDtV1X4-unsplash.jpg"],
   ["../../lfs/wallpapers/takashi-miyazaki-R6me1o4eWxg-unsplash.jpg", "/usr/share/backgrounds/default/takashi-miyazaki-R6me1o4eWxg-unsplash.jpg"],
   ["../../lfs/wallpapers/william-daigneault-7c8z4KEvgds-unsplash.jpg", "/usr/share/backgrounds/default/william-daigneault-7c8z4KEvgds-unsplash.jpg"],
-  
+
   # /usr/share/fontconfig
   ["../sysroot/common/usr/share/fontconfig/conf.avail/63-inter.conf", "/usr/share/fontconfig/conf.avail/63-inter.conf"],
 
