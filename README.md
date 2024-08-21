@@ -19,7 +19,7 @@
 </p>
 
 <p align="center">
-    Despite a <em>very</em> active commit history, Sodalite is fairly self-sustaining these days &mdash; mostly thanks to the awesome people at <a href="https://fyralabs.com">Fyra Labs</a> &mdash; and thus the repository will go months without any activity. This does not mean the project is abandoned, especially since <a href="https://github.com/electricduck">it's developer</a> uses it as their main OS. Regardless of repository activity, updates are built twice every week from the repository: logs are available at <a href="https://github.com/sodaliterocks/sodalite/actions">Actions</a>.
+    Despite a <em>very</em> active commit history, Sodalite is fairly self-sustaining these days &mdash; mostly thanks to the awesome people at <a href="https://fyralabs.com">Fyra Labs</a> &mdash; and thus the repository will go months without any activity. This does not mean the project is abandoned, especially since <a href="https://github.com/electricduck">its developer</a> uses it as their main OS. Regardless of repository activity, updates are built twice every week from the repository: logs are available at <a href="https://github.com/sodaliterocks/sodalite/actions">Actions</a>.
 </p>
 
 <p align="center">
